@@ -28,7 +28,28 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
-				<ErrorBoundary fallback={<div>Something went wrong.</div>}>
+				<ErrorBoundary
+					fallback={
+						<div className="min-h-screen flex items-center justify-center p-4">
+							<div className="text-center">
+								<h1 className="text-2xl font-bold text-gray-900 mb-4">
+									Oops! Something went wrong
+								</h1>
+								<p className="text-gray-600 mb-6">
+									We apologize for the inconvenience. Please try refreshing the
+									page.
+								</p>
+								<button
+									type="button"
+									onClick={() => window.location.reload()}
+									className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+								>
+									Refresh Page
+								</button>
+							</div>
+						</div>
+					}
+				>
 					{children}
 				</ErrorBoundary>
 			</body>
