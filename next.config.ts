@@ -2,7 +2,6 @@
 const nextConfig: import("next").NextConfig = {
 	poweredByHeader: false,
 	reactStrictMode: true,
-	swcMinify: true,
 	images: {
 		domains: [], // Add your image domains here
 	},
