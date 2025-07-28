@@ -9,7 +9,7 @@ const Navbar = () => {
 		<div className="flex items-center justify-between h-full px-8">
 			<Link href="/">
 				<Image
-					src="/logo_light.png"
+					src="/logo_light.svg"
 					alt="Nextdot Logo"
 					width={100.72}
 					height={12}

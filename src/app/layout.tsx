@@ -28,7 +28,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased bg-main-background`}
+				className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#E5E5E5]`}
 			>
 				<ErrorBoundary
 					fallback={
