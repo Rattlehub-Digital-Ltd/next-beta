@@ -20,12 +20,22 @@ const Content = () => {
 			>
 				<h2 className={`text-pretty font-bold text-2xl ${serif.className}`}>
 					Your Estate, <br />
-					Organized and Accessible Anytime, Anywhere
+					Organized and Accessible Anytime
 				</h2>
 				<p className="text-foreground-secondary text-[0.78rem] text-pretty">
-					By continuing, you agree to NEXTDOT's <strong>Privacy Policy</strong>,
-					<strong>Terms of Service</strong>, and acknowledge their{" "}
-					<strong>Data Policy</strong>.
+					By continuing, you agree to NEXTDOT's{" "}
+					<a href="/" className="font-semibold text-blue-500">
+						Privacy Policy
+					</a>{" "}
+					,
+					<a href="/" className="font-semibold text-blue-500">
+						Terms of Service
+					</a>
+					, and acknowledge their{" "}
+					<a href="/" className="font-semibold text-blue-500">
+						Data Policy
+					</a>
+					.
 				</p>
 			</motion.div>
 			<motion.div
@@ -36,7 +46,7 @@ const Content = () => {
 				transition={{ duration: 0.35 }}
 			>
 				<Button
-					className="font-semibold rounded-2xl h-11 w-full                                                                                                                                                                                                                 !pr-3 shadow-md shadow-blue-500/40 bg-blue-600"
+					className="font-semibold rounded-2xl h-12 w-full                                                                                                                                                                                                                 !pr-3 shadow-md shadow-blue-500/40 bg-blue-600"
 					variant="default"
 					type="button"
 					size="lg"
