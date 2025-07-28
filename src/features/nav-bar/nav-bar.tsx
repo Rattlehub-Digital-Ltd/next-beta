@@ -13,6 +13,7 @@ const Navbar = () => {
 					alt="Nextdot Logo"
 					width={100.72}
 					height={12}
+					loading="eager"
 				/>
 			</Link>
 			<MenuPopup>

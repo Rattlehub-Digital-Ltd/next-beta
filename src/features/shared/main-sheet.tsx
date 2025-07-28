@@ -35,6 +35,7 @@ function MainSheet({ title, imgSrc, imgAlt, content }: MainSheetProps) {
 						alt={imgAlt ?? "Image"}
 						height={256}
 						width={256}
+						loading="eager"
 					/>
 				</div>
 			</motion.div>
