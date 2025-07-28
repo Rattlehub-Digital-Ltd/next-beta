@@ -1,3 +1,4 @@
+import * as motion from "motion/react-client";
 import Image from "next/image";
 
 type MainSheetProps = {
@@ -17,7 +18,17 @@ function MainSheet({ title, imgSrc, imgAlt, content }: MainSheetProps) {
 					</h1>
 				</header>
 			)}
-			<div className="flex items-center justify-center">
+			<motion.div
+				className="flex items-center justify-center"
+				initial={{ scale: 0.8, opacity: 0.5 }}
+				animate={{ scale: 1, opacity: 1, translateY: 0 }}
+				transition={{
+					duration: 0.5,
+					type: "spring",
+					visualDuration: 0.4,
+					bounce: 0.5,
+				}}
+			>
 				<div>
 					<Image
 						src={imgSrc}
@@ -26,7 +37,7 @@ function MainSheet({ title, imgSrc, imgAlt, content }: MainSheetProps) {
 						width={256}
 					/>
 				</div>
-			</div>
+			</motion.div>
 			<div className="grow flex flex-col">{content}</div>
 		</div>
 	);
