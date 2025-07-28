@@ -24,15 +24,15 @@ const Content = () => {
 				</h2>
 				<p className="text-foreground-secondary text-[0.78rem] text-pretty">
 					By continuing, you agree to NEXTDOT's{" "}
-					<a href="/" className="font-semibold text-blue-500">
+					<a href="/" className="font-semibold text-blue-600">
 						Privacy Policy
 					</a>{" "}
 					,
-					<a href="/" className="font-semibold text-blue-500">
+					<a href="/" className="font-semibold text-blue-600">
 						Terms of Service
 					</a>
 					, and acknowledge their{" "}
-					<a href="/" className="font-semibold text-blue-500">
+					<a href="/" className="font-semibold text-blue-600">
 						Data Policy
 					</a>
 					.
