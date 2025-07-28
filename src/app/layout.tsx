@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ErrorBoundary from "@/components/error-boundary";
 import RefreshButton from "@/features/root-layout/refresh-button";
+import MainLayout from "./components/layouts/main-layout";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -27,7 +28,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+				className={`${geistSans.variable} ${geistMono.variable} antialiased bg-main-background`}
 			>
 				<ErrorBoundary
 					fallback={
@@ -45,9 +46,7 @@ export default function RootLayout({
 						</div>
 					}
 				>
-					<div className="min-h-screen bg-background">
-						<main className="container mx-auto px-4">{children}</main>
-					</div>
+					<MainLayout>{children}</MainLayout>
 				</ErrorBoundary>
 			</body>
 		</html>
