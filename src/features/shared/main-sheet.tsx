@@ -9,7 +9,7 @@ type MainSheetProps = {
 
 function MainSheet({ title, imgSrc, imgAlt, content }: MainSheetProps) {
 	return (
-		<div className="grow w-full h-full bg-white/65 stroke-1 stroke-black/5 rounded-3xl backdrop-blur-[60] shadow-[0px 16px 30px -3px rgba(106, 106, 106, 0.06)] space-y-4 p-4 flex flex-col">
+		<div className="grow w-full h-full bg-white/65 stroke-1 stroke-black/5 rounded-3xl backdrop-blur-3xl shadow-[0px 16px 30px -3px rgba(106, 106, 106, 0.06)] space-y-4 p-4 flex flex-col">
 			{title && (
 				<header>
 					<h1 className="text-sm font-bold uppercase text-center leading-6">
@@ -17,7 +17,7 @@ function MainSheet({ title, imgSrc, imgAlt, content }: MainSheetProps) {
 					</h1>
 				</header>
 			)}
-			<div className="flex items-center justify-center h-full">
+			<div className="flex items-center justify-center">
 				<div>
 					<Image
 						src={imgSrc}
