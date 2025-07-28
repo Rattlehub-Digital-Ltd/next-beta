@@ -23,7 +23,7 @@ const Content = () => {
 				</p>
 			</div>
 			<Button
-				className="font-semibold rounded-2xl h-11 !pr-3 shadow-md shadow-primary/40 bg-primary"
+				className="font-semibold rounded-2xl h-11 !pr-3 shadow-md shadow-blue-500/40 bg-blue-600"
 				variant="default"
 				type="button"
 				size="lg"
