@@ -18,7 +18,9 @@ const Content = () => {
 				animate={{ opacity: 1, translateY: 0 }}
 				transition={{ duration: 0.35 }}
 			>
-				<h2 className={`text-pretty font-bold text-2xl ${serif.className}`}>
+				<h2
+					className={`text-pretty font-bold text-2xl leading-8 ${serif.className}`}
+				>
 					Your Estate, <br />
 					Organized and Accessible Anytime
 				</h2>
@@ -46,7 +48,7 @@ const Content = () => {
 				transition={{ duration: 0.35 }}
 			>
 				<Button
-					className="font-semibold rounded-2xl h-12 w-full                                                                                                                                                                                                                 !pr-3 shadow-md shadow-blue-500/40 bg-blue-600"
+					className="font-semibold rounded-2xl h-11 w-full                                                                                                                                                                                                                 !pr-3 shadow-md shadow-blue-500/40 bg-blue-600"
 					variant="default"
 					type="button"
 					size="lg"
