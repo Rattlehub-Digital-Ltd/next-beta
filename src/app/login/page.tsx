@@ -1,11 +1,12 @@
+import { Merriweather } from "next/font/google";
+import { Button } from "@/components/ui/button";
+import MainSheet from "@/features/shared/main-sheet";
+import { FluentArrowCircleRight24Filled, SparkleIcon } from "../styles/icons";
+
 const serif = Merriweather({
 	variable: "--font-merriweather",
 	subsets: ["latin"],
 });
-
-import { Merriweather } from "next/font/google";
-import { Button } from "@/components/ui/button";
-import MainSheet from "@/features/shared/main-sheet";
 
 const Content = () => {
 	return (
@@ -22,11 +23,13 @@ const Content = () => {
 				</p>
 			</div>
 			<Button
-				className="font-semibold rounded-2xl h-11"
+				className="font-semibold rounded-2xl h-11 pr-3 shadow-md shadow-primary/40"
 				variant="default"
 				size="lg"
 			>
-				Continue with Nextdot
+				<SparkleIcon className="!h-4.5 !w-4.5 text-white mr-2" />
+				<span className="grow text-center text-sm">Continue with Nextdot</span>
+				<FluentArrowCircleRight24Filled className="!h-6 !w-6 text-white" />
 			</Button>
 		</div>
 	);

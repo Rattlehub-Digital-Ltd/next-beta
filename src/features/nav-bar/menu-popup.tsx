@@ -14,7 +14,9 @@ import {
 function MenuPopup({ children }: PropsWithChildren) {
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger>{children}</DropdownMenuTrigger>
+			<DropdownMenuTrigger asChild aria-label="Open menu">
+				{children}
+			</DropdownMenuTrigger>
 			<DropdownMenuContent>
 				<DropdownMenuLabel>My Account</DropdownMenuLabel>
 				<DropdownMenuSeparator />
