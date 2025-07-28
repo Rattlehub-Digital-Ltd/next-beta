@@ -28,7 +28,7 @@ export default function RootLayout({
 	return (
 		<html className="bg-main-background h-screen" lang="en">
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased h-full overflow-hidden bg-main-secondary-background`}
+				className={`${geistSans.variable} ${geistMono.variable} antialiased h-full overflow-hidden bg-main-secondary-background/97`}
 			>
 				<ErrorBoundary
 					fallback={

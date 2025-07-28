@@ -7,7 +7,7 @@ import MenuPopup from "./menu-popup";
 const Navbar = () => {
 	return (
 		<div className="flex items-center justify-between h-full px-8">
-			<Link href="/">
+			<Link className="relative z-1" href="/">
 				<Image
 					src="/logo_light.svg"
 					alt="Nextdot Logo"

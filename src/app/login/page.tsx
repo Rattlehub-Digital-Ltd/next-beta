@@ -10,7 +10,7 @@ const serif = Merriweather({
 
 const Content = () => {
 	return (
-		<div className="h-full flex flex-col w-full grow">
+		<div className="h-full flex flex-col w-full">
 			<div className="space-y-4 text-center px-6 grow">
 				<h2 className={`text-pretty font-bold text-2xl ${serif.className}`}>
 					Your Estate, <br />
@@ -23,12 +23,15 @@ const Content = () => {
 				</p>
 			</div>
 			<Button
-				className="font-semibold rounded-2xl h-11 !pr-3 shadow-md shadow-primary/40"
+				className="font-semibold rounded-2xl h-11 !pr-3 shadow-md shadow-primary/40 bg-primary"
 				variant="default"
+				type="button"
 				size="lg"
 			>
 				<SparkleIcon className="!h-4.5 !w-4.5 text-white mr-2" />
-				<span className="grow text-center text-sm">Continue with Nextdot</span>
+				<span className="grow text-center text-sm truncate">
+					Continue with Nextdot
+				</span>
 				<FluentArrowCircleRight24Filled className="!h-6 !w-6 text-white" />
 			</Button>
 		</div>
