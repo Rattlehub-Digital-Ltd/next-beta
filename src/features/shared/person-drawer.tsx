@@ -16,9 +16,17 @@ type PersonDrawerProps = {
 	title?: string;
 	description?: string;
 	children: React.ReactNode;
+	firstName?: string;
+	lastName?: string;
+	relationship?: string;
+	imgSrc?: string;
 };
 
 function PersonDrawer({
+	firstName = "",
+	lastName = "",
+	relationship = "",
+	imgSrc = "",
 	children,
 	description,
 	title = "Add person",
@@ -33,8 +41,8 @@ function PersonDrawer({
 					<DrawerTitle className="text-base font-semibold">{title}</DrawerTitle>
 					{description && <DrawerDescription>{description}</DrawerDescription>}
 				</DrawerHeader>
-				<div className="p-4 ">
-					<div className="grow w-full h-full bg-[#F6F6F6]/90 stroke-1 stroke-black/5 rounded-3xl backdrop-blur-[20px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)] space-y-4 p-4 flex flex-col">
+				<div className="p-4">
+					<div className="grow w-full h-full bg-[#F6F6F6]/90 stroke-1 stroke-black/5 rounded-3xl backdrop-blur-[20px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)] space-y-8 p-4 flex flex-col">
 						<header>
 							<h1 className="text-sm font-bold leading-6">
 								Profile Information
@@ -44,7 +52,14 @@ function PersonDrawer({
 							</p>
 						</header>
 						<ProfilePictureCard />
-						<PersonForm buttonLabel={title} onClose={() => setOpen(false)} />
+						<PersonForm
+							firstName={firstName}
+							lastName={lastName}
+							relationship={relationship}
+							imgSrc={imgSrc}
+							buttonLabel={title}
+							onClose={() => setOpen(false)}
+						/>
 					</div>
 				</div>
 			</DrawerContent>

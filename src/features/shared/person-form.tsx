@@ -15,6 +15,10 @@ import {
 } from "@/components/ui/select";
 
 type PersonFormProps = {
+	firstName?: string;
+	lastName?: string;
+	relationship?: string;
+	imgSrc?: string;
 	buttonLabel: string;
 	onClose: () => void;
 };
@@ -22,7 +26,7 @@ type PersonFormProps = {
 const labelClass =
 	"text-xs font-medium tracking-[0.08px] mb-1.5 text-[#616161]";
 const inputClass =
-	"!text-base placeholder:text-sm bg-white rounded-[12px] w-full";
+	"!text-base placeholder:text-sm bg-white rounded-[12px] w-full h-11 leading-6 flex items-center";
 
 function FieldInfo({ field }: { field: AnyFieldApi }) {
 	return (
@@ -35,12 +39,18 @@ function FieldInfo({ field }: { field: AnyFieldApi }) {
 	);
 }
 
-function PersonForm({ buttonLabel, onClose }: PersonFormProps) {
+function PersonForm({
+	firstName,
+	lastName,
+	relationship,
+	buttonLabel,
+	onClose,
+}: PersonFormProps) {
 	const form = useForm({
 		defaultValues: {
-			firstName: "",
-			lastName: "",
-			relationship: "",
+			firstName: firstName ?? "",
+			lastName: lastName ?? "",
+			relationship: relationship?.toLocaleLowerCase() ?? "",
 		},
 		onSubmit: async ({ value }) => {
 			// Do something with form data
@@ -51,7 +61,7 @@ function PersonForm({ buttonLabel, onClose }: PersonFormProps) {
 	return (
 		<div>
 			<form
-				className="space-y-4"
+				className="space-y-8"
 				onSubmit={(e) => {
 					e.preventDefault();
 					e.stopPropagation();
@@ -135,7 +145,7 @@ function PersonForm({ buttonLabel, onClose }: PersonFormProps) {
 										<SelectValue placeholder="Select relationship" />
 									</SelectTrigger>
 									<SelectContent>
-										{["Biological", "Adopted", "Other"].map((item) => (
+										{["Biological", "Adopted", "Other", "Wife"].map((item) => (
 											<SelectItem key={item} value={item}>
 												{item}
 											</SelectItem>
@@ -158,7 +168,11 @@ function PersonForm({ buttonLabel, onClose }: PersonFormProps) {
 									disabled={!canSubmit}
 									className="bg-blue-600 hover:bg-blue-600 active:bg-blue-700 px-8"
 								>
-									{isSubmitting ? "..." : buttonLabel}
+									{(firstName !== "" && lastName !== "") || relationship !== ""
+										? `Update ${firstName} ${lastName}`
+										: isSubmitting
+											? "Submitting..."
+											: buttonLabel}
 								</Button>
 							</motion.div>
 						)}

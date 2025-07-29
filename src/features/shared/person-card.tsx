@@ -8,14 +8,16 @@ import RemovePersonDrawer from "./remove-person-drawer";
 
 type PersonCardProps = {
 	imgSrc?: string;
-	fullName: string;
+	firstName: string;
+	lastName: string;
 	relationship: string;
 	onDelete: () => void;
 };
 
 function PersonCard({
 	imgSrc,
-	fullName,
+	firstName,
+	lastName,
 	relationship,
 	onDelete,
 }: PersonCardProps) {
@@ -34,11 +36,16 @@ function PersonCard({
 					{relationship}
 				</p>
 				<p className="text-[13px] font-semibold leading-4 truncate">
-					{fullName}
+					{`${firstName} ${lastName}`}
 				</p>
 			</div>
 			<div className="flex items-center gap-2">
-				<PersonDrawer>
+				<PersonDrawer
+					firstName={firstName}
+					lastName={lastName}
+					relationship={relationship}
+					imgSrc={imgSrc}
+				>
 					<Button className="h-8 w-8 px-0 py-0 rounded-full bg-black/[0.03] active:bg-black/[0.05]">
 						<Icon icon="fluent:edit-20-regular" style={{ stroke: "#6b6b6b" }} />
 					</Button>

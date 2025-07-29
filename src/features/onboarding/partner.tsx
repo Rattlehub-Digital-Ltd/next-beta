@@ -24,7 +24,8 @@ const Content = () => {
 				</p>
 				<div className="py-4 flex flex-col w-full items-center">
 					<PersonCard
-						fullName="Halle Berry"
+						firstName="Halle"
+						lastName="Berry"
 						relationship="Wife"
 						imgSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1ItXU1XrpFWqetXf1M59Fd7Pb3mMPslGYPg&s"
 						onDelete={() => console.log("Delete partner")}
