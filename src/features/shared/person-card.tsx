@@ -7,6 +7,7 @@ import PersonDrawer from "./person-drawer";
 import RemovePersonDrawer from "./remove-person-drawer";
 
 type PersonCardProps = {
+	title: string;
 	imgSrc?: string;
 	firstName: string;
 	lastName: string;
@@ -15,6 +16,7 @@ type PersonCardProps = {
 };
 
 function PersonCard({
+	title = "Add person",
 	imgSrc,
 	firstName,
 	lastName,
@@ -41,6 +43,7 @@ function PersonCard({
 			</div>
 			<div className="flex items-center gap-2">
 				<PersonDrawer
+					title={title}
 					firstName={firstName}
 					lastName={lastName}
 					relationship={relationship}

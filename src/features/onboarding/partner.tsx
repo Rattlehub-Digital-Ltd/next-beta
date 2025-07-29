@@ -24,6 +24,7 @@ const Content = () => {
 				</p>
 				<div className="py-4 flex flex-col w-full items-center">
 					<PersonCard
+						title="Edit partner"
 						firstName="Halle"
 						lastName="Berry"
 						relationship="Wife"
