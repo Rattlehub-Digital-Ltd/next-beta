@@ -1,5 +1,5 @@
 /** biome-ignore-all lint/correctness/noChildrenProp: better */
-
+import * as motion from "motion/react-client";
 import type { AnyFieldApi } from "@tanstack/react-form";
 import { useForm } from "@tanstack/react-form";
 import { Button } from "@/components/ui/button";
@@ -150,18 +150,22 @@ function PersonForm({ buttonLabel, onClose }: PersonFormProps) {
 					<form.Subscribe
 						selector={(state) => [state.canSubmit, state.isSubmitting]}
 						children={([canSubmit, isSubmitting]) => (
-							<Button
-								type="submit"
-								disabled={!canSubmit}
-								className="bg-blue-600 hover:bg-blue-600 active:bg-blue-700 px-8"
-							>
-								{isSubmitting ? "..." : buttonLabel}
-							</Button>
+							<motion.div whileTap={{ scale: 0.95 }}>
+								<Button
+									type="submit"
+									disabled={!canSubmit}
+									className="bg-blue-600 hover:bg-blue-600 active:bg-blue-700 px-8"
+								>
+									{isSubmitting ? "..." : buttonLabel}
+								</Button>
+							</motion.div>
 						)}
 					/>
-					<Button className="px-8" variant="outline" onClick={onClose}>
-						Cancel
-					</Button>
+					<motion.div whileTap={{ scale: 0.95 }}>
+						<Button className="px-8" variant="outline" onClick={onClose}>
+							Cancel
+						</Button>
+					</motion.div>
 				</div>
 			</form>
 		</div>
