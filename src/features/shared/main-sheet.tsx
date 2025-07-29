@@ -33,8 +33,8 @@ function MainSheet({ title, imgSrc, imgAlt, content }: MainSheetProps) {
 					<Image
 						src={imgSrc}
 						alt={imgAlt ?? "Image"}
-						height={256}
-						width={256}
+						height={192}
+						width={192}
 						loading="eager"
 					/>
 				</div>
