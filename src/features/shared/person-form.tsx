@@ -87,6 +87,7 @@ function PersonForm({ buttonLabel, onClose }: PersonFormProps) {
 									<Input
 										id={field.name}
 										name={field.name}
+										placeholder="Enter first name"
 										value={field.state.value}
 										className={inputClass}
 										onBlur={field.handleBlur}
@@ -109,6 +110,7 @@ function PersonForm({ buttonLabel, onClose }: PersonFormProps) {
 								<Input
 									id={field.name}
 									name={field.name}
+									placeholder="Enter last name"
 									value={field.state.value}
 									className={inputClass}
 									onBlur={field.handleBlur}
@@ -130,7 +132,7 @@ function PersonForm({ buttonLabel, onClose }: PersonFormProps) {
 
 								<Select>
 									<SelectTrigger className={inputClass}>
-										<SelectValue placeholder="Relationship" />
+										<SelectValue placeholder="Select relationship" />
 									</SelectTrigger>
 									<SelectContent>
 										{["Biological", "Adopted", "Other"].map((item) => (
