@@ -9,6 +9,8 @@ import {
 	DrawerTitle,
 	DrawerTrigger,
 } from "@/components/ui/drawer";
+import PersonForm from "./person-form";
+import ProfilePictureCard from "./profile-picture-card";
 
 type PersonDrawerProps = {
 	title?: string;
@@ -24,13 +26,13 @@ function PersonDrawer({
 	return (
 		<Drawer>
 			<DrawerTrigger asChild>{children}</DrawerTrigger>
-			<DrawerContent className="bg-main-background">
+			<DrawerContent className="bg-[#ECECEC]">
 				<DrawerHeader className="items-start text-left">
 					<DrawerTitle className="text-base font-semibold">{title}</DrawerTitle>
 					{description && <DrawerDescription>{description}</DrawerDescription>}
 				</DrawerHeader>
 				<div className="p-4 ">
-					<main className="grow w-full h-full bg-white/65 stroke-1 stroke-black/5 rounded-3xl backdrop-blur-[60px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)] space-y-3 p-4 flex flex-col">
+					<div className="grow w-full h-full bg-[#F6F6F6]/90 stroke-1 stroke-black/5 rounded-3xl backdrop-blur-[20px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)] space-y-3 p-4 flex flex-col">
 						<header>
 							<h1 className="text-sm font-bold leading-6">
 								Profile Information
@@ -39,7 +41,9 @@ function PersonDrawer({
 								Update your profile details and profile picture
 							</p>
 						</header>
-					</main>
+						<ProfilePictureCard />
+						<PersonForm />
+					</div>
 				</div>
 				<DrawerFooter className="grid grid-cols-2 gap-2">
 					<Button>Save</Button>
