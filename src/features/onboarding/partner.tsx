@@ -1,3 +1,5 @@
+"use client";
+
 import * as motion from "motion/react-client";
 import { CategoryBadge } from "@/features/shared/category-badge";
 import MainSheet from "@/features/shared/main-sheet";
@@ -25,7 +27,7 @@ const Content = () => {
 						fullName="Halle Berry"
 						relationship="Wife"
 						imgSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1ItXU1XrpFWqetXf1M59Fd7Pb3mMPslGYPg&s"
-						// onDelete={() => console.log("Delete partner")}
+						onDelete={() => console.log("Delete partner")}
 					/>
 				</div>
 			</motion.div>
