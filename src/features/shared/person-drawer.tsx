@@ -32,7 +32,7 @@ function PersonDrawer({
 					{description && <DrawerDescription>{description}</DrawerDescription>}
 				</DrawerHeader>
 				<div className="p-4 ">
-					<div className="grow w-full h-full bg-[#F6F6F6]/90 stroke-1 stroke-black/5 rounded-3xl backdrop-blur-[20px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)] space-y-3 p-4 flex flex-col">
+					<div className="grow w-full h-full bg-[#F6F6F6]/90 stroke-1 stroke-black/5 rounded-3xl backdrop-blur-[20px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)] space-y-4 p-4 flex flex-col">
 						<header>
 							<h1 className="text-sm font-bold leading-6">
 								Profile Information
