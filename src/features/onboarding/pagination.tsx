@@ -15,6 +15,13 @@ function Pagination({
 	onPrevious,
 	onNext,
 }: PaginationProps) {
+	console.log(
+		"Pagination component rendered",
+		currentPage,
+		totalPages,
+		onPrevious,
+		onNext,
+	);
 	return (
 		<motion.div
 			className="bg-[#FDFDFD]/67 border w-full border-[#EBEDED] rounded-full h-11 backdrop-blur-xl shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)] flex justify-between px-1.5 items-center"
@@ -36,7 +43,7 @@ function Pagination({
 				</Button>
 			</motion.div>
 			<div className="flex items-center gap-1.5">
-				<div className="bg-[#3C3C43]/60 h-1.5 w-4 rounded-full" />
+				<div className="bg-[#3C3C43] h-1.5 w-4 rounded-full" />
 				<div className="bg-[#3C3C43]/30 h-1.5 w-1.5 rounded-full" />
 				<div className="bg-[#3C3C43]/30 h-1.5 w-1.5 rounded-full" />
 				<div className="bg-[#3C3C43]/30 h-1.5 w-1.5 rounded-full" />
