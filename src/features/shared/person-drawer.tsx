@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
 	Drawer,
 	DrawerContent,
@@ -10,7 +11,6 @@ import {
 } from "@/components/ui/drawer";
 import PersonForm from "./person-form";
 import ProfilePictureCard from "./profile-picture-card";
-import { useState } from "react";
 
 type PersonDrawerProps = {
 	title?: string;

@@ -1,7 +1,8 @@
 /** biome-ignore-all lint/correctness/noChildrenProp: better */
-import * as motion from "motion/react-client";
+
 import type { AnyFieldApi } from "@tanstack/react-form";
 import { useForm } from "@tanstack/react-form";
+import * as motion from "motion/react-client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

@@ -7,6 +7,9 @@ import { useCallback, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { FluentArrowCircleRight24Filled, SparkleIcon } from "@/styles/icons";
 
+// import { useOnboardingStore } from "store/use-onboarding-store";
+// import { useCountStore } from "store/use-count-store";
+
 const LoginButton = () => {
 	const router = useRouter();
 	const searchParams = useSearchParams();
@@ -14,15 +17,48 @@ const LoginButton = () => {
 	const {
 		isLoading,
 		loginWithRedirect,
-		// user,
+		user,
 		isAuthenticated,
 		getAccessTokenSilently,
 	} = useAuth0();
 
+	// const { setIsOnboarded } = useOnboardingStore();
+	// const { setActionsCount, setSuggestionsCount } = useCountStore();
+
 	const [processing, setProcessing] = useState(false);
 
 	const redirectUrl =
-		searchParams.get("iss") ?? searchParams.get("redirectUrl") ?? "/snapshot";
+		searchParams.get("iss") ?? searchParams.get("redirectUrl") ?? "/onboarding";
+
+	const loadData = useCallback(async () => {
+		if (user && isAuthenticated) {
+			// const res = await getOnboardingStatus();
+			// const onboarded = !!res?.isOnboarded;
+			// if (onboarded) {
+			// 	try {
+			// 		const res = await fetchActivity();
+			// 		if (res) {
+			// 			const obj = res as ActivityProps;
+			// 			if (obj) {
+			// 				setActionsCount(obj.pending);
+			// 				setSuggestionsCount(obj.suggested);
+			// 			}
+			// 		}
+			// 	} catch (e) {
+			// 		console.debug(e);
+			// 	}
+			// }
+			// setIsOnboarded(onboarded);
+		}
+	}, [
+		// fetchActivity,
+		// getOnboardingStatus,
+		isAuthenticated,
+		// setActionsCount,
+		// setIsOnboarded,
+		// setSuggestionsCount,
+		user,
+	]);
 
 	const authenticate = useCallback(async () => {
 		if (!isAuthenticated && !isLoading) {
@@ -60,46 +96,21 @@ const LoginButton = () => {
 			})
 				.then(async (token) => {
 					if (token && token !== "") {
-						// await loadData();
+						await loadData();
 						router.replace(redirectUrl);
 					}
 				})
 				.catch((error) => console.log("Error getting access token:", error))
 				.finally(() => setProcessing(false));
 		}
-	}, [getAccessTokenSilently, isAuthenticated, isLoading, redirectUrl, router]);
-
-	// const loadData = useCallback(async () => {
-	// 	if (user && isAuthenticated) {
-	// 		const res = await getOnboardingStatus();
-	// 		const onboarded = !!res?.isOnboarded;
-
-	// 		if (onboarded) {
-	// 			try {
-	// 				const res = await fetchActivity();
-	// 				if (res) {
-	// 					const obj = res as ActivityProps;
-	// 					if (obj) {
-	// 						setActionsCount(obj.pending);
-	// 						setSuggestionsCount(obj.suggested);
-	// 					}
-	// 				}
-	// 			} catch (e) {
-	// 				console.debug(e);
-	// 			}
-	// 		}
-
-	// 		setIsOnboarded(onboarded);
-	// 	}
-	// }, [
-	// 	fetchActivity,
-	// 	getOnboardingStatus,
-	// 	isAuthenticated,
-	// 	setActionsCount,
-	// 	setIsOnboarded,
-	// 	setSuggestionsCount,
-	// 	user,
-	// ]);
+	}, [
+		getAccessTokenSilently,
+		isAuthenticated,
+		isLoading,
+		redirectUrl,
+		router,
+		loadData,
+	]);
 
 	useEffect(() => {
 		autoSignIn();

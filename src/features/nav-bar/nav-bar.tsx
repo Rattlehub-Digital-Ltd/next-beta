@@ -1,10 +1,16 @@
+"use client";
+
+import { useAuth0 } from "@auth0/auth0-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { getInitials } from "@/lib/utils";
 import MenuPopup from "./menu-popup";
 
 const Navbar = () => {
+	const { user } = useAuth0();
+
 	return (
 		<div className="flex items-center justify-between h-full px-8">
 			<Link className="relative z-1" href="/">
@@ -19,9 +25,9 @@ const Navbar = () => {
 			<MenuPopup>
 				<div className="relative">
 					<Avatar className="h-10 w-10 rounded-2xl">
-						<AvatarImage src="" />
+						<AvatarImage src={user?.picture} alt="Avatar" />
 						<AvatarFallback className="text-[0.7rem] font-semibold text-navbar-avatar-foreground bg-navbar-avatar-bg rounded-2xl h-full w-full">
-							TP
+							{getInitials(user?.name ?? user?.nickname ?? "")}
 						</AvatarFallback>
 					</Avatar>
 					<Badge
