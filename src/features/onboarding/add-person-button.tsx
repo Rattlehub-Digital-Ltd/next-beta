@@ -17,7 +17,7 @@ function AddPersonButton({ label }: AddPersonButtonProps) {
 		>
 			<PersonDrawer title={label}>
 				<Button
-					className="text-[#0372E3] rounded-full gap-1.5 w-full py-2 pl-2 pr-3 bg-[#0372E3]/15"
+					className="text-[#0372E3] rounded-full gap-1.5 w-full py-2 pl-2 pr-3 bg-[#0372E3]/8"
 					variant="default"
 					type="button"
 					size="lg"

@@ -19,7 +19,7 @@ function RemovePersonDrawer({ children, onDelete }: RemovePersonDrawerProps) {
 	return (
 		<Drawer>
 			<DrawerTrigger asChild>{children}</DrawerTrigger>
-			<DrawerContent className="bg-main-secondary-background">
+			<DrawerContent className="bg-[#ECECEC]">
 				<DrawerHeader>
 					<DrawerTitle>Are you absolutely sure?</DrawerTitle>
 					<DrawerDescription>This action cannot be undone.</DrawerDescription>

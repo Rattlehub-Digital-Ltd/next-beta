@@ -1,16 +1,16 @@
-import { Button } from "@/components/ui/button";
+"use client";
+
 import {
 	Drawer,
-	DrawerClose,
 	DrawerContent,
 	DrawerDescription,
-	DrawerFooter,
 	DrawerHeader,
 	DrawerTitle,
 	DrawerTrigger,
 } from "@/components/ui/drawer";
 import PersonForm from "./person-form";
 import ProfilePictureCard from "./profile-picture-card";
+import { useState } from "react";
 
 type PersonDrawerProps = {
 	title?: string;
@@ -23,11 +23,13 @@ function PersonDrawer({
 	description,
 	title = "Add person",
 }: PersonDrawerProps) {
+	const [open, setOpen] = useState(false);
+
 	return (
-		<Drawer>
+		<Drawer open={open} onOpenChange={setOpen}>
 			<DrawerTrigger asChild>{children}</DrawerTrigger>
 			<DrawerContent className="bg-[#ECECEC]">
-				<DrawerHeader className="items-start text-left">
+				<DrawerHeader className="items-start text-left px-6">
 					<DrawerTitle className="text-base font-semibold">{title}</DrawerTitle>
 					{description && <DrawerDescription>{description}</DrawerDescription>}
 				</DrawerHeader>
@@ -38,21 +40,13 @@ function PersonDrawer({
 								Profile Information
 							</h1>
 							<p className="text-xs leading-4 tracking-[0.01px] text-foreground-secondary">
-								Update your profile details and profile picture
+								Add/Update person details and/or profile picture
 							</p>
 						</header>
 						<ProfilePictureCard />
-						<PersonForm />
+						<PersonForm buttonLabel={title} onClose={() => setOpen(false)} />
 					</div>
 				</div>
-				<DrawerFooter className="grid grid-cols-2 gap-2">
-					<Button>Save</Button>
-					<DrawerClose asChild>
-						<Button className="w-full" variant="outline">
-							Cancel
-						</Button>
-					</DrawerClose>
-				</DrawerFooter>
 			</DrawerContent>
 		</Drawer>
 	);

@@ -14,6 +14,11 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 
+type PersonFormProps = {
+	buttonLabel: string;
+	onClose: () => void;
+};
+
 const labelClass =
 	"text-xs font-medium tracking-[0.08px] mb-1.5 text-[#616161]";
 const inputClass =
@@ -30,7 +35,7 @@ function FieldInfo({ field }: { field: AnyFieldApi }) {
 	);
 }
 
-function PersonForm() {
+function PersonForm({ buttonLabel, onClose }: PersonFormProps) {
 	const form = useForm({
 		defaultValues: {
 			firstName: "",
@@ -141,14 +146,23 @@ function PersonForm() {
 						)}
 					/>
 				</div>
-				<form.Subscribe
-					selector={(state) => [state.canSubmit, state.isSubmitting]}
-					children={([canSubmit, isSubmitting]) => (
-						<Button type="submit" disabled={!canSubmit} variant="link">
-							{isSubmitting ? "..." : "Add person"}
-						</Button>
-					)}
-				/>
+				<div className="flex items-center gap-2 mt-8">
+					<form.Subscribe
+						selector={(state) => [state.canSubmit, state.isSubmitting]}
+						children={([canSubmit, isSubmitting]) => (
+							<Button
+								type="submit"
+								disabled={!canSubmit}
+								className="bg-blue-600 hover:bg-blue-600 active:bg-blue-700 px-8"
+							>
+								{isSubmitting ? "..." : buttonLabel}
+							</Button>
+						)}
+					/>
+					<Button className="px-8" variant="outline" onClick={onClose}>
+						Cancel
+					</Button>
+				</div>
 			</form>
 		</div>
 	);
