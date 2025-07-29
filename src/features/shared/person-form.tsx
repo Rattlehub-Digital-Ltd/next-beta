@@ -22,7 +22,7 @@ type PersonFormProps = {
 const labelClass =
 	"text-xs font-medium tracking-[0.08px] mb-1.5 text-[#616161]";
 const inputClass =
-	"text-base placeholder: text-sm bg-white rounded-[12px] w-full";
+	"!text-base placeholder:text-sm bg-white rounded-[12px] w-full";
 
 function FieldInfo({ field }: { field: AnyFieldApi }) {
 	return (
