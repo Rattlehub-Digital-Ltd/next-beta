@@ -2,7 +2,19 @@ import { Icon } from "@iconify/react";
 import * as motion from "motion/react-client";
 import { Button } from "@/components/ui/button";
 
-function Pagination() {
+interface PaginationProps {
+	currentPage: number;
+	totalPages: number;
+	onPrevious: () => void;
+	onNext: () => void;
+}
+
+function Pagination({
+	currentPage,
+	totalPages,
+	onPrevious,
+	onNext,
+}: PaginationProps) {
 	return (
 		<motion.div
 			className="bg-[#FDFDFD]/67 border w-full border-[#EBEDED] rounded-full h-11 backdrop-blur-xl shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)] flex justify-between px-1.5 items-center"

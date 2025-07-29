@@ -6,7 +6,7 @@ import RefreshButton from "@/features/root-layout/refresh-button";
 import MainLayout from "./components/layouts/main-layout";
 
 const geistSans = Mona_Sans({
-	variable: "--font-mono-sans-sans",
+	variable: "--font-mono-sans",
 	subsets: ["latin"],
 });
 

@@ -14,8 +14,6 @@ const badgeVariants = cva(
 					"bg-category-badge-delay-background text-category-badge-delay-foreground",
 				protection:
 					"bg-category-badge-protection-background text-category-badge-protection-foreground",
-				outline:
-					"text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
 			},
 		},
 	},
@@ -24,10 +22,8 @@ const badgeVariants = cva(
 function CategoryBadge({
 	className,
 	variant,
-	asChild = false,
 	...props
-}: React.ComponentProps<"div"> &
-	VariantProps<typeof badgeVariants> & { asChild?: boolean }) {
+}: React.ComponentProps<"div"> & VariantProps<typeof badgeVariants>) {
 	const iconClass = "h-4 w-4 shrink-0";
 	let icon: React.ReactNode = null;
 	let title: string = "";
