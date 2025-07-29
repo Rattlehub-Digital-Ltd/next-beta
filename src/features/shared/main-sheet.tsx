@@ -10,7 +10,7 @@ type MainSheetProps = {
 
 function MainSheet({ title, imgSrc, imgAlt, content }: MainSheetProps) {
 	return (
-		<div className="grow w-full h-full bg-white/65 stroke-1 stroke-black/5 rounded-3xl backdrop-blur-[60px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)] space-y-4 p-4 flex flex-col">
+		<div className="grow w-full h-full bg-white/75 stroke-1 stroke-[#EBEDED] rounded-3xl backdrop-blur-[60px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)] space-y-4 p-4 flex flex-col">
 			{title && (
 				<header>
 					<h1 className="text-sm font-bold uppercase text-center leading-6">

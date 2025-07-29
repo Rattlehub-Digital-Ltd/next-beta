@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Mona_Sans } from "next/font/google";
 import "./globals.css";
 import ErrorBoundary from "@/components/error-boundary";
 import RefreshButton from "@/features/root-layout/refresh-button";
 import MainLayout from "./components/layouts/main-layout";
 
-const geistSans = Geist({
-	variable: "--font-geist-sans",
+const geistSans = Mona_Sans({
+	variable: "--font-mono-sans-sans",
 	subsets: ["latin"],
 });
 
@@ -28,7 +28,7 @@ export default function RootLayout({
 	return (
 		<html className="bg-[#E5E5E5] h-screen" lang="en">
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased h-full overflow-hidden bg-main-secondary-background/30 backdrop-blur-lg`}
+				className={`${geistSans.variable} ${geistMono.variable} antialiased h-full overflow-hidden bg-main-secondary-background/97`}
 			>
 				<ErrorBoundary
 					fallback={

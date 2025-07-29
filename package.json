@@ -11,7 +11,6 @@
 	},
 	"dependencies": {
 		"@auth0/auth0-react": "^2.4.0",
-		"@fluentui/svg-icons": "^1.1.307",
 		"@radix-ui/react-avatar": "^1.1.10",
 		"@radix-ui/react-dialog": "^1.1.14",
 		"@radix-ui/react-dropdown-menu": "^2.1.15",
@@ -31,6 +30,7 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.1.2",
+		"@iconify/react": "^6.0.0",
 		"@tailwindcss/postcss": "^4.1.11",
 		"@types/node": "^24.1.0",
 		"@types/react": "^19.1.8",

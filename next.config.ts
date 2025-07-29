@@ -3,7 +3,7 @@ const nextConfig: import("next").NextConfig = {
 	poweredByHeader: false,
 	reactStrictMode: true,
 	images: {
-		domains: [], // Add your image domains here
+		domains: ["encrypted-tbn0.gstatic.com"], // Add your image domains here
 	},
 	headers: async () => {
 		return [

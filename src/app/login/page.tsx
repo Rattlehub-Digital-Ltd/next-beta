@@ -1,8 +1,7 @@
 import * as motion from "motion/react-client";
 import { Merriweather } from "next/font/google";
-import { Button } from "@/components/ui/button";
+import LoginButton from "@/features/login/login-button";
 import MainSheet from "@/features/shared/main-sheet";
-import { FluentArrowCircleRight24Filled, SparkleIcon } from "../styles/icons";
 
 const serif = Merriweather({
 	variable: "--font-merriweather",
@@ -40,26 +39,7 @@ const Content = () => {
 					.
 				</p>
 			</motion.div>
-			<motion.div
-				className="w-full"
-				whileTap={{ scale: 0.95 }}
-				initial={{ opacity: 0, translateY: -60 }}
-				animate={{ opacity: 1, translateY: 0 }}
-				transition={{ duration: 0.35 }}
-			>
-				<Button
-					className="font-semibold rounded-2xl h-11 w-full                                                                                                                                                                                                                 !pr-3 shadow-md shadow-blue-500/40 bg-blue-600"
-					variant="default"
-					type="button"
-					size="lg"
-				>
-					<SparkleIcon className="!h-4.5 !w-4.5 text-white mr-2" />
-					<span className="grow text-center text-sm truncate">
-						Continue with Nextdot
-					</span>
-					<FluentArrowCircleRight24Filled className="!h-6 !w-6 text-white" />
-				</Button>
-			</motion.div>
+			<LoginButton />
 		</div>
 	);
 };
