@@ -3,12 +3,14 @@
 import { Icon } from "@iconify/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import PersonDrawer from "./person-drawer";
+import RemovePersonDrawer from "./remove-person-drawer";
 
 type PersonCardProps = {
 	imgSrc?: string;
 	fullName: string;
 	relationship: string;
-	onDelete?: () => void;
+	onDelete: () => void;
 };
 
 function PersonCard({
@@ -28,18 +30,28 @@ function PersonCard({
 				<AvatarFallback>HB</AvatarFallback>
 			</Avatar>
 			<div className="grow text-left">
-				<p className="text-xs leading-4 text-[#3C3C43]/80 tracking-[-0.08px]">
+				<p className="text-xs leading-4 text-[#3C3C43]/80 tracking-[-0.08px] truncate">
 					{relationship}
 				</p>
-				<p className="text-[13px] font-semibold leading-4">{fullName}</p>
+				<p className="text-[13px] font-semibold leading-4 truncate">
+					{fullName}
+				</p>
 			</div>
-			<Button
-				className="h-8 w-8 px-0 py-0 rounded-full bg-[#FEF2F2]"
-				type="button"
-				onClick={onDelete}
-			>
-				<Icon icon="fluent:delete-20-regular" style={{ stroke: "#DC2626" }} />
-			</Button>
+			<div className="flex items-center gap-2">
+				<PersonDrawer>
+					<Button className="h-8 w-8 px-0 py-0 rounded-full bg-black/[0.03] active:bg-black/[0.05]">
+						<Icon icon="fluent:edit-20-regular" style={{ stroke: "#6b6b6b" }} />
+					</Button>
+				</PersonDrawer>
+				<RemovePersonDrawer onDelete={onDelete}>
+					<Button className="h-8 w-8 px-0 py-0 rounded-full bg-[#FEF2F2]">
+						<Icon
+							icon="fluent:delete-20-regular"
+							style={{ stroke: "#DC2626" }}
+						/>
+					</Button>
+				</RemovePersonDrawer>
+			</div>
 		</div>
 	);
 }
