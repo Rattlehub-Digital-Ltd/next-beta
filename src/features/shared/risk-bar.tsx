@@ -10,7 +10,7 @@ export default function RiskBar() {
 				<span className="font-semibold text-foreground">Bank accounts</span>
 			</p>
 			<Badge className="text-foreground bg-[#F3F4F6] font-medium">
-				8 others
+				+8 others
 			</Badge>
 		</div>
 	);

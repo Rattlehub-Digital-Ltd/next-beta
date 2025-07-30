@@ -6,7 +6,7 @@ type HeaderProps = {
 
 function Header({ title, description, content }: HeaderProps) {
 	return (
-		<header className="space-y-1">
+		<header className="space-y-1 px-3">
 			<h1 className="text-xl font-extrabold">{title}</h1>
 			<p className="text-sm text-pretty leading-4 text-[#616161]">
 				{description}

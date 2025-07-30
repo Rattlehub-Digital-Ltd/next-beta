@@ -1,26 +1,89 @@
 import { Icon } from "@iconify/react";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 type SuggestionItemProps = {
 	title: string;
 	description: string;
 	showReminder?: boolean;
+	color?:
+		| "yellow"
+		| "teal"
+		| "dark-green"
+		| "indigo"
+		| "brown"
+		| "dark-teal"
+		| "blue";
 };
 
 export default function SuggestionItem({
 	title,
 	description,
 	showReminder = false,
+	color = "yellow",
 }: SuggestionItemProps) {
+	let color1 = "";
+	let color2 = "";
+	let icon = "";
+
+	switch (color) {
+		case "yellow":
+			color1 = "bg-[#FECB01]/15";
+			color2 = "bg-[#FECB01]";
+			icon = "fluent:lightbulb-filament-24-filled";
+			break;
+		case "teal":
+			color1 = "bg-[#6FCAB6]/15";
+			color2 = "bg-[#6FCAB6]";
+			icon = "fluent:text-bullet-list-square-sparkle-24-filled";
+			break;
+		case "dark-green":
+			color1 = "bg-[#197278]/15";
+			color2 = "bg-[#197278]";
+			icon = "fluent:target-arrow-24-filled";
+			break;
+		case "indigo":
+			color1 = "bg-[#5856D6]/15";
+			color2 = "bg-[#5856D6]";
+			icon = "fluent:people-24-filled";
+			break;
+		case "brown":
+			color1 = "bg-[#A2845E]/15";
+			color2 = "bg-[#A2845E]";
+			icon = "fluent:shield-lock-24-filled";
+			break;
+		case "dark-teal":
+			color1 = "bg-[#00C7BE]/15";
+			color2 = "bg-[#00C7BE]";
+			icon = "fluent:document-one-page-sparkle-24-filled";
+			break;
+		case "blue":
+			color1 = "bg-[#007AFF]/15";
+			color2 = "bg-[#007AFF]";
+			icon = "fluent:folder-people-24-filled";
+			break;
+		default:
+			color1 = "bg-[#000]/15";
+			color2 = "bg-[#6b6b6b]";
+			icon = "fluent:info-sparkle-24-filled";
+			break;
+	}
+
 	return (
 		<div className="flex gap-4">
-			<div className="relative h-10 w-10 flex items-center justify-center rounded-full bg-[#FECB01]/15 shrink-0">
-				<div className="h-[32px] w-[32px] shrink-0 rounded-full bg-[#FECB01] flex items-center justify-center text-white/95">
-					<Icon
-						icon="fluent:lightbulb-filament-20-regular"
-						height={20}
-						width={20}
-					/>
+			<div
+				className={cn(
+					"relative h-10 w-10 flex items-center justify-center rounded-full shrink-0",
+					color1,
+				)}
+			>
+				<div
+					className={cn(
+						"h-[32px] w-[32px] shrink-0 rounded-full flex items-center justify-center text-white/95",
+						color2,
+					)}
+				>
+					<Icon icon={icon} height={20} width={20} />
 				</div>
 			</div>
 			<div className="space-y-1">

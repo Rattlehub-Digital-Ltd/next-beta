@@ -23,19 +23,25 @@ const items: BottomTabBarItemProps[] = [
 		defaultIconSrc: "fluent:leaf-two-24-regular",
 		activeIconSrc: "fluent:leaf-two-24-filled",
 		label: "Suggestions",
-		href: "/suggestions",
+		href: "/dashboard/suggestions",
 	},
 	{
 		defaultIconSrc: "fluent:target-arrow-24-regular",
 		activeIconSrc: "fluent:target-arrow-24-filled",
 		label: "Goals",
-		href: "/goals",
+		href: "/dashboard/goals",
 	},
 	{
 		defaultIconSrc: "fluent:data-usage-sparkle-24-regular",
 		activeIconSrc: "fluent:data-usage-sparkle-24-filled",
 		label: "Overview",
-		href: "/overview",
+		href: "/dashboard/overview",
+	},
+	{
+		defaultIconSrc: "fluent:more-circle-24-regular",
+		activeIconSrc: "fluent:more-circle-24-filled",
+		label: "More",
+		href: "/dashboard/more",
 	},
 ];
 
