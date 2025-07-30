@@ -28,7 +28,7 @@ const LoginButton = () => {
 	const [processing, setProcessing] = useState(false);
 
 	const redirectUrl =
-		searchParams.get("iss") ?? searchParams.get("redirectUrl") ?? "/onboarding";
+		searchParams.get("iss") ?? searchParams.get("redirectUrl") ?? "/dashboard";
 
 	const loadData = useCallback(async () => {
 		if (user && isAuthenticated) {

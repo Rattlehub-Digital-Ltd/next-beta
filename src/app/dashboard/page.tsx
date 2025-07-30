@@ -1,10 +1,11 @@
 import { Icon } from "@iconify/react";
 import Link from "next/link";
+import SummaryCard from "@/features/dashboard/summary-card";
 import Header from "@/features/shared/header";
 
 function DashboardPage() {
 	return (
-		<div className="p-3">
+		<div className="py-3 space-y-4">
 			<Header
 				title="Welcome back!"
 				description="These will affect your estate, please read them carefully and take the necessary action."
@@ -24,6 +25,7 @@ function DashboardPage() {
 					</Link>
 				}
 			/>
+			<SummaryCard />
 		</div>
 	);
 }

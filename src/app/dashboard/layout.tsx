@@ -4,9 +4,9 @@ import BottomTabBar from "@/features/shared/bottom-tab-bar";
 
 export default function DashboardLayout({ children }: PropsWithChildren) {
 	return (
-		<div className="h-full flex flex-col space-y-3">
+		<div className="h-full w-full flex flex-col space-y-3">
 			<Banner />
-			<main className="container grow mx-auto">{children}</main>
+			<main className="container grow mx-auto pb-16 w-full">{children}</main>
 			<nav className="fixed bottom-0 left-0 w-full">
 				<BottomTabBar />
 			</nav>
