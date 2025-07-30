@@ -14,6 +14,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { cn } from "@/lib/utils";
 
 type PersonFormProps = {
 	firstName?: string;
@@ -142,7 +143,7 @@ function PersonForm({
 								</Label>
 
 								<Select>
-									<SelectTrigger className={inputClass}>
+									<SelectTrigger className={cn("py-[22px]", inputClass)}>
 										<SelectValue placeholder="Select relationship" />
 									</SelectTrigger>
 									<SelectContent>

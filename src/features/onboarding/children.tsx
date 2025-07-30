@@ -1,10 +1,10 @@
 "use client";
 
 import * as motion from "motion/react-client";
-import { CategoryBadge } from "@/features/shared/category-badge";
 import MainSheet from "@/features/shared/main-sheet";
 import PersonCard from "../shared/person-card";
 import AddPersonButton from "./add-person-button";
+import CategoryList from "../shared/category-list";
 
 const Content = () => {
 	return (
@@ -63,11 +63,9 @@ const Children = () => {
 				},
 			}}
 		>
-			<div className="flex items-center gap-1.5 mb-3 px-3">
-				<CategoryBadge variant="protection" />
-				<CategoryBadge variant="delay" />
-				<CategoryBadge variant="cost" />
-			</div>
+			<motion.div className="mb-3 px-3">
+				<CategoryList />
+			</motion.div>
 			<MainSheet
 				imgSrc="/images/children.png"
 				imgAlt="Child with bird Image"
