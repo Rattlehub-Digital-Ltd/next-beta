@@ -1,12 +1,11 @@
 import { Icon } from "@iconify/react";
-import * as motion from "motion/react-client";
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import RiskBar from "../shared/risk-bar";
 import SuggestionItem from "../shared/suggestion-item";
+import SummaryFooter from "../shared/summary-footer";
 
 function SummaryCard() {
 	return (
@@ -72,23 +71,13 @@ function SummaryCard() {
 				</div>
 			</div>
 			<Separator className="bg-black/5 px-4" />
-			<div className="px-4 space-y-6">
-				<p className="text-xs font-medium">
-					Do you have a <strong>Medical Policy Document</strong> in place?
-				</p>
-				<div className="grid grid-cols-2 gap-2">
-					<motion.div className="w-full" whileTap={{ scale: 0.9 }}>
-						<Button className="w-full rounded-2xl bg-blue-600 hover:bg-blue-600 active:bg-blue-700 px-6">
-							Yes, I do
-						</Button>
-					</motion.div>
-					<motion.div className="w-full" whileTap={{ scale: 0.9 }}>
-						<Button className="px-6 rounded-2xl w-full" variant="outline">
-							No
-						</Button>
-					</motion.div>
-				</div>
-			</div>
+			<SummaryFooter>
+				<span className="font-normal">
+					Do you have{" "}
+					<span className="font-semibold">Medical Policy Document</span> in
+					place?
+				</span>
+			</SummaryFooter>
 		</div>
 	);
 }

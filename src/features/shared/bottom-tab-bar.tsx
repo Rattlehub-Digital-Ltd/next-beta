@@ -3,6 +3,7 @@
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 type BottomTabBarItemProps = {
@@ -49,7 +50,7 @@ function BottomTabBar() {
 	const pathname = usePathname();
 
 	return (
-		<div className="flex items-center justify-around py-4 max-w-screen-lg w-full px-4 mx-auto bg-white/60 border-t border-black/5 backdrop-blur-[15px]">
+		<div className="flex items-center justify-around py-4 max-w-screen-lg w-full mx-auto bg-white/60 border-t border-black/5 backdrop-blur-[15px]">
 			{items.map(({ defaultIconSrc, activeIconSrc, label, href }) => {
 				const isActive = pathname === href;
 
@@ -69,6 +70,25 @@ function BottomTabBar() {
 								height={24}
 							/>
 						</div>
+
+						{label.toLowerCase() === "home" && (
+							<div className="absolute top-0 right-1.5 -mt-1.5">
+								<Badge
+									className="h-4 min-w-4 text-[10px] rounded-full px-1 font-mono tabular-nums"
+									variant="destructive"
+								>
+									10
+								</Badge>
+							</div>
+						)}
+
+						{label.toLowerCase() === "suggestions" && (
+							<div className="absolute top-0 right-1.5 -mt-1.5">
+								<Badge className="h-4 min-w-4 rounded-full px-1 font-mono tabular-nums text-[10px] bg-green-600">
+									99
+								</Badge>
+							</div>
+						)}
 
 						<p
 							className={cn(
