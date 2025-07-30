@@ -5,7 +5,7 @@ import Header from "@/features/shared/header";
 
 function DashboardPage() {
 	return (
-		<div className="py-3 space-y-4">
+		<div className="pt-3 space-y-4 pb-2">
 			<Header
 				title="Welcome back!"
 				description="These will affect your estate, please read them carefully and take the necessary action."

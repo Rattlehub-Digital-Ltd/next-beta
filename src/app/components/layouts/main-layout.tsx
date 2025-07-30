@@ -13,8 +13,8 @@ export default function MainLayout({ children }: PropsWithChildren) {
 			}}
 		>
 			<div className="h-full flex flex-col overflow-y-auto theme">
-				<div className="p-4">
-					<nav className="sticky left-0 top-0 w-full py-3 z-20 backdrop-blur-[15px] bg-white/65 rounded-[23px]">
+				<div className="p-3.5 sticky left-0 top-0 w-full z-20">
+					<nav className="py-3 backdrop-blur-[15px] bg-white/40 rounded-[23px]">
 						<Navbar />
 					</nav>
 				</div>
