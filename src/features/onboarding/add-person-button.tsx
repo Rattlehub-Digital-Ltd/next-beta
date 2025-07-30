@@ -1,3 +1,5 @@
+"use client";
+
 import { Icon } from "@iconify/react";
 import * as motion from "motion/react-client";
 import { Button } from "@/components/ui/button";

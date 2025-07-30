@@ -3,7 +3,24 @@ const nextConfig: import("next").NextConfig = {
 	poweredByHeader: false,
 	reactStrictMode: true,
 	images: {
-		domains: ["encrypted-tbn0.gstatic.com"], // Add your image domains here
+		// Add your image domains here
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "encrypted-tbn0.gstatic.com",
+				port: "",
+			},
+			{
+				protocol: "https",
+				hostname: "deadline.com",
+				port: "",
+			},
+			{
+				protocol: "https",
+				hostname: "static.wikia.nocookie.net",
+				port: "",
+			},
+		],
 	},
 	headers: async () => {
 		return [
