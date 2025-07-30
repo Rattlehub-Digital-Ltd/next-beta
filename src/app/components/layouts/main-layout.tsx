@@ -13,7 +13,7 @@ export default function MainLayout({ children }: PropsWithChildren) {
 			}}
 		>
 			<div className="h-full flex flex-col overflow-y-auto theme">
-				<nav className="top-0 w-full h-24 py-6">
+				<nav className="sticky left-0 top-0 w-full h-24 py-6 z-20 backdrop-blur-[15px] bg-white/20">
 					<Navbar />
 				</nav>
 				<main className="container relative flex flex-col grow mx-auto px-4 pb-8 pt-4 z-10">

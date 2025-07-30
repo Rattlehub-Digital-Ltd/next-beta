@@ -47,7 +47,6 @@ const items: BottomTabBarItemProps[] = [
 
 function BottomTabBar() {
 	const pathname = usePathname();
-	console.log(pathname);
 
 	return (
 		<div className="flex items-center justify-around py-4 max-w-screen-lg w-full px-4 mx-auto bg-white/60 border-t border-black/5 backdrop-blur-[15px]">
