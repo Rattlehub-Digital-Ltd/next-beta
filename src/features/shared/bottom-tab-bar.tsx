@@ -62,11 +62,13 @@ function BottomTabBar() {
 							{ "text-blue-600": isActive },
 						)}
 					>
-						<Icon
-							icon={isActive ? activeIconSrc : defaultIconSrc}
-							width={24}
-							height={24}
-						/>
+						<div className="h-6 w-6 shrink-0">
+							<Icon
+								icon={isActive ? activeIconSrc : defaultIconSrc}
+								width={24}
+								height={24}
+							/>
+						</div>
 
 						<p
 							className={cn(
