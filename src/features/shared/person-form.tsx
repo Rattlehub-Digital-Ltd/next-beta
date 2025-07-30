@@ -163,11 +163,11 @@ function PersonForm({
 					<form.Subscribe
 						selector={(state) => [state.canSubmit, state.isSubmitting]}
 						children={([canSubmit, isSubmitting]) => (
-							<motion.div whileTap={{ scale: 0.95 }}>
+							<motion.div whileTap={{ scale: 0.9 }}>
 								<Button
 									type="submit"
 									disabled={!canSubmit}
-									className="bg-blue-600 hover:bg-blue-600 active:bg-blue-700 px-8"
+									className="rounded-2xl bg-blue-600 hover:bg-blue-600 active:bg-blue-700 px-6"
 								>
 									{(firstName !== "" && lastName !== "") || relationship !== ""
 										? `Update ${firstName} ${lastName}`
@@ -178,8 +178,12 @@ function PersonForm({
 							</motion.div>
 						)}
 					/>
-					<motion.div whileTap={{ scale: 0.95 }}>
-						<Button className="px-8" variant="outline" onClick={onClose}>
+					<motion.div whileTap={{ scale: 0.9 }}>
+						<Button
+							className="px-6 rounded-2xl"
+							variant="outline"
+							onClick={onClose}
+						>
 							Cancel
 						</Button>
 					</motion.div>
