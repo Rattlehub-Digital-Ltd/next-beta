@@ -12,21 +12,21 @@ const Navbar = () => {
 	const { user } = useAuth0();
 
 	return (
-		<div className="flex items-center justify-between h-full px-8">
+		<div className="flex items-center justify-between h-full pr-4 pl-6">
 			<Link className="relative z-1" href="/">
 				<Image
 					src="/logo_light.svg"
 					alt="Nextdot Logo"
-					width={100.72}
-					height={12}
+					width={84}
+					height={10}
 					loading="eager"
 				/>
 			</Link>
 			<MenuPopup>
 				<div className="relative">
-					<Avatar className="h-10 w-10 rounded-2xl">
+					<Avatar className="h-8 w-8 rounded-[12px]">
 						<AvatarImage src={user?.picture} alt="Avatar" />
-						<AvatarFallback className="text-[0.7rem] font-semibold text-navbar-avatar-foreground bg-navbar-avatar-bg rounded-2xl h-full w-full">
+						<AvatarFallback className="text-[0.7rem] font-semibold text-navbar-avatar-foreground bg-navbar-avatar-bg rounded-[12px] h-full w-full">
 							{getInitials(user?.name ?? user?.nickname ?? "")}
 						</AvatarFallback>
 					</Avatar>
