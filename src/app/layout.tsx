@@ -26,9 +26,9 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html className="bg-[#E5E5E5] h-screen" lang="en">
+		<html className="bg-[#E5E5E5] h-screen overflow-hidden" lang="en">
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased h-full overflow-hidden bg-[#E5E5E5]`}
+				className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen overflow-hidden bg-[#E5E5E5]`}
 			>
 				<ErrorBoundary
 					fallback={
