@@ -13,7 +13,12 @@ export default function EstatePlan() {
 			<GoalProgressBar />
 			<div className="grid grid-cols-2 gap-4">
 				{data.map((item) => (
-					<DocumentItem key={item.id} item={item} />
+					<DocumentItem
+						key={item.id}
+						className="bg-[#ECFDF5] ring-[#00C7BE]/80"
+						color="#00C7BE"
+						item={item}
+					/>
 				))}
 			</div>
 		</div>

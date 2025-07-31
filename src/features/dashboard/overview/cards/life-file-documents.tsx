@@ -12,7 +12,12 @@ export default function LifeFileDocuments() {
 
 			<div className="grid grid-cols-2 gap-4">
 				{data.map((item) => (
-					<DocumentItem key={item.id} item={item} />
+					<DocumentItem
+						key={item.id}
+						className="bg-[#007AFF]/5 ring-[#007AFF]/80"
+						color="#007AFF"
+						item={item}
+					/>
 				))}
 			</div>
 		</div>

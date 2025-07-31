@@ -12,7 +12,7 @@ export default function DocumentLocationBadge({
 	return (
 		<div className="text-[#374151] rounded-[8px] h-8 flex items-center space-x-1 px-1.5 bg-[#FDFDFD]/60 border border-[#EBEDED] backdrop-blur-[25px] shadow-[0px_12px_30px_0px rgba(106, 106, 106, 0.06)]">
 			<Icon
-				icon="fluent:lock-shield-24-filled"
+				icon="fluent:lock-shield-24-regular"
 				height={18}
 				width={18}
 				className="shrink-0"

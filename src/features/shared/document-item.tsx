@@ -5,9 +5,15 @@ import DocumentLocationBadge from "../dashboard/overview/document-location-badge
 
 type DocumentItemProps = {
 	item: Document;
+	className: string;
+	color: string;
 };
 
-export default function DocumentItem({ item }: DocumentItemProps) {
+export default function DocumentItem({
+	className,
+	color = "#00C7BE",
+	item,
+}: DocumentItemProps) {
 	const { displayName, affectedOwner, isApplicable } = item;
 
 	return (
@@ -15,6 +21,7 @@ export default function DocumentItem({ item }: DocumentItemProps) {
 			className={cn(
 				"text-[#374151] rounded-[12px] flex flex-col space-y-1 p-2 bg-white border border-[#EBEDED] backdrop-blur-[25px] shadow-[0px_12px_30px_0px rgba(106, 106, 106, 0.06)]",
 				{ "bg-[#ECFDF5] ring-2 ring-[#00C7BE]/80": isApplicable },
+				className,
 			)}
 		>
 			<div className="flex items-center space-x-1">
@@ -36,7 +43,7 @@ export default function DocumentItem({ item }: DocumentItemProps) {
 					)}
 
 					{isApplicable && (
-						<div className="text-[#00C7BE]">
+						<div style={{ color }}>
 							<Icon
 								icon="fluent:checkmark-circle-24-filled"
 								height={16}
