@@ -15,8 +15,10 @@ export default function EstatePlan() {
 				{data.map((item) => (
 					<DocumentItem
 						key={item.id}
-						className="bg-[#ECFDF5] ring-[#00C7BE]/80"
-						color="#00C7BE"
+						className={
+							item.isApplicable ? "bg-[#ECFDF5] ring-[#00C7BE]/80" : ""
+						}
+						color={item.isApplicable ? "#00C7BE" : ""}
 						item={item}
 					/>
 				))}

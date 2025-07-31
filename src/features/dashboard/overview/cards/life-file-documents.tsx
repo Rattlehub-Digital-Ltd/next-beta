@@ -14,8 +14,10 @@ export default function LifeFileDocuments() {
 				{data.map((item) => (
 					<DocumentItem
 						key={item.id}
-						className="bg-[#007AFF]/5 ring-[#007AFF]/80"
-						color="#007AFF"
+						className={
+							item.isApplicable ? "bg-[#007AFF]/5 ring-[#007AFF]/80" : ""
+						}
+						color={item.isApplicable ? "#007AFF" : ""}
 						item={item}
 					/>
 				))}
