@@ -1,9 +1,9 @@
 "use client";
 
-import * as React from "react";
+import { Icon } from "@iconify/react";
 import { parseDate } from "chrono-node";
 import { CalendarIcon } from "lucide-react";
-
+import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Input } from "@/components/ui/input";
@@ -13,7 +13,6 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from "@/components/ui/popover";
-import { Icon } from "@iconify/react";
 
 function formatDate(date: Date | undefined) {
 	if (!date) {

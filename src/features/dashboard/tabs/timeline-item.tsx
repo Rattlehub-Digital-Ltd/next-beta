@@ -1,6 +1,6 @@
+import { Icon } from "@iconify/react";
 import CategoryList from "@/features/shared/category-list";
 import UserBadge from "@/features/shared/user-badge";
-import { Icon } from "@iconify/react";
 
 type TimelineItemProps = {
 	ownerName: string;

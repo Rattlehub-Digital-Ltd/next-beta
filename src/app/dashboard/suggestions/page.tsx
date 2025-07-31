@@ -7,7 +7,7 @@ import SummaryFooter from "@/features/shared/summary-footer";
 
 export default function SuggestionsPage() {
 	return (
-		<div className="pt-3 space-y-4 pb-12">
+		<div className="pt-3 space-y-4 pb-8">
 			<Header
 				title="Suggestions"
 				description="Organize and store essential family-related documents."
@@ -27,7 +27,7 @@ export default function SuggestionsPage() {
 					</Link>
 				}
 			/>
-			<div className="w-full h-full bg-[#F8F8F8]/95 py-4 stroke-1 stroke-[#EBEDED] rounded-3xl backdrop-blur-[60px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)] space-y-4 flex flex-col">
+			<div className="w-full h-full bg-[#F8F8F8]/95 py-4 border border-[#EBEDED] rounded-3xl backdrop-blur-[60px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)] space-y-4 flex flex-col">
 				<div className="px-4">
 					<SuggestionItem
 						title="Account Confirmation Letter"

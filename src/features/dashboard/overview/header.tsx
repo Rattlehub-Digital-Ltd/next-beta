@@ -1,11 +1,9 @@
 import { Icon } from "@iconify/react";
 import { cn } from "@/lib/utils";
-import ReminderButton from "./reminder/reminder-button";
 
-type SuggestionItemProps = {
+type HeaderProps = {
 	title: string;
 	description: string;
-	showReminder?: boolean;
 	color?:
 		| "yellow"
 		| "teal"
@@ -16,12 +14,7 @@ type SuggestionItemProps = {
 		| "blue";
 };
 
-export default function SuggestionItem({
-	title,
-	description,
-	showReminder = false,
-	color = "yellow",
-}: SuggestionItemProps) {
+function Header({ title, description, color }: HeaderProps) {
 	let color1 = "";
 	let color2 = "";
 	let icon = "";
@@ -70,7 +63,7 @@ export default function SuggestionItem({
 	}
 
 	return (
-		<div className="flex gap-4">
+		<div className="flex flex-col gap-3">
 			<div
 				className={cn(
 					"relative h-10 w-10 flex items-center justify-center rounded-full shrink-0",
@@ -88,11 +81,10 @@ export default function SuggestionItem({
 			</div>
 			<div>
 				<p className="text-[15px] leading-6 font-semibold">{title}</p>
-				<p className="text-[12.6px] leading-5 text-pretty text-[#616161]">
-					{description}
-				</p>
-				{showReminder && <ReminderButton />}
+				<p className="text-xs text-pretty text-[#616161]">{description}</p>
 			</div>
 		</div>
 	);
 }
+
+export default Header;

@@ -1,6 +1,6 @@
+import { Icon } from "@iconify/react";
 import { Button } from "@/components/ui/button";
 import ReminderDrawer from "./reminder-drawer";
-import { Icon } from "@iconify/react";
 
 export default function ReminderButton() {
 	return (
