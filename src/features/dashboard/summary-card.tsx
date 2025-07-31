@@ -9,7 +9,7 @@ import SummaryFooter from "../shared/summary-footer";
 
 function SummaryCard() {
 	return (
-		<div className="w-full h-full bg-[#F8F8F8]/95 py-4 stroke-1 stroke-[#EBEDED] rounded-3xl backdrop-blur-[60px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)] space-y-4 flex flex-col">
+		<div className="w-full h-full bg-[#F8F8F8]/95 py-4 border border-[#EBEDED] rounded-3xl backdrop-blur-[60px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)] space-y-4 flex flex-col">
 			<div className="px-2 grid grid-cols-2">
 				<div className="flex items-center space-x-2">
 					<Image

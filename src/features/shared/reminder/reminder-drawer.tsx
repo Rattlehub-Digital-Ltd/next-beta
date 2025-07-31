@@ -25,7 +25,7 @@ export default function ReminderDrawer({ children }: ReminderDrawerProps) {
 					<DrawerDescription>set a reminder for this goal</DrawerDescription>
 				</DrawerHeader>
 				<div className="p-4">
-					<div className="p-4 bg-[#F6F6F6]/90 stroke-1 stroke-black/5 rounded-3xl backdrop-blur-[20px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)]">
+					<div className="p-4 bg-[#F6F6F6]/90 border border-black/5 rounded-3xl backdrop-blur-[20px] shadow-[0px_16px_30px_0px rgba(106, 106, 106, 0.06)]">
 						<Calendar29 />
 					</div>
 				</div>
