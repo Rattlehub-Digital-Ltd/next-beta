@@ -44,10 +44,12 @@ function Pagination({
 				{Array.from({ length: totalPages }, (_, i) => (
 					<motion.div
 						key={uid.randomUUID()}
-						className={cn("bg-[#3C3C43]/30 h-1.5 w-1.5 rounded-full", {
-							"w-4 bg-blue-600": i + 1 === currentPage,
-						})}
-						transition={{ duration: 0.35, type: "spring" }}
+						className={cn(
+							"bg-[#3C3C43]/30 h-1.5 w-1.5 rounded-full transition-all ease-in-out duration-300",
+							{
+								"w-4 bg-blue-600": i + 1 === currentPage,
+							},
+						)}
 					/>
 				))}
 			</div>

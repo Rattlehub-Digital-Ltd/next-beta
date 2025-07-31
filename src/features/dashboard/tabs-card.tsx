@@ -1,15 +1,34 @@
+import { Icon } from "@iconify/react";
+import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ActionsTab from "./tabs/actions-tab";
 import TimelineTab from "./tabs/timeline-tab";
 
 export default function TabsCard() {
 	return (
-		<div className="w-full h-full p-4 bg-[#F8F8F8]/95 py-4 stroke-1 stroke-[#EBEDED] rounded-3xl backdrop-blur-[60px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)] space-y-4 flex flex-col">
+		<div>
 			<Tabs defaultValue="actions" className="space-y-3">
-				<TabsList>
-					<TabsTrigger value="actions">Actions</TabsTrigger>
-					<TabsTrigger value="timeline">Timeline</TabsTrigger>
-				</TabsList>
+				<div className="pt-3.5 sticky left-0 top-16 w-full z-15">
+					<div className="p-2 backdrop-blur-[15px] bg-white/40 rounded-[16px] border border-[#EBEDED] flex justify-between items-center shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)]">
+						<TabsList>
+							<TabsTrigger className="px-6" value="actions">
+								Actions
+							</TabsTrigger>
+							<TabsTrigger className="px-6" value="timeline">
+								Timeline
+							</TabsTrigger>
+						</TabsList>
+						<Button
+							className="rounded-lg bg-[#EBEBEB] text-[#6b6b6b] h-9 w-9 !px-0 !py-0 border border-black/5"
+							variant="ghost"
+						>
+							<Icon
+								icon="fluent:arrow-counterclockwise-24-regular"
+								className="!w-5 !h-5"
+							/>
+						</Button>
+					</div>
+				</div>
 				<TabsContent value="actions">
 					<ActionsTab />
 				</TabsContent>
