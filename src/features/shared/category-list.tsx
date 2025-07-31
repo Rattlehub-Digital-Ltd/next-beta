@@ -1,4 +1,5 @@
 import * as motion from "motion/react-client";
+import type { CategoryVariant } from "@/types/category-variant";
 import { CategoryBadge } from "./category-badge";
 
 const containerVariants = {
@@ -17,7 +18,11 @@ const itemVariants = {
 	visible: { opacity: 1, x: 0 },
 };
 
-function CategoryList() {
+type CategoryListProps = {
+	items: string[];
+};
+
+function CategoryList({ items }: CategoryListProps) {
 	return (
 		<motion.div
 			className="flex items-center gap-1.5"
@@ -25,15 +30,11 @@ function CategoryList() {
 			initial="hidden"
 			animate="visible"
 		>
-			<motion.div variants={itemVariants}>
-				<CategoryBadge variant="protection" />
-			</motion.div>
-			<motion.div variants={itemVariants}>
-				<CategoryBadge variant="delay" />
-			</motion.div>
-			<motion.div variants={itemVariants}>
-				<CategoryBadge variant="cost" />
-			</motion.div>
+			{items.map((item) => (
+				<motion.div key={item} variants={itemVariants}>
+					<CategoryBadge variant={item.toLowerCase() as CategoryVariant} />
+				</motion.div>
+			))}
 		</motion.div>
 	);
 }

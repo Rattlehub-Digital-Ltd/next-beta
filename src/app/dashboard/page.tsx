@@ -1,6 +1,7 @@
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import SummaryCard from "@/features/dashboard/summary-card";
+import TabsCard from "@/features/dashboard/tabs-card";
 import Header from "@/features/shared/header";
 
 function DashboardPage() {
@@ -26,6 +27,7 @@ function DashboardPage() {
 				}
 			/>
 			<SummaryCard />
+			<TabsCard />
 		</div>
 	);
 }

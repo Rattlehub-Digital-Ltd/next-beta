@@ -9,8 +9,8 @@ import {
 } from "@/components/ui/carousel";
 import Children from "@/features/onboarding/children";
 import Dependents from "@/features/onboarding/dependents";
-import Pagination from "@/features/onboarding/pagination";
 import Partner from "@/features/onboarding/partner";
+import Pagination from "@/features/shared/pagination";
 
 function OnboardingPage() {
 	const [api, setApi] = useState<CarouselApi>();
