@@ -35,7 +35,7 @@ const Content = () => {
 						firstName="Zendaya"
 						lastName="Coleman "
 						relationship="Extended family"
-						imgSrc="https://static.wikia.nocookie.net/euphoria-hbo/images/8/8e/Zendaya.2.jpg/revision/latest?cb=20220127161803"
+						imgSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfaqn3epJvdldKDEgK8Ef1e1iGWb6nl3cinQcXRnwOwMI6mx-ZTCBEqo3azQktoTFOIv-rB9xfq6lFnA5JGj3jpwtlLhmib3BUZ6aXP8m99w"
 						onDelete={() => console.log("Delete children")}
 					/>
 				</div>
