@@ -5,23 +5,25 @@ import { CategoryBadge } from "@/features/shared/category-badge";
 import MainSheet from "@/features/shared/main-sheet";
 import PersonCard from "../shared/person-card";
 import AddPersonButton from "./add-person-button";
+import Options from "./options";
 
 const Content = () => {
 	return (
 		<div className="h-full flex flex-col w-full">
 			<motion.div
-				className="text-center px-6 grow"
+				className="text-left px-6 grow"
 				initial={{ opacity: 0, translateY: 10 }}
 				animate={{ opacity: 1, translateY: 0 }}
 				transition={{ duration: 0.25 }}
 			>
-				<h2 className={`text-pretty font-semibold text-xl leading-8`}>
-					Do you have a partner
-				</h2>
-				<p className="text-foreground-secondary text-[0.85rem] text-pretty">
+				<h2 className="text-sm font-medium">Do you have a partner</h2>
+				<p className="text-muted-foreground text-sm text-pretty">
 					The person who you are married to or with whom you enjoy a long-term
 					relationship
 				</p>
+				<div className="py-4">
+					<Options />
+				</div>
 				<div className="py-4 flex flex-col w-full items-center">
 					<PersonCard
 						title="Edit Halle Berry (Wife)"

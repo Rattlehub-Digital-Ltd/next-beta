@@ -308,7 +308,7 @@ export default function ActionsTab() {
 		<ul className="space-y-4">
 			{data.items.map(({ id, displayName, eduText, riskItems }) => (
 				<li key={id}>
-					<div className="flex flex-col space-y-3 p-4 rounded-[16px] stroke-1 stroke-[#d1d1d1] backdrop-blur-[25px] bg-white/60">
+					<div className="flex flex-col space-y-3 p-4 rounded-[23px] stroke-1 stroke-[#d1d1d1] backdrop-blur-[25px] bg-white/60">
 						<SuggestionItem
 							title={displayName}
 							description={eduText}
