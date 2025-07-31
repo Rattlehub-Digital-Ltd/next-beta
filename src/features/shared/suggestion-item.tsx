@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import ReminderButton from "./reminder/reminder-button";
 
 type SuggestionItemProps = {
 	title: string;
@@ -91,20 +91,7 @@ export default function SuggestionItem({
 				<p className="text-[12.6px] leading-5 text-pretty text-[#616161]">
 					{description}
 				</p>
-				{showReminder && (
-					<Button
-						className="text-xs font-semibold text-[#E34C00] px-0 py-2 -ml-4"
-						variant="ghost"
-					>
-						<Icon
-							className="!w-4.5 !h-4.5 shrink-0"
-							icon="fluent:alert-urgent-24-filled"
-							height={18}
-							width={18}
-						/>
-						<span className="grow truncate">Set a reminder</span>
-					</Button>
-				)}
+				{showReminder && <ReminderButton />}
 			</div>
 		</div>
 	);
