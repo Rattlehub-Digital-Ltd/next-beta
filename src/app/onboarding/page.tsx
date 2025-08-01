@@ -34,16 +34,16 @@ function OnboardingPage() {
 		<div className="h-full space-y-3 flex flex-col">
 			<Carousel setApi={setApi} className="grow">
 				<CarouselContent className="h-full">
-					<CarouselItem className="h-full">
+					<CarouselItem className="max-h-screen">
 						<Partner />
 					</CarouselItem>
-					<CarouselItem className="h-full">
+					<CarouselItem className="max-h-screen">
 						<Children />
 					</CarouselItem>
-					<CarouselItem className="h-full">
+					<CarouselItem className="max-h-screen">
 						<Dependents />
 					</CarouselItem>
-					<CarouselItem className="h-full">
+					<CarouselItem className="max-h-screen">
 						<Summary />
 					</CarouselItem>
 				</CarouselContent>
