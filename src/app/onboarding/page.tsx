@@ -10,6 +10,7 @@ import {
 import Children from "@/features/onboarding/children";
 import Dependents from "@/features/onboarding/dependents";
 import Partner from "@/features/onboarding/partner";
+import Summary from "@/features/onboarding/summary/summary";
 import Pagination from "@/features/shared/pagination";
 
 function OnboardingPage() {
@@ -41,6 +42,9 @@ function OnboardingPage() {
 					</CarouselItem>
 					<CarouselItem className="h-full">
 						<Dependents />
+					</CarouselItem>
+					<CarouselItem className="h-full">
+						<Summary />
 					</CarouselItem>
 				</CarouselContent>
 			</Carousel>
