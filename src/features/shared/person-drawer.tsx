@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { usePersonDrawerStore } from "store/person-drawer-store";
 import {
 	Drawer,
 	DrawerContent,
@@ -29,12 +29,11 @@ function PersonDrawer({
 	imgSrc = "",
 	children,
 	description,
-	title = "Add person",
 }: PersonDrawerProps) {
-	const [open, setOpen] = useState(false);
+	const { title, open, onOpenChange } = usePersonDrawerStore();
 
 	return (
-		<Drawer open={open} onOpenChange={setOpen}>
+		<Drawer open={open} onOpenChange={onOpenChange}>
 			<DrawerTrigger asChild>{children}</DrawerTrigger>
 			<DrawerContent className="bg-[#ECECEC]">
 				<DrawerHeader className="items-start text-left px-6">
@@ -58,7 +57,7 @@ function PersonDrawer({
 							relationship={relationship}
 							imgSrc={imgSrc}
 							buttonLabel={title}
-							onClose={() => setOpen(false)}
+							onClose={() => onOpenChange(false)}
 						/>
 					</div>
 				</div>

@@ -24,7 +24,7 @@ function PersonCard({
 	onDelete,
 }: PersonCardProps) {
 	return (
-		<div className="flex items-center px-1.5 rounded-full h-11 w-full gap-3 bg-white shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)]">
+		<div className="flex items-center px-1.5 rounded-full h-11 w-full gap-3 bg-white border border-black/5 shadow-[0px_16px_30px_0px rgba(106, 106, 106, 0.06)]">
 			<Avatar>
 				<AvatarImage
 					className="h-8 w-8"

@@ -1,6 +1,7 @@
 import { Icon } from "@iconify/react";
 import * as motion from "motion/react-client";
 import ShortUniqueId from "short-unique-id";
+import { useOnboardingStore } from "store/onboarding-store";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -19,6 +20,8 @@ function Pagination({
 	onPrevious,
 	onNext,
 }: PaginationProps) {
+	const { nextButtonDisabled } = useOnboardingStore();
+
 	return (
 		<motion.div
 			className="bg-[#FDFDFD]/67 border w-full border-[#EBEDED] rounded-full h-11 backdrop-blur-xl shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)] flex justify-between px-1.5 items-center"
@@ -60,7 +63,8 @@ function Pagination({
 				transition={{ duration: 0.35 }}
 			>
 				<Button
-					className="rounded-full bg-[#EBEBEB] text-[#424242] h-8 w-8 !px-0 !py-0"
+					className="rounded-full bg-blue-600 text-white disabled:bg-[#EBEBEB] disabled:text-[#424242] h-8 w-8 !px-0 !py-0"
+					disabled={nextButtonDisabled}
 					variant="ghost"
 					onClick={onNext}
 				>

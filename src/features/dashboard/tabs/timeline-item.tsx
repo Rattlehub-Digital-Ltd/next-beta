@@ -1,9 +1,9 @@
 import { Icon } from "@iconify/react";
+import { format } from "date-fns";
 import CategoryList from "@/features/shared/category-list";
 import UserBadge from "@/features/shared/user-badge";
 import { cn } from "@/lib/utils";
 import type { Timeline } from "@/types/timeline";
-import { format } from "date-fns";
 
 type TimelineItemProps = {
 	item: Timeline;

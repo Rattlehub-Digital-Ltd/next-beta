@@ -63,9 +63,9 @@ const Children = () => {
 				},
 			}}
 		>
-			<motion.div className="mb-3 px-3">
+			<div className="mb-3 px-3">
 				<CategoryList items={["cost", "protection", "delay"]} />
-			</motion.div>
+			</div>
 			<MainSheet
 				imgSrc="/images/children.png"
 				imgAlt="Child with bird Image"

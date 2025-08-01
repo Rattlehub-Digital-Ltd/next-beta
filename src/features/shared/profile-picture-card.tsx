@@ -1,9 +1,21 @@
 import { Icon } from "@iconify/react";
+import { useCallback } from "react";
+import { useDropzone } from "react-dropzone";
 import { Button } from "@/components/ui/button";
 
 function ProfilePictureCard() {
+	const onDrop = useCallback((acceptedFiles: File[]) => {
+		// Do something with the files
+		console.log(acceptedFiles);
+	}, []);
+	const { getRootProps, getInputProps } = useDropzone({ onDrop, maxFiles: 1 });
+
 	return (
-		<div className="bg-white/67 rounded-3xl p-3 backdrop-blur-[24pxpx] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)]">
+		<div
+			className="bg-white/67 rounded-3xl p-3 backdrop-blur-[24pxpx] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)]"
+			{...getRootProps()}
+		>
+			<input {...getInputProps()} />
 			<div className="flex items-center gap-4">
 				<div className="bg-black/8 rounded-full h-16 w-16 relative flex items-center justify-center shrink-0">
 					<Icon

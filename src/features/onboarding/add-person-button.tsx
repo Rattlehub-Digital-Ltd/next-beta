@@ -7,9 +7,10 @@ import PersonDrawer from "../shared/person-drawer";
 
 type AddPersonButtonProps = {
 	label: string;
+	disabled?: boolean;
 };
 
-function AddPersonButton({ label }: AddPersonButtonProps) {
+function AddPersonButton({ disabled, label }: AddPersonButtonProps) {
 	return (
 		<motion.div
 			whileTap={{ scale: 0.95 }}
@@ -19,10 +20,11 @@ function AddPersonButton({ label }: AddPersonButtonProps) {
 		>
 			<PersonDrawer title={label}>
 				<Button
-					className="text-[#0372E3] rounded-full gap-1.5 w-full py-2 pl-2 pr-3 bg-[#0372E3]/8"
+					className="text-[#0372E3] rounded-full gap-1.5 w-full py-2 pl-2 pr-3 bg-[#0372E3]/8 disabled:opacity-50"
 					variant="default"
 					type="button"
 					size="lg"
+					disabled={disabled}
 				>
 					<Icon
 						icon="fluent:add-circle-20-regular"
