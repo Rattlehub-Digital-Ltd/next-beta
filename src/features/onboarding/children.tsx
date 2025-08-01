@@ -3,8 +3,8 @@
 import * as motion from "motion/react-client";
 import MainSheet from "@/features/shared/main-sheet";
 import CategoryList from "../shared/category-list";
-import PersonCard from "../shared/person-card";
-import AddPersonButton from "./add-person-button";
+// import PersonCard from "../shared/person-card";
+// import AddPersonButton from "./add-person-button";
 
 const Content = () => {
 	return (
@@ -21,7 +21,7 @@ const Content = () => {
 				<p className="text-foreground-secondary text-[0.85rem] text-pretty">
 					Your legally recognized biological or adopted children
 				</p>
-				<div className="py-4 flex flex-col w-full items-center space-y-3">
+				{/* <div className="py-4 flex flex-col w-full items-center space-y-3">
 					<PersonCard
 						type="child"
 						title="Edit John Wick"
@@ -40,11 +40,11 @@ const Content = () => {
 						imgSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfaqn3epJvdldKDEgK8Ef1e1iGWb6nl3cinQcXRnwOwMI6mx-ZTCBEqo3azQktoTFOIv-rB9xfq6lFnA5JGj3jpwtlLhmib3BUZ6aXP8m99w"
 						onDelete={() => console.log("Delete children")}
 					/>
-				</div>
+				</div> */}
 			</motion.div>
-			<div className="w-full flex justify-center">
+			{/* <div className="w-full flex justify-center">
 				<AddPersonButton type="child" label="Add Children" />
-			</div>
+			</div> */}
 		</div>
 	);
 };

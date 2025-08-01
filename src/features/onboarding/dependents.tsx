@@ -3,8 +3,8 @@
 import * as motion from "motion/react-client";
 import { CategoryBadge } from "@/features/shared/category-badge";
 import MainSheet from "@/features/shared/main-sheet";
-import PersonCard from "../shared/person-card";
-import AddPersonButton from "./add-person-button";
+// import PersonCard from "../shared/person-card";
+// import AddPersonButton from "./add-person-button";
 
 const Content = () => {
 	return (
@@ -22,7 +22,7 @@ const Content = () => {
 					Individuals who rely on yourself for financial support, excluding your
 					spouse and children
 				</p>
-				<div className="py-4 flex flex-col w-full items-center space-y-3">
+				{/* <div className="py-4 flex flex-col w-full items-center space-y-3">
 					<PersonCard
 						type="dependent"
 						title="Edit John Wick"
@@ -41,11 +41,11 @@ const Content = () => {
 						imgSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfaqn3epJvdldKDEgK8Ef1e1iGWb6nl3cinQcXRnwOwMI6mx-ZTCBEqo3azQktoTFOIv-rB9xfq6lFnA5JGj3jpwtlLhmib3BUZ6aXP8m99w"
 						onDelete={() => console.log("Delete dependents")}
 					/>
-				</div>
+				</div> */}
 			</motion.div>
-			<div className="w-full flex justify-center">
+			{/* <div className="w-full flex justify-center">
 				<AddPersonButton type="dependent" label="Add Dependent" />
-			</div>
+			</div> */}
 		</div>
 	);
 };
