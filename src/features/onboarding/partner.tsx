@@ -24,10 +24,8 @@ type PersonProps = {
 
 const uid = new ShortUniqueId();
 
-const Content = ({ value, items, onValueChange }: PersonProps) => {
+const Content = ({ value, items, onValueChange, onReset }: PersonProps) => {
 	const { partner, setPartner } = usePartnerStore();
-
-	console.log(partner);
 
 	return (
 		<div className="h-full flex flex-col w-full">
@@ -56,13 +54,14 @@ const Content = ({ value, items, onValueChange }: PersonProps) => {
 								type="button"
 								size="sm"
 								variant="link"
+								onClick={onReset}
 							>
 								<Icon icon="fluent:arrow-reset-20-filled" />
 								<span className="text-[12.6px]">Reset</span>
 							</Button>
 						</div>
 
-						<ul>
+						<ul className="w-full flex flex-col space-y-3">
 							{partner.map((item) => (
 								<li key={uid.randomUUID()}>
 									<PersonCard
@@ -155,7 +154,9 @@ const Partner = () => {
 								setType("partner");
 								onOpenChange(true);
 							} else {
+								setTitle("Add person");
 								setPartner(null);
+								setType("unknown");
 							}
 						}}
 					/>

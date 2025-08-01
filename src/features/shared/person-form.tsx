@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import type { Person, PersonType } from "@/types/person";
+import { usePersonDrawerStore } from "store/person-drawer-store";
 
 type PersonFormProps = {
 	type: PersonType;
@@ -59,6 +60,7 @@ function PersonForm({
 	onClose,
 }: PersonFormProps) {
 	const { partner, setPartner } = usePartnerStore();
+	const { onOpenChange } = usePersonDrawerStore();
 
 	const form = useForm({
 		defaultValues: {
@@ -74,18 +76,16 @@ function PersonForm({
 				image: "",
 			};
 
-			console.log({ type });
-
 			if (type === "partner") {
 				const items = partner ? partner : [];
 				items.push(data);
-				console.log({ items });
 				setPartner(items);
 			} else if (type === "child") {
 			} else if (type === "dependent") {
 			}
 
-			onClose();
+			onOpenChange(false);
+			// onClose();
 		},
 	});
 
