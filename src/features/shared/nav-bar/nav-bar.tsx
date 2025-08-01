@@ -17,8 +17,8 @@ const Navbar = () => {
 				<Image
 					src="/logo_light.svg"
 					alt="Nextdot Logo"
-					width={84}
-					height={10}
+					width={101}
+					height={12}
 					loading="eager"
 				/>
 			</Link>

@@ -98,7 +98,7 @@ const Partner = () => {
 
 	return (
 		<motion.div
-			className="h-full w-full flex flex-col grow"
+			className="h-full w-full flex flex-col"
 			initial={{ opacity: 0, scale: 0.7, translateY: 20 }}
 			animate={{ opacity: 1, scale: 1, translateY: 0 }}
 			transition={{
