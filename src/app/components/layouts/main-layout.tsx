@@ -18,7 +18,7 @@ export default function MainLayout({ children }: PropsWithChildren) {
 						<Navbar />
 					</nav>
 				</div>
-				<main className="container relative flex flex-col grow mx-auto p-4 z-10">
+				<main className="container relative flex flex-col grow mx-auto p-12 z-10">
 					{children}
 				</main>
 			</div>
