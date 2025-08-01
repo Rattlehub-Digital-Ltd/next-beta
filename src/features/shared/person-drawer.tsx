@@ -17,7 +17,7 @@ type PersonDrawerProps = {
 	type: PersonType;
 	title?: string;
 	description?: string;
-	children: React.ReactNode;
+	children?: React.ReactNode;
 	firstName?: string;
 	lastName?: string;
 	relationship?: string;
@@ -37,7 +37,7 @@ function PersonDrawer({
 
 	return (
 		<Drawer open={open} onOpenChange={onOpenChange}>
-			<DrawerTrigger asChild>{children}</DrawerTrigger>
+			{children && <DrawerTrigger asChild>{children}</DrawerTrigger>}
 			<DrawerContent className="bg-[#ECECEC] !max-h-[95vh]">
 				<DrawerHeader className="items-start text-left px-6">
 					<DrawerTitle className="text-base font-semibold">{title}</DrawerTitle>

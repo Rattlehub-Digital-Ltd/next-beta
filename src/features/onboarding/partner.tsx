@@ -9,7 +9,7 @@ import { usePartnerStore } from "store/partner-store";
 import { usePersonDrawerStore } from "store/person-drawer-store";
 import { Button } from "@/components/ui/button";
 import MainSheet from "@/features/shared/main-sheet";
-import type { Person } from "@/types/person";
+// import type { Person } from "@/types/person";
 import CategoryList from "../shared/category-list";
 import PersonCard from "../shared/person-card";
 // import AddPersonButton from "./add-person-button";
@@ -17,14 +17,13 @@ import Options from "./options";
 
 type PersonProps = {
 	value: string | null;
-	items: Person[] | null;
 	onValueChange: (value: string | null) => void;
 	onReset: () => void;
 };
 
 const uid = new ShortUniqueId();
 
-const Content = ({ value, items, onValueChange, onReset }: PersonProps) => {
+const Content = ({ value, onValueChange, onReset }: PersonProps) => {
 	const { partner, setPartner } = usePartnerStore();
 	const { onOpenChange, setTitle, setType } = usePersonDrawerStore();
 
@@ -104,9 +103,7 @@ const Content = ({ value, items, onValueChange, onReset }: PersonProps) => {
 							variant="default"
 							type="button"
 							size="lg"
-							disabled={
-								value === null || (value === "yes" && items?.length === 0)
-							}
+							disabled={value === null || value === "yes"}
 							onClick={() => {
 								setTitle("Add Partner");
 								setType("partner");
@@ -172,14 +169,13 @@ const Partner = () => {
 				content={
 					<Content
 						value={has}
-						items={partner}
 						onReset={() => {
 							setHas(null);
 							setPartner(null);
 						}}
 						onValueChange={(value: string | null) => {
 							setHas(value);
-							if (value === "yes") {
+							if (value?.toLowerCase() === "yes") {
 								setTitle("Add Partner");
 								setType("partner");
 								onOpenChange(true);
