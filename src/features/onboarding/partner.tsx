@@ -12,6 +12,7 @@ import MainSheet from "@/features/shared/main-sheet";
 // import type { Person } from "@/types/person";
 import CategoryList from "../shared/category-list";
 import PersonCard from "../shared/person-card";
+import AddPersonButton from "./add-person-button";
 // import AddPersonButton from "./add-person-button";
 import Options from "./options";
 
@@ -25,7 +26,6 @@ const uid = new ShortUniqueId();
 
 const Content = ({ value, onValueChange, onReset }: PersonProps) => {
 	const { partner, setPartner } = usePartnerStore();
-	const { onOpenChange, setTitle, setType } = usePersonDrawerStore();
 
 	return (
 		<div className="h-full flex flex-col w-full">
@@ -92,40 +92,11 @@ const Content = ({ value, onValueChange, onReset }: PersonProps) => {
 			</motion.div>
 			{value === "yes" && (
 				<div className="w-full flex justify-center">
-					<motion.div
-						whileTap={{ scale: 0.95 }}
-						initial={{ opacity: 0, translateY: -60 }}
-						animate={{ opacity: 1, translateY: 0 }}
-						transition={{ duration: 0.35 }}
-					>
-						<Button
-							className="text-[#0372E3] rounded-full gap-1.5 w-full py-2 pl-2 pr-3 bg-[#0372E3]/8 disabled:opacity-50"
-							variant="default"
-							type="button"
-							size="lg"
-							disabled={value === null}
-							onClick={() => {
-								setTitle("Add Partner");
-								setType("partner");
-								onOpenChange(true);
-							}}
-						>
-							<Icon
-								icon="fluent:add-circle-20-regular"
-								style={{ stroke: "#0372E3" }}
-							/>
-							<span className="text-center text-[13px] font-semibold leading-4 truncate">
-								Add Partner
-							</span>
-						</Button>
-					</motion.div>
-					{/* <AddPersonButton
+					<AddPersonButton
 						type="partner"
-						disabled={
-							value === null || (value === "yes" && items?.length === 0)
-						}
+						disabled={value === null}
 						label="Add Partner"
-					/> */}
+					/>
 				</div>
 			)}
 		</div>

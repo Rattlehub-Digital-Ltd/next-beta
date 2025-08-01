@@ -64,10 +64,20 @@ export default function Options({ value, onValueChange }: OptionsProps) {
 					</Label>
 				))}
 			</RadioGroup>
-			<div className="flex gap-2 items-center mt-3 text-muted-foreground">
-				<Icon icon="fluent:info-16-regular" height={16} width={16} />
-				<p className="font-medium text-xs text-left">
-					Select Yes or No <span className="text-red-500">*</span>
+			<div className="flex gap-2 mt-4 text-muted-foreground p-3 bg-black/3 rounded-2xl">
+				<Icon
+					icon="fluent:info-16-regular"
+					className="shrink-0 mt-[3px]"
+					height={16}
+					width={16}
+				/>
+				<p className="text-xs text-left text-pretty leading-5">
+					Please choose yes or no, your information will not be shared with
+					third parties, read our{" "}
+					<a href="/" className="text-blue-600 font-medium hover:underline">
+						Data Policy
+					</a>{" "}
+					for more information <span className="text-red-500">*</span>
 				</p>
 			</div>
 		</fieldset>
