@@ -4,6 +4,7 @@ import type { AnyFieldApi } from "@tanstack/react-form";
 import { useForm } from "@tanstack/react-form";
 import * as motion from "motion/react-client";
 import { usePartnerStore } from "store/partner-store";
+import { usePersonDrawerStore } from "store/person-drawer-store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,7 +17,6 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import type { Person, PersonType } from "@/types/person";
-import { usePersonDrawerStore } from "store/person-drawer-store";
 
 type PersonFormProps = {
 	type: PersonType;
