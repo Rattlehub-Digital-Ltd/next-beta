@@ -1,20 +1,17 @@
 "use client";
 
-import { Icon } from "@iconify/react";
 import * as motion from "motion/react-client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ShortUniqueId from "short-unique-id";
 import { useOnboardingStore } from "store/onboarding-store";
 import { usePartnerStore } from "store/partner-store";
 import { usePersonDrawerStore } from "store/person-drawer-store";
-import { Button } from "@/components/ui/button";
 import MainSheet from "@/features/shared/main-sheet";
-// import type { Person } from "@/types/person";
 import CategoryList from "../shared/category-list";
 import PersonCard from "../shared/person-card";
 import AddPersonButton from "./add-person-button";
-// import AddPersonButton from "./add-person-button";
-import Options from "./options";
+import ListHeader from "./list-header";
+import TabHeader from "./tab-header";
 
 type PersonProps = {
 	value: string | null;
@@ -35,31 +32,16 @@ const Content = ({ value, onValueChange, onReset }: PersonProps) => {
 				animate={{ opacity: 1, translateY: 0 }}
 				transition={{ duration: 0.25 }}
 			>
-				<h2 className="text-base font-medium">Do you have a partner</h2>
-				<p className="text-muted-foreground text-sm text-pretty">
-					The person who you are married to or with whom you enjoy a long-term
-					relationship
-				</p>
-				{value === "no" || value === null ? (
-					<div className="py-6">
-						<Options value={value} onValueChange={onValueChange} />
-					</div>
-				) : null}
+				<TabHeader
+					title="Do you have a partner"
+					description="The person who you are married to or with whom you enjoy a long-term
+					relationship"
+					value={value}
+					onValueChange={onValueChange}
+				/>
 				{partner && partner?.length > 0 && (
 					<div className="py-6 flex flex-col w-full items-center">
-						<div className="flex items-center space-x-2 w-full pl-3 py-2">
-							<p className="text-sm font-semibold grow text-left">List</p>
-							<Button
-								className="!no-underline text-red-500"
-								type="button"
-								size="sm"
-								variant="link"
-								onClick={onReset}
-							>
-								<Icon icon="fluent:arrow-reset-20-filled" />
-								<span className="text-[12.6px]">Reset</span>
-							</Button>
-						</div>
+						<ListHeader title="Partner" onReset={onReset} />
 
 						<ul className="w-full flex flex-col space-y-3">
 							{partner.map((item) => (
@@ -104,11 +86,9 @@ const Content = ({ value, onValueChange, onReset }: PersonProps) => {
 };
 
 const Partner = () => {
-	const { partner, setPartner } = usePartnerStore();
+	const { has, setHas, partner, setPartner } = usePartnerStore();
 	const { setTitle, onOpenChange, setType } = usePersonDrawerStore();
 	const { setNextButtonDisabled } = useOnboardingStore();
-
-	const [has, setHas] = useState<string | null>(null);
 
 	useEffect(() => {
 		setNextButtonDisabled(
