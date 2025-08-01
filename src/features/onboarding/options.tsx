@@ -22,12 +22,6 @@ const option = [
 export default function Options({ value, onValueChange }: OptionsProps) {
 	return (
 		<fieldset>
-			<div className="flex gap-2 items-center mb-3 text-muted-foreground">
-				<Icon icon="fluent:info-16-regular" height={16} width={16} />
-				<p className="font-medium text-xs text-left">
-					Select Yes or No <span className="text-red-500">*</span>
-				</p>
-			</div>
 			<RadioGroup
 				defaultValue="yes"
 				value={value}
@@ -70,6 +64,12 @@ export default function Options({ value, onValueChange }: OptionsProps) {
 					</Label>
 				))}
 			</RadioGroup>
+			<div className="flex gap-2 items-center mt-3 text-muted-foreground">
+				<Icon icon="fluent:info-16-regular" height={16} width={16} />
+				<p className="font-medium text-xs text-left">
+					Select Yes or No <span className="text-red-500">*</span>
+				</p>
+			</div>
 		</fieldset>
 	);
 }
