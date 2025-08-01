@@ -8,7 +8,7 @@ const uid = new ShortUniqueId({ length: 10 });
 
 export default function GoalsPage() {
 	return (
-		<div>
+		<div className="pt-3 space-y-4 pb-8">
 			<Header
 				title="Goals"
 				description="Keep essential documents ready when life changes come your way."
