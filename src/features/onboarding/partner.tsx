@@ -103,7 +103,7 @@ const Content = ({ value, onValueChange, onReset }: PersonProps) => {
 							variant="default"
 							type="button"
 							size="lg"
-							disabled={value === null || value === "yes"}
+							disabled={value === null}
 							onClick={() => {
 								setTitle("Add Partner");
 								setType("partner");
