@@ -3,10 +3,10 @@
 import type { AnyFieldApi } from "@tanstack/react-form";
 import { useForm } from "@tanstack/react-form";
 import * as motion from "motion/react-client";
+import { usePartnerStore } from "store/partner-store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-
 import {
 	Select,
 	SelectContent,
@@ -15,8 +15,10 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
+import type { Person, PersonType } from "@/types/person";
 
 type PersonFormProps = {
+	type: PersonType;
 	firstName?: string;
 	lastName?: string;
 	relationship?: string;
@@ -28,42 +30,69 @@ type PersonFormProps = {
 const labelClass =
 	"text-xs font-medium tracking-[0.08px] mb-1.5 text-[#616161]";
 const inputClass =
-	"!text-base placeholder:text-sm bg-white rounded-[12px] w-full h-11 leading-6 flex items-center";
+	"!text-base placeholder:text-sm bg-white rounded-[12px] w-full h-10 leading-6 flex items-center";
 
 function FieldInfo({ field }: { field: AnyFieldApi }) {
 	return (
 		<>
 			{field.state.meta.isTouched && !field.state.meta.isValid ? (
-				<em>{field.state.meta.errors.join(", ")}</em>
+				<p className="text-xs mt-1 truncate">
+					<span className="text-red-500">*</span>{" "}
+					{field.state.meta.errors.join(", ")}
+				</p>
 			) : null}
-			{field.state.meta.isValidating ? "Validating..." : null}
+			{field.state.meta.isValidating ? (
+				<p className="text-xs text-muted-foreground mt-1 truncate">
+					"Validating..."
+				</p>
+			) : null}
 		</>
 	);
 }
 
 function PersonForm({
+	type,
 	firstName,
 	lastName,
 	relationship,
 	buttonLabel,
 	onClose,
 }: PersonFormProps) {
+	const { partner, setPartner } = usePartnerStore();
+
 	const form = useForm({
 		defaultValues: {
 			firstName: firstName ?? "",
 			lastName: lastName ?? "",
-			relationship: relationship?.toLocaleLowerCase() ?? "",
+			relationship: relationship ?? "",
 		},
 		onSubmit: async ({ value }) => {
-			// Do something with form data
-			console.log(value);
+			const data: Person = {
+				firstName: value.firstName,
+				lastName: value.lastName,
+				relationship: value.relationship,
+				image: "",
+			};
+
+			console.log({ type });
+
+			if (type === "partner") {
+				const items = partner ? partner : [];
+				items.push(data);
+				console.log({ items });
+				setPartner(items);
+			} else if (type === "child") {
+			} else if (type === "dependent") {
+			}
+
+			onClose();
 		},
 	});
 
 	return (
 		<div>
 			<form
-				className="space-y-8"
+				className="space-y-6"
 				onSubmit={(e) => {
 					e.preventDefault();
 					e.stopPropagation();
@@ -142,8 +171,12 @@ function PersonForm({
 									Relationship <span className="text-red-500">*</span>
 								</Label>
 
-								<Select>
-									<SelectTrigger className={cn("py-[22px]", inputClass)}>
+								<Select
+									onValueChange={field.handleChange}
+									value={field.state.value}
+									name={field.name}
+								>
+									<SelectTrigger className={cn("py-[18px]", inputClass)}>
 										<SelectValue placeholder="Select relationship" />
 									</SelectTrigger>
 									<SelectContent>

@@ -24,7 +24,9 @@ export default function Options({ value, onValueChange }: OptionsProps) {
 		<fieldset>
 			<div className="flex gap-2 items-center mb-3 text-muted-foreground">
 				<Icon icon="fluent:info-16-regular" height={16} width={16} />
-				<p className="font-medium text-xs text-left">Select Yes or No.</p>
+				<p className="font-medium text-xs text-left">
+					Select Yes or No <span className="text-red-500">*</span>
+				</p>
 			</div>
 			<RadioGroup
 				defaultValue="yes"

@@ -23,14 +23,16 @@ const Content = () => {
 				</p>
 				<div className="py-4 flex flex-col w-full items-center space-y-3">
 					<PersonCard
+						type="child"
 						title="Edit John Wick"
 						firstName="John"
 						lastName="Wick"
 						relationship="Adopted child"
-						imgSrc="https://deadline.com/wp-content/uploads/2023/03/Keanu-Reeves-john-wick-4.jpg?w=681&h=383&crop=1"
+						imgSrc=""
 						onDelete={() => console.log("Delete children")}
 					/>
 					<PersonCard
+						type="child"
 						title="Edit Zendaya Coleman "
 						firstName="Zendaya"
 						lastName="Coleman "
@@ -41,7 +43,7 @@ const Content = () => {
 				</div>
 			</motion.div>
 			<div className="w-full flex justify-center">
-				<AddPersonButton label="Add Children" />
+				<AddPersonButton type="child" label="Add Children" />
 			</div>
 		</div>
 	);

@@ -17,10 +17,13 @@ function OnboardingPage() {
 	const [current, setCurrent] = useState(0);
 	const [count, setCount] = useState(0);
 
+	console.log(current, count);
+
 	useEffect(() => {
 		if (!api) {
 			return;
 		}
+		console.log("hey");
 		setCount(api.scrollSnapList().length);
 		setCurrent(api.selectedScrollSnap() + 1);
 		api.on("select", () => {

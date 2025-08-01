@@ -24,6 +24,7 @@ const Content = () => {
 				</p>
 				<div className="py-4 flex flex-col w-full items-center space-y-3">
 					<PersonCard
+						type="dependent"
 						title="Edit John Wick"
 						firstName="John"
 						lastName="Wick"
@@ -32,6 +33,7 @@ const Content = () => {
 						onDelete={() => console.log("Delete dependents")}
 					/>
 					<PersonCard
+						type="dependent"
 						title="Edit Zenday Coleman "
 						firstName="Zendaya"
 						lastName="Coleman "
@@ -42,7 +44,7 @@ const Content = () => {
 				</div>
 			</motion.div>
 			<div className="w-full flex justify-center">
-				<AddPersonButton label="Add Dependent" />
+				<AddPersonButton type="dependent" label="Add Dependent" />
 			</div>
 		</div>
 	);

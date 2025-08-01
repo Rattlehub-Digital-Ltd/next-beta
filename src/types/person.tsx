@@ -4,3 +4,5 @@ export type Person = {
 	relationship: string;
 	image?: string;
 };
+
+export type PersonType = "partner" | "child" | "dependent" | "unknown";

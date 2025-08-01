@@ -1,8 +1,11 @@
 "use client";
 
+import { Icon } from "@iconify/react";
 import * as motion from "motion/react-client";
 import { useEffect, useState } from "react";
+import ShortUniqueId from "short-unique-id";
 import { useOnboardingStore } from "store/onboarding-store";
+import { usePartnerStore } from "store/partner-store";
 import { usePersonDrawerStore } from "store/person-drawer-store";
 import { Button } from "@/components/ui/button";
 import MainSheet from "@/features/shared/main-sheet";
@@ -19,7 +22,13 @@ type PersonProps = {
 	onReset: () => void;
 };
 
+const uid = new ShortUniqueId();
+
 const Content = ({ value, items, onValueChange }: PersonProps) => {
+	const { partner, setPartner } = usePartnerStore();
+
+	console.log(partner);
+
 	return (
 		<div className="h-full flex flex-col w-full">
 			<motion.div
@@ -38,31 +47,54 @@ const Content = ({ value, items, onValueChange }: PersonProps) => {
 						<Options value={value} onValueChange={onValueChange} />
 					</div>
 				) : null}
-				<div className="py-6 flex flex-col w-full items-center">
-					<div className="flex items-center space-x-2 w-full pl-3 py-2">
-						<p className="text-sm font-semibold grow text-left">List</p>
-						<Button
-							className="!no-underline text-red-500"
-							type="button"
-							size="sm"
-							variant="link"
-						>
-							Reset
-						</Button>
+				{partner && partner?.length > 0 && (
+					<div className="py-6 flex flex-col w-full items-center">
+						<div className="flex items-center space-x-2 w-full pl-3 py-2">
+							<p className="text-sm font-semibold grow text-left">List</p>
+							<Button
+								className="!no-underline text-red-500"
+								type="button"
+								size="sm"
+								variant="link"
+							>
+								<Icon icon="fluent:arrow-reset-20-filled" />
+								<span className="text-[12.6px]">Reset</span>
+							</Button>
+						</div>
+
+						<ul>
+							{partner.map((item) => (
+								<li key={uid.randomUUID()}>
+									<PersonCard
+										type="partner"
+										title={`Edit ${item.firstName} ${item.lastName}`}
+										firstName={item.firstName}
+										lastName={item.lastName}
+										relationship={item.relationship}
+										imgSrc={item.image}
+										onDelete={(firstName, lastName, relationship) => {
+											const copy = [...(partner ?? [])];
+											const index = copy.findIndex(
+												(item) =>
+													item.firstName === firstName &&
+													item.lastName === lastName &&
+													item.relationship === relationship,
+											);
+
+											copy.splice(index, 1);
+											setPartner(copy);
+										}}
+									/>
+								</li>
+							))}
+						</ul>
 					</div>
-					<PersonCard
-						title="Edit Halle Berry (Wife)"
-						firstName="Halle"
-						lastName="Berry"
-						relationship="Wife"
-						imgSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1ItXU1XrpFWqetXf1M59Fd7Pb3mMPslGYPg&s"
-						onDelete={() => console.log("Delete partner")}
-					/>
-				</div>
+				)}
 			</motion.div>
 			{value === "yes" && (
 				<div className="w-full flex justify-center">
 					<AddPersonButton
+						type="partner"
 						disabled={
 							value === null || (value === "yes" && items?.length === 0)
 						}
@@ -75,11 +107,11 @@ const Content = ({ value, items, onValueChange }: PersonProps) => {
 };
 
 const Partner = () => {
-	const { setTitle, onOpenChange } = usePersonDrawerStore();
+	const { partner, setPartner } = usePartnerStore();
+	const { setTitle, onOpenChange, setType } = usePersonDrawerStore();
 	const { setNextButtonDisabled } = useOnboardingStore();
 
 	const [has, setHas] = useState<string | null>(null);
-	const [partner, setPartner] = useState<Person[] | null>(null);
 
 	useEffect(() => {
 		setNextButtonDisabled(
@@ -120,6 +152,7 @@ const Partner = () => {
 							setHas(value);
 							if (value === "yes") {
 								setTitle("Add Partner");
+								setType("partner");
 								onOpenChange(true);
 							} else {
 								setPartner(null);
