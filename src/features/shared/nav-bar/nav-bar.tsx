@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth0 } from "@auth0/auth0-react";
+import { Icon } from "@iconify/react";
 import Image from "next/image";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -27,7 +28,13 @@ const Navbar = () => {
 					<Avatar className="h-8 w-8 rounded-[12px]">
 						<AvatarImage src={user?.picture} alt="Avatar" />
 						<AvatarFallback className="text-[0.7rem] font-semibold text-navbar-avatar-foreground bg-navbar-avatar-bg rounded-[12px] h-full w-full">
-							{getInitials(user?.name ?? user?.nickname ?? "")}
+							{user?.name && user?.nickname ? (
+								getInitials(user?.name ?? user?.nickname ?? "")
+							) : (
+								<div className="text-white">
+									<Icon icon="fluent:person-20-filled" className="!w-4 !h-4" />
+								</div>
+							)}
 						</AvatarFallback>
 					</Avatar>
 					<Badge

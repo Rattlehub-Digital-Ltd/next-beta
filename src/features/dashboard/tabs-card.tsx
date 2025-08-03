@@ -11,10 +11,18 @@ export default function TabsCard() {
 				<div className="pt-3.5 sticky left-0 top-16 w-full z-15">
 					<div className="p-2 backdrop-blur-[15px] bg-white/40 rounded-[16px] border border-[#EBEDED] flex justify-between items-center shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)]">
 						<TabsList>
-							<TabsTrigger className="px-6" value="actions">
+							<TabsTrigger className="px-2" value="actions">
+								<Icon
+									icon="fluent:cursor-click-20-filled"
+									className="!w-5 !h-5"
+								/>
 								Actions
 							</TabsTrigger>
-							<TabsTrigger className="px-6" value="timeline">
+							<TabsTrigger className="px-2" value="timeline">
+								<Icon
+									icon="fluent:calendar-clock-20-filled"
+									className="!w-5 !h-5"
+								/>
 								Timeline
 							</TabsTrigger>
 						</TabsList>
