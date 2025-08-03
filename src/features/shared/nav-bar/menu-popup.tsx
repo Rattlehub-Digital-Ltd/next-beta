@@ -12,6 +12,7 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { isValidEmail } from "@/lib/utils";
+import { ComingSoonBadge } from "../coming-soon-badge";
 
 type UserMenuProps = {
 	children: React.ReactNode;
@@ -44,7 +45,10 @@ const UserMenu = ({ children }: UserMenuProps) => {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
-			<DropdownMenuContent className="mr-4 w-48 border-border" sideOffset={8}>
+			<DropdownMenuContent
+				className="mr-4 max-w-96 border-border"
+				sideOffset={8}
+			>
 				<DropdownMenuLabel className="text-[10px] uppercase font-medium text-muted-foreground">
 					Account
 				</DropdownMenuLabel>
@@ -54,16 +58,38 @@ const UserMenu = ({ children }: UserMenuProps) => {
 						<p className="text-neutral-500 text-[0.8rem]">{`${email ?? "unknown"}`}</p>
 					</div>
 				</DropdownMenuItem>
-				<DropdownMenuSeparator className="bg-default-200" />
+				<DropdownMenuSeparator className="bg-muted" />
 				<DropdownMenuItem className="pointer-events-none opacity-80">
-					<span className="opacity-60">Billing</span>
-					{/* <ComingSoonBadge variant="gradient" className="ml-8 text-[11px]" /> */}
+					<div className="flex items-center gap-2">
+						<Icon
+							icon="fluent:receipt-20-regular"
+							className="shrink-0 !h-5 !w-5"
+							height={20}
+							width={20}
+						/>
+						<span className="opacity-60">Billing</span>
+						<ComingSoonBadge
+							variant="gradient"
+							className="ml-8 text-[11px] whitespace-nowrap"
+						/>
+					</div>
 				</DropdownMenuItem>
 				<DropdownMenuItem className="pointer-events-none opacity-80">
-					<span className="opacity-60">Profile</span>
-					{/* <ComingSoonBadge variant="gradient" className="ml-8 text-[11px]" /> */}
+					<div className="flex items-center gap-2">
+						<Icon
+							icon="fluent:person-20-regular"
+							className="shrink-0 !h-5 !w-5"
+							height={20}
+							width={20}
+						/>
+						<span className="opacity-60">Profile</span>
+						<ComingSoonBadge
+							variant="gradient"
+							className="ml-8 text-[11px] whitespace-nowrap"
+						/>
+					</div>
 				</DropdownMenuItem>
-				<DropdownMenuSeparator className="bg-default-200" />
+				<DropdownMenuSeparator className="bg-muted" />
 				<DropdownMenuItem
 					className="font-medium text-red-600"
 					onClick={async () => {
@@ -81,6 +107,7 @@ const UserMenu = ({ children }: UserMenuProps) => {
 					<div className="flex items-center gap-2">
 						<Icon
 							icon="hugeicons:logout-03"
+							className="shrink-0 !h-5 !w-5"
 							height={20}
 							width={20}
 							style={{ color: "#DC2626" }}
