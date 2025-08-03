@@ -42,12 +42,12 @@ export default function SuggesteItemDrawer({
 					<DrawerTitle className="text-sm font-semibold">
 						{displayName}
 					</DrawerTitle>
-					<DrawerDescription className="text-sm">
-						View affected People and articles.
+					<DrawerDescription className="text-xs">
+						View affected people.
 					</DrawerDescription>
 				</DrawerHeader>
 				<div className="p-4 space-y-3">
-					<div className="p-3 bg-[#F6F6F6]/90 space-y-3 border border-black/5 rounded-3xl backdrop-blur-[20px] shadow-[0px_8px_30px_0px rgba(106, 106, 106, 0.06)]">
+					<div className="p-3 bg-[#FFFFFF]/80 space-y-3 border border-black/5 rounded-3xl backdrop-blur-[25px] shadow-[0px_8px_30px_0px rgba(106, 106, 106, 0.06)]">
 						<div className="flex  space-x-4">
 							<div className="text-[#616161]">
 								<Icon
