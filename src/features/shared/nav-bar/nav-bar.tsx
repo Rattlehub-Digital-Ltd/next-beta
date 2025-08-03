@@ -32,7 +32,7 @@ const Navbar = () => {
 								getInitials(user?.name ?? user?.nickname ?? "")
 							) : (
 								<div className="text-white">
-									<Icon icon="fluent:person-20-filled" className="!w-4 !h-4" />
+									<Icon icon="fluent:person-20-filled" className="!w-5 !h-5" />
 								</div>
 							)}
 						</AvatarFallback>
