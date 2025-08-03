@@ -7,7 +7,7 @@ export default function DashboardLayout({ children }: PropsWithChildren) {
 		<div className="h-full w-full flex flex-col space-y-3">
 			<Banner />
 			<main className="container grow mx-auto pb-2 w-full">{children}</main>
-			<nav className="fixed bottom-0 left-0 w-full">
+			<nav className="fixed bottom-0 left-0 w-full z-30">
 				<BottomTabBar />
 			</nav>
 		</div>
