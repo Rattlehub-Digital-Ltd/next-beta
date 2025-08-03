@@ -6,6 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import RiskBar from "../shared/risk-bar";
 import SuggestionItem from "../shared/suggestion-item";
 import SummaryFooter from "../shared/summary-footer";
+import SuggesteItemDrawer from "./suggestions/suggeste-item-drawer";
 
 function SummaryCard() {
 	return (
@@ -67,7 +68,9 @@ function SummaryCard() {
 					/>
 				</div>
 				<div className="px-4">
-					<RiskBar />
+					<SuggesteItemDrawer item={item}>
+						<RiskBar />
+					</SuggesteItemDrawer>
 				</div>
 			</div>
 			<Separator className="bg-black/5 px-4" />
@@ -83,3 +86,163 @@ function SummaryCard() {
 }
 
 export default SummaryCard;
+
+const item = {
+	ranking: 4.5188,
+	suggestedFor: [
+		{
+			name: "Child",
+			displayName: "Children",
+			eduText: null,
+			affectedOwners: ["John Wick"],
+		},
+		{
+			name: "Dependent",
+			displayName: "Dependent",
+			eduText: null,
+			affectedOwners: ["Black Widow"],
+		},
+		{
+			name: "Partner",
+			displayName: "Spouse / Partner",
+			eduText: null,
+			affectedOwners: ["Halle Berry"],
+		},
+		{
+			name: "Child",
+			displayName: "Children",
+			eduText: null,
+			affectedOwners: ["Your child"],
+		},
+		{
+			name: "Dependent",
+			displayName: "Dependent",
+			eduText: null,
+			affectedOwners: ["Your dependent"],
+		},
+		{
+			name: "Partner",
+			displayName: "Spouse / Partner",
+			eduText: null,
+			affectedOwners: ["Halle Berry"],
+		},
+		{
+			name: "Child",
+			displayName: "Children",
+			eduText: null,
+			affectedOwners: ["Your child"],
+		},
+		{
+			name: "Dependent",
+			displayName: "Dependent",
+			eduText: null,
+			affectedOwners: ["Your dependent"],
+		},
+		{
+			name: "Partner",
+			displayName: "Spouse / Partner",
+			eduText: null,
+			affectedOwners: ["Halle Berry"],
+		},
+		{
+			name: "Child",
+			displayName: "Children",
+			eduText: null,
+			affectedOwners: ["Your child"],
+		},
+		{
+			name: "Dependent",
+			displayName: "Dependent",
+			eduText: null,
+			affectedOwners: ["Your dependent"],
+		},
+		{
+			name: "Partner",
+			displayName: "Spouse / Partner",
+			eduText: null,
+			affectedOwners: ["Halle Berry"],
+		},
+	],
+	serviceProviders: [
+		{
+			name: "NextDot Advisory",
+			summary:
+				"This could be your business. Click [here](https://nextdot.ai/contact-us/) to learn more.",
+			isPreferred: true,
+		},
+		{
+			name: "Other Advisory",
+			summary:
+				"This could be your business. Click [here](https://nextdot.ai/contact-us/) to learn more",
+			isPreferred: false,
+		},
+	],
+	suggestedReadings: [
+		{
+			name: "Read about this at NextDot.Ai",
+			link: "https://nextdot.ai",
+		},
+	],
+	id: "d49870a7-4398-4b1f-9ded-5417cc1903a8|66b82b46-f685-46d6-afd3-9c493c820fe0|2231704490061893844|4ff0ce2a-762a-444d-8f0a-98de5acfe5d8",
+	name: "LifePolicy",
+	displayName: "Life Policy",
+	eduText:
+		"If you have a family, life insurance is essential because it helps protect your loved ones financially",
+	isApplicable: null,
+	riskItems: [
+		{
+			category: "Protection",
+			goalName: "Life Insurance Claim",
+			eduText:
+				"Without life insurance, your loved ones may face financial hardship, leaving them exposed to debts, living expenses, or educational costs without a safety net.",
+		},
+		{
+			category: "Delay",
+			goalName: "Life Insurance Claim",
+			eduText:
+				"If no policy exists or is inaccessible, beneficiaries may face long delays in securing funds, creating stress during an already difficult time.",
+		},
+		{
+			category: "Cost",
+			goalName: "Life Insurance Claim",
+			eduText:
+				"Your family may need to rely on savings, sell assets, or take on debt to cover immediate financial needs, potentially losing wealth unnecessarily.",
+		},
+		{
+			category: "Protection",
+			goalName: "Estate Plan",
+			eduText:
+				"Without clear life insurance information, your loved ones may face financial strain, leaving essential expenses like mortgage payments or education costs uncovered.",
+		},
+		{
+			category: "Delay",
+			goalName: "Estate Plan",
+			eduText:
+				"Lack of documentation can slow down the payout process, leaving beneficiaries waiting during a critical time.",
+		},
+		{
+			category: "Cost",
+			goalName: "Estate Plan",
+			eduText:
+				"Without life insurance proceeds, the estate may need to liquidate valuable assets or incur debt to cover final expenses, creating unnecessary financial and emotional stress.",
+		},
+		{
+			category: "Protection",
+			goalName: "Legacy",
+			eduText:
+				"Without clear life insurance information, your loved ones may face financial strain, leaving essential expenses like mortgage payments or education costs uncovered.",
+		},
+		{
+			category: "Delay",
+			goalName: "Legacy",
+			eduText:
+				"Lack of documentation can slow down the payout process, leaving beneficiaries waiting during a critical time.",
+		},
+		{
+			category: "Cost",
+			goalName: "Legacy",
+			eduText:
+				"Without life insurance proceeds, the estate may need to liquidate valuable assets or incur debt to cover final expenses, creating unnecessary financial and emotional stress.",
+		},
+	],
+};
