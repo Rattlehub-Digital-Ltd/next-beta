@@ -45,7 +45,10 @@ export default function ArticlesTab() {
 								<p className="text-[13.8px] text-neutral-600">
 									{article.summary}
 								</p>
-								<a className="flex-grow overflow-hidden " href={article.link}>
+								<a
+									className="flex-grow overflow-hidden text-blue-600 font-medium"
+									href={article.link}
+								>
 									<p className="text-xs font-medium truncate line-clamp-1">
 										{article.link}
 									</p>
