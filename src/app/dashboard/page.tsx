@@ -37,7 +37,7 @@ function DashboardPage() {
 					<Button
 						color="primary"
 						size="lg"
-						className="shadow-md bg-blue-600 active:bg-blue-700 rounded-2xl shadow-blue-500/40 h-11 text-[13px] w-full overflow-hidden"
+						className="shadow-xl bg-blue-700/80 backdrop-blur-[25px] active:bg-blue-700 rounded-2xl shadow-blue-500/40 h-11 text-[13px] w-full"
 						variant="default"
 					>
 						<SparkleIcon className="w-5 h-5 text-white shrink-0" />
