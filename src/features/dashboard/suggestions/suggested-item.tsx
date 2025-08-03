@@ -25,7 +25,9 @@ export default function SuggestedItem({ item }: SuggestedItemProps) {
 				/>
 			</div>
 			<div className="px-4">
-				<RiskBar />
+				<SuggesteItemDrawer item={item}>
+					<RiskBar />
+				</SuggesteItemDrawer>
 			</div>
 			<div className="px-4">
 				<RiskCarousel items={riskItems} />

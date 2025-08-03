@@ -170,3 +170,9 @@
 		@apply bg-background text-foreground;
 	}
 }
+
+.provider-summary-markdown a {
+	color: #2563eb !important;
+	text-decoration: underline !important;
+	font-weight: 600 !important;
+}

@@ -1,5 +1,3 @@
-import { Icon } from "@iconify/react";
-import ShortUniqueId from "short-unique-id";
 import { Button } from "@/components/ui/button";
 import {
 	Drawer,
@@ -11,21 +9,19 @@ import {
 	DrawerTitle,
 	DrawerTrigger,
 } from "@/components/ui/drawer";
-import UserBadge from "@/features/shared/user-badge";
 import type { Suggested } from "@/types/suggested";
+import DrawerTabsCard from "./drawer-tabs-card";
 
 type SuggestedItemDrawerProps = {
 	children: React.ReactNode;
 	item: Suggested;
 };
 
-const uid = new ShortUniqueId({ length: 10 });
-
 export default function SuggesteItemDrawer({
 	children,
 	item,
 }: SuggestedItemDrawerProps) {
-	const { suggestedFor, displayName } = item;
+	const { suggestedFor, displayName, eduText } = item;
 
 	const people: string[] = [];
 	suggestedFor.forEach((item) => {
@@ -37,38 +33,17 @@ export default function SuggesteItemDrawer({
 	return (
 		<Drawer>
 			<DrawerTrigger asChild>{children}</DrawerTrigger>
-			<DrawerContent className="bg-[#ECECEC]">
+			<DrawerContent className="bg-[#ECECEC] h-[85vh]">
 				<DrawerHeader className="text-left items-start px-6 gap-0">
 					<DrawerTitle className="text-sm font-semibold">
 						{displayName}
 					</DrawerTitle>
-					<DrawerDescription className="text-xs">
-						View affected people.
+					<DrawerDescription className="text-xs line-clamp-2 text-left">
+						{eduText}
 					</DrawerDescription>
 				</DrawerHeader>
-				<div className="p-4 space-y-3">
-					<div className="p-3 bg-[#FFFFFF]/80 space-y-3 border border-black/5 rounded-3xl backdrop-blur-[25px] shadow-[0px_8px_30px_0px rgba(106, 106, 106, 0.06)]">
-						<div className="flex  space-x-4">
-							<div className="text-[#616161]">
-								<Icon
-									icon="fluent:people-community-24-filled"
-									height={24}
-									width={24}
-								/>
-							</div>
-							<div className="grow">
-								<p className="text-[13px] font-medium">Suggested for</p>
-								<p className="text-xs text-[#616161]">
-									{suggestedFor.length} people are at risk
-								</p>
-							</div>
-						</div>
-						<div className="pt-6 flex flex-wrap gap-2">
-							{people.map((person) => (
-								<UserBadge key={uid.randomUUID()} name={person} />
-							))}
-						</div>
-					</div>
+				<div className="px-4 overflow-y-auto">
+					<DrawerTabsCard item={item} />
 				</div>
 				<DrawerFooter>
 					<DrawerClose asChild>

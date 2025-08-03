@@ -1,19 +1,19 @@
 import type { RiskItemProps } from "./risk-item-props";
 
-type SuggestedFor = {
+export type SuggestedFor = {
 	name: string;
 	displayName: string;
 	eduText: string | null;
 	affectedOwners: string[];
 };
 
-type ServiceProvider = {
+export type ServiceProvider = {
 	name: string;
 	summary: string;
 	isPreferred: boolean;
 };
 
-type SuggestedReading = {
+export type SuggestedReading = {
 	name: string;
 	link: string;
 };
