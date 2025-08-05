@@ -49,6 +49,20 @@ const UserMenu = ({ children }: UserMenuProps) => {
 				className="mr-4 max-w-96 border-border"
 				sideOffset={8}
 			>
+				<DropdownMenuSeparator className="bg-muted" />
+				<DropdownMenuItem>
+					<div className="flex items-center gap-2">
+						<Icon
+							icon="fluent:checkmark-starburst-16-filled"
+							className="shrink-0 !h-5 !w-5"
+							height={20}
+							width={20}
+						/>
+						<span className="opacity-60">Upgrage to Pro</span>
+					</div>
+				</DropdownMenuItem>
+
+				<DropdownMenuSeparator className="bg-muted" />
 				<DropdownMenuLabel className="text-[10px] uppercase font-medium text-muted-foreground">
 					Account
 				</DropdownMenuLabel>
@@ -59,6 +73,21 @@ const UserMenu = ({ children }: UserMenuProps) => {
 					</div>
 				</DropdownMenuItem>
 				<DropdownMenuSeparator className="bg-muted" />
+				<DropdownMenuItem className="pointer-events-none opacity-80">
+					<div className="flex items-center gap-2">
+						<Icon
+							icon="fluent:person-20-regular"
+							className="shrink-0 !h-5 !w-5"
+							height={20}
+							width={20}
+						/>
+						<span className="opacity-60">Account</span>
+						<ComingSoonBadge
+							variant="gradient"
+							className="ml-8 text-[11px] whitespace-nowrap"
+						/>
+					</div>
+				</DropdownMenuItem>
 				<DropdownMenuItem className="pointer-events-none opacity-80">
 					<div className="flex items-center gap-2">
 						<Icon
@@ -74,15 +103,16 @@ const UserMenu = ({ children }: UserMenuProps) => {
 						/>
 					</div>
 				</DropdownMenuItem>
+
 				<DropdownMenuItem className="pointer-events-none opacity-80">
 					<div className="flex items-center gap-2">
 						<Icon
-							icon="fluent:person-20-regular"
+							icon="fluent:alert-20-regular"
 							className="shrink-0 !h-5 !w-5"
 							height={20}
 							width={20}
 						/>
-						<span className="opacity-60">Profile</span>
+						<span className="opacity-60">Notifications</span>
 						<ComingSoonBadge
 							variant="gradient"
 							className="ml-8 text-[11px] whitespace-nowrap"
