@@ -14,7 +14,7 @@ export default function Banner() {
 			<SparkleIcon className="h-4 w-4 shrink-0" />
 			<p className="font-medium grow truncate text-[12px] tracking-wide">
 				Try Premium{" "}
-				<span className="text-yellow-300 font-bold">14 days free trial</span>
+				<span className="text-yellow-300 font-bold">14 day free trial</span>
 			</p>
 			<Button
 				className="text-xs gap-1 font-bold bg-white/95 backdrop-blur-md rounded-[10px] text-[#6155F5] h-6"
