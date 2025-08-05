@@ -32,9 +32,9 @@ export default function ServiceProvidersTab({
 							</div>
 							<div>
 								<p className="text-[0.8rem] font-semibold">{provider.name}</p>
-								<p className="text-pretty text-[#616161] text-[0.8rem] provider-summary-markdown">
+								<div className="text-pretty text-[#616161] text-[0.8rem] provider-summary-markdown">
 									<Markdown>{provider.summary}</Markdown>
-								</p>
+								</div>
 							</div>
 						</div>
 					</li>

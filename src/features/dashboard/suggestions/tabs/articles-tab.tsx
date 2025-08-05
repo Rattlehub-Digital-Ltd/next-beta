@@ -90,14 +90,14 @@ const data = [
 		summary:
 			"The rules that govern the creation of an estate plan are in flux. Courts once demanded strict adherence to the Wills Act. Yet this legacy of hyper-vigilance is waning, as the Uniform Probate Code, the Restatement (Third) of Property, and ten states have adopted the harmless error rule. Meanwhile, trusts, which need not comply with the Wills Act, have eclipsed wills as the dominant method of posthumous wealth transmission.",
 	},
-	{
-		author:
-			"Faziatul Amillia Mohamad Basir, Wan Marhaini Wan Ahmad, and Mahfuzur Rahman",
-		image: "https://i.pravatar.cc/150?u=a04258114e29026708c",
+	// {
+	// 	author:
+	// 		"Faziatul Amillia Mohamad Basir, Wan Marhaini Wan Ahmad, and Mahfuzur Rahman",
+	// 	image: "https://i.pravatar.cc/150?u=a04258114e29026708c",
 
-		link: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2833019",
-		title: "Estate Planning Behaviour: A Systematic Literature Review",
-		summary:
-			"Estate planning is a financial tool for an individual to manage wealth upon his incapacitation or death. Although there are numerous studies on estate planning, there still needs to be an effort to systematically review the estate planning measurements. The paper aims to systematically review the literature published between 1990 to 2021 and evaluate the measures of estate planning and its methodological qualities.",
-	},
+	// 	link: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2833019",
+	// 	title: "Estate Planning Behaviour: A Systematic Literature Review",
+	// 	summary:
+	// 		"Estate planning is a financial tool for an individual to manage wealth upon his incapacitation or death. Although there are numerous studies on estate planning, there still needs to be an effort to systematically review the estate planning measurements. The paper aims to systematically review the literature published between 1990 to 2021 and evaluate the measures of estate planning and its methodological qualities.",
+	// },
 ];

@@ -33,7 +33,7 @@ export default function SuggesteItemDrawer({
 	return (
 		<Drawer>
 			<DrawerTrigger asChild>{children}</DrawerTrigger>
-			<DrawerContent className="bg-[#ECECEC] h-[85vh]">
+			<DrawerContent className="bg-[#ECECEC] h-[95vh]">
 				<DrawerHeader className="text-left items-start px-6 gap-0">
 					<DrawerTitle className="text-sm font-semibold">
 						{displayName}
