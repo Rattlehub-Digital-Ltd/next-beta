@@ -1,6 +1,8 @@
 "use client";
 
+import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useOnboardingStore } from "store/use-onboarding-store";
 import {
 	Carousel,
 	type CarouselApi,
@@ -10,10 +12,11 @@ import {
 import Children from "@/features/onboarding/children";
 import Dependents from "@/features/onboarding/dependents";
 import Partner from "@/features/onboarding/partner";
-// import Summary from "@/features/onboarding/summary/summary";
 import Pagination from "@/features/shared/pagination";
 
 function OnboardingPage() {
+	const { isOnboarded } = useOnboardingStore();
+
 	const [api, setApi] = useState<CarouselApi>();
 	const [current, setCurrent] = useState(0);
 	const [count, setCount] = useState(0);
@@ -29,6 +32,8 @@ function OnboardingPage() {
 			setCurrent(api.selectedScrollSnap() + 1);
 		});
 	}, [api]);
+
+	if (isOnboarded) redirect("/dashboard");
 
 	return (
 		<div className="grow space-y-3 flex flex-col overflow-hidden">

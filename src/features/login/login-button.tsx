@@ -2,17 +2,27 @@
 
 import { useAuth0 } from "@auth0/auth0-react";
 import * as motion from "motion/react-client";
-import { useRouter, useSearchParams } from "next/navigation";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { FluentArrowCircleRight24Filled, SparkleIcon } from "@/styles/icons";
 
-// import { useOnboardingStore } from "store/use-onboarding-store";
-// import { useCountStore } from "store/use-count-store";
+import { toast } from "sonner";
+import { useActivitySummaryStore } from "store/use-activity-summary-store";
+import { useAppStore } from "store/use-app-store";
+import { useOnboardingStore } from "store/use-onboarding-store";
+import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
+import useApi from "@/hooks/use-api";
+import { FluentArrowCircleRight24Filled, SparkleIcon } from "@/styles/icons";
 
 const LoginButton = () => {
 	const router = useRouter();
 	const searchParams = useSearchParams();
+
+	const { getOnboardingStatus, getActivitySummary } = useApi();
+
+	const { setIsOnboarded } = useOnboardingStore();
+	const { setActivity } = useActivitySummaryStore();
+	const { initialized, setInitialized } = useAppStore();
 
 	const {
 		isLoading,
@@ -22,9 +32,6 @@ const LoginButton = () => {
 		getAccessTokenSilently,
 	} = useAuth0();
 
-	// const { setIsOnboarded } = useOnboardingStore();
-	// const { setActionsCount, setSuggestionsCount } = useCountStore();
-
 	const [processing, setProcessing] = useState(false);
 
 	const redirectUrl =
@@ -32,31 +39,47 @@ const LoginButton = () => {
 
 	const loadData = useCallback(async () => {
 		if (user && isAuthenticated) {
-			// const res = await getOnboardingStatus();
-			// const onboarded = !!res?.isOnboarded;
-			// if (onboarded) {
-			// 	try {
-			// 		const res = await fetchActivity();
-			// 		if (res) {
-			// 			const obj = res as ActivityProps;
-			// 			if (obj) {
-			// 				setActionsCount(obj.pending);
-			// 				setSuggestionsCount(obj.suggested);
-			// 			}
-			// 		}
-			// 	} catch (e) {
-			// 		console.debug(e);
-			// 	}
-			// }
-			// setIsOnboarded(onboarded);
+			if (initialized) return;
+
+			setProcessing(true);
+
+			if (isAuthenticated) {
+				if (!initialized) {
+					const onboardingStatusResp = await getOnboardingStatus();
+
+					if (onboardingStatusResp?.data) {
+						const isOnboarded = onboardingStatusResp.data.isOnboarded;
+						setIsOnboarded(isOnboarded);
+
+						const activitySummaryResp = await getActivitySummary();
+						if (activitySummaryResp?.data) {
+							setActivity(activitySummaryResp.data);
+							setInitialized(true);
+						}
+
+						if (isOnboarded)
+							redirect(window.location.origin !== "/" ? "/" : "/dashboard");
+						else redirect("/dashboard/onboarding");
+					} else {
+						setInitialized(false);
+					}
+				}
+
+				setProcessing(false);
+				redirect(window.location.origin);
+			} else {
+				setInitialized(false);
+				setProcessing(false);
+			}
 		}
 	}, [
-		// fetchActivity,
-		// getOnboardingStatus,
+		setActivity,
+		getActivitySummary,
+		getOnboardingStatus,
+		initialized,
 		isAuthenticated,
-		// setActionsCount,
-		// setIsOnboarded,
-		// setSuggestionsCount,
+		setInitialized,
+		setIsOnboarded,
 		user,
 	]);
 
@@ -79,7 +102,7 @@ const LoginButton = () => {
 					});
 			} catch (error) {
 				console.error("Authentication error:", error);
-				// toast("An error occurred during sign-in.");
+				toast("An error occurred during sign-in.");
 				setProcessing(false);
 			}
 		}
@@ -97,11 +120,14 @@ const LoginButton = () => {
 				.then(async (token) => {
 					if (token && token !== "") {
 						await loadData();
+
 						router.replace(redirectUrl);
 					}
 				})
 				.catch((error) => console.log("Error getting access token:", error))
-				.finally(() => setProcessing(false));
+				.finally(() => {
+					setProcessing(false);
+				});
 		}
 	}, [
 		getAccessTokenSilently,
@@ -125,17 +151,21 @@ const LoginButton = () => {
 			transition={{ duration: 0.35 }}
 		>
 			<Button
-				className="font-semibold rounded-2xl h-11 w-full !pr-3 shadow-md shadow-blue-500/40 bg-blue-600 disabled:bg-blue-400"
+				className="font-semibold rounded-2xl h-11 w-full !pr-3 shadow-md shadow-blue-500/40 disabled:opacity-85 bg-blue-600 disabled:bg-blue-500"
 				variant="default"
+				disabled={processing}
 				type="button"
 				size="lg"
 				onClick={authenticate}
 			>
 				<SparkleIcon className="!h-4.5 !w-4.5 text-white mr-2" />
 				<span className="grow text-center text-sm truncate">
-					{isLoading || processing ? "Please wait..." : "Continue with Nextdot"}
+					{processing ? "Please wait..." : "Continue with Nextdot"}
 				</span>
-				<FluentArrowCircleRight24Filled className="!h-6 !w-6 text-white" />
+				{!processing && (
+					<FluentArrowCircleRight24Filled className="!h-6 !w-6 text-white" />
+				)}
+				{processing && <Spinner size="lg" variant="dark" />}
 			</Button>
 		</motion.div>
 	);

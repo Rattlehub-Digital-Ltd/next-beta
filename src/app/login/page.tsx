@@ -1,6 +1,13 @@
+"use client";
+
+import { useAuth0 } from "@auth0/auth0-react";
 import * as motion from "motion/react-client";
 import { Merriweather } from "next/font/google";
+import { redirect } from "next/navigation";
+import { useOnboardingStore } from "store/use-onboarding-store";
+import { appConfig } from "@/config/app.config";
 import LoginButton from "@/features/login/login-button";
+import Loading from "@/features/shared/loading";
 import MainSheet from "@/features/shared/main-sheet";
 
 const serif = Merriweather({
@@ -9,6 +16,7 @@ const serif = Merriweather({
 });
 
 const Content = () => {
+	const { links } = appConfig;
 	return (
 		<div className="h-full flex flex-col w-full">
 			<motion.div
@@ -25,15 +33,30 @@ const Content = () => {
 				</h2>
 				<p className="text-foreground-secondary text-[0.78rem] text-pretty">
 					By continuing, you agree to NEXTDOT's{" "}
-					<a href="/" className="font-semibold text-blue-600">
+					<a
+						href={links.privacyPolicy}
+						className="font-semibold text-blue-600"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
 						Privacy Policy
 					</a>{" "}
 					,
-					<a href="/" className="font-semibold text-blue-600">
+					<a
+						href={links.termsOfUse}
+						className="font-semibold text-blue-600"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
 						Terms of Service
 					</a>
 					, and acknowledge their{" "}
-					<a href="/" className="font-semibold text-blue-600">
+					<a
+						href={links.dataPolicy}
+						className="font-semibold text-blue-600"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
 						Data Policy
 					</a>
 					.
@@ -44,7 +67,15 @@ const Content = () => {
 	);
 };
 
-function LoginPage() {
+export default function LoginPage() {
+	const { isAuthenticated, isLoading } = useAuth0();
+
+	const { isOnboarded } = useOnboardingStore();
+
+	if (isAuthenticated) {
+		redirect(isOnboarded ? "/dashboard" : "/dashboard/onboarding");
+	}
+
 	return (
 		<motion.div
 			className="h-full w-full flex flex-col grow"
@@ -66,8 +97,7 @@ function LoginPage() {
 				imgAlt="Login Image"
 				content={<Content />}
 			/>
+			{isLoading && <Loading />}
 		</motion.div>
 	);
 }
-
-export default LoginPage;

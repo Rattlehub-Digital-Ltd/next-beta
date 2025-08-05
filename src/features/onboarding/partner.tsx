@@ -3,9 +3,9 @@
 import * as motion from "motion/react-client";
 import { useEffect } from "react";
 import ShortUniqueId from "short-unique-id";
-import { useOnboardingStore } from "store/onboarding-store";
-import { usePartnerStore } from "store/partner-store";
-import { usePersonDrawerStore } from "store/person-drawer-store";
+import { useOnboardingStore } from "store/use-onboarding-store";
+import { usePartnerStore } from "store/use-partner-store";
+import { usePersonDrawerStore } from "store/use-person-drawer-store";
 import MainSheet from "@/features/shared/main-sheet";
 import CategoryList from "../shared/category-list";
 import PersonCard from "../shared/person-card";

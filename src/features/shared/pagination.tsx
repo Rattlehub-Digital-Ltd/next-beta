@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react";
 import * as motion from "motion/react-client";
 import ShortUniqueId from "short-unique-id";
-import { useOnboardingStore } from "store/onboarding-store";
+import { useOnboardingStore } from "store/use-onboarding-store";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 

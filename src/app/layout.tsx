@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Mona_Sans } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";
 import ErrorBoundary from "@/components/error-boundary";
 import RefreshButton from "@/features/root-layout/refresh-button";
 import MainLayout from "./components/layouts/main-layout";
@@ -47,6 +48,7 @@ export default function RootLayout({
 					}
 				>
 					<MainLayout>{children}</MainLayout>
+					<Toaster />
 				</ErrorBoundary>
 			</body>
 		</html>

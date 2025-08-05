@@ -1,6 +1,6 @@
 "use client";
 
-import { usePersonDrawerStore } from "store/person-drawer-store";
+import { usePersonDrawerStore } from "store/use-person-drawer-store";
 import {
 	Drawer,
 	DrawerContent,

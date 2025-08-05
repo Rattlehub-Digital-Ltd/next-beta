@@ -3,8 +3,8 @@
 import type { AnyFieldApi } from "@tanstack/react-form";
 import { useForm } from "@tanstack/react-form";
 import * as motion from "motion/react-client";
-import { usePartnerStore } from "store/partner-store";
-import { usePersonDrawerStore } from "store/person-drawer-store";
+import { usePartnerStore } from "store/use-partner-store";
+import { usePersonDrawerStore } from "store/use-person-drawer-store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

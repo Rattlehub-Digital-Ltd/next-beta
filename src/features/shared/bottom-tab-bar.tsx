@@ -3,6 +3,7 @@
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useActivitySummaryStore } from "store/use-activity-summary-store";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
@@ -48,6 +49,7 @@ const items: BottomTabBarItemProps[] = [
 
 function BottomTabBar() {
 	const pathname = usePathname();
+	const { activity } = useActivitySummaryStore();
 
 	return (
 		<div className="flex items-center justify-around py-4 max-w-screen-lg w-full mx-auto bg-white/60 border-t border-black/5 backdrop-blur-[15px]">
@@ -71,23 +73,27 @@ function BottomTabBar() {
 							/>
 						</div>
 
-						{label.toLowerCase() === "home" && (
-							<div className="absolute top-0 right-1.5 -mt-1.5">
-								<Badge
-									className="h-4 min-w-4 text-[10px] rounded-full px-1 font-mono tabular-nums"
-									variant="destructive"
-								>
-									10
-								</Badge>
-							</div>
-						)}
+						{activity && (
+							<>
+								{label.toLowerCase() === "home" && (
+									<div className="absolute top-0 right-1.5 -mt-1.5">
+										<Badge
+											className="h-4 min-w-4 text-[10px] rounded-full px-1 font-mono tabular-nums"
+											variant="destructive"
+										>
+											{activity.pending}
+										</Badge>
+									</div>
+								)}
 
-						{label.toLowerCase() === "suggestions" && (
-							<div className="absolute top-0 right-1.5 -mt-1.5">
-								<Badge className="h-4 min-w-4 rounded-full px-1 font-mono tabular-nums text-[10px] bg-green-600">
-									99
-								</Badge>
-							</div>
+								{label.toLowerCase() === "suggestions" && (
+									<div className="absolute top-0 right-1.5 -mt-1.5">
+										<Badge className="h-4 min-w-4 rounded-full px-1 font-mono tabular-nums text-[10px] bg-green-600">
+											{activity.completed}
+										</Badge>
+									</div>
+								)}
+							</>
 						)}
 
 						<p
