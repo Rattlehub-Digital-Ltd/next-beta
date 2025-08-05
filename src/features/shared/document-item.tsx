@@ -19,8 +19,8 @@ export default function DocumentItem({
 	return (
 		<div
 			className={cn(
-				"text-[#374151] rounded-[12px] flex flex-col space-y-1 p-2 bg-white border border-[#EBEDED] backdrop-blur-[25px] shadow-[0px_12px_30px_0px rgba(106, 106, 106, 0.06)]",
-				{ "bg-[#ECFDF5] ring-2 ring-[#00C7BE]/80": isApplicable },
+				"text-[#374151] rounded-[12px] flex flex-col space-y-1 p-2 bg-white/65 border border-[#EBEDED] backdrop-blur-[25px] shadow-[0px_12px_30px_0px rgba(106, 106, 106, 0.06)]",
+				{ "bg-[#ECFDF5]/75 ring-2 ring-[#00C7BE]/80": isApplicable },
 				className,
 			)}
 		>

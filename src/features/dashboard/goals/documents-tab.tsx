@@ -2,7 +2,7 @@ import DocumentItem from "@/features/shared/document-item";
 
 export default function DocumentsTab() {
 	return (
-		<div className="grid grid-cols-2 gap-4 pt-4 px-4 rounded-[23px] border border-[#EBEDED] backdrop-blur-[25px] bg-white/65">
+		<div className="grid grid-cols-2 gap-4 py-4 px-4 rounded-[23px] border border-[#EBEDED] backdrop-blur-[25px] bg-white/65">
 			{data.map((item) => (
 				<DocumentItem
 					key={item.id}
