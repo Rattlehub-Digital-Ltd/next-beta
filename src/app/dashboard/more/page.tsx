@@ -24,9 +24,24 @@ export default function MorePage() {
 						Add people
 					</h1>
 					<div className="flex items-center h-16 gap-2 py-2">
-						<AddPeople label="Partner" icon="fluent:person-heart-32-filled" />
-						<AddPeople label="Child" icon="fluent:person-star-32-filled" />
-						<AddPeople label="Dependent" icon="fluent:people-32-filled" />
+						<AddPeople
+							label="Partner"
+							icon="fluent:person-heart-32-filled"
+							type="partner"
+							iconClass="bg-[#197278] ring-[#197278]/15"
+						/>
+						<AddPeople
+							label="Child"
+							icon="fluent:person-star-32-filled"
+							type="child"
+							iconClass="bg-[#FECB01] ring-[#FECB01]/15"
+						/>
+						<AddPeople
+							label="Dependent"
+							icon="fluent:people-community-48-filled"
+							type="dependent"
+							iconClass="bg-[#5856D6] ring-[#5856D6]/15"
+						/>
 					</div>
 				</div>
 			</div>

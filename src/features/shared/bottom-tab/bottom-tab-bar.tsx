@@ -43,7 +43,7 @@ const items: BottomTabBarItemProps[] = [
 		defaultIconSrc: "fluent:more-circle-24-regular",
 		activeIconSrc: "fluent:more-circle-24-filled",
 		label: "More",
-		href: "/more",
+		href: "/dashboard/more",
 	},
 ];
 
