@@ -43,13 +43,16 @@ const items: BottomTabBarItemProps[] = [
 		defaultIconSrc: "fluent:more-circle-24-regular",
 		activeIconSrc: "fluent:more-circle-24-filled",
 		label: "More",
-		href: "/dashboard/more",
+		href: "/more",
 	},
 ];
 
 function BottomTabBar() {
 	const pathname = usePathname();
 	const { activity } = useActivitySummaryStore();
+
+	if (pathname === "/" || pathname.toLowerCase() === "/dashboard/onboarding")
+		return;
 
 	return (
 		<div className="flex items-center justify-around py-4 max-w-screen-lg w-full mx-auto bg-white/60 border-t border-black/5 backdrop-blur-[15px]">

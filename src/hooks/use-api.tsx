@@ -160,7 +160,7 @@ const useApi = () => {
 		});
 	}, [client]);
 
-	return { getOnboardingStatus, getActivitySummary };
+	return { accessToken, getOnboardingStatus, getActivitySummary };
 };
 
 export default useApi;

@@ -4,7 +4,7 @@ import "./globals.css";
 import { Toaster } from "sonner";
 import ErrorBoundary from "@/components/error-boundary";
 import RefreshButton from "@/features/root-layout/refresh-button";
-import MainLayout from "./components/layouts/main-layout";
+import MainLayout from "../components/main-layout";
 
 const geistSans = Mona_Sans({
 	variable: "--font-mono-sans",
@@ -27,9 +27,9 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html className="bg-[#E5E5E5] h-screen overflow-hidden" lang="en">
+		<html className="bg-[#E5E5E5] h-screen" lang="en">
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen overflow-hidden bg-[#E5E5E5]`}
+				className={`${geistSans.variable} ${geistMono.variable} antialiased h-full overflow-y-auto bg-[#E5E5E5]`}
 			>
 				<ErrorBoundary
 					fallback={

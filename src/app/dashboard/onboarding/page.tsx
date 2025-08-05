@@ -12,6 +12,7 @@ import {
 import Children from "@/features/onboarding/children";
 import Dependents from "@/features/onboarding/dependents";
 import Partner from "@/features/onboarding/partner";
+import Summary from "@/features/onboarding/summary/summary";
 import Pagination from "@/features/shared/pagination";
 
 function OnboardingPage() {
@@ -36,26 +37,24 @@ function OnboardingPage() {
 	if (isOnboarded) redirect("/dashboard");
 
 	return (
-		<div className="grow space-y-3 flex flex-col overflow-hidden">
-			<div className="grow overflow-hidden flex flex-col pb-1">
-				<Carousel setApi={setApi} className="h-full">
-					<CarouselContent className="h-full">
-						<CarouselItem className="overflow-hidden">
-							<Partner />
-						</CarouselItem>
-						<CarouselItem className="overflow-hidden">
-							<Children />
-						</CarouselItem>
-						<CarouselItem className="overflow-hidden">
-							<Dependents />
-						</CarouselItem>
-						{/* <CarouselItem className="h-full overflow-hidden">
-							<Summary />
-						</CarouselItem> */}
-					</CarouselContent>
-				</Carousel>
-			</div>
-			<div className="sticky bottom-0 left-0 w-full z-10">
+		<div className="space-y-3 flex flex-col overflow-hidden">
+			<Carousel setApi={setApi}>
+				<CarouselContent className="h-full">
+					<CarouselItem>
+						<Partner />
+					</CarouselItem>
+					<CarouselItem>
+						<Children />
+					</CarouselItem>
+					<CarouselItem>
+						<Dependents />
+					</CarouselItem>
+					<CarouselItem>
+						<Summary />
+					</CarouselItem>
+				</CarouselContent>
+			</Carousel>
+			<div className="fixed bottom-4 left-0 w-full z-50 px-4">
 				<Pagination
 					currentPage={current}
 					totalPages={count}
