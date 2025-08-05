@@ -7,7 +7,6 @@ import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
-	DropdownMenuLabel,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -45,58 +44,50 @@ const UserMenu = ({ children }: UserMenuProps) => {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
-			<DropdownMenuContent
-				className="mr-4 max-w-96 border-border"
-				sideOffset={8}
-			>
+			<DropdownMenuContent className="mr-4 w-64 border-border" sideOffset={8}>
+				<DropdownMenuItem className="w-full">
+					<div className="text-left w-full">
+						<h2 className="text-sm font-medium truncate w-full">{name}</h2>
+						<p className="text-neutral-500 text-[0.8rem]">{`${email ?? "unknown"}`}</p>
+					</div>
+				</DropdownMenuItem>
 				<DropdownMenuSeparator className="bg-muted" />
 				<DropdownMenuItem>
-					<div className="flex items-center gap-2">
+					<div className="flex items-center gap-2 w-full">
 						<Icon
 							icon="fluent:checkmark-starburst-16-filled"
 							className="shrink-0 !h-5 !w-5"
 							height={20}
 							width={20}
 						/>
-						<span className="opacity-60">Upgrage to Pro</span>
-					</div>
-				</DropdownMenuItem>
-
-				<DropdownMenuSeparator className="bg-muted" />
-				<DropdownMenuLabel className="text-[10px] uppercase font-medium text-muted-foreground">
-					Account
-				</DropdownMenuLabel>
-				<DropdownMenuItem>
-					<div className="text-left">
-						<h2 className="text-sm font-medium truncate w-full">{name}</h2>
-						<p className="text-neutral-500 text-[0.8rem]">{`${email ?? "unknown"}`}</p>
+						<span className="grow">Upgrage to Pro</span>
 					</div>
 				</DropdownMenuItem>
 				<DropdownMenuSeparator className="bg-muted" />
-				<DropdownMenuItem className="pointer-events-none opacity-80">
-					<div className="flex items-center gap-2">
+				<DropdownMenuItem className="pointer-events-none">
+					<div className="flex items-center gap-2 w-full">
 						<Icon
 							icon="fluent:person-20-regular"
 							className="shrink-0 !h-5 !w-5"
 							height={20}
 							width={20}
 						/>
-						<span className="opacity-60">Account</span>
+						<span className="grow">Account</span>
 						<ComingSoonBadge
 							variant="gradient"
-							className="ml-8 text-[11px] whitespace-nowrap"
+							className="text-[11px] whitespace-nowrap"
 						/>
 					</div>
 				</DropdownMenuItem>
-				<DropdownMenuItem className="pointer-events-none opacity-80">
-					<div className="flex items-center gap-2">
+				<DropdownMenuItem className="pointer-events-none w-full">
+					<div className="flex items-center gap-2 w-full">
 						<Icon
 							icon="fluent:receipt-20-regular"
 							className="shrink-0 !h-5 !w-5"
 							height={20}
 							width={20}
 						/>
-						<span className="opacity-60">Billing</span>
+						<span className="grow">Billing</span>
 						<ComingSoonBadge
 							variant="gradient"
 							className="ml-8 text-[11px] whitespace-nowrap"
@@ -104,24 +95,20 @@ const UserMenu = ({ children }: UserMenuProps) => {
 					</div>
 				</DropdownMenuItem>
 
-				<DropdownMenuItem className="pointer-events-none opacity-80">
-					<div className="flex items-center gap-2">
+				<DropdownMenuItem className="pointer-events-none w-full">
+					<div className="flex items-center gap-2 w-full">
 						<Icon
 							icon="fluent:alert-20-regular"
 							className="shrink-0 !h-5 !w-5"
 							height={20}
 							width={20}
 						/>
-						<span className="opacity-60">Notifications</span>
-						<ComingSoonBadge
-							variant="gradient"
-							className="ml-8 text-[11px] whitespace-nowrap"
-						/>
+						<span className="grow">Notifications</span>
 					</div>
 				</DropdownMenuItem>
 				<DropdownMenuSeparator className="bg-muted" />
 				<DropdownMenuItem
-					className="font-medium text-red-600"
+					className="font-medium text-red-600 w-full"
 					onClick={async () => {
 						logout({
 							logoutParams: { returnTo: window.location.origin },
@@ -134,7 +121,7 @@ const UserMenu = ({ children }: UserMenuProps) => {
 							});
 					}}
 				>
-					<div className="flex items-center gap-2">
+					<div className="flex items-center gap-2 w-full">
 						<Icon
 							icon="hugeicons:logout-03"
 							className="shrink-0 !h-5 !w-5"
@@ -142,7 +129,7 @@ const UserMenu = ({ children }: UserMenuProps) => {
 							width={20}
 							style={{ color: "#DC2626" }}
 						/>
-						<span className="font-medium text-sm">Sign out</span>
+						<span className="font-medium text-sm grow">Sign out</span>
 					</div>
 				</DropdownMenuItem>
 			</DropdownMenuContent>
