@@ -4,15 +4,15 @@ import CardContainer from "./card-container";
 
 export default function Summary() {
 	return (
-		<div className="h-full w-full flex flex-col">
-			<header className="space-y-1 px-6">
+		<div className="h-full w-full flex flex-col space-y-6 py-4">
+			<header className="space-y-1 px-4">
 				<h1 className="text-lg font-bold">Summary</h1>
 				<p className="text-sm leading-5 text-[#616161] text-pretty">
 					A summary of all the details you have provided. Please carefully
 					review for any mistakes or inconsistencies.
 				</p>
 			</header>
-			<div className="grow flex flex-col space-y-6 overflow-hidden w-full px-4">
+			<div className="grow flex flex-col space-y-6 overflow-hidden w-full">
 				<CardContainer
 					title="Partner"
 					icon={
