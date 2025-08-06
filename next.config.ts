@@ -37,7 +37,7 @@ const nextConfig: import("next").NextConfig = {
 		return [
 			{
 				// matching all API routes
-				source: "/app/api/:path*",
+				source: "/src/app/api/:path*",
 				headers: [
 					{ key: "Access-Control-Allow-Credentials", value: "true" },
 					{

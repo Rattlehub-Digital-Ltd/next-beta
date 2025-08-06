@@ -53,7 +53,7 @@ const UserMenu = ({ children }: UserMenuProps) => {
 				</DropdownMenuItem>
 				<DropdownMenuSeparator className="bg-muted" />
 				<DropdownMenuItem>
-					<div className="flex items-center gap-2 w-full">
+					<div className="flex items-center gap-2 w-full text-indigo-600">
 						<Icon
 							icon="fluent:checkmark-starburst-16-filled"
 							className="shrink-0 !h-5 !w-5"
