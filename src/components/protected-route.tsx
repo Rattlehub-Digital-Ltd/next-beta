@@ -24,7 +24,7 @@ export default function ProtectedRoute({ children }: PropsWithChildren) {
 	const { setIsOnboarded, isOnboarded } = useOnboardingStore();
 	const { activity, setActivity } = useActivitySummaryStore();
 
-	const { setInitialized } = useAppStore();
+	const { setInitialized, initialized } = useAppStore();
 
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -82,6 +82,9 @@ export default function ProtectedRoute({ children }: PropsWithChildren) {
 	if (isLoading) return <Loading />;
 
 	if (!isAuthenticated) redirect("/login");
+
+	if (!isLoading && !initialized)
+		return <div className="p-4">Private route: Access Forbidden!</div>;
 
 	return <div className="h-full w-full">{children}</div>;
 }
