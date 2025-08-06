@@ -35,6 +35,7 @@ export default function ProtectedRoute({ children }: PropsWithChildren) {
 
 	const checkInitialization = useCallback(async () => {
 		if (!isAuthenticated) redirect("/login");
+		if (initialized) return;
 
 		try {
 			setIsLoading(true);
@@ -67,6 +68,7 @@ export default function ProtectedRoute({ children }: PropsWithChildren) {
 			toast.error("Error: Private Route, Something went wrong");
 		}
 	}, [
+		initialized,
 		setActivity,
 		setIsOnboarded,
 		getActivitySummary,

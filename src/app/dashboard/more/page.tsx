@@ -3,6 +3,7 @@
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { appConfig } from "@/config/app.config";
+import Changelog from "@/features/dashboard/more/changelog";
 import AddPeople from "@/features/onboarding/summary/add-people";
 import ProfileHeader from "@/features/onboarding/summary/profile-header";
 import Header from "@/features/shared/header";
@@ -20,7 +21,7 @@ export default function MorePage() {
 			<div className="space-y-6">
 				<ProfileHeader />
 				<div className="py-2 flex flex-col gap-4">
-					<h1 className="text-xs uppercase mb-3 ml-1 font-medium">
+					<h1 className="text-[10px] uppercase mb-3 ml-1 font-medium">
 						Add people
 					</h1>
 					<div className="flex items-center h-16 gap-2 py-2">
@@ -44,6 +45,9 @@ export default function MorePage() {
 						/>
 					</div>
 				</div>
+			</div>
+			<div>
+				<Changelog />
 			</div>
 			<div className="px-4 space-y-4 pt-8">
 				<Button
