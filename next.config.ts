@@ -2,6 +2,16 @@
 const nextConfig: import("next").NextConfig = {
 	poweredByHeader: false,
 	reactStrictMode: true,
+	allowedDevOrigins: [
+		"local-origin.dev",
+		"*.local-origin.dev",
+		"*.localhost",
+		"nextdotapp.b2clogin.com",
+		"nextdotapp.onmicrosoft.com",
+		"dev-wmhvsl21tz6qvxhl.ca.auth0.com",
+		"auth.nextdot.ai",
+		"dev-api.nextdot.ai",
+	],
 	images: {
 		// Add your image domains here
 		remotePatterns: [
