@@ -9,6 +9,7 @@ import {
 	useRef,
 	useState,
 } from "react";
+import { toast } from "sonner";
 import { useActivitySummaryStore } from "store/use-activity-summary-store";
 import { useAppStore } from "store/use-app-store";
 import { useOnboardingStore } from "store/use-onboarding-store";
@@ -62,6 +63,8 @@ export default function ProtectedRoute({ children }: PropsWithChildren) {
 		} catch (error) {
 			console.log(error);
 			setIsLoading(false);
+			setInitialized(false);
+			toast.error("Error: Private Route, Something went wrong");
 		}
 	}, [
 		setActivity,

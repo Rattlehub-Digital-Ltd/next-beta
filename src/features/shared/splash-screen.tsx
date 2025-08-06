@@ -4,12 +4,12 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { useCallback, useEffect } from "react";
+import { toast } from "sonner";
 import { useActivitySummaryStore } from "store/use-activity-summary-store";
 import { useAppStore } from "store/use-app-store";
 import { useOnboardingStore } from "store/use-onboarding-store";
 import { Spinner } from "@/components/ui/spinner";
 import useApi from "@/hooks/use-api";
-import { toast } from "sonner";
 
 export default function SplashScreen() {
 	const { isAuthenticated } = useAuth0();
@@ -37,13 +37,7 @@ export default function SplashScreen() {
 						setActivity(activitySummaryResp?.data);
 						setInitialized(true);
 
-						redirect(
-							window.location.origin
-								? "/"
-								: isOnboarded
-									? "/dashboard"
-									: "/dahsboard/onboarding",
-						);
+						redirect(isOnboarded ? "/dashboard" : "/dashboard/onboarding");
 					} else {
 						setInitialized(false);
 						toast.error("Error initializing, Something went wrong");
@@ -52,7 +46,6 @@ export default function SplashScreen() {
 					setInitialized(false);
 				}
 				setLoading(false);
-				redirect(window.location.origin);
 			} catch (error) {
 				setInitialized(false);
 				console.log(error);
