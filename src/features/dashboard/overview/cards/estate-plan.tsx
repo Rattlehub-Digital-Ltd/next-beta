@@ -1,5 +1,5 @@
 import DocumentItem from "@/features/shared/document-item";
-// import GoalProgressBar from "@/features/shared/goal-progress-bar";
+import GoalProgressBar from "@/features/shared/goal-progress-bar";
 import Header from "../header";
 
 export default function EstatePlan() {
@@ -10,7 +10,7 @@ export default function EstatePlan() {
 				description="Keep track of all the required documents for this life event, for you and your family."
 				color="teal"
 			/>
-			{/* <GoalProgressBar /> */}
+			<GoalProgressBar title="Estate plan is 45% complete" progress="w-[45%]" />
 			<div className="grid grid-cols-2 gap-4">
 				{data.map((item) => (
 					<DocumentItem
