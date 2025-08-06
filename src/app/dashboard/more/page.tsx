@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "@iconify/react";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { appConfig } from "@/config/app.config";
@@ -51,6 +52,8 @@ export default function MorePage() {
 			</div>
 			<div className="px-4 space-y-4 pt-8">
 				<Button
+					className="rounded-full !pr-5"
+					variant="destructive"
 					onClick={async () => {
 						try {
 							const url = appConfig.previewMode
@@ -74,7 +77,8 @@ export default function MorePage() {
 						window.location.pathname = "/";
 					}}
 				>
-					<p className="flex-grow">Reset</p>
+					<Icon icon="fluent:arrow-reset-20-filled" />
+					<p className="flex-grow">Reset Profile</p>
 				</Button>
 				<p className="text-[11px] font-medium text-neutral-500">
 					{appConfig.name} © {new Date().getFullYear()}{" "}
