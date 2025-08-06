@@ -12,7 +12,7 @@ const configuration: Auth0ProviderOptions = {
 	useRefreshTokensFallback: true,
 	authorizationParams: {
 		audience: process.env.NEXT_PUBLIC_AUDIENCE || "",
-		redirect_uri: `${appConfig.baseURL}/snapshot`,
+		redirect_uri: `${appConfig.baseURL}/dashboard`,
 		scope: "openid profile offline_access",
 	},
 	onRedirectCallback: (appState, user) => {

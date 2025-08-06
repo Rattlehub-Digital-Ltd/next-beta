@@ -9,6 +9,7 @@ import { useAppStore } from "store/use-app-store";
 import { useOnboardingStore } from "store/use-onboarding-store";
 import { Spinner } from "@/components/ui/spinner";
 import useApi from "@/hooks/use-api";
+import { toast } from "sonner";
 
 export default function SplashScreen() {
 	const { isAuthenticated } = useAuth0();
@@ -33,24 +34,30 @@ export default function SplashScreen() {
 					setIsOnboarded(isOnboarded);
 					const activitySummaryResp = await getActivitySummary();
 					if (activitySummaryResp?.data) {
-						setActivity(activitySummaryResp.data);
+						setActivity(activitySummaryResp?.data);
 						setInitialized(true);
+
+						redirect(
+							window.location.origin
+								? "/"
+								: isOnboarded
+									? "/dashboard"
+									: "/dahsboard/onboarding",
+						);
+					} else {
+						setInitialized(false);
+						toast.error("Error initializing, Something went wrong");
 					}
-					redirect(
-						window.location.origin
-							? "/"
-							: isOnboarded
-								? "/dashboard"
-								: "/dahsboard/onboarding",
-					);
 				} else {
 					setInitialized(false);
 				}
 				setLoading(false);
 				redirect(window.location.origin);
 			} catch (error) {
+				setInitialized(false);
 				console.log(error);
 				setLoading(false);
+				toast.error("Error initializing, Something went wrong");
 			}
 		} else {
 			setInitialized(false);
@@ -72,6 +79,9 @@ export default function SplashScreen() {
 	}, [initialize]);
 
 	if (!loading || initialized) return;
+
+	if (!loading && !initialized)
+		return <div className="p-4">Error initializing app</div>;
 
 	return (
 		<div className="flex flex-col fixed z-200 top-0 left-0 right-0 bottom-0 h-full w-full items-center justify-center bg-[#111827]/90 backdrop-blur-[25px]">

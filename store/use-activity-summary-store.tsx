@@ -2,13 +2,13 @@ import { create } from "zustand";
 import type { ActivitySummary } from "@/types/activity-summary";
 
 interface ActivitySummaryStoreProps {
-	activity: ActivitySummary | null;
-	setActivity: (activity: ActivitySummary | null) => void;
+	activity: ActivitySummary | undefined;
+	setActivity: (activity: ActivitySummary | undefined) => void;
 }
 
 export const useActivitySummaryStore = create<ActivitySummaryStoreProps>(
 	(set) => ({
-		activity: null,
+		activity: undefined,
 		setActivity: (activity) => set({ activity }),
 	}),
 );
