@@ -12,7 +12,7 @@ export const appConfig = {
 		process.env.NODE_ENV === "development"
 			? "http://localhost:3000"
 			: isPreviewMode
-				? "https://preview.nextdot.app"
+				? "https://dev.nextdot.app"
 				: "https://nextdot.app",
 
 	links: {
