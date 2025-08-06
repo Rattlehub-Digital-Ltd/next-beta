@@ -12,11 +12,11 @@ import { suggestionEndpoints } from "@/api/services/dashboard/suggestion/endpoin
 import { onboardingEndpoints } from "@/api/services/onboarding/endpoints";
 import { appConfig } from "@/config/app.config";
 import type { PaginationParams } from "@/types";
+import type { DocumentsResponse } from "@/types/action-item";
 import type { ActivitySummaryResponse } from "@/types/activity-summary";
 import { AxiosMethod } from "@/types/axios-method";
 import type { OnboardingStatus } from "@/types/onboarding";
 import type { SuggestedResponse } from "@/types/suggested";
-import type { DocumentsResponse } from "@/types/action-item";
 
 const useApi = () => {
 	const { getAccessTokenSilently, isAuthenticated } = useAuth0();

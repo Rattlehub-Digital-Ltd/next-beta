@@ -1,12 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import ShortUniqueId from "short-unique-id";
+import { Skeleton } from "@/components/ui/skeleton";
 import RiskCarousel from "@/features/shared/risk-carousel";
 import SuggestionItem from "@/features/shared/suggestion-item";
-import type { ActionItem } from "@/types/action-item";
-import { Skeleton } from "@/components/ui/skeleton";
-import ShortUniqueId from "short-unique-id";
 import useApi from "@/hooks/use-api";
+import type { ActionItem } from "@/types/action-item";
 
 const uid = new ShortUniqueId({ length: 10 });
 
