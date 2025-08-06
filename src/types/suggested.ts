@@ -30,3 +30,7 @@ export type Suggested = {
 	isApplicable: null;
 	riskItems: RiskItemProps[];
 };
+
+export type SuggestedResponse = {
+	data: Suggested[];
+};

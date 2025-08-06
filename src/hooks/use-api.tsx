@@ -8,11 +8,14 @@ import axios, {
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { dashboardEndpoints } from "@/api/services/dashboard/endpoints";
+import { suggestionEndpoints } from "@/api/services/dashboard/suggestion/endpoints";
 import { onboardingEndpoints } from "@/api/services/onboarding/endpoints";
 import { appConfig } from "@/config/app.config";
+import type { PaginationParams } from "@/types";
 import type { ActivitySummaryResponse } from "@/types/activity-summary";
 import { AxiosMethod } from "@/types/axios-method";
 import type { OnboardingStatus } from "@/types/onboarding";
+import type { SuggestedResponse } from "@/types/suggested";
 
 const useApi = () => {
 	const { getAccessTokenSilently, isAuthenticated } = useAuth0();
@@ -101,36 +104,6 @@ const useApi = () => {
 			},
 		);
 
-		// instance.interceptors.response.use(
-		// 	(response: AxiosResponse) => {
-		// 		return response;
-		// 	},
-
-		// 	async (error) => {
-		// 		const status = error.response ? error.response.status : null;
-
-		// 		if (status === 401) {
-		// 			try {
-		// 				const originalRequest = error.config;
-
-		// 				const accessToken = initialize();
-
-		// 				instance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-
-		// 				return await instance(originalRequest);
-		// 			} catch (error) {
-		// 				return Promise.reject(error);
-		// 			}
-		// 		}
-
-		// 		if (status === 403 && error.response.data) {
-		// 			return Promise.reject(error.response.data);
-		// 		}
-
-		// 		return Promise.reject(error);
-		// 	},
-		// );
-
 		return instance;
 	}, [initialize, accessToken]);
 
@@ -160,7 +133,24 @@ const useApi = () => {
 		});
 	}, [client]);
 
-	return { accessToken, getOnboardingStatus, getActivitySummary };
+	const getSuggestions = useCallback(
+		async (
+			params: PaginationParams,
+		): Promise<SuggestedResponse | undefined> => {
+			return await client({
+				url: suggestionEndpoints.getSuggestions(params),
+				method: AxiosMethod.GET,
+			});
+		},
+		[client],
+	);
+
+	return {
+		accessToken,
+		getOnboardingStatus,
+		getActivitySummary,
+		getSuggestions,
+	};
 };
 
 export default useApi;
