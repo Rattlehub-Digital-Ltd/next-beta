@@ -25,6 +25,7 @@ export default function SuggestedItems() {
 
 			setIsLoading(false);
 		} catch (error) {
+			setIsLoading(false);
 			console.log(error);
 			toast.error("Error fetching suggestions");
 		}

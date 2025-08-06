@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import ShortUniqueId from "short-unique-id";
+import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
 import RiskCarousel from "@/features/shared/risk-carousel";
 import SuggestionItem from "@/features/shared/suggestion-item";
@@ -19,8 +20,13 @@ export default function ActionsTab() {
 	const fetchData = useCallback(async () => {
 		setLoading(true);
 
-		const documentsResponse = await getDocuments({ page: 1, limit: 10 });
-		setItems(documentsResponse?.data?.items);
+		try {
+			const documentsResponse = await getDocuments({ page: 1, limit: 10 });
+			setItems(documentsResponse?.data?.items);
+		} catch (error) {
+			console.log(error);
+			toast.error("Error fetching actions");
+		}
 
 		setLoading(false);
 	}, [getDocuments]);

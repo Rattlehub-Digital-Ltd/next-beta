@@ -25,6 +25,7 @@ export default function GoalItems() {
 
 			setIsLoading(false);
 		} catch (error) {
+			setIsLoading(false);
 			console.log(error);
 			toast.error("Error fetching goals");
 		}

@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
+import { toast } from "sonner";
 import { useActivitySummaryStore } from "store/use-activity-summary-store";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -31,7 +32,9 @@ export default function SummaryCard() {
 
 			setIsLoading(false);
 		} catch (error) {
+			setIsLoading(false);
 			console.log(error);
+			toast.error("Error fetching top suggested item");
 		}
 	}, [getSuggestions]);
 
