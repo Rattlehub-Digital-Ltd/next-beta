@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import ShortUniqueId from "short-unique-id";
+import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
 import useApi from "@/hooks/use-api";
 import type { Suggested } from "@/types/suggested";
@@ -25,6 +26,7 @@ export default function SuggestedItems() {
 			setIsLoading(false);
 		} catch (error) {
 			console.log(error);
+			toast.error("Error fetching suggestions");
 		}
 	}, [getSuggestions]);
 
@@ -43,6 +45,7 @@ export default function SuggestedItems() {
 			{/* Loading complete and data has value */}
 			{!isLoading &&
 				items &&
+				items?.length > 0 &&
 				items.map((item) => <SuggestedItem key={item.id} item={item} />)}
 
 			{/* Loading complete and data has no value */}

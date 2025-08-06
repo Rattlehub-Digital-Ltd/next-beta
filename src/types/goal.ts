@@ -5,3 +5,7 @@ export type Goal = {
 	ranking: number;
 	percentageCompletion: number;
 };
+
+export type GoalsResponse = {
+	data: Goal[];
+};

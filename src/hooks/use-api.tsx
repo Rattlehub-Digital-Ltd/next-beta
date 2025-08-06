@@ -8,6 +8,7 @@ import axios, {
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { dashboardEndpoints } from "@/api/services/dashboard/endpoints";
+import { goalEndpoints } from "@/api/services/dashboard/goal/endpoints";
 import { suggestionEndpoints } from "@/api/services/dashboard/suggestion/endpoints";
 import { onboardingEndpoints } from "@/api/services/onboarding/endpoints";
 import { appConfig } from "@/config/app.config";
@@ -15,6 +16,7 @@ import type { PaginationParams } from "@/types";
 import type { DocumentsResponse } from "@/types/action-item";
 import type { ActivitySummaryResponse } from "@/types/activity-summary";
 import { AxiosMethod } from "@/types/axios-method";
+import type { GoalsResponse } from "@/types/goal";
 import type { OnboardingStatus } from "@/types/onboarding";
 import type { SuggestedResponse } from "@/types/suggested";
 
@@ -158,12 +160,23 @@ const useApi = () => {
 		[client],
 	);
 
+	const getGoals = useCallback(
+		async (paging: PaginationParams): Promise<GoalsResponse | undefined> => {
+			return await client({
+				url: goalEndpoints.getGoals(paging),
+				method: AxiosMethod.GET,
+			});
+		},
+		[client],
+	);
+
 	return {
 		accessToken,
 		getOnboardingStatus,
 		getActivitySummary,
 		getSuggestions,
 		getDocuments,
+		getGoals,
 	};
 };
 

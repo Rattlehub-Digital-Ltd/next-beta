@@ -1,10 +1,7 @@
 import { Icon } from "@iconify/react";
 import Link from "next/link";
-import ShortUniqueId from "short-unique-id";
-import GoalItem from "@/features/dashboard/goals/goal-item";
+import GoalItems from "@/features/dashboard/goals/goal-items";
 import Header from "@/features/shared/header";
-
-const uid = new ShortUniqueId({ length: 10 });
 
 export default function GoalsPage() {
 	return (
@@ -28,46 +25,7 @@ export default function GoalsPage() {
 					</Link>
 				}
 			/>
-			<div className="flex flex-col space-y-4">
-				{data.map((item) => (
-					<GoalItem key={uid.randomUUID()} item={item} />
-				))}
-			</div>
+			<GoalItems />
 		</div>
 	);
 }
-
-const data = [
-	{
-		name: "Estate Plan",
-		displayName: "Estate Plan",
-		eduText:
-			"Keep track of all the required documents for this life event, for you and your family",
-		ranking: 150.5274,
-		percentageCompletion: 9.0,
-	},
-	{
-		name: "Family",
-		displayName: "Family",
-		eduText:
-			"Keep track of all the required documents for this life event, for you and your family",
-		ranking: 70.30770000000001,
-		percentageCompletion: 30.0,
-	},
-	{
-		name: "Life Insurance Claim",
-		displayName: "Life Insurance Claim",
-		eduText:
-			"Keep track of all the required documents for this life event, for you and your family",
-		ranking: 33.6783,
-		percentageCompletion: 0.0,
-	},
-	{
-		name: "Estate Liquidity",
-		displayName: "Estate Liquidity",
-		eduText:
-			"Keep track of all the required documents for this life event, for you and your family",
-		ranking: 28.8609,
-		percentageCompletion: 0.0,
-	},
-];
