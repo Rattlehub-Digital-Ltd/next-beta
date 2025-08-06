@@ -16,6 +16,7 @@ import type { ActivitySummaryResponse } from "@/types/activity-summary";
 import { AxiosMethod } from "@/types/axios-method";
 import type { OnboardingStatus } from "@/types/onboarding";
 import type { SuggestedResponse } from "@/types/suggested";
+import type { DocumentsResponse } from "@/types/action-item";
 
 const useApi = () => {
 	const { getAccessTokenSilently, isAuthenticated } = useAuth0();
@@ -135,10 +136,22 @@ const useApi = () => {
 
 	const getSuggestions = useCallback(
 		async (
-			params: PaginationParams,
+			paging: PaginationParams,
 		): Promise<SuggestedResponse | undefined> => {
 			return await client({
-				url: suggestionEndpoints.getSuggestions(params),
+				url: suggestionEndpoints.getSuggestions(paging),
+				method: AxiosMethod.GET,
+			});
+		},
+		[client],
+	);
+
+	const getDocuments = useCallback(
+		async (
+			paging: PaginationParams,
+		): Promise<DocumentsResponse | undefined> => {
+			return await client({
+				url: dashboardEndpoints.getDocuments(paging),
 				method: AxiosMethod.GET,
 			});
 		},
@@ -150,6 +163,7 @@ const useApi = () => {
 		getOnboardingStatus,
 		getActivitySummary,
 		getSuggestions,
+		getDocuments,
 	};
 };
 

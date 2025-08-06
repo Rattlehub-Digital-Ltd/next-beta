@@ -1,7 +1,7 @@
 import type { PaginationParams } from "@/types";
 
 export const suggestionEndpoints = {
-	getSuggestions: (params: PaginationParams) =>
-		`/suggestions?PageNumber=${params.page}&PageSize=${params.limit}`,
+	getSuggestions: (paging: PaginationParams) =>
+		`/suggestions?PageNumber=${paging.page}&PageSize=${paging.limit}`,
 	toggleSuggestion: () => `/suggestions/toggle`,
 } as const;

@@ -20,3 +20,7 @@ export type ActionsResponse = {
 	pageNumber: number;
 	pageSize: number;
 };
+
+export type DocumentsResponse = {
+	data: ActionsResponse;
+};
