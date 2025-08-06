@@ -71,10 +71,10 @@ export default function SplashScreen() {
 		initialize();
 	}, [initialize]);
 
-	if (!loading || initialized) return;
-
 	if (!loading && !initialized)
 		return <div className="p-4">Error initializing app</div>;
+
+	if (!loading || initialized) return;
 
 	return (
 		<div className="flex flex-col fixed z-200 top-0 left-0 right-0 bottom-0 h-full w-full items-center justify-center bg-[#111827]/90 backdrop-blur-[25px]">
