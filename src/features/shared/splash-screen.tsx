@@ -69,7 +69,7 @@ export default function SplashScreen() {
 		return <div className="p-4">Error initializing app</div>;
 
 	return (
-		<div className="flex flex-col fixed z-200 top-0 left-0 right-0 bottom-0 h-full w-full items-center justify-center bg-[#111827]/90 backdrop-blur-[25px]">
+		<div className="flex flex-col fixed z-200 top-0 left-0 right-0 bottom-0 h-full w-full items-center justify-center bg-[#111827]">
 			<div className="relative flex items-center justify-center h-24 w-24">
 				<Image
 					src="/wordmark-dark.svg"

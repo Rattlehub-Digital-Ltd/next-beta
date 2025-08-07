@@ -11,6 +11,7 @@ import { dashboardEndpoints } from "@/api/services/dashboard/endpoints";
 import { goalEndpoints } from "@/api/services/dashboard/goal/endpoints";
 import { suggestionEndpoints } from "@/api/services/dashboard/suggestion/endpoints";
 import { onboardingEndpoints } from "@/api/services/onboarding/endpoints";
+import { overviewEndpoints } from "@/api/services/overview/endpoints";
 import { appConfig } from "@/config/app.config";
 import type { PaginationParams } from "@/types";
 import type { DocumentsResponse } from "@/types/action-item";
@@ -18,6 +19,12 @@ import type { ActivitySummaryResponse } from "@/types/activity-summary";
 import { AxiosMethod } from "@/types/axios-method";
 import type { GoalsResponse } from "@/types/goal";
 import type { OnboardingStatus } from "@/types/onboarding";
+import type {
+	DocumentLocationResponse,
+	EstatePlanResponse,
+	FamilyResponse,
+	LifeFileDocumentResponse,
+} from "@/types/overview";
 import type { SuggestedResponse } from "@/types/suggested";
 
 const useApi = () => {
@@ -170,6 +177,42 @@ const useApi = () => {
 		[client],
 	);
 
+	const getOverviewLifeFileDocuments = useCallback(async (): Promise<
+		LifeFileDocumentResponse | undefined
+	> => {
+		return await client({
+			url: overviewEndpoints.getOverviewLifeFileDocuments(),
+			method: AxiosMethod.GET,
+		});
+	}, [client]);
+
+	const getOverviewFamily = useCallback(async (): Promise<
+		FamilyResponse | undefined
+	> => {
+		return await client({
+			url: overviewEndpoints.getOverviewFamily(),
+			method: AxiosMethod.GET,
+		});
+	}, [client]);
+
+	const getOverviewEstatePlan = useCallback(async (): Promise<
+		EstatePlanResponse | undefined
+	> => {
+		return await client({
+			url: overviewEndpoints.getOverviewEstatePlan(),
+			method: AxiosMethod.GET,
+		});
+	}, [client]);
+
+	const getOverviewDocumentLocations = useCallback(async (): Promise<
+		DocumentLocationResponse | undefined
+	> => {
+		return await client({
+			url: overviewEndpoints.getOverviewDocumentLocations(),
+			method: AxiosMethod.GET,
+		});
+	}, [client]);
+
 	return {
 		accessToken,
 		getOnboardingStatus,
@@ -177,6 +220,10 @@ const useApi = () => {
 		getSuggestions,
 		getDocuments,
 		getGoals,
+		getOverviewFamily,
+		getOverviewEstatePlan,
+		getOverviewDocumentLocations,
+		getOverviewLifeFileDocuments,
 	};
 };
 

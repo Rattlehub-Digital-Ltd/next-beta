@@ -26,31 +26,39 @@ const Navbar = () => {
 				/>
 			</Link>
 			{user && (
-				<MenuPopup>
-					<div className="relative">
-						<Avatar className="h-8 w-8 rounded-[12px]">
-							<AvatarImage src={user?.picture} alt="Avatar" />
-							<AvatarFallback className="text-[0.7rem] font-semibold text-navbar-avatar-foreground bg-navbar-avatar-bg rounded-[12px] h-full w-full">
-								{user?.name && user?.nickname ? (
-									getInitials(user?.name ?? user?.nickname ?? "")
-								) : (
-									<div className="text-white">
-										<Icon
-											icon="fluent:person-20-filled"
-											className="!w-5 !h-5"
-										/>
-									</div>
-								)}
-							</AvatarFallback>
-						</Avatar>
-						<Badge
-							className="h-5 min-w-5 rounded-full px-1 text-[0.65rem] font-mono tabular-nums absolute top-0 right-0 -mt-1.5 -mr-1.5"
-							variant="destructive"
-						>
-							34
-						</Badge>
-					</div>
-				</MenuPopup>
+				<div className="flex items-center gap-6">
+					<Badge
+						className="h-5 min-w-5 rounded-full  text-[0.65rem] font-mono tabular-nums"
+						variant="default"
+					>
+						BETA
+					</Badge>
+					<MenuPopup>
+						<div className="relative">
+							<Avatar className="h-8 w-8 rounded-[12px]">
+								<AvatarImage src={user?.picture} alt="Avatar" />
+								<AvatarFallback className="text-[0.7rem] font-semibold text-navbar-avatar-foreground bg-navbar-avatar-bg rounded-[12px] h-full w-full">
+									{user?.name && user?.nickname ? (
+										getInitials(user?.name ?? user?.nickname ?? "")
+									) : (
+										<div className="text-white">
+											<Icon
+												icon="fluent:person-20-filled"
+												className="!w-5 !h-5"
+											/>
+										</div>
+									)}
+								</AvatarFallback>
+							</Avatar>
+							<Badge
+								className="h-5 min-w-5 rounded-full px-1 text-[0.65rem] font-mono tabular-nums absolute top-0 right-0 -mt-1.5 -mr-1.5"
+								variant="destructive"
+							>
+								34
+							</Badge>
+						</div>
+					</MenuPopup>
+				</div>
 			)}
 			{!user && (
 				<Link
