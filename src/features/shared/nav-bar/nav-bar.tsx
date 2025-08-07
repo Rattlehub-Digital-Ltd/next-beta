@@ -31,6 +31,7 @@ const Navbar = () => {
 						className="h-5 min-w-5 rounded-full  text-[0.65rem] font-mono tabular-nums"
 						variant="default"
 					>
+						<Icon icon="fluent:star-16-filled" />
 						BETA
 					</Badge>
 					<MenuPopup>
