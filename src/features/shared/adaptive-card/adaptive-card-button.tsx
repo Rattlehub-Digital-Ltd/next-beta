@@ -82,7 +82,8 @@ function AdaptiveCardButton({
 		setIsLoading(true);
 
 		const resp = await getAdaptiveCard(referer, recordId);
-		setCards(resp);
+		console.log(resp?.data);
+		setCards(resp?.data);
 
 		const activityResponse = await getActivitySummary();
 		setActivity(activityResponse?.data);
@@ -113,6 +114,7 @@ function AdaptiveCardButton({
 		}
 
 		const resp = await submitAdaptiveCard(formData, header);
+
 		if (resp) setCards(resp);
 
 		setIsOnboarded(true);
@@ -142,7 +144,7 @@ function AdaptiveCardButton({
 			<DrawerTrigger asChild className="flex justify-center w-full">
 				{children}
 			</DrawerTrigger>
-			<DrawerContent className="max-h-[90svh] flex flex-col items-center min-h-60 h-full pb-4 !rounded-t-3xl">
+			<DrawerContent className="max-h-[95svh] flex flex-col items-center min-h-[80svh] h-full pb-4 !rounded-t-3xl">
 				<VisuallyHidden>
 					<DrawerHeader className="sticky top-0 z-20 w-full max-w-xl pl-5 text-left bg-background/80 backdrop-blur-sm">
 						<DrawerTitle className="flex items-center gap-2">

@@ -219,7 +219,7 @@ const useApi = () => {
 
 	// Adaptive card
 	const getAdaptiveCard = useCallback(
-		async (referer: string, recordId?: string): Promise<object | undefined> => {
+		async (referer: string, recordId?: string) => {
 			const headers: Record<string, string> = {};
 
 			if (recordId) {
@@ -232,6 +232,7 @@ const useApi = () => {
 			}
 
 			return await client({
+				baseURL: `${process.env.NEXT_PUBLIC_API_BASE_URL as string}`,
 				url: dashboardEndpoints.getAdaptiveCard(),
 				method: AxiosMethod.GET,
 				headers: {
@@ -248,8 +249,9 @@ const useApi = () => {
 			headers: object = {},
 		): Promise<object | undefined> => {
 			return await client({
+				baseURL: `${process.env.NEXT_PUBLIC_API_BASE_URL as string}`,
 				url: dashboardEndpoints.getAdaptiveCard(),
-				method: AxiosMethod.GET,
+				method: AxiosMethod.PUT,
 				data: formData,
 				headers: {
 					"Content-Type": "multipart/form-data",

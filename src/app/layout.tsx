@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Mona_Sans } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 import { Toaster } from "sonner";
 import ErrorBoundary from "@/components/error-boundary";
 import RefreshButton from "@/features/root-layout/refresh-button";
@@ -31,6 +32,27 @@ export default function RootLayout({
 			<body
 				className={`${fontSans.variable} ${fontMono.variable} antialiased h-full overflow-y-auto bg-[#E5E5E5]`}
 			>
+				<Script
+					strategy="afterInteractive"
+					src="https://unpkg.com/markdown-it@14.1.0/dist/markdown-it.min.js"
+				/>
+				<Script
+					strategy="afterInteractive"
+					src="https://unpkg.com/adaptivecards@3.0.4/dist/adaptivecards.min.js"
+				/>
+				{/* <!-- Adaptive Cards Base Styles --> */}
+				<link
+					precedence="default"
+					rel="stylesheet"
+					href="https://unpkg.com/adaptivecards@3.0.4/dist/adaptivecards.css"
+				/>
+
+				{/* <!-- Carousel Styles (IMPORTANT!) --> */}
+				<link
+					precedence="default"
+					rel="stylesheet"
+					href="https://unpkg.com/adaptivecards@3.0.4/dist/adaptivecards-carousel.css"
+				/>
 				<ErrorBoundary
 					fallback={
 						<div className="min-h-screen flex items-center justify-center p-4">

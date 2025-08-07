@@ -109,7 +109,7 @@ function AdaptiveCardTemplate({ card, submit }: AdaptiveCardProps) {
 	return (
 		<div className="h-full md:max-w-xl">
 			<div
-				className={`px-4 pb-4 rounded-3xl md:px-0 !${fontSans.className} !${fontMono.className}`}
+				className={`px-4 pb-4 rounded-3xl md:px-0 !${fontSans.variable} !${fontMono.variable}`}
 				ref={cardWrapperRef}
 			/>
 		</div>
