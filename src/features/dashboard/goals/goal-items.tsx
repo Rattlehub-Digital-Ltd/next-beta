@@ -38,10 +38,13 @@ export default function GoalItems() {
 	return (
 		<div>
 			{/* Loading incomplete */}
-			{isLoading &&
-				Array.from({ length: 3 }).map(() => (
-					<LoadingSkeleton key={uid.randomUUID()} />
-				))}
+			{isLoading && (
+				<div className="space-y-4">
+					{Array.from({ length: 3 }).map(() => (
+						<LoadingSkeleton key={uid.randomUUID()} />
+					))}
+				</div>
+			)}
 
 			{/* Loading complete and data has value */}
 			<div className="flex flex-col space-y-4">
