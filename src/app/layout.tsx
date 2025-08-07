@@ -6,12 +6,12 @@ import ErrorBoundary from "@/components/error-boundary";
 import RefreshButton from "@/features/root-layout/refresh-button";
 import MainLayout from "../components/main-layout";
 
-const geistSans = Mona_Sans({
+const fontSans = Mona_Sans({
 	variable: "--font-mono-sans",
 	subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
+const fontMono = Geist_Mono({
 	variable: "--font-geist-mono",
 	subsets: ["latin"],
 });
@@ -29,7 +29,7 @@ export default function RootLayout({
 	return (
 		<html className="bg-[#E5E5E5] h-[100svh]" lang="en">
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased h-full overflow-y-auto bg-[#E5E5E5]`}
+				className={`${fontSans.variable} ${fontMono.variable} antialiased h-full overflow-y-auto bg-[#E5E5E5]`}
 			>
 				<ErrorBoundary
 					fallback={

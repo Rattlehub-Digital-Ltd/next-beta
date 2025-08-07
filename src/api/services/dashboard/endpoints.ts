@@ -6,4 +6,5 @@ export const dashboardEndpoints = {
 	getActivitySummary: () => "/documents/activity-summary",
 	getDocuments: (paging: PaginationParams) =>
 		`/documents?PageNumber=${paging.page}&PageSize=${paging.limit}`,
+	getAdaptiveCard: () => "/adaptive-card",
 } as const;

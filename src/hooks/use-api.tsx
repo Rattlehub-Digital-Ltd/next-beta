@@ -9,8 +9,8 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { dashboardEndpoints } from "@/api/services/dashboard/endpoints";
 import { goalEndpoints } from "@/api/services/dashboard/goal/endpoints";
+import { onboardingEndpoints } from "@/api/services/dashboard/onboarding/endpoints";
 import { suggestionEndpoints } from "@/api/services/dashboard/suggestion/endpoints";
-import { onboardingEndpoints } from "@/api/services/onboarding/endpoints";
 import { overviewEndpoints } from "@/api/services/overview/endpoints";
 import { appConfig } from "@/config/app.config";
 import type { PaginationParams } from "@/types";
@@ -143,6 +143,7 @@ const useApi = () => {
 		});
 	}, [client]);
 
+	// Suggestions
 	const getSuggestions = useCallback(
 		async (
 			paging: PaginationParams,
@@ -155,6 +156,7 @@ const useApi = () => {
 		[client],
 	);
 
+	// Documents
 	const getDocuments = useCallback(
 		async (
 			paging: PaginationParams,
@@ -167,6 +169,7 @@ const useApi = () => {
 		[client],
 	);
 
+	// Goals
 	const getGoals = useCallback(
 		async (paging: PaginationParams): Promise<GoalsResponse | undefined> => {
 			return await client({
@@ -177,6 +180,7 @@ const useApi = () => {
 		[client],
 	);
 
+	// Overview
 	const getOverviewLifeFileDocuments = useCallback(async (): Promise<
 		LifeFileDocumentResponse | undefined
 	> => {
@@ -213,8 +217,53 @@ const useApi = () => {
 		});
 	}, [client]);
 
+	// Adaptive card
+	const getAdaptiveCard = useCallback(
+		async (referer: string, recordId?: string): Promise<object | undefined> => {
+			const headers: Record<string, string> = {};
+
+			if (recordId) {
+				// If recordId is provided, include it in the headers
+				headers["x-record-identifier"] = recordId;
+			}
+
+			if (referer && referer.length > 0) {
+				headers["x-referer-context"] = referer;
+			}
+
+			return await client({
+				url: dashboardEndpoints.getAdaptiveCard(),
+				method: AxiosMethod.GET,
+				headers: {
+					...headers,
+				},
+			});
+		},
+		[client],
+	);
+
+	const submitAdaptiveCard = useCallback(
+		async (
+			formData: FormData,
+			headers: object = {},
+		): Promise<object | undefined> => {
+			return await client({
+				url: dashboardEndpoints.getAdaptiveCard(),
+				method: AxiosMethod.GET,
+				data: formData,
+				headers: {
+					"Content-Type": "multipart/form-data",
+					...headers,
+				},
+			});
+		},
+		[client],
+	);
+
 	return {
 		accessToken,
+		getAdaptiveCard,
+		submitAdaptiveCard,
 		getOnboardingStatus,
 		getActivitySummary,
 		getSuggestions,

@@ -1,12 +1,16 @@
 "use client";
 
+import * as motion from "motion/react-client";
 import { useCallback, useEffect, useState } from "react";
 import ShortUniqueId from "short-unique-id";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import AdaptiveCardButton from "@/features/shared/adaptive-card/adaptive-card-button";
 import RiskCarousel from "@/features/shared/risk-carousel";
 import SuggestionItem from "@/features/shared/suggestion-item";
 import useApi from "@/hooks/use-api";
+import { SparkleIcon } from "@/styles/icons";
 import type { ActionItem } from "@/types/action-item";
 
 const uid = new ShortUniqueId({ length: 10 });
@@ -16,6 +20,7 @@ export default function ActionsTab() {
 
 	const [loading, setLoading] = useState(false);
 	const [items, setItems] = useState<ActionItem[] | undefined>();
+	const [currentItem, setCurrentItem] = useState<ActionItem | undefined>();
 
 	const fetchData = useCallback(async () => {
 		setLoading(true);
@@ -46,20 +51,28 @@ export default function ActionsTab() {
 			{/* Loading complete and data has value */}
 			{!loading && items && (
 				<ul className="space-y-4">
-					{items.map(({ id, displayName, eduText, riskItems }) => (
-						<li key={id}>
-							<div className="flex flex-col space-y-3 p-4 rounded-[23px] border border-[#EBEDED] backdrop-blur-[25px] bg-white/65 shadow-[0px_16px_30px_0px rgba(106, 106, 106, 0.06)]">
-								<SuggestionItem
-									title={displayName}
-									description={eduText}
-									showReminder={false}
-									color="teal"
-								/>
+					{items.map((item) => {
+						const { id, displayName, eduText, riskItems } = item;
 
-								<RiskCarousel items={riskItems} />
-							</div>
-						</li>
-					))}
+						return (
+							<li key={id}>
+								<div
+									id={id}
+									className="flex flex-col space-y-3 p-4 rounded-[23px] border border-[#EBEDED] backdrop-blur-[25px] bg-white/65 shadow-[0px_16px_30px_0px rgba(106, 106, 106, 0.06)]"
+								>
+									<SuggestionItem
+										title={displayName}
+										description={eduText}
+										showReminder={false}
+										color="teal"
+										updateCurrentItem={() => setCurrentItem(item)}
+									/>
+
+									<RiskCarousel items={riskItems} />
+								</div>
+							</li>
+						);
+					})}
 				</ul>
 			)}
 
@@ -68,6 +81,31 @@ export default function ActionsTab() {
 
 			{/* Fetching data error */}
 			{!loading && !items && <div>Error fetching data</div>}
+
+			{/* Adaptive card button */}
+			{currentItem && (
+				<div className="mt-6 fixed bottom-24 left-0 w-full z-20 px-6">
+					<AdaptiveCardButton
+						recordId={currentItem.id}
+						referer="actions"
+						refresh={fetchData}
+					>
+						<motion.div whileTap={{ scale: 0.95 }}>
+							<Button
+								color="primary"
+								size="lg"
+								className="shadow-md bg-blue-700/80 backdrop-blur-[25px] active:bg-blue-700 rounded-2xl shadow-blue-500/40 h-11 text-[13px] w-full"
+								variant="default"
+							>
+								<SparkleIcon className="w-5 h-5 text-white shrink-0" />
+								<span className="line-clamp-1 truncate">
+									{currentItem.displayName}
+								</span>
+							</Button>
+						</motion.div>
+					</AdaptiveCardButton>
+				</div>
+			)}
 		</div>
 	);
 }

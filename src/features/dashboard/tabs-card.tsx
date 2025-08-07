@@ -1,4 +1,7 @@
+"use client";
+
 import { Icon } from "@iconify/react";
+
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ActionsTab from "./tabs/actions-tab";
