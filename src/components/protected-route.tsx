@@ -13,9 +13,9 @@ import { toast } from "sonner";
 import { useActivitySummaryStore } from "store/use-activity-summary-store";
 import { useAppStore } from "store/use-app-store";
 import { useOnboardingStore } from "store/use-onboarding-store";
+import type { OnboardingStatus } from "@/api/services/dashboard/onboarding/types";
 import Loading from "@/features/shared/loading";
 import useApi from "@/hooks/use-api";
-import type { OnboardingStatus } from "@/types/onboarding";
 
 export default function ProtectedRoute({ children }: PropsWithChildren) {
 	const { isAuthenticated } = useAuth0();

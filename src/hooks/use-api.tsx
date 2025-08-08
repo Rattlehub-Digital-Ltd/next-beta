@@ -9,23 +9,23 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { dashboardEndpoints } from "@/api/services/dashboard/endpoints";
 import { goalEndpoints } from "@/api/services/dashboard/goal/endpoints";
+import type { GoalsResponse } from "@/api/services/dashboard/goal/types";
 import { onboardingEndpoints } from "@/api/services/dashboard/onboarding/endpoints";
-import { suggestionEndpoints } from "@/api/services/dashboard/suggestion/endpoints";
-import { overviewEndpoints } from "@/api/services/overview/endpoints";
-import { appConfig } from "@/config/app.config";
-import type { PaginationParams } from "@/types";
-import type { DocumentsResponse } from "@/types/action-item";
-import type { ActivitySummaryResponse } from "@/types/activity-summary";
-import { AxiosMethod } from "@/types/axios-method";
-import type { GoalsResponse } from "@/types/goal";
-import type { OnboardingStatus } from "@/types/onboarding";
+import type { OnboardingStatus } from "@/api/services/dashboard/onboarding/types";
+import { overviewEndpoints } from "@/api/services/dashboard/overview/endpoints";
 import type {
 	DocumentLocationResponse,
 	EstatePlanResponse,
 	FamilyResponse,
 	LifeFileDocumentResponse,
-} from "@/types/overview";
-import type { SuggestedResponse } from "@/types/suggested";
+} from "@/api/services/dashboard/overview/types";
+import { suggestionEndpoints } from "@/api/services/dashboard/suggestion/endpoints";
+import type { SuggestedResponse } from "@/api/services/dashboard/suggestion/types";
+import { appConfig } from "@/config/app.config";
+import type { PaginationParams } from "@/types";
+import type { DocumentsResponse } from "@/types/action-item";
+import type { ActivitySummaryResponse } from "@/types/activity-summary";
+import { AxiosMethod } from "@/types/axios-method";
 
 const useApi = () => {
 	const { getAccessTokenSilently, isAuthenticated } = useAuth0();

@@ -1,4 +1,4 @@
-import type { RiskItemProps } from "./risk-item-props";
+import type { RiskItemProps } from "@/types/risk-item-props";
 
 export type SuggestedFor = {
 	name: string;

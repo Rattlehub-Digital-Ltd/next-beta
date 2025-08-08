@@ -1,41 +1,18 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
 import ShortUniqueId from "short-unique-id";
+import { useGetFamily } from "@/api/services/dashboard/overview/queries";
 import { Skeleton } from "@/components/ui/skeleton";
 import SuggestionItem from "@/features/shared/suggestion-item";
 import UserBadge from "@/features/shared/user-badge";
-import useApi from "@/hooks/use-api";
-import type { FamilyType } from "@/types/overview";
 
 const uid = new ShortUniqueId();
 
 export default function Family() {
-	const { getOverviewFamily } = useApi();
-
-	const [isLoading, setIsLoading] = useState(false);
-	const [items, setItems] = useState<FamilyType[] | undefined>();
-
-	const fetchData = useCallback(async () => {
-		setIsLoading(true);
-
-		try {
-			const response = await getOverviewFamily();
-			setItems(response?.data);
-		} catch (error) {
-			console.log(error);
-		}
-
-		setIsLoading(false);
-	}, [getOverviewFamily]);
-
-	useEffect(() => {
-		fetchData();
-	}, [fetchData]);
+	const { data: items, isLoading, isError } = useGetFamily();
 
 	return (
 		<div>
-			{/* Loading incomplete */}
 			{isLoading && <LoadingSkeleton />}
 
 			{!isLoading && (
@@ -48,13 +25,11 @@ export default function Family() {
 					/>
 
 					{/* Loading complete and data has value */}
-					{items && items?.length > 0 && (
+					{items && (
 						<div className="flex flex-wrap gap-2">
-							<UserBadge name="Halle Berry" />
-							<UserBadge name="John Wick" />
-							<UserBadge name="Black Widow" />
-							<UserBadge name="Child 1" />
-							<UserBadge name="Child 2" />
+							{items.map((item) => (
+								<UserBadge key={uid.randomUUID()} name={item.displayName} />
+							))}
 						</div>
 					)}
 
@@ -66,7 +41,7 @@ export default function Family() {
 					)}
 
 					{/* Fetching data error */}
-					{!items && (
+					{isError && (
 						<p className="text-[13px] pl-14 text-muted-foreground">
 							Error fetching data
 						</p>

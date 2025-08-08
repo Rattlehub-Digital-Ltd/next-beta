@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react";
+import type { Suggested } from "@/api/services/dashboard/suggestion/types";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import type { Suggested } from "@/types/suggested";
 import ArticlesTab from "./tabs/articles-tab";
 import ServiceProvidersTab from "./tabs/service-providers-tab";
 import SuggestedForTab from "./tabs/suggested-for-tab";

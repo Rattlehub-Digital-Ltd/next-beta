@@ -1,10 +1,10 @@
 import { Icon } from "@iconify/react";
+import type { Suggested } from "@/api/services/dashboard/suggestion/types";
 import { Button } from "@/components/ui/button";
 import RiskBar from "@/features/shared/risk-bar";
 import RiskCarousel from "@/features/shared/risk-carousel";
 import SuggestionItem from "@/features/shared/suggestion-item";
 import SummaryFooter from "@/features/shared/summary-footer";
-import type { Suggested } from "@/types/suggested";
 import SuggesteItemDrawer from "./suggeste-item-drawer";
 
 type SuggestedItemProps = {

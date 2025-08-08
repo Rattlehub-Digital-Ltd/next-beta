@@ -1,3 +1,4 @@
+import type { Suggested } from "@/api/services/dashboard/suggestion/types";
 import { Button } from "@/components/ui/button";
 import {
 	Drawer,
@@ -9,7 +10,6 @@ import {
 	DrawerTitle,
 	DrawerTrigger,
 } from "@/components/ui/drawer";
-import type { Suggested } from "@/types/suggested";
 import DrawerTabsCard from "./drawer-tabs-card";
 
 type SuggestedItemDrawerProps = {

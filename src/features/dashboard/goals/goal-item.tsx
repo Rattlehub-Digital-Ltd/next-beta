@@ -1,7 +1,7 @@
+import type { Goal } from "@/api/services/dashboard/goal/types";
 import GoalProgressBar from "@/features/shared/goal-progress-bar";
 import RiskBar from "@/features/shared/risk-bar";
 import SuggestionItem from "@/features/shared/suggestion-item";
-import type { Goal } from "@/types/goal";
 import TabsCard from "./tabs-card";
 
 type GoalItemProps = {

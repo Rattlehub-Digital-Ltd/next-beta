@@ -1,6 +1,6 @@
 import ShortUniqueId from "short-unique-id";
+import type { SuggestedFor } from "@/api/services/dashboard/suggestion/types";
 import UserBadge from "@/features/shared/user-badge";
-import type { SuggestedFor } from "@/types/suggested";
 
 type SuggestedForProps = {
 	items: SuggestedFor[];

@@ -1,38 +1,16 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
 import ShortUniqueId from "short-unique-id";
+import { useGetEstatePlan } from "@/api/services/dashboard/overview/queries";
 import { Skeleton } from "@/components/ui/skeleton";
 import DocumentItem from "@/features/shared/document-item";
 import GoalProgressBar from "@/features/shared/goal-progress-bar";
-import useApi from "@/hooks/use-api";
-import type { EstatePlanType } from "@/types/overview";
 import Header from "../header";
 
 const uid = new ShortUniqueId();
 
 export default function EstatePlan() {
-	const { getOverviewEstatePlan } = useApi();
-
-	const [isLoading, setIsLoading] = useState(false);
-	const [items, setItems] = useState<EstatePlanType[] | undefined>();
-
-	const fetchData = useCallback(async () => {
-		setIsLoading(true);
-
-		try {
-			const response = await getOverviewEstatePlan();
-			setItems(response?.data);
-		} catch (error) {
-			console.log(error);
-		}
-
-		setIsLoading(false);
-	}, [getOverviewEstatePlan]);
-
-	useEffect(() => {
-		fetchData();
-	}, [fetchData]);
+	const { data: items, isLoading, isError } = useGetEstatePlan();
 
 	return (
 		<div>
@@ -49,7 +27,7 @@ export default function EstatePlan() {
 					/>
 
 					{/* Loading complete and data has value */}
-					{items && items?.length > 0 && (
+					{items && (
 						<>
 							<GoalProgressBar
 								title="Estate plan is 45% complete"
@@ -78,7 +56,7 @@ export default function EstatePlan() {
 					)}
 
 					{/* Fetching data error */}
-					{!items && (
+					{isError && (
 						<p className="text-[13px] text-muted-foreground">
 							Error fetching data
 						</p>

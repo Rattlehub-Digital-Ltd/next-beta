@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react";
 import Markdown from "react-markdown";
-import type { ServiceProvider } from "@/types/suggested";
+import type { ServiceProvider } from "@/api/services/dashboard/suggestion/types";
 
 type ServiceProvidersTabProps = {
 	serviceProviders: ServiceProvider[];

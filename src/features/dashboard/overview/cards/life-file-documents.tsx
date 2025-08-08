@@ -1,38 +1,15 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
 import ShortUniqueId from "short-unique-id";
+import { useGetLifeFileDocuments } from "@/api/services/dashboard/overview/queries";
 import { Skeleton } from "@/components/ui/skeleton";
 import DocumentItem from "@/features/shared/document-item";
-import useApi from "@/hooks/use-api";
-import type { LifeFileDocument } from "@/types/overview";
 import Header from "../header";
 
 const uid = new ShortUniqueId();
 
 export default function LifeFileDocuments() {
-	const { getOverviewLifeFileDocuments } = useApi();
-
-	const [isLoading, setIsLoading] = useState(false);
-	const [items, setItems] = useState<LifeFileDocument[] | undefined>();
-
-	const fetchData = useCallback(async () => {
-		setIsLoading(true);
-
-		try {
-			const response = await getOverviewLifeFileDocuments();
-			console.log(response);
-			setItems(response?.data);
-		} catch (error) {
-			console.log(error);
-		}
-
-		setIsLoading(false);
-	}, [getOverviewLifeFileDocuments]);
-
-	useEffect(() => {
-		fetchData();
-	}, [fetchData]);
+	const { data: items, isLoading, isError } = useGetLifeFileDocuments();
 
 	return (
 		<div>
@@ -48,7 +25,7 @@ export default function LifeFileDocuments() {
 					/>
 
 					{/* Loading complete and data has value */}
-					{items && items?.length > 0 && (
+					{items && (
 						<div className="grid grid-cols-2 gap-4">
 							{items.map((item) => (
 								<DocumentItem
@@ -71,7 +48,7 @@ export default function LifeFileDocuments() {
 					)}
 
 					{/* Fetching data error */}
-					{!items && (
+					{isError && (
 						<p className="text-[13px] text-muted-foreground">
 							Error fetching data
 						</p>

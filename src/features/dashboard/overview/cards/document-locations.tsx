@@ -1,38 +1,15 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
 import ShortUniqueId from "short-unique-id";
+import { useGetDocumentLocations } from "@/api/services/dashboard/overview/queries";
 import { Skeleton } from "@/components/ui/skeleton";
 import SuggestionItem from "@/features/shared/suggestion-item";
-import useApi from "@/hooks/use-api";
-import type { DocumentLocation } from "@/types/overview";
 import DocumentLocationBadge from "../document-location-badge";
 
 const uid = new ShortUniqueId();
 
 export default function DocumentLocations() {
-	const { getOverviewDocumentLocations } = useApi();
-
-	const [isLoading, setIsLoading] = useState(false);
-	const [items, setItems] = useState<DocumentLocation[] | undefined>();
-
-	const fetchData = useCallback(async () => {
-		setIsLoading(true);
-
-		try {
-			const response = await getOverviewDocumentLocations();
-			setItems(response?.data);
-			console.log(response);
-		} catch (error) {
-			console.log(error);
-		}
-
-		setIsLoading(false);
-	}, [getOverviewDocumentLocations]);
-
-	useEffect(() => {
-		fetchData();
-	}, [fetchData]);
+	const { data: items, isLoading, isError } = useGetDocumentLocations();
 
 	return (
 		<div>
@@ -50,7 +27,7 @@ export default function DocumentLocations() {
 					/>
 
 					{/* Loading complete and data has value */}
-					{items && items?.length > 0 && (
+					{items && (
 						<div className="grid grid-cols-2 gap-2">
 							<DocumentLocationBadge label="Safe" count={4} />
 							<DocumentLocationBadge label="Lawyer Safe" count={2} />
@@ -67,7 +44,7 @@ export default function DocumentLocations() {
 					)}
 
 					{/* Fetching data error */}
-					{!items && (
+					{isError && (
 						<p className="text-[13px] pl-14 text-muted-foreground">
 							Error fetching data
 						</p>
