@@ -21,6 +21,7 @@ export default function LifeFileDocuments() {
 
 		try {
 			const response = await getOverviewLifeFileDocuments();
+			console.log(response);
 			setItems(response?.data);
 		} catch (error) {
 			console.log(error);
@@ -64,14 +65,14 @@ export default function LifeFileDocuments() {
 
 					{/* Loading complete and data has no value */}
 					{items?.length === 0 && (
-						<p className="text-[13px] pl-14 text-muted-foreground">
+						<p className="text-[13px] text-muted-foreground">
 							You are all caught up for now
 						</p>
 					)}
 
 					{/* Fetching data error */}
 					{!items && (
-						<p className="text-[13px] pl-14 text-muted-foreground">
+						<p className="text-[13px] text-muted-foreground">
 							Error fetching data
 						</p>
 					)}
