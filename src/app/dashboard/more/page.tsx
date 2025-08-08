@@ -14,7 +14,7 @@ export default function MorePage() {
 	const { accessToken } = useApi();
 
 	return (
-		<div className="space-y-8">
+		<div className="space-y-8 pb-8">
 			<Header
 				title="Updates and features"
 				description="Keep up to date with the latest features and updates."

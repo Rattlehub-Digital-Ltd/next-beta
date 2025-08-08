@@ -2,6 +2,8 @@
 
 import { useAuth0 } from "@auth0/auth0-react";
 import { Icon } from "@iconify/react";
+import Link from "next/link";
+import { useState } from "react";
 import { useOnboardingStore } from "store/use-onboarding-store";
 import {
 	DropdownMenu,
@@ -12,8 +14,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { isValidEmail } from "@/lib/utils";
 import { ComingSoonBadge } from "../coming-soon-badge";
-import Link from "next/link";
-import { useState } from "react";
 
 type UserMenuProps = {
 	children: React.ReactNode;
