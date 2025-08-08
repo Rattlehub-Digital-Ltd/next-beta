@@ -2,6 +2,7 @@
 
 import { useAuth0 } from "@auth0/auth0-react";
 import { Icon } from "@iconify/react";
+import Link from "next/link";
 import { useOnboardingStore } from "store/use-onboarding-store";
 import {
 	DropdownMenu,
@@ -53,26 +54,32 @@ const UserMenu = ({ children }: UserMenuProps) => {
 				</DropdownMenuItem>
 				<DropdownMenuSeparator className="bg-muted" />
 				<DropdownMenuItem>
-					<div className="flex items-center gap-2 w-full !text-indigo-600">
-						<Icon
-							icon="fluent:checkmark-starburst-16-filled"
-							className="shrink-0 !h-5 !w-5 !text-indigo-600"
-							height={20}
-							width={20}
-							style={{ color: "#4f39f6" }}
-						/>
-						<span className="grow font-medium">Upgrage to Pro</span>
-					</div>
+					<Link href="/dashboard/subscription">
+						<div className="flex items-center gap-2 w-full !text-indigo-600">
+							<div className="h-5 w-5">
+								<Icon
+									icon="fluent:checkmark-starburst-16-filled"
+									className="shrink-0 !h-5 !w-5 !text-indigo-600"
+									height={20}
+									width={20}
+									style={{ color: "#4f39f6" }}
+								/>
+							</div>
+							<span className="grow font-medium">Upgrage to Pro</span>
+						</div>
+					</Link>
 				</DropdownMenuItem>
 				<DropdownMenuSeparator className="bg-muted" />
 				<DropdownMenuItem className="pointer-events-none">
 					<div className="flex items-center gap-2 w-full">
-						<Icon
-							icon="fluent:person-20-regular"
-							className="shrink-0 !h-5 !w-5"
-							height={20}
-							width={20}
-						/>
+						<div className="h-5 w-5">
+							<Icon
+								icon="fluent:person-20-regular"
+								className="shrink-0 !h-5 !w-5"
+								height={20}
+								width={20}
+							/>
+						</div>
 						<span className="grow">Account</span>
 						<ComingSoonBadge
 							variant="gradient"
@@ -82,12 +89,14 @@ const UserMenu = ({ children }: UserMenuProps) => {
 				</DropdownMenuItem>
 				<DropdownMenuItem className="pointer-events-none w-full">
 					<div className="flex items-center gap-2 w-full">
-						<Icon
-							icon="fluent:receipt-20-regular"
-							className="shrink-0 !h-5 !w-5"
-							height={20}
-							width={20}
-						/>
+						<div className="flex items-center gap-2 w-full">
+							<Icon
+								icon="fluent:receipt-20-regular"
+								className="shrink-0 !h-5 !w-5"
+								height={20}
+								width={20}
+							/>
+						</div>
 						<span className="grow">Billing</span>
 						<ComingSoonBadge
 							variant="gradient"
@@ -98,12 +107,14 @@ const UserMenu = ({ children }: UserMenuProps) => {
 
 				<DropdownMenuItem className="pointer-events-none w-full">
 					<div className="flex items-center gap-2 w-full">
-						<Icon
-							icon="fluent:alert-20-regular"
-							className="shrink-0 !h-5 !w-5"
-							height={20}
-							width={20}
-						/>
+						<div className="flex items-center gap-2 w-full">
+							<Icon
+								icon="fluent:alert-20-regular"
+								className="shrink-0 !h-5 !w-5"
+								height={20}
+								width={20}
+							/>
+						</div>
 						<span className="grow">Notifications</span>
 					</div>
 				</DropdownMenuItem>
@@ -123,13 +134,15 @@ const UserMenu = ({ children }: UserMenuProps) => {
 					}}
 				>
 					<div className="flex items-center gap-2 w-full">
-						<Icon
-							icon="hugeicons:logout-03"
-							className="shrink-0 !h-5 !w-5"
-							height={20}
-							width={20}
-							style={{ color: "#DC2626" }}
-						/>
+						<div className="flex items-center gap-2 w-full">
+							<Icon
+								icon="hugeicons:logout-03"
+								className="shrink-0 !h-5 !w-5"
+								height={20}
+								width={20}
+								style={{ color: "#DC2626" }}
+							/>
+						</div>
 						<span className="font-medium text-sm grow">Sign out</span>
 					</div>
 				</DropdownMenuItem>
