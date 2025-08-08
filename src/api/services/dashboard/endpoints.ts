@@ -1,8 +1,6 @@
 import { appConfig } from "@/config/app.config";
 import type { PaginationParams } from "@/types";
 
-export const ONBOARDIND_QUERY_KEY = "ONBOARDIND_QUERY_KEY";
-
 export const dashboardEndpoints = {
 	getActivitySummary: () => "/documents/activity-summary",
 	getDocuments: (paging: PaginationParams) =>
@@ -11,4 +9,6 @@ export const dashboardEndpoints = {
 		appConfig.previewMode ? "/api/AdaptiveCard" : "/guardian/api/AdaptiveCard",
 	submitAdaptiveCard: () =>
 		appConfig.previewMode ? "/api/AdaptiveCard" : "/guardian/api/AdaptiveCard",
+	getTimeline: (paging: PaginationParams) =>
+		`/documents/activity?PageNumber=${paging.page}&PageSize=${paging.limit}`,
 } as const;

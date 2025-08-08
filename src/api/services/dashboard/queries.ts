@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "@/hooks/use-axios";
-import type { PaginationParams } from "@/types";
+import type { PaginationParams, TimelineData } from "@/types";
 import type { ActionsResponse } from "@/types/action-item";
 import type { ActivitySummary } from "@/types/activity-summary";
 import { dashboardEndpoints } from "./endpoints";
@@ -26,7 +26,7 @@ export const useGetDocuments = (paging: PaginationParams) => {
 	const { client } = useAxios();
 
 	return useQuery({
-		queryKey: ["documents"],
+		queryKey: ["documents", paging],
 		queryFn: async () => {
 			const { data } = await client.get<ActionsResponse>(
 				dashboardEndpoints.getDocuments(paging),
@@ -51,7 +51,7 @@ export const useGetAdaptiveCard = (referer: string, recordId?: string) => {
 	}
 
 	return useQuery({
-		queryKey: ["adaptive_card"],
+		queryKey: ["adaptive_card", referer, recordId],
 		queryFn: async () => {
 			const { data } = await client.get<ActivitySummary>(
 				dashboardEndpoints.getAdaptiveCard(),
@@ -59,6 +59,26 @@ export const useGetAdaptiveCard = (referer: string, recordId?: string) => {
 					baseURL: `${process.env.NEXT_PUBLIC_API_BASE_URL as string}`,
 					headers: {
 						...headers,
+					},
+				},
+			);
+
+			return data;
+		},
+	});
+};
+
+export const useGetTimeline = (referer: string, paging: PaginationParams) => {
+	const { client } = useAxios();
+
+	return useQuery({
+		queryKey: ["timeline", paging],
+		queryFn: async () => {
+			const { data } = await client.get<TimelineData>(
+				dashboardEndpoints.getTimeline(paging),
+				{
+					headers: {
+						"x-referer-context": referer,
 					},
 				},
 			);
