@@ -74,6 +74,21 @@ const UserMenu = ({ children }: UserMenuProps) => {
 				</DropdownMenuItem>
 				<DropdownMenuSeparator className="bg-muted" />
 				<DropdownMenuItem onClick={() => setOpen(false)}>
+					<Link className="w-full" href="/dashboard">
+						<div className="flex items-center gap-2 w-full">
+							<div className="flex items-center gap-2">
+								<Icon
+									icon="fluent:alert-20-regular"
+									className="shrink-0 !h-5 !w-5"
+									height={20}
+									width={20}
+								/>
+							</div>
+							<span className="grow">Notifications</span>
+						</div>
+					</Link>
+				</DropdownMenuItem>
+				<DropdownMenuItem onClick={() => setOpen(false)}>
 					<div className="flex items-center gap-2 w-full">
 						<div className="h-5 w-5">
 							<Icon
@@ -107,23 +122,7 @@ const UserMenu = ({ children }: UserMenuProps) => {
 						/>
 					</div>
 				</DropdownMenuItem>
-				<DropdownMenuItem onClick={() => setOpen(false)}>
-					<div className="flex items-center gap-2 w-full">
-						<div className="flex items-center gap-2">
-							<Icon
-								icon="fluent:alert-20-regular"
-								className="shrink-0 !h-5 !w-5"
-								height={20}
-								width={20}
-							/>
-						</div>
-						<span className="grow">Notifications</span>
-						<ComingSoonBadge
-							variant="gradient"
-							className="text-[11px] whitespace-nowrap"
-						/>
-					</div>
-				</DropdownMenuItem>
+
 				<DropdownMenuSeparator
 					className="bg-muted"
 					onClick={() => setOpen(false)}
