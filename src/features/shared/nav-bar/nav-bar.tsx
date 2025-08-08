@@ -28,11 +28,11 @@ const Navbar = () => {
 			{user && (
 				<div className="flex items-center gap-6">
 					<Badge
-						className="h-5 min-w-5 rounded-full  text-[0.65rem] font-mono tabular-nums"
+						className="bg-[#ff6c37] h-5 min-w-5 rounded-full  text-[10px] pl-1 font-mono tabular-nums"
 						variant="default"
 					>
 						<Icon icon="fluent:star-16-filled" />
-						BETA
+						<span>BETA</span>
 					</Badge>
 					<MenuPopup>
 						<div className="relative">
