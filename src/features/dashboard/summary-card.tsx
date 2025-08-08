@@ -3,44 +3,26 @@
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
-import { toast } from "sonner";
 import { useActivitySummaryStore } from "store/use-activity-summary-store";
-import type { Suggested } from "@/api/services/dashboard/suggestion/types";
+import { useGetSuggestions } from "@/api/services/dashboard/suggestion/queries";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
-import useApi from "@/hooks/use-api";
 import RiskBar from "../shared/risk-bar";
 import SuggestionItem from "../shared/suggestion-item";
 import SummaryFooter from "../shared/summary-footer";
 import SuggesteItemDrawer from "./suggestions/suggeste-item-drawer";
 
 export default function SummaryCard() {
-	const { getSuggestions } = useApi();
 	const { activity } = useActivitySummaryStore();
 
-	const [item, setItem] = useState<Suggested | undefined>();
-	const [isLoading, setIsLoading] = useState(false);
+	const {
+		data: items,
+		isLoading,
+		isError,
+	} = useGetSuggestions({ page: 1, limit: 1 });
 
-	const fetchSuggestions = useCallback(async () => {
-		try {
-			setIsLoading(true);
-
-			const suggestionResp = await getSuggestions({ page: 1, limit: 1 });
-			setItem(suggestionResp?.data?.[0]);
-
-			setIsLoading(false);
-		} catch (error) {
-			setIsLoading(false);
-			console.log(error);
-			toast.error("Error fetching top suggested item");
-		}
-	}, [getSuggestions]);
-
-	useEffect(() => {
-		fetchSuggestions();
-	}, [fetchSuggestions]);
+	const item = items?.[0];
 
 	return (
 		<div className="w-full h-full bg-[#F8F8F8]/95 py-4 border border-[#EBEDED] rounded-3xl backdrop-blur-[60px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)] space-y-4 flex flex-col">
@@ -84,7 +66,7 @@ export default function SummaryCard() {
 			<Separator className="bg-black/5 px-4" />
 
 			{/* Suggested item is not loading and has a value */}
-			{!isLoading && item && (
+			{item && (
 				<div className="space-y-3">
 					<div className="flex flex-col space-y-1 items-center">
 						<Badge className="uppercase text-[10px] px-2.5 py-1 rounded-full tracking-wider font-bold text-white bg-gradient-to-br from-[#EF060F] to-[#B60CF2]">
@@ -155,9 +137,9 @@ export default function SummaryCard() {
 			)}
 
 			{/* Suggested item has no value */}
-			{!isLoading && !item && <div>No suggested item</div>}
+			{isError && <div>No suggested item</div>}
 
-			{!isLoading && item && (
+			{item && (
 				<>
 					<Separator className="bg-black/5 px-4" />
 					<SummaryFooter>

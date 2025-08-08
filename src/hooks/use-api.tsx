@@ -223,7 +223,6 @@ const useApi = () => {
 			const headers: Record<string, string> = {};
 
 			if (recordId) {
-				// If recordId is provided, include it in the headers
 				headers["x-record-identifier"] = recordId;
 			}
 

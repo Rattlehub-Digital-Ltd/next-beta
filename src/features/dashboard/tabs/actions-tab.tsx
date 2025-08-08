@@ -1,55 +1,39 @@
 "use client";
 
 import * as motion from "motion/react-client";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import ShortUniqueId from "short-unique-id";
-import { toast } from "sonner";
+import { useGetDocuments } from "@/api/services/dashboard/queries";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import AdaptiveCardButton from "@/features/shared/adaptive-card/adaptive-card-button";
 import RiskCarousel from "@/features/shared/risk-carousel";
 import SuggestionItem from "@/features/shared/suggestion-item";
-import useApi from "@/hooks/use-api";
 import { SparkleIcon } from "@/styles/icons";
 import type { ActionItem } from "@/types/action-item";
 
 const uid = new ShortUniqueId({ length: 10 });
 
 export default function ActionsTab() {
-	const { getDocuments } = useApi();
+	const { data, isLoading, isError, refetch } = useGetDocuments({
+		page: 1,
+		limit: 1,
+	});
 
-	const [loading, setLoading] = useState(false);
-	const [items, setItems] = useState<ActionItem[] | undefined>();
 	const [currentItem, setCurrentItem] = useState<ActionItem | undefined>();
 
-	const fetchData = useCallback(async () => {
-		setLoading(true);
-
-		try {
-			const documentsResponse = await getDocuments({ page: 1, limit: 10 });
-			setItems(documentsResponse?.data?.items);
-		} catch (error) {
-			console.log(error);
-			toast.error("Error fetching actions");
-		}
-
-		setLoading(false);
-	}, [getDocuments]);
-
-	useEffect(() => {
-		fetchData();
-	}, [fetchData]);
+	const items = data?.items;
 
 	return (
 		<div className="space-y-4">
 			{/* Loading incomplete */}
-			{loading &&
+			{isLoading &&
 				Array.from({ length: 3 }).map(() => (
 					<LoadingSkeleton key={uid.randomUUID()} />
 				))}
 
 			{/* Loading complete and data has value */}
-			{!loading && items && (
+			{items && (
 				<ul className="space-y-4">
 					{items.map((item) => {
 						const { id, displayName, eduText, riskItems } = item;
@@ -84,14 +68,11 @@ export default function ActionsTab() {
 			)}
 
 			{/* Fetching data error */}
-			{!items && (
+			{isError && (
 				<p className="text-[13px] pl-14 text-muted-foreground">
 					Error fetching data
 				</p>
 			)}
-
-			{/* Fetching data error */}
-			{!loading && !items && <div>Error fetching data</div>}
 
 			{/* Adaptive card button */}
 			{currentItem && (
@@ -99,7 +80,7 @@ export default function ActionsTab() {
 					<AdaptiveCardButton
 						recordId={currentItem.id}
 						referer="actions"
-						refresh={fetchData}
+						refresh={refetch}
 					>
 						<motion.div whileTap={{ scale: 0.95 }}>
 							<Button
