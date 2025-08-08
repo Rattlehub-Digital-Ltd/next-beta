@@ -58,7 +58,9 @@ function AdaptiveCardTemplate({ card, submit }: AdaptiveCardProps) {
 				console.debug("Received data:", actionData);
 				// Do something with the data
 			} else {
-				console.debug("No data received from the card action.");
+				console.debug(
+					"You are all caught up for now received from the card action.",
+				);
 			}
 		};
 

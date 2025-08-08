@@ -55,10 +55,18 @@ export default function GoalItems() {
 			</div>
 
 			{/* Loading complete and data has no value */}
-			{!isLoading && items?.length === 0 && <div>No data</div>}
+			{items?.length === 0 && (
+				<p className="text-[13px] pl-14 text-muted-foreground">
+					You are all caught up for now
+				</p>
+			)}
 
 			{/* Fetching data error */}
-			{!isLoading && !items && <div>Error fetching data</div>}
+			{!items && (
+				<p className="text-[13px] pl-14 text-muted-foreground">
+					Error fetching data
+				</p>
+			)}
 		</div>
 	);
 }

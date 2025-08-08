@@ -77,7 +77,18 @@ export default function ActionsTab() {
 			)}
 
 			{/* Loading complete and data has no value */}
-			{!loading && items?.length === 0 && <div>No data</div>}
+			{items?.length === 0 && (
+				<p className="text-[13px] pl-14 text-muted-foreground">
+					You are all caught up for now
+				</p>
+			)}
+
+			{/* Fetching data error */}
+			{!items && (
+				<p className="text-[13px] pl-14 text-muted-foreground">
+					Error fetching data
+				</p>
+			)}
 
 			{/* Fetching data error */}
 			{!loading && !items && <div>Error fetching data</div>}

@@ -60,11 +60,17 @@ export default function Family() {
 
 					{/* Loading complete and data has no value */}
 					{items?.length === 0 && (
-						<p className="text-xs text-secondary-foreground">No data</p>
+						<p className="text-[13px] pl-14 text-muted-foreground">
+							You are all caught up for now
+						</p>
 					)}
 
 					{/* Fetching data error */}
-					{!items && <p className="text-xs">Error fetching data</p>}
+					{!items && (
+						<p className="text-[13px] pl-14 text-muted-foreground">
+							Error fetching data
+						</p>
+					)}
 				</div>
 			)}
 		</div>
