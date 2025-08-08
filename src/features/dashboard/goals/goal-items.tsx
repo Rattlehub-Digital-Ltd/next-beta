@@ -5,7 +5,6 @@ import GoalItem from "./goal-item";
 const uid = new ShortUniqueId();
 
 export default function GoalItems({ goals }: { goals: Goal[] }) {
-	console.log(goals);
 	return (
 		<div>
 			<div className="flex flex-col space-y-4">

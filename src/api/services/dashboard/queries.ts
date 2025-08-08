@@ -72,7 +72,7 @@ export const useGetTimeline = (referer: string, paging: PaginationParams) => {
 	const { client } = useAxios();
 
 	return useQuery({
-		queryKey: ["timeline", paging],
+		queryKey: ["timeline", referer, paging],
 		queryFn: async () => {
 			const { data } = await client.get<TimelineData>(
 				dashboardEndpoints.getTimeline(paging),

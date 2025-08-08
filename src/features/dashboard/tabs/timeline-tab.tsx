@@ -5,8 +5,8 @@ import TimelineItem from "./timeline-item";
 
 const uid = new ShortUniqueId({ length: 10 });
 
-export default function TimelineTab() {
-	const { data, isLoading, isError } = useGetTimeline("timeline", {
+export default function TimelineTab({ referer }: { referer: string }) {
+	const { data, isLoading, isError } = useGetTimeline(referer, {
 		page: 1,
 		limit: 15,
 	});

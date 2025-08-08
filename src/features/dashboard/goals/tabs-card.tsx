@@ -4,7 +4,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TimelineTab from "../tabs/timeline-tab";
 import DocumentsTab from "./documents-tab";
 
-export default function TabsCard() {
+export default function TabsCard({
+	referer = "timeline",
+}: {
+	referer?: string;
+}) {
 	return (
 		<div>
 			<Tabs defaultValue="documents" className="space-y-3">
@@ -41,7 +45,7 @@ export default function TabsCard() {
 					<DocumentsTab />
 				</TabsContent>
 				<TabsContent value="timeline">
-					<TimelineTab />
+					<TimelineTab referer={referer} />
 				</TabsContent>
 			</Tabs>
 		</div>

@@ -44,7 +44,7 @@ export default function TabsCard() {
 					<ActionsTab />
 				</TabsContent>
 				<TabsContent value="timeline">
-					<TimelineTab />
+					<TimelineTab referer="timeline" />
 				</TabsContent>
 			</Tabs>
 		</div>
