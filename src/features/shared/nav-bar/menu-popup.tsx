@@ -13,6 +13,7 @@ import {
 import { isValidEmail } from "@/lib/utils";
 import { ComingSoonBadge } from "../coming-soon-badge";
 import Link from "next/link";
+import { useState } from "react";
 
 type UserMenuProps = {
 	children: React.ReactNode;
@@ -22,6 +23,8 @@ const UserMenu = ({ children }: UserMenuProps) => {
 	const { user, logout } = useAuth0();
 
 	const { setIsOnboarded } = useOnboardingStore();
+
+	const [open, setOpen] = useState(false);
 
 	let email: string;
 	let name: string;
@@ -43,7 +46,7 @@ const UserMenu = ({ children }: UserMenuProps) => {
 	}
 
 	return (
-		<DropdownMenu>
+		<DropdownMenu open={open} onOpenChange={setOpen}>
 			<DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
 			<DropdownMenuContent className="mr-4 w-64 border-border" sideOffset={8}>
 				<DropdownMenuItem className="w-full">
@@ -53,7 +56,7 @@ const UserMenu = ({ children }: UserMenuProps) => {
 					</div>
 				</DropdownMenuItem>
 				<DropdownMenuSeparator className="bg-muted" />
-				<DropdownMenuItem>
+				<DropdownMenuItem onClick={() => setOpen(false)}>
 					<Link href="/dashboard/subscription">
 						<div className="flex items-center gap-2 w-full !text-indigo-600">
 							<div className="h-5 w-5">
@@ -70,7 +73,7 @@ const UserMenu = ({ children }: UserMenuProps) => {
 					</Link>
 				</DropdownMenuItem>
 				<DropdownMenuSeparator className="bg-muted" />
-				<DropdownMenuItem className="pointer-events-none">
+				<DropdownMenuItem onClick={() => setOpen(false)}>
 					<div className="flex items-center gap-2 w-full">
 						<div className="h-5 w-5">
 							<Icon
@@ -87,7 +90,7 @@ const UserMenu = ({ children }: UserMenuProps) => {
 						/>
 					</div>
 				</DropdownMenuItem>
-				<DropdownMenuItem className="pointer-events-none w-full">
+				<DropdownMenuItem onClick={() => setOpen(false)}>
 					<div className="flex items-center gap-2 w-full">
 						<div className="flex items-center gap-2">
 							<Icon
@@ -104,8 +107,7 @@ const UserMenu = ({ children }: UserMenuProps) => {
 						/>
 					</div>
 				</DropdownMenuItem>
-
-				<DropdownMenuItem className="pointer-events-none w-full">
+				<DropdownMenuItem onClick={() => setOpen(false)}>
 					<div className="flex items-center gap-2 w-full">
 						<div className="flex items-center gap-2">
 							<Icon
@@ -116,9 +118,16 @@ const UserMenu = ({ children }: UserMenuProps) => {
 							/>
 						</div>
 						<span className="grow">Notifications</span>
+						<ComingSoonBadge
+							variant="gradient"
+							className="text-[11px] whitespace-nowrap"
+						/>
 					</div>
 				</DropdownMenuItem>
-				<DropdownMenuSeparator className="bg-muted" />
+				<DropdownMenuSeparator
+					className="bg-muted"
+					onClick={() => setOpen(false)}
+				/>
 				<DropdownMenuItem
 					className="font-medium text-red-600 w-full"
 					onClick={async () => {
