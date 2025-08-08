@@ -17,7 +17,7 @@ const uid = new ShortUniqueId({ length: 10 });
 export default function ActionsTab() {
 	const { data, isLoading, isError, refetch } = useGetDocuments({
 		page: 1,
-		limit: 1,
+		limit: 5,
 	});
 
 	const [currentItem, setCurrentItem] = useState<ActionItem | undefined>();
