@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import useAxios from "@/hooks/use-axios";
 import type { PaginationParams, TimelineData } from "@/types";
 import type { ActionsResponse } from "@/types/action-item";
@@ -33,6 +33,27 @@ export const useGetDocuments = (paging: PaginationParams) => {
 			);
 
 			return data;
+		},
+	});
+};
+
+export const useInfiniteGetDocuments = (paging: PaginationParams) => {
+	const { client } = useAxios();
+
+	return useInfiniteQuery({
+		queryKey: ["documents"],
+		queryFn: async ({ pageParam = 1 }) => {
+			const { data } = await client.get<ActionsResponse>(
+				dashboardEndpoints.getInfiniteDocuments(pageParam),
+			);
+
+			return data;
+		},
+		initialPageParam: 1,
+		getNextPageParam: (lastPage, allPages) => {
+			const lastBatch = lastPage.totalItems ?? 0;
+			if (lastBatch < paging.limit) return undefined;
+			return allPages.length + 1;
 		},
 	});
 };

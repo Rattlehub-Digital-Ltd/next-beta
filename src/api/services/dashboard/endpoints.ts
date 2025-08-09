@@ -3,6 +3,7 @@ import type { PaginationParams } from "@/types";
 
 export const dashboardEndpoints = {
 	getActivitySummary: () => "/documents/activity-summary",
+	getInfiniteDocuments: (page: number) => `/documents?PageNumber=${page}`,
 	getDocuments: (paging: PaginationParams) =>
 		`/documents?PageNumber=${paging.page}&PageSize=${paging.limit}`,
 	getAdaptiveCard: () =>

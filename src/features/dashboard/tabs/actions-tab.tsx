@@ -3,7 +3,7 @@
 import * as motion from "motion/react-client";
 import { useState } from "react";
 import ShortUniqueId from "short-unique-id";
-import { useGetDocuments } from "@/api/services/dashboard/queries";
+import { useInfiniteGetDocuments } from "@/api/services/dashboard/queries";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import AdaptiveCardButton from "@/features/shared/adaptive-card/adaptive-card-button";
@@ -15,14 +15,22 @@ import type { ActionItem } from "@/types/action-item";
 const uid = new ShortUniqueId({ length: 10 });
 
 export default function ActionsTab() {
-	const { data, isLoading, isError, refetch } = useGetDocuments({
+	const {
+		data,
+		isLoading,
+		refetch,
+		error,
+		fetchNextPage,
+		hasNextPage,
+		isFetching,
+		isFetchingNextPage,
+		// status,
+	} = useInfiniteGetDocuments({
 		page: 1,
 		limit: 5,
 	});
 
 	const [currentItem, setCurrentItem] = useState<ActionItem | undefined>();
-
-	const items = data?.items;
 
 	return (
 		<div className="space-y-4">
@@ -33,9 +41,9 @@ export default function ActionsTab() {
 				))}
 
 			{/* Loading complete and data has value */}
-			{items && (
-				<ul className="space-y-4">
-					{items.map((item) => {
+			<ul className="space-y-4">
+				{data?.pages.map((page) => {
+					return page.items.map((item) => {
 						const { id, displayName, eduText, riskItems } = item;
 
 						return (
@@ -56,19 +64,31 @@ export default function ActionsTab() {
 								</div>
 							</li>
 						);
-					})}
-				</ul>
-			)}
+					});
+				})}
+			</ul>
+
+			<Button
+				className="w-full"
+				disabled={!hasNextPage || isFetching}
+				onClick={() => fetchNextPage()}
+			>
+				{isFetchingNextPage
+					? "Loading more..."
+					: hasNextPage
+						? "Load More"
+						: "Nothing more to load"}
+			</Button>
 
 			{/* Loading complete and data has no value */}
-			{items?.length === 0 && (
+			{!hasNextPage && (
 				<p className="text-[13px] pl-14 text-muted-foreground">
 					You are all caught up for now
 				</p>
 			)}
 
 			{/* Fetching data error */}
-			{isError && (
+			{error && (
 				<p className="text-[13px] pl-14 text-muted-foreground">
 					Error fetching data
 				</p>
