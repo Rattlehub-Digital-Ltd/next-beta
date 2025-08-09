@@ -12,7 +12,7 @@ export default function Banner() {
 	if (pathname.toLowerCase() === "/dashboard/onboarding") return;
 
 	return (
-		<div className="h-10 flex items-center w-full bg-[#6155F5] text-white pl-4 pr-2 space-x-2  rounded-[16px]">
+		<div className="h-10 flex items-center w-full bg-gradient-to-br from-blue-600 to-purple-600 text-white pl-4 pr-2 space-x-2  rounded-[16px]">
 			<SparkleIcon className="h-4 w-4 shrink-0" />
 			<p className="font-medium grow truncate text-[12px] tracking-wide">
 				Your trial ends in{" "}
