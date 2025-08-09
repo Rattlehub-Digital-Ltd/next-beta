@@ -29,9 +29,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html className="bg-[#E5E5E5] h-[100svh]" lang="en">
-			<body
-				className={`${fontSans.variable} ${fontMono.variable} antialiased h-full overflow-y-auto bg-[#E5E5E5]`}
-			>
+			<head>
 				<Script
 					strategy="afterInteractive"
 					src="https://unpkg.com/markdown-it@14.1.0/dist/markdown-it.min.js"
@@ -53,6 +51,10 @@ export default function RootLayout({
 					rel="stylesheet"
 					href="https://unpkg.com/adaptivecards@3.0.0/dist/adaptivecards-carousel.css"
 				/>
+			</head>
+			<body
+				className={`${fontSans.variable} ${fontMono.variable} antialiased h-full overflow-y-auto bg-[#E5E5E5]`}
+			>
 				<ErrorBoundary
 					fallback={
 						<div className="min-h-screen flex items-center justify-center p-4">
