@@ -26,7 +26,9 @@ export default function SplashScreen() {
 		useGetOnboarding();
 
 	useEffect(() => {
-		if (activity) setActivity(activity);
+		if (activity) {
+			setActivity(activity);
+		}
 		if (onboardingStatus) setIsOnboarded(onboardingStatus.isOnboarded);
 
 		if (activity && onboardingStatus) {
