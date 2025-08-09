@@ -1,5 +1,6 @@
 "use client";
 
+import * as motion from "motion/react-client";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { SparkleIcon } from "@/styles/icons";
@@ -18,13 +19,15 @@ export default function Banner() {
 				<span className="text-yellow-300 font-bold">10 days</span>
 			</p>
 			<StripeDrawer>
-				<Button
-					className="text-[11px] uppercase tracking-wide gap-1 font-bold bg-white/95 backdrop-blur-md rounded-[10px] text-[#6155F5] h-6"
-					size="sm"
-					variant="default"
-				>
-					Subscribe
-				</Button>
+				<motion.div whileTap={{ scale: 0.9 }}>
+					<Button
+						className="text-[11px] uppercase tracking-wide gap-1 font-bold bg-white/95 backdrop-blur-md rounded-[10px] text-[#6155F5] h-6"
+						size="sm"
+						variant="default"
+					>
+						Subscribe
+					</Button>
+				</motion.div>
 			</StripeDrawer>
 		</div>
 	);
