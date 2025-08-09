@@ -38,20 +38,20 @@ export default function RootLayout({
 				/>
 				<Script
 					strategy="afterInteractive"
-					src="https://unpkg.com/adaptivecards@3.0.4/dist/adaptivecards.min.js"
+					src="https://unpkg.com/adaptivecards@3.0.0/dist/adaptivecards.min.js"
 				/>
 				{/* <!-- Adaptive Cards Base Styles --> */}
 				<link
 					precedence="default"
 					rel="stylesheet"
-					href="https://unpkg.com/adaptivecards@3.0.4/dist/adaptivecards.css"
+					href="https://unpkg.com/adaptivecards@3.0.0/dist/adaptivecards.css"
 				/>
 
 				{/* <!-- Carousel Styles (IMPORTANT!) --> */}
 				<link
 					precedence="default"
 					rel="stylesheet"
-					href="https://unpkg.com/adaptivecards@3.0.4/dist/adaptivecards-carousel.css"
+					href="https://unpkg.com/adaptivecards@3.0.0/dist/adaptivecards-carousel.css"
 				/>
 				<ErrorBoundary
 					fallback={
