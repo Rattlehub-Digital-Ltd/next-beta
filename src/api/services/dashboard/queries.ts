@@ -41,7 +41,7 @@ export const useInfiniteGetDocuments = (paging: PaginationParams) => {
 	const { client } = useAxios();
 
 	return useInfiniteQuery({
-		queryKey: ["documents"],
+		queryKey: ["documents", "infinite", { limit: paging.limit }],
 		queryFn: async ({ pageParam = 1 }) => {
 			const { data } = await client.get<ActionsResponse>(
 				dashboardEndpoints.getInfiniteDocuments(pageParam),
@@ -52,7 +52,7 @@ export const useInfiniteGetDocuments = (paging: PaginationParams) => {
 		initialPageParam: 1,
 		getNextPageParam: (lastPage, allPages) => {
 			const lastBatch = lastPage.totalItems ?? 0;
-			if (lastBatch < paging.limit) return undefined;
+			if (lastBatch < lastPage.pageSize) return undefined;
 			return allPages.length + 1;
 		},
 	});
