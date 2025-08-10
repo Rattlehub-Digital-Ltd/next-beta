@@ -18,7 +18,7 @@ type SuggestionItemProps = {
 		| "brown"
 		| "dark-teal"
 		| "blue";
-	updateCurrentItem?: () => void;
+	updateCurrentItem?: (show: boolean) => void;
 };
 
 export default function SuggestionItem({
@@ -29,7 +29,7 @@ export default function SuggestionItem({
 	updateCurrentItem,
 }: SuggestionItemProps) {
 	const { isIntersecting, ref } = useIntersectionObserver({
-		threshold: 0.5,
+		threshold: 0.01,
 	});
 
 	let color1 = "";
@@ -80,7 +80,10 @@ export default function SuggestionItem({
 	}
 
 	useEffect(() => {
-		if (isIntersecting) updateCurrentItem?.();
+		if (isIntersecting) updateCurrentItem?.(true);
+		else {
+			updateCurrentItem?.(false);
+		}
 	}, [isIntersecting, updateCurrentItem]);
 
 	return (

@@ -12,6 +12,7 @@ import RiskCarousel from "@/features/shared/risk-carousel";
 import SuggestionItem from "@/features/shared/suggestion-item";
 import { SparkleIcon } from "@/styles/icons";
 import type { ActionItem } from "@/types/action-item";
+import type { Variants } from "motion/react";
 
 const uid = new ShortUniqueId({ length: 10 });
 
@@ -42,32 +43,42 @@ export default function ActionsTab() {
 				))}
 
 			{/* Loading complete and data has value */}
-			<ul className="space-y-4">
-				{data?.pages.map((page) => {
-					return page.items.map((item) => {
-						const { id, displayName, eduText, riskItems } = item;
+			{data && (
+				<ul className="space-y-4">
+					{data?.pages.map((page) => {
+						return page.items.map((item) => {
+							const { id, displayName, eduText, riskItems } = item;
 
-						return (
-							<li key={id}>
-								<div
-									id={id}
-									className="flex flex-col space-y-3 p-4 rounded-[23px] border border-[#EBEDED] backdrop-blur-[25px] bg-white/65 shadow-[0px_16px_30px_0px rgba(106, 106, 106, 0.06)]"
+							return (
+								<motion.li
+									key={id}
+									initial="offscreen"
+									whileInView="onscreen"
+									viewport={{ amount: 0.8 }}
 								>
-									<SuggestionItem
-										title={displayName}
-										description={eduText}
-										showReminder={false}
-										color="teal"
-										updateCurrentItem={() => setCurrentItem(item)}
-									/>
+									<motion.div
+										id={id}
+										variants={cardVariants}
+										className="flex flex-col space-y-3 p-4 rounded-[23px] border border-[#EBEDED] backdrop-blur-[25px] bg-white/65 shadow-[0px_16px_30px_0px rgba(106, 106, 106, 0.06)]"
+									>
+										<SuggestionItem
+											title={displayName}
+											description={eduText}
+											showReminder={false}
+											color="teal"
+											updateCurrentItem={(show: boolean) =>
+												setCurrentItem(show ? item : undefined)
+											}
+										/>
 
-									<RiskCarousel items={riskItems} />
-								</div>
-							</li>
-						);
-					});
-				})}
-			</ul>
+										<RiskCarousel items={riskItems} />
+									</motion.div>
+								</motion.li>
+							);
+						});
+					})}
+				</ul>
+			)}
 
 			<motion.div className="px-2" whileTap={{ scale: 0.95 }}>
 				<Button
@@ -186,4 +197,22 @@ const LoadingSkeleton = () => {
 			</div>
 		</div>
 	);
+};
+
+const cardVariants: Variants = {
+	offscreen: {
+		y: 0.75,
+		scale: 0.9,
+		opacity: 0.6,
+	},
+	onscreen: {
+		y: 0,
+		scale: 1,
+		opacity: 1,
+		transition: {
+			type: "spring",
+			bounce: 0.4,
+			duration: 0.8,
+		},
+	},
 };
