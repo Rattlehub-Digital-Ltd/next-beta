@@ -16,7 +16,7 @@ export default function GoalItems({ goals }: { goals: Goal[] }) {
 						key={uid.randomUUID()}
 						initial="offscreen"
 						whileInView="onscreen"
-						viewport={{ amount: 0.5 }}
+						viewport={{ amount: 0.35 }}
 					>
 						<motion.div variants={cardVariants}>
 							<GoalItem item={item} />
