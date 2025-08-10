@@ -13,7 +13,7 @@ export default function SuggestedItems({ items }: { items: Suggested[] }) {
 					key={item.id}
 					initial="offscreen"
 					whileInView="onscreen"
-					viewport={{ amount: 0.35 }}
+					viewport={{ amount: 0.3 }}
 				>
 					<motion.div variants={cardVariants}>
 						<SuggestedItem item={item} />
