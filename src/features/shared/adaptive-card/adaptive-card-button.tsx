@@ -82,7 +82,7 @@ function AdaptiveCardButton({
 		setIsLoading(true);
 
 		const resp = await getAdaptiveCard(referer, recordId);
-		console.log(resp?.data);
+
 		setCards(resp?.data);
 
 		const activityResponse = await getActivitySummary();
