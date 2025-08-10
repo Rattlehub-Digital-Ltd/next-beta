@@ -30,10 +30,10 @@ export default function RootLayout({
 	return (
 		<html className="bg-[#E5E5E5] h-[100svh]" lang="en">
 			<head>
-				<Script
+				{/* <Script
 					strategy="afterInteractive"
 					src="https://unpkg.com/markdown-it@14.1.0/dist/markdown-it.min.js"
-				/>
+				/> */}
 				<Script
 					strategy="afterInteractive"
 					src="https://unpkg.com/adaptivecards@3.0.0/dist/adaptivecards.min.js"
