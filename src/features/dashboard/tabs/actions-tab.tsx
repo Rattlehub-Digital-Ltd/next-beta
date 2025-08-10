@@ -10,9 +10,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 import AdaptiveCardButton from "@/features/shared/adaptive-card/adaptive-card-button";
 import RiskCarousel from "@/features/shared/risk-carousel";
 import SuggestionItem from "@/features/shared/suggestion-item";
+import { cardVariants } from "@/motion";
 import { SparkleIcon } from "@/styles/icons";
 import type { ActionItem } from "@/types/action-item";
-import type { Variants } from "motion/react";
 
 const uid = new ShortUniqueId({ length: 10 });
 
@@ -54,7 +54,7 @@ export default function ActionsTab() {
 									key={id}
 									initial="offscreen"
 									whileInView="onscreen"
-									viewport={{ amount: 0.8 }}
+									viewport={{ amount: 0.6 }}
 								>
 									<motion.div
 										id={id}
@@ -197,22 +197,4 @@ const LoadingSkeleton = () => {
 			</div>
 		</div>
 	);
-};
-
-const cardVariants: Variants = {
-	offscreen: {
-		y: 0.75,
-		scale: 0.9,
-		opacity: 0.6,
-	},
-	onscreen: {
-		y: 0,
-		scale: 1,
-		opacity: 1,
-		transition: {
-			type: "spring",
-			bounce: 0.4,
-			duration: 0.8,
-		},
-	},
 };

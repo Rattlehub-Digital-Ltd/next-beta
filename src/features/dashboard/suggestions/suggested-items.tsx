@@ -1,13 +1,24 @@
 "use client";
 
+import * as motion from "motion/react-client";
 import type { Suggested } from "@/api/services/dashboard/suggestion/types";
+import { cardVariants } from "@/motion";
 import SuggestedItem from "./suggested-item";
 
 export default function SuggestedItems({ items }: { items: Suggested[] }) {
 	return (
 		<div className="flex flex-col space-y-4">
 			{items.map((item) => (
-				<SuggestedItem key={item.id} item={item} />
+				<motion.div
+					key={item.id}
+					initial="offscreen"
+					whileInView="onscreen"
+					viewport={{ amount: 0.5 }}
+				>
+					<motion.div variants={cardVariants}>
+						<SuggestedItem item={item} />
+					</motion.div>
+				</motion.div>
 			))}
 
 			{/* Loading complete and data has no value */}
