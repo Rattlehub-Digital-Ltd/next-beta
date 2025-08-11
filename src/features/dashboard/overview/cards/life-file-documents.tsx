@@ -26,7 +26,7 @@ export default function LifeFileDocuments() {
 
 					{/* Loading complete and data has value */}
 					{items && (
-						<div className="grid grid-cols-2 gap-4">
+						<div className="grid grid-cols-2 gap-2">
 							{items.map((item) => (
 								<DocumentItem
 									key={item.id}
