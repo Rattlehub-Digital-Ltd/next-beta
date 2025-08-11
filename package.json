@@ -3,11 +3,11 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"dev": "bunx next dev --turbopack",
-		"build": "bunx next build",
-		"start": "bunx next start",
-		"lint": "bunx biome check --write .",
-		"format": "bunx biome format --write ."
+		"dev": "npx next dev --turbopack",
+		"build": "npx next build",
+		"start": "npx next start",
+		"lint": "npx biome check --write .",
+		"format": "npx biome format --write ."
 	},
 	"dependencies": {
 		"@auth0/auth0-react": "^2.4.0",
@@ -46,13 +46,11 @@
 		"react-markdown": "^10.1.0",
 		"short-unique-id": "^5.3.2",
 		"sonner": "^2.0.7",
+		"swiper": "8.4.7",
 		"tailwind-merge": "^3.3.1",
 		"tailwindcss-animate": "^1.0.7",
 		"vaul": "^1.1.2",
 		"zustand": "^5.0.7"
-	},
-	"peerDependencies": {
-		"swiper": "8.4.7"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.1.3",
@@ -66,7 +64,7 @@
 		"postcss": "^8.5.6",
 		"tailwindcss": "^4.1.11",
 		"tw-animate-css": "^1.3.6",
-		"typescript": "^5.9.2"
+		"typescript": "5.9.2"
 	},
 	"browserslist": [
 		"> 0.25%",
