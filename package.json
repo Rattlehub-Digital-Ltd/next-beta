@@ -10,6 +10,8 @@
     "format": "bunx biome format --write ."
   },
   "dependencies": {
+    "@analytics/customerio": "^0.2.2",
+    "@analytics/google-analytics": "^1.1.0",
     "@auth0/auth0-react": "^2.4.0",
     "@radix-ui/react-accordion": "^1.2.11",
     "@radix-ui/react-avatar": "^1.1.10",
@@ -28,6 +30,7 @@
     "@tanstack/react-query-devtools": "^5.84.2",
     "@types/markdown-it": "^14.1.2",
     "adaptivecards": "3.0.0",
+    "analytics": "^0.8.19",
     "axios": "^1.11.0",
     "chrono-node": "^2.8.3",
     "class-variance-authority": "^0.7.1",

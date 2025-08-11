@@ -1,5 +1,6 @@
 import { Auth0Provider, type Auth0ProviderOptions } from "@auth0/auth0-react";
 import { appConfig } from "@/config/app.config";
+import { identify } from "./analytics";
 
 const domain = process.env.NEXT_PUBLIC_OIDC_DOMAIN || "";
 const clientId = process.env.NEXT_PUBLIC_OIDC_CLIENT_ID || "";
@@ -16,7 +17,12 @@ const configuration: Auth0ProviderOptions = {
 		scope: "openid profile offline_access",
 	},
 	onRedirectCallback: (appState, user) => {
-		console.log(appState, user);
+		if (user) {
+			identify(user.sub, {
+				email: user.email,
+				name: user.name,
+			});
+		}
 	},
 };
 

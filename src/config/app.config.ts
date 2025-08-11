@@ -20,4 +20,12 @@ export const appConfig = {
 		dataPolicy: "https://rattlehub.com/data-policy/",
 		termsOfUse: "https://rattlehub.com/terms-of-use/",
 	},
+	analytics: {
+		googleAnalytics: {
+			trackingId: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_TRACKING_ID || "",
+		},
+		customerIO: {
+			siteId: process.env.NEXT_PUBLIC_CUSTOMERIO_SITE_ID || "",
+		},
+	},
 };
