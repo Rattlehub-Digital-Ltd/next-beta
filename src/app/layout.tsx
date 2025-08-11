@@ -8,7 +8,7 @@ import RefreshButton from "@/features/root-layout/refresh-button";
 import MainLayout from "../components/main-layout";
 
 const fontSans = Mona_Sans({
-	variable: "--font-mono-sans",
+	variable: "--font-mona-sans",
 	subsets: ["latin"],
 });
 
