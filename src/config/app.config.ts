@@ -26,6 +26,7 @@ export const appConfig = {
 		},
 		customerIO: {
 			siteId: process.env.NEXT_PUBLIC_CUSTOMERIO_SITE_ID || "",
+			apiKey: process.env.NEXT_PUBLIC_CUSTOMER_IO_API_KEY as string,
 		},
 	},
 };
