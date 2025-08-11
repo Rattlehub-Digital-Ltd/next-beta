@@ -4,8 +4,8 @@ import { createContext } from "react";
 import { identify, track } from "./analytics";
 
 type AnalyticsContextType = {
-	track: (eventName: string, payload?: Record<string, any>) => void;
-	identify: (userId: string, traits?: Record<string, any>) => void;
+	track: (eventName: string, payload?: Record<string, object>) => void;
+	identify: (userId: string, traits?: Record<string, object>) => void;
 };
 
 export const AnalyticsContext = createContext<AnalyticsContextType>({

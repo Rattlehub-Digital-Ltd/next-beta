@@ -16,11 +16,11 @@ const configuration: Auth0ProviderOptions = {
 		redirect_uri: `${appConfig.baseURL}/dashboard`,
 		scope: "openid profile offline_access",
 	},
-	onRedirectCallback: (appState, user) => {
+	onRedirectCallback: (_, user) => {
 		if (user) {
-			identify(user.sub, {
-				email: user.email,
-				name: user.name,
+			identify(user.sub as string, {
+				email: user.email as string,
+				name: user.name as string,
 			});
 		}
 	},
