@@ -129,6 +129,7 @@ function PersonForm({
 										id={field.name}
 										name={field.name}
 										placeholder="Enter first name"
+										autoComplete="name"
 										value={field.state.value}
 										className={inputClass}
 										onBlur={field.handleBlur}
@@ -152,6 +153,7 @@ function PersonForm({
 									id={field.name}
 									name={field.name}
 									placeholder="Enter last name"
+									autoComplete="family-name"
 									value={field.state.value}
 									className={inputClass}
 									onBlur={field.handleBlur}
