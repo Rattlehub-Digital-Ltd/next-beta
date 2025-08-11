@@ -73,7 +73,7 @@ export default function SummaryCard() {
 							Top suggestion
 						</Badge>
 						<Link
-							href="/suggestions"
+							href="/dashboard/suggestions"
 							className="p-3 flex items-center space-x-1.5 text-xs font-semibold text-blue-600 no-underline"
 						>
 							See all suggestions
