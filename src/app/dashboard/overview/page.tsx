@@ -1,10 +1,12 @@
 import { Icon } from "@iconify/react";
+import * as motion from "motion/react-client";
 import Link from "next/link";
 import DocumentLocations from "@/features/dashboard/overview/cards/document-locations";
 import EstatePlan from "@/features/dashboard/overview/cards/estate-plan";
 import Family from "@/features/dashboard/overview/cards/family";
 import LifeFileDocuments from "@/features/dashboard/overview/cards/life-file-documents";
 import Header from "@/features/shared/header";
+import { cardVariants } from "@/motion";
 
 export default function OverviewPage() {
 	return (
@@ -28,10 +30,42 @@ export default function OverviewPage() {
 					</Link>
 				}
 			/>
-			<Family />
-			<DocumentLocations />
-			<EstatePlan />
-			<LifeFileDocuments />
+			<motion.div
+				initial="offscreen"
+				whileInView="onscreen"
+				viewport={{ amount: 0.3 }}
+			>
+				<motion.div variants={cardVariants}>
+					<Family />
+				</motion.div>
+			</motion.div>
+			<motion.div
+				initial="offscreen"
+				whileInView="onscreen"
+				viewport={{ amount: 0.3 }}
+			>
+				<motion.div variants={cardVariants}>
+					<DocumentLocations />
+				</motion.div>
+			</motion.div>
+			<motion.div
+				initial="offscreen"
+				whileInView="onscreen"
+				viewport={{ amount: 0.3 }}
+			>
+				<motion.div variants={cardVariants}>
+					<EstatePlan />
+				</motion.div>
+			</motion.div>
+			<motion.div
+				initial="offscreen"
+				whileInView="onscreen"
+				viewport={{ amount: 0.3 }}
+			>
+				<motion.div variants={cardVariants}>
+					<LifeFileDocuments />
+				</motion.div>
+			</motion.div>
 		</div>
 	);
 }
