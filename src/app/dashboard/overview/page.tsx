@@ -33,7 +33,7 @@ export default function OverviewPage() {
 			<motion.div
 				initial="offscreen"
 				whileInView="onscreen"
-				viewport={{ amount: 0.15 }}
+				viewport={{ amount: 0.2 }}
 			>
 				<motion.div variants={cardVariants}>
 					<Family />
@@ -42,7 +42,7 @@ export default function OverviewPage() {
 			<motion.div
 				initial="offscreen"
 				whileInView="onscreen"
-				viewport={{ amount: 0.15 }}
+				viewport={{ amount: 0.2 }}
 			>
 				<motion.div variants={cardVariants}>
 					<DocumentLocations />
@@ -51,7 +51,7 @@ export default function OverviewPage() {
 			<motion.div
 				initial="offscreen"
 				whileInView="onscreen"
-				viewport={{ amount: 0.15 }}
+				viewport={{ amount: 0.2 }}
 			>
 				<motion.div variants={cardVariants}>
 					<EstatePlan />
@@ -60,7 +60,7 @@ export default function OverviewPage() {
 			<motion.div
 				initial="offscreen"
 				whileInView="onscreen"
-				viewport={{ amount: 0.15 }}
+				viewport={{ amount: 0.2 }}
 			>
 				<motion.div variants={cardVariants}>
 					<LifeFileDocuments />
