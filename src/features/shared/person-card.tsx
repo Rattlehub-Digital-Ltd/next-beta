@@ -67,10 +67,14 @@ function PersonCard({
 				<RemovePersonDrawer
 					onDelete={() => onDelete(firstName, lastName, relationship)}
 				>
-					<Button className="h-8 w-8 px-0 py-0 rounded-full bg-[#FEF2F2]">
+					<Button
+						className="h-8 w-8 px-0 py-0 rounded-full bg-[#FEF2F2]"
+						type="button"
+					>
 						<Icon
 							icon="fluent:delete-20-regular"
 							style={{ stroke: "#DC2626" }}
+							aria-label={`Delete ${firstName} ${lastName}`}
 						/>
 					</Button>
 				</RemovePersonDrawer>

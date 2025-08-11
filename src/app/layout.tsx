@@ -30,25 +30,10 @@ export default function RootLayout({
 	return (
 		<html className="bg-[#E5E5E5] h-[100svh]" lang="en">
 			<head>
-				{/* <Script
-					strategy="afterInteractive"
-					src="https://unpkg.com/markdown-it@14.1.0/dist/markdown-it.min.js"
-				/> */}
 				<Script
 					strategy="afterInteractive"
 					src="https://unpkg.com/adaptivecards@3.0.0/dist/adaptivecards.min.js"
 				/>
-				{/* <link
-					precedence="default"
-					rel="stylesheet"
-					href="https://unpkg.com/adaptivecards@3.0.0/dist/adaptivecards.css"
-				/>
-
-				<link
-					precedence="default"
-					rel="stylesheet"
-					href="https://unpkg.com/adaptivecards@3.0.0/dist/adaptivecards-carousel.css"
-				/> */}
 			</head>
 			<body
 				className={`${fontSans.variable} ${fontMono.variable} antialiased h-full overflow-y-auto bg-[#E5E5E5]`}
