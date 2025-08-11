@@ -21,7 +21,7 @@ export default function NotFound() {
 					width={256}
 				/>
 			</div>
-			<div className="space-y-1 text-sm text-center max-w-50">
+			<div className="space-y-1 text-sm text-center max-w-xs">
 				<p className="font-medium">
 					We couldn't find the page you were looking for.
 				</p>
