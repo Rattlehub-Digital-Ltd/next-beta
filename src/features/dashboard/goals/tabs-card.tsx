@@ -1,9 +1,9 @@
 import { Icon } from "@iconify/react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { track } from "@/lib/analytics";
 import TimelineTab from "../tabs/timeline-tab";
 import DocumentsTab from "./documents-tab";
-import { track } from "@/lib/analytics";
 
 export default function TabsCard({
 	referer = "timeline",
