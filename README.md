@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nextdot - Estate Planning Platform
+
+Nextdot is a modern, web-based platform designed to help users manage their estate planning and financial well-being. It provides actionable suggestions, risk assessments, and a centralized dashboard to keep track of important life documents and policies.
+
+## Features
+
+-   **Dashboard:** A central hub that provides a summary of completed tasks and outstanding issues.
+-   **Actionable Suggestions:** The platform provides personalized suggestions (e.g., "Secure a Medical Policy") to help users improve their estate plan.
+-   **Risk Assessment:** Visualizes potential risks to your estate across categories like "Protection," "Delay," and "Cost."
+-   **Family Management:** Allows users to manage information for their partner, children, and other dependents.
+-   **Onboarding:** A guided process to help new users set up their profiles and input initial data.
+-   **Third-Party Integration:** Connects with service providers like "NextDot Advisory" and integrates with Stripe for payments.
+-   **Educational Content:** Provides links to suggested readings to help users make informed decisions.
+
+## Tech Stack
+
+-   **Framework:** [Next.js](https://nextjs.org/) 15 (with App Router)
+-   **Language:** [TypeScript](https://www.typescriptlang.org/)
+-   **Package Manager:** [Bun](https://bun.sh/)
+-   **Styling:** [Tailwind CSS](https://tailwindcss.com/) with [Shadcn UI](https://ui.shadcn.com/) components.
+-   **State Management:** [Zustand](https://github.com/pmndrs/zustand) (client-side) and [TanStack Query](https://tanstack.com/query/latest) (server-side).
+-   **Forms:** [TanStack Form](https://tanstack.com/form/latest)
+-   **Authentication:** [Auth0](https://auth0.com/)
+-   **Linting & Formatting:** [Biome](https://biomejs.dev/)
+-   **API Client:** [Axios](https://axios-http.com/)
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+-   [Bun](https://bun.sh/docs/installation) installed on your machine.
+-   Node.js (LTS version recommended).
+
+### Installation
+
+1.  Clone the repository:
+    ```bash
+    git clone <repository-url>
+    cd next-beta
+    ```
+
+2.  Install dependencies:
+    ```bash
+    bun install
+    ```
+
+### Running the Development Server
+
+To run the application in development mode with hot-reloading:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+bun run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will be available at [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+-   `bun run dev`: Starts the development server with Turbopack.
+-   `bun run build`: Creates a production-ready build.
+-   `bun run start`: Starts the production server.
+-   `bun run lint`: Lints and auto-fixes code using Biome.
+-   `bun run format`: Formats code using Biome.
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+The codebase is organized into several key directories within `src/`:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+-   `app/`: Contains the pages and routes, following the Next.js App Router structure.
+-   `components/`: Shared, reusable UI components.
+-   `features/`: More complex, domain-specific components that make up the core features of the application.
+-   `lib/`: Utility functions, API request logic, and provider configurations.
+-   `hooks/`: Custom React hooks.
+-   `store/`: Zustand state management stores.
+-   `types/`: TypeScript type definitions.
+-   `public/`: Static assets like images and fonts.
