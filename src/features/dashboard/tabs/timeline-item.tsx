@@ -48,12 +48,10 @@ function TimelineItem({ item, lastItem = false }: TimelineItemProps) {
 					</p>
 				</div>
 				<CategoryList items={categories.map((c) => c.toLowerCase())} />
-				<div className="flex flex-col justify-center space-y-1 py-3 px-6 rounded-[10px] border border-[#EBEDED] backdrop-blur-[25px] bg-white/65 relative shadow-[0px_16px_30px_0px rgba(106, 106, 106, 0.06)]">
+				<div className="flex flex-col justify-center space-y-1 p-4 rounded-[12px] border border-[#EBEDED] backdrop-blur-[25px] bg-white/65 relative shadow-[0px_16px_30px_0px rgba(106, 106, 106, 0.06)]">
 					<UserBadge name={ownerDisplayName} />
-					<p className="text-sm font-semibold">{displayName}</p>
+					<p className="text-sm font-semibold mt-1">{displayName}</p>
 					<p className="text-xs text-[#616161]">{description}</p>
-
-					<div className="absolute top-2 left-1.5 h-full w-0.5 bg-indigo-500 rounded-full max-h-[80%]" />
 				</div>
 			</div>
 		</div>

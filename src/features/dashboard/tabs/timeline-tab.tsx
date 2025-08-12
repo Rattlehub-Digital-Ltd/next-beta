@@ -1,43 +1,75 @@
+import { Icon } from "@iconify/react";
+import * as motion from "motion/react-client";
 import ShortUniqueId from "short-unique-id";
-import { useGetTimeline } from "@/api/services/dashboard/queries";
+import { useInfiniteGetTimeline } from "@/api/services/dashboard/queries";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import TimelineItem from "./timeline-item";
 
 const uid = new ShortUniqueId({ length: 10 });
 
 export default function TimelineTab({ referer }: { referer: string }) {
-	const { data, isLoading, isError } = useGetTimeline(referer, {
+	const {
+		data,
+		isLoading,
+		error,
+		fetchNextPage,
+		hasNextPage,
+		isFetching,
+		isFetchingNextPage,
+	} = useInfiniteGetTimeline(referer, {
 		page: 1,
 		limit: 15,
 	});
 
-	const items = data?.items;
-
 	return (
-		<div className="flex flex-col pt-8 px-4 rounded-[23px] border border-[#EBEDED] backdrop-blur-[25px] bg-white/15">
+		<div className="flex flex-col pt-8">
 			{isLoading &&
 				Array.from({ length: 5 }).map(() => (
 					<LoadingSkeleton key={uid.randomUUID()} />
 				))}
 
 			{/** biome-ignore lint/complexity/useOptionalChain: later */}
-			{items &&
-				items.map((item, index, arr) => (
-					<TimelineItem
-						key={uid.randomUUID()}
-						item={item}
-						lastItem={index === arr.length - 1}
-					/>
-				))}
+			{data &&
+				data?.pages.map((page) => {
+					return page.items.map((item, index, arr) => {
+						return (
+							<div key={uid.randomUUID()} className="w-full overflow-hidden">
+								<TimelineItem
+									key={uid.randomUUID()}
+									item={item}
+									lastItem={index === arr.length - 1}
+								/>
+							</div>
+						);
+					});
+				})}
 
-			{items?.length === 0 && (
+			{hasNextPage && (
+				<motion.div className="py-0 rounded-2xl" whileTap={{ scale: 0.95 }}>
+					<Button
+						className="w-full bg-white/45 backdrop-blur-2xl text-foreground hover:bg-white/75 hover:text-foreground rounded-[12px] text-[13px] font-medium font-mono"
+						disabled={!hasNextPage || isFetching}
+						onClick={() => fetchNextPage()}
+					>
+						<Icon icon="fluent:arrow-counterclockwise-dashes-24-filled" />
+						{isFetchingNextPage
+							? "Loading more..."
+							: hasNextPage
+								? "Load More"
+								: "Nothing more to load"}
+					</Button>
+				</motion.div>
+			)}
+
+			{!hasNextPage && (
 				<p className="text-[13px] pb-8 text-muted-foreground">
 					You are all caught up for now
 				</p>
 			)}
 
 			{/* Fetching data error */}
-			{isError && (
+			{error && (
 				<p className="text-[13px] pb-8 text-muted-foreground">
 					Error fetching data
 				</p>

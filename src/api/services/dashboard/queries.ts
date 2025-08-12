@@ -89,6 +89,36 @@ export const useGetAdaptiveCard = (referer: string, recordId?: string) => {
 	});
 };
 
+export const useInfiniteGetTimeline = (
+	referer: string,
+	paging: PaginationParams,
+) => {
+	const { client } = useAxios();
+
+	return useInfiniteQuery({
+		queryKey: [
+			"timeline",
+			referer,
+			paging,
+			"infinite",
+			{ limit: paging.limit },
+		],
+		queryFn: async ({ pageParam = 1 }) => {
+			const { data } = await client.get<TimelineData>(
+				dashboardEndpoints.getInfiniteTimeline(pageParam),
+			);
+
+			return data;
+		},
+		initialPageParam: 1,
+		getNextPageParam: (lastPage, allPages) => {
+			const lastBatch = lastPage.totalItems ?? 0;
+			if (lastBatch < lastPage.pageSize) return undefined;
+			return allPages.length + 1;
+		},
+	});
+};
+
 export const useGetTimeline = (referer: string, paging: PaginationParams) => {
 	const { client } = useAxios();
 

@@ -26,7 +26,6 @@ export default function ActionsTab() {
 		hasNextPage,
 		isFetching,
 		isFetchingNextPage,
-		// status,
 	} = useInfiniteGetDocuments({
 		page: 1,
 		limit: 5,
@@ -80,20 +79,22 @@ export default function ActionsTab() {
 				</ul>
 			)}
 
-			<motion.div className="px-2" whileTap={{ scale: 0.95 }}>
-				<Button
-					className="w-full bg-white/45 backdrop-blur-2xl text-foreground hover:bg-white/75 hover:text-foreground rounded-[12px] text-[13px] font-medium font-mono"
-					disabled={!hasNextPage || isFetching}
-					onClick={() => fetchNextPage()}
-				>
-					<Icon icon="fluent:arrow-counterclockwise-dashes-24-filled" />
-					{isFetchingNextPage
-						? "Loading more..."
-						: hasNextPage
-							? "Load More"
-							: "Nothing more to load"}
-				</Button>
-			</motion.div>
+			{hasNextPage && (
+				<motion.div className="px-2" whileTap={{ scale: 0.95 }}>
+					<Button
+						className="w-full bg-white/45 backdrop-blur-2xl text-foreground hover:bg-white/75 hover:text-foreground rounded-[12px] text-[13px] font-medium font-mono"
+						disabled={!hasNextPage || isFetching}
+						onClick={() => fetchNextPage()}
+					>
+						<Icon icon="fluent:arrow-counterclockwise-dashes-24-filled" />
+						{isFetchingNextPage
+							? "Loading more..."
+							: hasNextPage
+								? "Load More"
+								: "Nothing more to load"}
+					</Button>
+				</motion.div>
+			)}
 
 			{/* Loading complete and data has no value */}
 			{!hasNextPage && (
