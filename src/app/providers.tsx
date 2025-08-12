@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import type { ThemeProviderProps } from "next-themes";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import type * as React from "react";
+import { AnalyticsProvider } from "@/lib/analytics-provider";
 
 const AuthProvider = dynamic(() => import("@/lib/auth-provider"), {
 	ssr: false,
@@ -31,7 +32,9 @@ export function Providers({ children, themeProps }: ProvidersProps) {
 		<QueryClientProvider client={queryClient}>
 			{/* <ReactQueryDevtools initialIsOpen={false} /> */}
 			<AuthProvider>
-				<NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
+				<AnalyticsProvider>
+					<NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
+				</AnalyticsProvider>
 			</AuthProvider>
 		</QueryClientProvider>
 	);
