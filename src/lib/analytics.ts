@@ -12,6 +12,7 @@ const analytics = Analytics({
 		}),
 		customerIO({
 			siteId: process.env.NEXT_PUBLIC_SITE_ID as string,
+			apiKey: process.env.NEXT_PUBLIC_CUSTOMER_IO_API_KEY as string,
 		}),
 	],
 });
