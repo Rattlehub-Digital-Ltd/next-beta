@@ -4,6 +4,7 @@ import * as motion from "motion/react-client";
 import ShortUniqueId from "short-unique-id";
 import { useGetLifeFileDocuments } from "@/api/services/dashboard/overview/queries";
 import { Skeleton } from "@/components/ui/skeleton";
+import AdaptiveCardButton from "@/features/shared/adaptive-card/adaptive-card-button";
 import DocumentItem from "@/features/shared/document-item";
 import Header from "../header";
 
@@ -29,17 +30,24 @@ export default function LifeFileDocuments() {
 					{items && (
 						<div className="grid grid-cols-2 gap-2">
 							{items.map((item) => (
-								<motion.div key={item.id} whileTap={{ scale: 0.95 }}>
-									<DocumentItem
-										className={
-											item.isApplicable
-												? "bg-[#007AFF]/5 ring-[#007AFF]/80"
-												: ""
-										}
-										color={item.isApplicable ? "#007AFF" : ""}
-										item={item}
-									/>
-								</motion.div>
+								<AdaptiveCardButton
+									key={item.id}
+									recordId={item.id}
+									referer=""
+									refresh={console.log}
+								>
+									<motion.div key={item.id} whileTap={{ scale: 0.95 }}>
+										<DocumentItem
+											className={
+												item.isApplicable
+													? "bg-[#007AFF]/5 ring-[#007AFF]/80"
+													: ""
+											}
+											color={item.isApplicable ? "#007AFF" : ""}
+											item={item}
+										/>
+									</motion.div>
+								</AdaptiveCardButton>
 							))}
 						</div>
 					)}

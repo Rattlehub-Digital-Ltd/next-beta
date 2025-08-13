@@ -106,6 +106,28 @@ export const useGetAdaptiveCard = (referer: string, recordId?: string) => {
 	});
 };
 
+export const usePutAdaptiveCard = async (
+	formData: FormData,
+	headers: object = {},
+) => {
+	const { client } = useAxios();
+
+	// biome-ignore lint/suspicious/noExplicitAny: stuff
+	const { data } = await client.put<any>(
+		dashboardEndpoints.submitAdaptiveCard(),
+		formData,
+		{
+			baseURL: `${process.env.NEXT_PUBLIC_API_BASE_URL as string}`,
+			headers: {
+				"Content-Type": "multipart/form-data",
+				...headers,
+			},
+		},
+	);
+
+	return data;
+};
+
 export const useInfiniteGetTimeline = (
 	referer: string,
 	paging: PaginationParams,

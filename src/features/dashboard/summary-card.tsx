@@ -144,8 +144,8 @@ export default function SummaryCard() {
 					<Separator className="bg-black/5 px-4" />
 					<SummaryFooter>
 						<span className="font-normal">
-							Do you have{" "}
-							<span className="font-semibold">Medical Policy Document</span> in
+							Do you have a{" "}
+							<span className="font-semibold">{item.displayName}</span> in
 							place?
 						</span>
 					</SummaryFooter>

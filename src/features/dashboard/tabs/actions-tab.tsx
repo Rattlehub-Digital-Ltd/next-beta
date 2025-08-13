@@ -2,17 +2,15 @@
 
 import { Icon } from "@iconify/react";
 import * as motion from "motion/react-client";
-import { useState } from "react";
 import ShortUniqueId from "short-unique-id";
 import { useInfiniteGetDocuments } from "@/api/services/dashboard/queries";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
-import AdaptiveCardButton from "@/features/shared/adaptive-card/adaptive-card-button";
 import RiskCarousel from "@/features/shared/risk-carousel";
 import SuggestionItem from "@/features/shared/suggestion-item";
 import { cardVariants } from "@/motion";
-import { SparkleIcon } from "@/styles/icons";
-import type { ActionItem } from "@/types/action-item";
+import CardFooter from "./card-footer";
 
 const uid = new ShortUniqueId({ length: 10 });
 
@@ -30,8 +28,6 @@ export default function ActionsTab() {
 		page: 1,
 		limit: 5,
 	});
-
-	const [currentItem, setCurrentItem] = useState<ActionItem | undefined>();
 
 	return (
 		<div className="space-y-4">
@@ -58,19 +54,31 @@ export default function ActionsTab() {
 									<motion.div
 										id={id}
 										variants={cardVariants}
-										className="flex flex-col space-y-3 p-4 rounded-[23px] border border-[#EBEDED] backdrop-blur-[25px] bg-white/65 shadow-[0px_16px_30px_0px rgba(106, 106, 106, 0.06)]"
+										className="flex flex-col space-y-3 py-4 rounded-[23px] border border-[#EBEDED] backdrop-blur-[25px] bg-white/65 shadow-[0px_16px_30px_0px rgba(106, 106, 106, 0.06)]"
 									>
-										<SuggestionItem
-											title={displayName}
-											description={eduText}
-											showReminder={false}
-											color="teal"
-											updateCurrentItem={(show: boolean) =>
-												setCurrentItem(show ? item : undefined)
-											}
-										/>
+										<div className="px-4">
+											<SuggestionItem
+												title={displayName}
+												description={eduText}
+												showReminder={false}
+												color="teal"
+											/>
+										</div>
 
-										<RiskCarousel items={riskItems} />
+										<div className="px-4">
+											<RiskCarousel items={riskItems} />
+										</div>
+
+										<Separator className="bg-black/5 px-4" />
+										<CardFooter recordId={id} refresh={refetch}>
+											<span className="font-normal">
+												Do you have{" "}
+												<span className="font-semibold">
+													{item.displayName}
+												</span>{" "}
+												in place?
+											</span>
+										</CardFooter>
 									</motion.div>
 								</motion.li>
 							);
@@ -108,31 +116,6 @@ export default function ActionsTab() {
 				<p className="text-[13px] pl-14 text-muted-foreground">
 					Error fetching data
 				</p>
-			)}
-
-			{/* Adaptive card button */}
-			{currentItem && (
-				<div className="mt-6 fixed bottom-24 left-0 w-full z-20 px-6">
-					<AdaptiveCardButton
-						recordId={currentItem.id}
-						referer="actions"
-						refresh={refetch}
-					>
-						<motion.div whileTap={{ scale: 0.95 }}>
-							<Button
-								color="primary"
-								size="lg"
-								className="shadow-md bg-blue-700/80 backdrop-blur-[25px] active:bg-blue-700 rounded-2xl shadow-blue-500/40 h-11 text-[13px] w-full"
-								variant="default"
-							>
-								<SparkleIcon className="w-5 h-5 text-white shrink-0" />
-								<span className="line-clamp-1 truncate">
-									{currentItem.displayName}
-								</span>
-							</Button>
-						</motion.div>
-					</AdaptiveCardButton>
-				</div>
 			)}
 		</div>
 	);

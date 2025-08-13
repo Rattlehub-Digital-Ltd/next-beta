@@ -1,10 +1,10 @@
 import { Icon } from "@iconify/react";
+import type { Variants } from "motion";
 import * as motion from "motion/react-client";
 import ShortUniqueId from "short-unique-id";
 import { useOnboardingStore } from "store/use-onboarding-store";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import type { Variants } from "motion";
 
 interface PaginationProps {
 	currentPage: number;

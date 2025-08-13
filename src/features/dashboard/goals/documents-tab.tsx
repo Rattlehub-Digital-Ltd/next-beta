@@ -9,7 +9,7 @@ export default function DocumentsTab({ goalName }: { goalName: string }) {
 	const { data, isLoading, isError } = useGetGoalDocuments(goalName);
 
 	return (
-		<div className="grid grid-cols-2 gap-4 py-4 px-4 rounded-[23px] border border-[#EBEDED] backdrop-blur-[25px] bg-white/65">
+		<div className="grid grid-cols-2 gap-2 p-2 rounded-[23px] border border-[#EBEDED] backdrop-blur-[25px] bg-white/25">
 			{data &&
 				data?.length > 0 &&
 				data.map((item) => (
@@ -19,7 +19,10 @@ export default function DocumentsTab({ goalName }: { goalName: string }) {
 						referer=""
 						refresh={console.log}
 					>
-						<motion.div whileTap={{ scale: !item.isApplicable ? 0.95 : 1 }}>
+						<motion.div
+							className="w-full"
+							whileTap={{ scale: !item.isApplicable ? 0.95 : 1 }}
+						>
 							<DocumentItem
 								className={
 									item.isApplicable ? "bg-[#ECFDF5] ring-[#00C7BE]/80" : ""

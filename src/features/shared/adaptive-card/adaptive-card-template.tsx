@@ -1,7 +1,7 @@
 import * as AdaptiveCards from "adaptivecards";
 import MarkdownIt from "markdown-it";
 import { Geist_Mono, Mona_Sans } from "next/font/google";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const adaptiveCard = new AdaptiveCards.AdaptiveCard();
 
@@ -27,20 +27,29 @@ AdaptiveCards.AdaptiveCard.onProcessMarkdown = (text, result) => {
 };
 
 export interface AdaptiveCardProps {
+	autoYes?: boolean;
+	recordId?: string;
 	// biome-ignore lint/suspicious/noExplicitAny: true
 	card: any;
+	setProccessing: (isProcessing: boolean) => void;
 	submit: (
 		formData: FormData,
 		isCancelButton: boolean,
-		headers?: unknown,
-	) => void;
+		headers?: object,
+	) => Promise<void>;
 }
 
-function AdaptiveCardTemplate({ card, submit }: AdaptiveCardProps) {
+function AdaptiveCardTemplate({
+	autoYes,
+	recordId,
+	card,
+	submit,
+}: AdaptiveCardProps) {
 	const cardWrapperRef = useRef<HTMLDivElement>(null);
 	const formData = useRef<FormData>(new FormData());
+	const [initialized, setInitialized] = useState(false);
 
-	useEffect(() => {
+	const initialize = useCallback(async () => {
 		if (!cardWrapperRef || !card || !cardWrapperRef.current) return;
 
 		const adaptiveCard = new AdaptiveCards.AdaptiveCard();
@@ -48,6 +57,40 @@ function AdaptiveCardTemplate({ card, submit }: AdaptiveCardProps) {
 
 		cardWrapperRef.current.innerHTML = "";
 		adaptiveCard.render(cardWrapperRef.current);
+
+		if (autoYes && recordId && !initialized) {
+			const inputs = adaptiveCard.getAllInputs();
+
+			const form = new FormData();
+
+			if (inputs?.length > 0) {
+				let i = 0;
+				for (const input of inputs) {
+					const { id, value, getJsonTypeName } = input;
+					const typeName = getJsonTypeName();
+
+					if (
+						value !== "" &&
+						value !== undefined &&
+						i === 1 &&
+						typeName === "Input.ChoiceSet"
+					) {
+						form.append(id?.toString() ?? "", value);
+					} else {
+						form.append(id?.toString() ?? "", "yes");
+					}
+					i++;
+				}
+
+				const header = {};
+
+				(header as Record<string, string>)["x-record-identifier"] = recordId;
+
+				await submit(form, false, header);
+			}
+
+			setInitialized(true);
+		}
 
 		card.onExecuteAction = (action: AdaptiveCards.SubmitAction) => {
 			// Access the data from the action
@@ -90,8 +133,6 @@ function AdaptiveCardTemplate({ card, submit }: AdaptiveCardProps) {
 				}
 			}
 
-			console.log("Form data to submit:", form);
-
 			action.validateInputs();
 			console.debug(
 				action.title,
@@ -106,7 +147,11 @@ function AdaptiveCardTemplate({ card, submit }: AdaptiveCardProps) {
 				action.toJSON()?.data,
 			);
 		};
-	}, [card, submit]);
+	}, [card, submit, autoYes, recordId, initialized]);
+
+	useEffect(() => {
+		initialize();
+	}, [initialize]);
 
 	return (
 		<div className="h-full md:max-w-xl">

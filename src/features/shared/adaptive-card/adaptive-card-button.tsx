@@ -1,9 +1,9 @@
 /** biome-ignore-all lint/suspicious/noExplicitAny: true */
-
 import { VisuallyHidden } from "@react-aria/visually-hidden";
 import Image from "next/image";
-import { type ReactNode, useState } from "react";
+import { type ReactNode, useCallback, useState } from "react";
 import ShortUniqueId from "short-unique-id";
+import { dashboardEndpoints } from "@/api/services/dashboard/endpoints";
 import { useGetAdaptiveCard } from "@/api/services/dashboard/queries";
 import {
 	Drawer,
@@ -14,11 +14,12 @@ import {
 } from "@/components/ui/drawer";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
-import useApi from "@/hooks/use-api";
+import useAxios from "@/hooks/use-axios";
 import type { Document } from "@/types/document";
 import AdaptiveCardTemplate from "./adaptive-card-template";
 
 type Props = {
+	autoSubmit?: boolean;
 	currentDocument?: Document;
 	recordId?: string;
 	referer: string;
@@ -61,6 +62,7 @@ const ErrorComp = () => (
 );
 
 function AdaptiveCardButton({
+	autoSubmit,
 	recordId,
 	referer,
 	children,
@@ -71,43 +73,52 @@ function AdaptiveCardButton({
 		referer,
 		recordId,
 	);
-	const { submitAdaptiveCard } = useApi();
+
+	const { client } = useAxios();
 
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [open, setOpen] = useState(defaultOpen);
 
-	const onSubmit = async (
-		formData: FormData,
-		isCancelButton: boolean,
-		headers?: unknown,
-	) => {
-		setIsProcessing(true);
+	const submit = useCallback(
+		async (formData: FormData, isCancelButton: boolean, headers?: object) => {
+			setIsProcessing(true);
 
-		const header = headers ? (headers as object) : {};
-		if (recordId) {
-			// If recordId is provided, include it in the headers
-			(header as Record<string, string>)["x-record-identifier"] = recordId;
-		}
+			try {
+				await client.put<any>(
+					dashboardEndpoints.submitAdaptiveCard(),
+					formData,
+					{
+						baseURL: `${process.env.NEXT_PUBLIC_API_BASE_URL as string}`,
+						headers: {
+							"Content-Type": "multipart/form-data",
+							...headers,
+						},
+					},
+				);
+			} catch (error) {
+				console.log(error);
+			} finally {
+				setIsProcessing(false);
 
-		await submitAdaptiveCard(formData, header);
-
-		refetch({});
-
-		if (isCancelButton) {
-			setIsProcessing(false);
-			setOpen(false);
-			refresh();
-		}
-
-		setIsProcessing(false);
-	};
+				if (isCancelButton) {
+					setOpen(false);
+					refresh();
+					refetch();
+				}
+			}
+		},
+		[refresh, client, refetch],
+	);
 
 	return (
 		<Drawer open={open} onOpenChange={setOpen} onClose={refresh}>
-			<DrawerTrigger asChild className="flex justify-center w-full">
+			<DrawerTrigger
+				asChild
+				className="flex justify-center w-full overflow-hidden"
+			>
 				{children}
 			</DrawerTrigger>
-			<DrawerContent className="max-h-[95svh] flex flex-col items-center min-h-[80svh] h-full pb-4 !rounded-t-3xl">
+			<DrawerContent className="h-[90svh] flex flex-col items-center min-h-[80svh]  pb-4 !rounded-t-3xl">
 				<VisuallyHidden>
 					<DrawerHeader className="sticky top-0 z-20 w-full max-w-xl pl-5 text-left bg-background/80 backdrop-blur-sm">
 						<DrawerTitle className="flex items-center gap-2">
@@ -119,8 +130,11 @@ function AdaptiveCardButton({
 					{isLoading && <Loading />}
 					{!isLoading && data && (
 						<AdaptiveCardTemplate
+							autoYes={autoSubmit}
+							recordId={recordId}
 							card={data?.itemListElement?.card}
-							submit={onSubmit}
+							setProccessing={setIsProcessing}
+							submit={submit}
 						/>
 					)}
 					{isError && <ErrorComp />}
