@@ -27,7 +27,7 @@ export default function EstatePlan() {
 					/>
 
 					{/* Loading complete and data has value */}
-					{items && (
+					{items && items.length > 0 && (
 						<>
 							<GoalProgressBar
 								title="Estate plan is 45% complete"

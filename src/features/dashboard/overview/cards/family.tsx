@@ -26,7 +26,7 @@ export default function Family() {
 					/>
 
 					{/* Loading complete and data has value */}
-					{items && (
+					{items && items.length > 0 && (
 						<div className="flex flex-wrap gap-2">
 							{items.map((item) => (
 								<motion.div key={uid.randomUUID()} whileTap={{ scale: 0.95 }}>
@@ -39,7 +39,7 @@ export default function Family() {
 					{/* Loading complete and data has no value */}
 					{items?.length === 0 && (
 						<p className="text-[13px] pl-14 text-muted-foreground">
-							You are all caught up for now
+							You haven't added any family members
 						</p>
 					)}
 
