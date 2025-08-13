@@ -1,6 +1,7 @@
 import * as motion from "motion/react-client";
 import type { CategoryVariant } from "@/types/category-variant";
 import { CategoryBadge } from "./category-badge";
+import TagDialog from "./tag/tag-dialog";
 
 const containerVariants = {
 	hidden: { opacity: 0 },
@@ -31,9 +32,11 @@ function CategoryList({ items }: CategoryListProps) {
 			animate="visible"
 		>
 			{items.map((item) => (
-				<motion.div key={item} variants={itemVariants}>
-					<CategoryBadge variant={item.toLowerCase() as CategoryVariant} />
-				</motion.div>
+				<TagDialog key={item} name={item}>
+					<motion.div whileTap={{ scale: 0.95 }} variants={itemVariants}>
+						<CategoryBadge variant={item.toLowerCase() as CategoryVariant} />
+					</motion.div>
+				</TagDialog>
 			))}
 		</motion.div>
 	);
