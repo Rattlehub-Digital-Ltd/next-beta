@@ -3,15 +3,12 @@
 import { Icon } from "@iconify/react";
 import axios from "axios";
 import { motion } from "motion/react";
-import ShortUniqueId from "short-unique-id";
-import { useGetFamily } from "@/api/services/dashboard/overview/queries";
 import { Button } from "@/components/ui/button";
 import { appConfig } from "@/config/app.config";
 import Changelog from "@/features/dashboard/more/changelog";
 import AddPeople from "@/features/onboarding/summary/add-people";
 import ProfileHeader from "@/features/onboarding/summary/profile-header";
 import Header from "@/features/shared/header";
-import PersonCard from "@/features/shared/person-card";
 import useApi from "@/hooks/use-api";
 
 const container = {
@@ -30,11 +27,8 @@ const item = {
 	show: { opacity: 1, y: 0, scale: 1 },
 };
 
-const uid = new ShortUniqueId({ length: 10 });
-
 export default function MorePage() {
 	const { accessToken } = useApi();
-	const { data } = useGetFamily();
 
 	return (
 		<div className="space-y-8 pb-8">
@@ -54,22 +48,7 @@ export default function MorePage() {
 					<h1 className="text-[10px] uppercase mb-3 ml-1 font-medium">
 						people
 					</h1>
-					{data && (
-						<ul className="w-full flex flex-col space-y-2 mb-6">
-							{data.map((item) => (
-								<li key={uid.randomUUID()}>
-									<PersonCard
-										type="partner"
-										title={`Edit ${item.displayName}`}
-										firstName={item.displayName.split(" ")?.[0]}
-										lastName={item.displayName.split(" ")?.[1]}
-										relationship={item.itemType}
-										onDelete={console.log}
-									/>
-								</li>
-							))}
-						</ul>
-					)}
+
 					<motion.div
 						variants={container}
 						initial="hidden"
