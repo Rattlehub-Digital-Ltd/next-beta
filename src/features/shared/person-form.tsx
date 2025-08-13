@@ -3,8 +3,10 @@
 import type { AnyFieldApi } from "@tanstack/react-form";
 import { useForm } from "@tanstack/react-form";
 import * as motion from "motion/react-client";
+import { useChildrenStore } from "store/use-children-store";
+import { useDependentStore } from "store/use-dependent-store";
 import { usePartnerStore } from "store/use-partner-store";
-import { usePersonDrawerStore } from "store/use-person-drawer-store";
+// import { usePersonDrawerStore } from "store/use-person-drawer-store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -60,7 +62,10 @@ function PersonForm({
 	onClose,
 }: PersonFormProps) {
 	const { partner, setPartner } = usePartnerStore();
-	const { onOpenChange } = usePersonDrawerStore();
+	const { children, setChildren } = useChildrenStore();
+	const { dependents, setDependents } = useDependentStore();
+
+	// const { onOpenChange } = usePersonDrawerStore();
 
 	const form = useForm({
 		defaultValues: {
@@ -81,11 +86,18 @@ function PersonForm({
 				items.push(data);
 				setPartner(items);
 			} else if (type === "child") {
+				const items = children ? children : [];
+				items.push(data);
+				setChildren(items);
 			} else if (type === "dependent") {
+				const items = dependents ? dependents : [];
+				items.push(data);
+				setDependents(items);
 			}
 
-			onOpenChange(false);
-			// onClose();
+			// onOpenChange(false);
+			form.reset();
+			onClose();
 		},
 	});
 
@@ -97,6 +109,7 @@ function PersonForm({
 					e.preventDefault();
 					e.stopPropagation();
 					form.handleSubmit();
+					form.reset();
 				}}
 			>
 				<div>

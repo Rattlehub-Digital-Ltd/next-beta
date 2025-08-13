@@ -86,15 +86,13 @@ const Content = ({ value, onValueChange, onReset }: PersonProps) => {
 };
 
 const Dependents = () => {
-	const { has, setHas, dependents, setDependents } = useDependentStore();
+	const { has, setHas, setDependents } = useDependentStore();
 	const { setTitle, onOpenChange, setType } = usePersonDrawerStore();
 	const { setNextButtonDisabled } = useOnboardingStore();
 
 	useEffect(() => {
-		setNextButtonDisabled(
-			has === null || (has === "yes" && dependents?.length === 0),
-		);
-	}, [has, dependents?.length, setNextButtonDisabled]);
+		setNextButtonDisabled(false);
+	}, [setNextButtonDisabled]);
 
 	return (
 		<motion.div
