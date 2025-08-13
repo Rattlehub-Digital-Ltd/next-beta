@@ -1,5 +1,6 @@
 "use client";
 
+import * as motion from "motion/react-client";
 import ShortUniqueId from "short-unique-id";
 import { useGetLifeFileDocuments } from "@/api/services/dashboard/overview/queries";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -28,14 +29,17 @@ export default function LifeFileDocuments() {
 					{items && (
 						<div className="grid grid-cols-2 gap-2">
 							{items.map((item) => (
-								<DocumentItem
-									key={item.id}
-									className={
-										item.isApplicable ? "bg-[#007AFF]/5 ring-[#007AFF]/80" : ""
-									}
-									color={item.isApplicable ? "#007AFF" : ""}
-									item={item}
-								/>
+								<motion.div key={item.id}>
+									<DocumentItem
+										className={
+											item.isApplicable
+												? "bg-[#007AFF]/5 ring-[#007AFF]/80"
+												: ""
+										}
+										color={item.isApplicable ? "#007AFF" : ""}
+										item={item}
+									/>
+								</motion.div>
 							))}
 						</div>
 					)}
