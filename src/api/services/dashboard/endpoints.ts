@@ -14,4 +14,6 @@ export const dashboardEndpoints = {
 		`/documents/activity?PageNumber=${paging.page}&PageSize=${paging.limit}`,
 	getInfiniteTimeline: (page: number) =>
 		`/documents/activity?PageNumber=${page}`,
+	getGoalDocuments: (goalName: string) =>
+		`/overview/documents?goalName=${goalName}`,
 } as const;

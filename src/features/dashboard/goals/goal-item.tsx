@@ -25,7 +25,7 @@ function GoalItem({ item }: GoalItemProps) {
 				<RiskBar />
 			</div>
 			<div>
-				<TabsCard referer={name} />
+				<TabsCard goalName={name} referer={name} />
 			</div>
 			<div>
 				<GoalProgressBar

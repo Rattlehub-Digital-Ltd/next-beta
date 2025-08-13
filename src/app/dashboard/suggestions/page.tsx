@@ -47,7 +47,7 @@ export default function SuggestionsPage() {
 			{/* Fetching data error */}
 			{isError && (
 				<p className="text-[13px] pl-4 text-muted-foreground">
-					Error fetching goals
+					Error fetching suggestions
 				</p>
 			)}
 

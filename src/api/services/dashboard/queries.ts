@@ -5,6 +5,7 @@ import useAxios from "@/hooks/use-axios";
 import type { PaginationParams, TimelineData } from "@/types";
 import type { ActionsResponse } from "@/types/action-item";
 import type { ActivitySummary } from "@/types/activity-summary";
+import type { Document } from "@/types/document";
 import { dashboardEndpoints } from "./endpoints";
 
 export const useGetActivitySummary = () => {
@@ -30,6 +31,21 @@ export const useGetDocuments = (paging: PaginationParams) => {
 		queryFn: async () => {
 			const { data } = await client.get<ActionsResponse>(
 				dashboardEndpoints.getDocuments(paging),
+			);
+
+			return data;
+		},
+	});
+};
+
+export const useGetGoalDocuments = (goalName: string) => {
+	const { client } = useAxios();
+
+	return useQuery({
+		queryKey: ["goal_documents", goalName],
+		queryFn: async () => {
+			const { data } = await client.get<Document[]>(
+				dashboardEndpoints.getGoalDocuments(goalName),
 			);
 
 			return data;
@@ -74,7 +90,8 @@ export const useGetAdaptiveCard = (referer: string, recordId?: string) => {
 	return useQuery({
 		queryKey: ["adaptive_card", referer, recordId],
 		queryFn: async () => {
-			const { data } = await client.get<ActivitySummary>(
+			// biome-ignore lint/suspicious/noExplicitAny: unknown object
+			const { data } = await client.get<any>(
 				dashboardEndpoints.getAdaptiveCard(),
 				{
 					baseURL: `${process.env.NEXT_PUBLIC_API_BASE_URL as string}`,

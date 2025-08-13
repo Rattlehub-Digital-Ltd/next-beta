@@ -2,10 +2,9 @@
 
 import { VisuallyHidden } from "@react-aria/visually-hidden";
 import Image from "next/image";
-import { type ReactNode, useCallback, useEffect, useState } from "react";
+import { type ReactNode, useState } from "react";
 import ShortUniqueId from "short-unique-id";
-import { useActivitySummaryStore } from "store/use-activity-summary-store";
-import { useOnboardingStore } from "store/use-onboarding-store";
+import { useGetAdaptiveCard } from "@/api/services/dashboard/queries";
 import {
 	Drawer,
 	DrawerContent,
@@ -16,9 +15,11 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
 import useApi from "@/hooks/use-api";
+import type { Document } from "@/types/document";
 import AdaptiveCardTemplate from "./adaptive-card-template";
 
 type Props = {
+	currentDocument?: Document;
 	recordId?: string;
 	referer: string;
 	children: ReactNode;
@@ -48,7 +49,7 @@ const Loading = () => (
 );
 
 const ErrorComp = () => (
-	<div className="flex flex-col items-center justify-center w-full h-full px-4 py-8 space-y-4 text-center">
+	<div className="flex flex-col items-center justify-center w-full h-full px-8 py-8 space-y-4 text-center">
 		<div>
 			<Image src="/empty_state_3.svg" alt="" height={192} width={192} />
 		</div>
@@ -66,37 +67,14 @@ function AdaptiveCardButton({
 	defaultOpen,
 	refresh,
 }: Props) {
-	const { getActivitySummary, getAdaptiveCard, submitAdaptiveCard } = useApi();
-
-	const { setActivity } = useActivitySummaryStore();
-	const { setIsOnboarded } = useOnboardingStore();
-
-	const [isLoading, setIsLoading] = useState(true);
-	const [isProcessing, setIsProcessing] = useState(false);
-	const [open, setOpen] = useState(defaultOpen);
-	const [cards, setCards] = useState<any | undefined>();
-
-	const fetchData = useCallback(async () => {
-		if (!open) return;
-
-		setIsLoading(true);
-
-		const resp = await getAdaptiveCard(referer, recordId);
-
-		setCards(resp?.data);
-
-		const activityResponse = await getActivitySummary();
-		setActivity(activityResponse?.data);
-
-		setIsLoading(false);
-	}, [
-		getActivitySummary,
-		setActivity,
-		getAdaptiveCard,
+	const { data, isLoading, isError, refetch } = useGetAdaptiveCard(
 		referer,
 		recordId,
-		open,
-	]);
+	);
+	const { submitAdaptiveCard } = useApi();
+
+	const [isProcessing, setIsProcessing] = useState(false);
+	const [open, setOpen] = useState(defaultOpen);
 
 	const onSubmit = async (
 		formData: FormData,
@@ -105,19 +83,15 @@ function AdaptiveCardButton({
 	) => {
 		setIsProcessing(true);
 
-		setIsOnboarded(true);
-
 		const header = headers ? (headers as object) : {};
 		if (recordId) {
 			// If recordId is provided, include it in the headers
 			(header as Record<string, string>)["x-record-identifier"] = recordId;
 		}
 
-		const resp = await submitAdaptiveCard(formData, header);
+		await submitAdaptiveCard(formData, header);
 
-		if (resp) setCards(resp);
-
-		setIsOnboarded(true);
+		refetch({});
 
 		if (isCancelButton) {
 			setIsProcessing(false);
@@ -128,19 +102,8 @@ function AdaptiveCardButton({
 		setIsProcessing(false);
 	};
 
-	useEffect(() => {
-		fetchData();
-	}, [fetchData]);
-
 	return (
-		<Drawer
-			open={open}
-			onOpenChange={setOpen}
-			onClose={() => {
-				refresh();
-				console.log("Drawer closed");
-			}}
-		>
+		<Drawer open={open} onOpenChange={setOpen} onClose={refresh}>
 			<DrawerTrigger asChild className="flex justify-center w-full">
 				{children}
 			</DrawerTrigger>
@@ -154,13 +117,13 @@ function AdaptiveCardButton({
 				</VisuallyHidden>
 				<div className="relative flex-grow w-full overflow-y-auto max-w-xl p-0 pb-0">
 					{isLoading && <Loading />}
-					{!isLoading && cards && (
+					{!isLoading && data && (
 						<AdaptiveCardTemplate
-							card={cards?.itemListElement?.card}
+							card={data?.itemListElement?.card}
 							submit={onSubmit}
 						/>
 					)}
-					{!isLoading && !isProcessing && !cards && <ErrorComp />}
+					{isError && <ErrorComp />}
 					{isProcessing && (
 						<div className="absolute top-0 left-0 z-10 flex flex-col items-center justify-center w-full h-full space-y-8 text-center bg-background/90 backdrop-blur-sm">
 							<Spinner />

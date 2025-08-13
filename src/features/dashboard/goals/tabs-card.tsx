@@ -7,8 +7,10 @@ import DocumentsTab from "./documents-tab";
 
 export default function TabsCard({
 	referer = "timeline",
+	goalName,
 }: {
 	referer?: string;
+	goalName: string;
 }) {
 	function handleTabChange(value: string) {
 		track("viewed_tab", {
@@ -53,7 +55,7 @@ export default function TabsCard({
 					</div>
 				</div>
 				<TabsContent value="documents">
-					<DocumentsTab />
+					<DocumentsTab goalName={goalName} />
 				</TabsContent>
 				<TabsContent value="timeline">
 					<TimelineTab referer={referer} />
