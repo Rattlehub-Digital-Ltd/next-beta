@@ -4,6 +4,7 @@ import ShortUniqueId from "short-unique-id";
 import { useOnboardingStore } from "store/use-onboarding-store";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import type { Variants } from "motion";
 
 interface PaginationProps {
 	currentPage: number;
@@ -14,9 +15,25 @@ interface PaginationProps {
 
 const uid = new ShortUniqueId();
 
+export const itemVariant: Variants = {
+	active: {
+		width: 16,
+	},
+	inactive: {
+		width: 6,
+
+		transition: {
+			type: "inertia",
+			ease: "linear",
+			// duration: 0.3,
+		},
+	},
+};
+
 function Pagination({
 	currentPage,
 	totalPages,
+
 	onPrevious,
 	onNext,
 }: PaginationProps) {
@@ -44,17 +61,21 @@ function Pagination({
 				</Button>
 			</motion.div>
 			<div className="flex items-center gap-1.5">
-				{Array.from({ length: totalPages }, (_, i) => (
-					<motion.div
-						key={uid.randomUUID()}
-						className={cn(
-							"bg-[#3C3C43]/30 h-1.5 w-1.5 rounded-full transition-all ease-in-out duration-300",
-							{
-								"w-4 bg-blue-600": i + 1 === currentPage,
-							},
-						)}
-					/>
-				))}
+				{Array.from({ length: totalPages }, (_, i) => {
+					const isActive = i + 1 === currentPage;
+					return (
+						<motion.div
+							key={uid.randomUUID()}
+							layout
+							initial="inactive"
+							animate={isActive ? "active" : "inactive"}
+							variants={itemVariant}
+							className={cn("bg-[#3C3C43]/30 h-1.5 w-1.5 rounded-full", {
+								" bg-blue-600": isActive,
+							})}
+						/>
+					);
+				})}
 			</div>
 			<motion.div
 				whileTap={{ scale: 0.9 }}
