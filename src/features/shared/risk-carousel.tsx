@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import ShortUniqueId from "short-unique-id";
+import { useOnboardingStore } from "store/use-onboarding-store";
 import {
 	Carousel,
 	type CarouselApi,
@@ -19,6 +20,8 @@ type RiskCarouselProps = {
 const uid = new ShortUniqueId();
 
 export default function RiskCarousel({ items }: RiskCarouselProps) {
+	const { setNextButtonDisabled } = useOnboardingStore();
+
 	const [api, setApi] = useState<CarouselApi>();
 	const [current, setCurrent] = useState(0);
 	const [count, setCount] = useState(0);
@@ -27,12 +30,13 @@ export default function RiskCarousel({ items }: RiskCarouselProps) {
 		if (!api) {
 			return;
 		}
+		setNextButtonDisabled(false);
 		setCount(api.scrollSnapList().length);
 		setCurrent(api.selectedScrollSnap() + 1);
 		api.on("select", () => {
 			setCurrent(api.selectedScrollSnap() + 1);
 		});
-	}, [api]);
+	}, [api, setNextButtonDisabled]);
 
 	return (
 		<div className="space-y-3 flex flex-col">
