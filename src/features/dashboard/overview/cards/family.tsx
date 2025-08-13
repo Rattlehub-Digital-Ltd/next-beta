@@ -1,5 +1,6 @@
 "use client";
 
+import * as motion from "motion/react-client";
 import ShortUniqueId from "short-unique-id";
 import { useGetFamily } from "@/api/services/dashboard/overview/queries";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -28,7 +29,9 @@ export default function Family() {
 					{items && (
 						<div className="flex flex-wrap gap-2">
 							{items.map((item) => (
-								<UserBadge key={uid.randomUUID()} name={item.displayName} />
+								<motion.div key={uid.randomUUID()} whileTap={{ scale: 0.95 }}>
+									<UserBadge name={item.displayName} />
+								</motion.div>
 							))}
 						</div>
 					)}

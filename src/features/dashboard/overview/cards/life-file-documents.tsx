@@ -29,7 +29,7 @@ export default function LifeFileDocuments() {
 					{items && (
 						<div className="grid grid-cols-2 gap-2">
 							{items.map((item) => (
-								<motion.div key={item.id}>
+								<motion.div key={item.id} whileTap={{ scale: 0.95 }}>
 									<DocumentItem
 										className={
 											item.isApplicable

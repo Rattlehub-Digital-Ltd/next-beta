@@ -55,7 +55,7 @@ function BottomTabBar() {
 		return;
 
 	return (
-		<div className="flex items-center justify-around py-4 max-w-screen-lg w-full mx-auto bg-white/60 border-t border-black/5 backdrop-blur-[15px]">
+		<div className="flex items-center justify-around max-w-screen-lg w-full mx-auto bg-white/60 border-t border-black/5 backdrop-blur-[15px]">
 			{items.map(({ defaultIconSrc, activeIconSrc, label, href }) => {
 				const isActive = pathname === href;
 
@@ -64,40 +64,40 @@ function BottomTabBar() {
 						key={label}
 						href={href}
 						className={cn(
-							"relative flex flex-col items-center justify-center w-16 h-full text-[#6B6B6B] space-y-1.5",
+							"relative flex flex-col items-center justify-center py-4 w-16 h-full text-[#6B6B6B] space-y-1.5",
 							{ "text-blue-600": isActive },
 						)}
 					>
-						<div className="h-6 w-6 shrink-0">
+						<div className="h-6 w-6 shrink-0 relative">
 							<Icon
 								icon={isActive ? activeIconSrc : defaultIconSrc}
 								width={24}
 								height={24}
 							/>
+
+							{activity && (
+								<>
+									{label.toLowerCase() === "home" && (
+										<div className="absolute top-0 right-0 -mr-2.5 -mt-2">
+											<Badge
+												className="h-4 min-w-4 text-[10px] rounded-full px-1 font-mono tabular-nums"
+												variant="destructive"
+											>
+												{activity.pending}
+											</Badge>
+										</div>
+									)}
+
+									{label.toLowerCase() === "suggestions" && (
+										<div className="absolute top-0 right-0 -mr-2.5 -mt-2">
+											<Badge className="h-4 min-w-4 rounded-full px-1 font-mono tabular-nums text-[10px] bg-green-600">
+												{activity.completed}
+											</Badge>
+										</div>
+									)}
+								</>
+							)}
 						</div>
-
-						{activity && (
-							<>
-								{label.toLowerCase() === "home" && (
-									<div className="absolute top-0 right-1.5 -mt-1.5">
-										<Badge
-											className="h-4 min-w-4 text-[10px] rounded-full px-1 font-mono tabular-nums"
-											variant="destructive"
-										>
-											{activity.pending}
-										</Badge>
-									</div>
-								)}
-
-								{label.toLowerCase() === "suggestions" && (
-									<div className="absolute top-0 right-1.5 -mt-1.5">
-										<Badge className="h-4 min-w-4 rounded-full px-1 font-mono tabular-nums text-[10px] bg-green-600">
-											{activity.completed}
-										</Badge>
-									</div>
-								)}
-							</>
-						)}
 
 						<p
 							className={cn(
@@ -107,6 +107,13 @@ function BottomTabBar() {
 						>
 							{label}
 						</p>
+
+						{isActive && (
+							<div
+								className="absolute top-0 w-10 h-1 rounded-b-full bg-blue-600 animate-fade-in"
+								aria-hidden="true"
+							/>
+						)}
 					</Link>
 				);
 			})}
