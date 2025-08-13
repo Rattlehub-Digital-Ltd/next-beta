@@ -1,9 +1,11 @@
 import { Icon } from "@iconify/react";
 
+import * as motion from "motion/react-client";
 import Link from "next/link";
 import SummaryCard from "@/features/dashboard/summary-card";
 import TabsCard from "@/features/dashboard/tabs-card";
 import Header from "@/features/shared/header";
+import { cardVariants } from "@/motion";
 
 function DashboardPage() {
 	return (
@@ -27,7 +29,15 @@ function DashboardPage() {
 					</Link>
 				}
 			/>
-			<SummaryCard />
+			<motion.div
+				initial="offscreen"
+				whileInView="onscreen"
+				viewport={{ amount: 0.2 }}
+			>
+				<motion.div variants={cardVariants}>
+					<SummaryCard />
+				</motion.div>
+			</motion.div>
 			<TabsCard />
 		</div>
 	);
