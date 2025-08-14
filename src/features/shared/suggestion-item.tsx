@@ -1,8 +1,6 @@
 "use client";
 
 import { Icon } from "@iconify/react";
-import { useEffect } from "react";
-import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { cn } from "@/lib/utils";
 import ReminderButton from "./reminder/reminder-button";
 
@@ -17,8 +15,8 @@ type SuggestionItemProps = {
 		| "indigo"
 		| "brown"
 		| "dark-teal"
-		| "blue";
-	updateCurrentItem?: (show: boolean) => void;
+		| "blue"
+		| "purple";
 };
 
 export default function SuggestionItem({
@@ -26,12 +24,7 @@ export default function SuggestionItem({
 	description,
 	showReminder = false,
 	color = "yellow",
-	updateCurrentItem,
 }: SuggestionItemProps) {
-	const { isIntersecting, ref } = useIntersectionObserver({
-		threshold: 0.01,
-	});
-
 	let color1 = "";
 	let color2 = "";
 	let icon = "";
@@ -72,6 +65,11 @@ export default function SuggestionItem({
 			color2 = "bg-[#007AFF]";
 			icon = "fluent:folder-people-24-filled";
 			break;
+		case "purple":
+			color1 = "bg-[#CB30E0]/15";
+			color2 = "bg-[#CB30E0]";
+			icon = "fluent:shield-checkmark-24-filled";
+			break;
 		default:
 			color1 = "bg-[#000]/15";
 			color2 = "bg-[#6b6b6b]";
@@ -79,15 +77,8 @@ export default function SuggestionItem({
 			break;
 	}
 
-	useEffect(() => {
-		if (isIntersecting) updateCurrentItem?.(true);
-		else {
-			updateCurrentItem?.(false);
-		}
-	}, [isIntersecting, updateCurrentItem]);
-
 	return (
-		<div ref={ref} className="flex gap-4">
+		<div className="flex gap-4">
 			<div
 				className={cn(
 					"relative h-10 w-10 flex items-center justify-center rounded-full shrink-0",

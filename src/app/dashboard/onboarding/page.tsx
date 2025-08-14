@@ -9,10 +9,11 @@ import {
 	CarouselContent,
 	CarouselItem,
 } from "@/components/ui/carousel";
+import EstateChecklist from "@/features/dashboard/overview/cards/estate-checklist";
 import Children from "@/features/onboarding/children";
 import Dependents from "@/features/onboarding/dependents";
 import Partner from "@/features/onboarding/partner";
-// import Summary from "@/features/onboarding/summary/summary";
+import Summary from "@/features/onboarding/summary/summary";
 import Pagination from "@/features/shared/pagination";
 
 function OnboardingPage() {
@@ -49,9 +50,12 @@ function OnboardingPage() {
 					<CarouselItem>
 						<Dependents />
 					</CarouselItem>
-					{/* <CarouselItem>
+					<CarouselItem>
+						<EstateChecklist />
+					</CarouselItem>
+					<CarouselItem>
 						<Summary />
-					</CarouselItem> */}
+					</CarouselItem>
 				</CarouselContent>
 			</Carousel>
 			<div className="fixed bottom-4 left-0 w-full z-50 px-4">
