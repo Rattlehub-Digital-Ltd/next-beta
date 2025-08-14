@@ -13,7 +13,7 @@ export default function RiskItem({
 }: RiskItemProps) {
 	return (
 		<div className="space-y-3 p-3 rounded-[12px] border border-[#EBEDED] backdrop-blur-[25px] shadow-[0px_12px_30px_0px rgba(106, 106, 106, 0.06)]">
-			<h1 className="text-sm font-semibold leading-4">{goalName}</h1>
+			<h1 className="text-sm font-semibold leading-4 pl-0.5">{goalName}</h1>
 			<CategoryList items={[category]} />
 			<p className="text-[0.78rem] text-pretty">{eduText}</p>
 		</div>
