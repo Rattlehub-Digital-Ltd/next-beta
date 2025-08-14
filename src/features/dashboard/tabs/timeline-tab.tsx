@@ -45,24 +45,29 @@ export default function TimelineTab({ referer }: { referer: string }) {
 					});
 				})}
 
-			{hasNextPage && (
-				<motion.div className="py-0 rounded-2xl" whileTap={{ scale: 0.95 }}>
-					<Button
-						className="w-full bg-white/45 backdrop-blur-2xl text-foreground hover:bg-white/75 hover:text-foreground rounded-[12px] text-[13px] font-medium font-mono"
-						disabled={!hasNextPage || isFetching}
-						onClick={() => fetchNextPage()}
-					>
-						<Icon icon="fluent:arrow-counterclockwise-dashes-24-filled" />
-						{isFetchingNextPage
-							? "Loading more..."
-							: hasNextPage
-								? "Load More"
-								: "Nothing more to load"}
-					</Button>
-				</motion.div>
-			)}
+			{hasNextPage &&
+				data &&
+				data.pages.length > 0 &&
+				data.pages[0].items.length > 0 && (
+					<motion.div className="py-0 rounded-2xl" whileTap={{ scale: 0.95 }}>
+						<Button
+							className="w-full bg-white/45 backdrop-blur-2xl text-foreground hover:bg-white/75 hover:text-foreground rounded-[12px] text-[13px] font-medium font-mono"
+							disabled={!hasNextPage || isFetching}
+							onClick={() => fetchNextPage()}
+						>
+							<Icon icon="fluent:arrow-counterclockwise-dashes-24-filled" />
+							{isFetchingNextPage
+								? "Loading more..."
+								: hasNextPage
+									? "Load More"
+									: "Nothing more to load"}
+						</Button>
+					</motion.div>
+				)}
 
-			{!hasNextPage && (
+			{(!data ||
+				data?.pages.length <= 0 ||
+				data.pages[0].items.length <= 0) && (
 				<p className="text-[13px] pb-8 text-muted-foreground">
 					You are all caught up for now
 				</p>

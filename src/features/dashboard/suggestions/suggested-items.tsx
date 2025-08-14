@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "@iconify/react";
 import * as motion from "motion/react-client";
 import type { Suggested } from "@/api/services/dashboard/suggestion/types";
 import { cardVariants } from "@/motion";
@@ -23,9 +24,10 @@ export default function SuggestedItems({ items }: { items: Suggested[] }) {
 
 			{/* Loading complete and data has no value */}
 			{items.length === 0 && (
-				<p className="text-[13px] pl-14 text-muted-foreground">
+				<div className="text-[13px] text-muted-foreground flex items-center gap-2 px-3">
+					<Icon icon="fluent:info-sparkle-20-filled" className="h-5 w-5" />
 					You are all caught up for now
-				</p>
+				</div>
 			)}
 		</div>
 	);

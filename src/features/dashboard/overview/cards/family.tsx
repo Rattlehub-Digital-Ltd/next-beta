@@ -38,7 +38,7 @@ export default function Family() {
 
 					{/* Loading complete and data has no value */}
 					{items?.length === 0 && (
-						<p className="text-[13px] pl-14 text-muted-foreground">
+						<p className="text-[13px] pl-3 text-muted-foreground">
 							You haven't added any family members
 						</p>
 					)}

@@ -9,7 +9,7 @@ const uid = new ShortUniqueId();
 
 export default function GoalItems({ goals }: { goals: Goal[] }) {
 	return (
-		<div>
+		<div className="w-full">
 			<motion.div className="flex flex-col space-y-4">
 				{goals.map((item) => (
 					<motion.div
@@ -26,7 +26,7 @@ export default function GoalItems({ goals }: { goals: Goal[] }) {
 			</motion.div>
 
 			{goals.length === 0 && (
-				<p className="text-[13px] pl-14 text-muted-foreground">
+				<p className="text-[13px] pl-14 text-muted-foreground col-span-full">
 					You are all caught up for now
 				</p>
 			)}

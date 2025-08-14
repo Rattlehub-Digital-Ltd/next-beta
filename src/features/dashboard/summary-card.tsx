@@ -137,7 +137,19 @@ export default function SummaryCard() {
 			)}
 
 			{/* Suggested item has no value */}
-			{isError && <div>No suggested item</div>}
+			{isError && (
+				<div className="px-4 text-xs text-muted-foreground flex items-center gap-2">
+					<Icon icon="fluent:warning-20-filled" className="h-5 w-5" />
+					Something went wrong!
+				</div>
+			)}
+
+			{!isLoading && !isError && !item && (
+				<div className="px-4 text-xs text-muted-foreground flex items-center gap-2">
+					<Icon icon="fluent:info-sparkle-20-filled" className="h-5 w-5" />
+					No suggested item, you all caught up
+				</div>
+			)}
 
 			{item && (
 				<>

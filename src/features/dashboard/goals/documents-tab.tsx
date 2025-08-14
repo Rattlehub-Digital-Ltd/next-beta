@@ -34,16 +34,20 @@ export default function DocumentsTab({ goalName }: { goalName: string }) {
 					</AdaptiveCardButton>
 				))}
 
-			{isLoading && <div>Loading...</div>}
+			{isLoading && (
+				<div className="col-span-full text-xs text-muted-foreground px-2">
+					Loading...
+				</div>
+			)}
 
 			{data?.length === 0 && (
-				<p className="text-[13px] text-muted-foreground">
+				<p className="text-[13px] px-2 text-muted-foreground col-span-full">
 					You are all caught up for now
 				</p>
 			)}
 
 			{isError && (
-				<p className="text-[13px] pl-4 text-muted-foreground">
+				<p className="text-[13px] px-2 text-muted-foreground col-span-full">
 					Error fetching goals
 				</p>
 			)}
