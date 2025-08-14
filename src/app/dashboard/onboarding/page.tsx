@@ -9,7 +9,7 @@ import {
 	CarouselContent,
 	CarouselItem,
 } from "@/components/ui/carousel";
-import EstateChecklist from "@/features/dashboard/overview/cards/estate-checklist";
+import EstateChecklist from "@/features/dashboard/overview/cards/estate-checklist/estate-checklist";
 import Children from "@/features/onboarding/children";
 import Dependents from "@/features/onboarding/dependents";
 import Partner from "@/features/onboarding/partner";
