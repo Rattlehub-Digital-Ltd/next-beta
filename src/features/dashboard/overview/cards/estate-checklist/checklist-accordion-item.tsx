@@ -46,9 +46,9 @@ const ChecklistAccordionItemComponent = ({
 				<div className="grow overflow-hidden">
 					<div className="flex w-full">
 						<div className="flex items-center grow w-full justify-between font-medium text-left">
-							<div className="flex items-center gap-1.5 text-[#6b6b6b]">
+							<div className="flex grow items-center gap-1.5 text-[#6b6b6b]">
 								<Icon icon="fluent:shield-20-filled" className="h-5 w-5" />
-								<span className="text-neutral-800 grow">
+								<span className="text-neutral-800 grow truncate">
 									{item.displayName}
 								</span>
 							</div>
