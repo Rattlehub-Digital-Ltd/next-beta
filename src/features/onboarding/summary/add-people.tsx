@@ -5,9 +5,10 @@ import * as motion from "motion/react-client";
 import { usePersonDrawerStore } from "store/use-person-drawer-store";
 import PersonDrawer from "@/features/shared/person-drawer";
 import { cn } from "@/lib/utils";
-import type { PersonType } from "@/types/person";
+import type { Person, PersonType } from "@/types/person";
 
 type AddPeopeleProps = {
+	person?: Person;
 	label: string;
 	icon: string;
 	type: PersonType;
@@ -15,6 +16,7 @@ type AddPeopeleProps = {
 };
 
 export default function AddPeople({
+	person,
 	type,
 	icon,
 	label,
@@ -23,7 +25,7 @@ export default function AddPeople({
 	const { setTitle, setType } = usePersonDrawerStore();
 
 	return (
-		<PersonDrawer type={type} title={label}>
+		<PersonDrawer type={type} title={label} person={person}>
 			<motion.div
 				whileTap={{ scale: 0.95 }}
 				className="flex flex-col rounded-[16px] h-24 w-24 gap-2 bg-white/70 backdrop-blur-3xl border border-black/5 shadow-[0px_16px_30px_0px rgba(106, 106, 106, 0.06)]"

@@ -18,21 +18,11 @@ type PersonDrawerProps = {
 	title?: string;
 	description?: string;
 	children?: React.ReactNode;
-	firstName?: string;
-	lastName?: string;
-	relationship?: string;
-	imgSrc?: string;
+	person?: Person;
 	addPerson?: (data: Person) => void;
 };
 
-function PersonDrawer({
-	firstName = "",
-	lastName = "",
-	relationship = "",
-	imgSrc = "",
-	children,
-	description,
-}: PersonDrawerProps) {
+function PersonDrawer({ person, children, description }: PersonDrawerProps) {
 	const { type, title, open, onOpenChange } = usePersonDrawerStore();
 
 	return (
@@ -54,10 +44,7 @@ function PersonDrawer({
 						<ProfilePictureCard />
 						<PersonForm
 							type={type}
-							firstName={firstName}
-							lastName={lastName}
-							relationship={relationship}
-							imgSrc={imgSrc}
+							person={person}
 							buttonLabel={title}
 							onClose={() => onOpenChange(false)}
 						/>

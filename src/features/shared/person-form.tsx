@@ -6,7 +6,7 @@ import * as motion from "motion/react-client";
 import { useChildrenStore } from "store/use-children-store";
 import { useDependentStore } from "store/use-dependent-store";
 import { usePartnerStore } from "store/use-partner-store";
-// import { usePersonDrawerStore } from "store/use-person-drawer-store";
+import { usePersonDrawerStore } from "store/use-person-drawer-store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -22,10 +22,7 @@ import type { Person, PersonType } from "@/types/person";
 
 type PersonFormProps = {
 	type: PersonType;
-	firstName?: string;
-	lastName?: string;
-	relationship?: string;
-	imgSrc?: string;
+	person?: Person;
 	buttonLabel: string;
 	onClose: () => void;
 };
@@ -53,25 +50,18 @@ function FieldInfo({ field }: { field: AnyFieldApi }) {
 	);
 }
 
-function PersonForm({
-	type,
-	firstName,
-	lastName,
-	relationship,
-	buttonLabel,
-	onClose,
-}: PersonFormProps) {
+function PersonForm({ type, person, buttonLabel, onClose }: PersonFormProps) {
 	const { partner, setPartner } = usePartnerStore();
 	const { children, setChildren } = useChildrenStore();
 	const { dependents, setDependents } = useDependentStore();
 
-	// const { onOpenChange } = usePersonDrawerStore();
+	const { onOpenChange } = usePersonDrawerStore();
 
 	const form = useForm({
 		defaultValues: {
-			firstName: firstName ?? "",
-			lastName: lastName ?? "",
-			relationship: relationship ?? "",
+			firstName: person?.firstName ?? "",
+			lastName: person?.lastName ?? "",
+			relationship: person?.relationship ?? "",
 		},
 		onSubmit: async ({ value }) => {
 			const data: Person = {
@@ -95,9 +85,9 @@ function PersonForm({
 				setDependents(items);
 			}
 
-			// onOpenChange(false);
-			form.reset();
-			onClose();
+			onOpenChange(false);
+
+			// onClose();
 		},
 	});
 
@@ -106,10 +96,9 @@ function PersonForm({
 			<form
 				className="space-y-6"
 				onSubmit={(e) => {
+					form.handleSubmit();
 					e.preventDefault();
 					e.stopPropagation();
-					form.handleSubmit();
-					form.reset();
 				}}
 			>
 				<div>
@@ -218,8 +207,8 @@ function PersonForm({
 									disabled={!canSubmit}
 									className="rounded-2xl bg-blue-600 hover:bg-blue-600 active:bg-blue-700 px-6"
 								>
-									{(firstName !== "" && lastName !== "") || relationship !== ""
-										? `Update ${firstName} ${lastName}`
+									{person
+										? `Update ${person.firstName} ${person.lastName}`
 										: isSubmitting
 											? "Submitting..."
 											: buttonLabel}

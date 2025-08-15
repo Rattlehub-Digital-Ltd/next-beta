@@ -73,7 +73,7 @@ const Content = ({ value, onValueChange, onReset }: PersonProps) => {
 				)}
 			</motion.div>
 			{value === "yes" && (
-				<div className="w-full flex justify-center">
+				<div className="w-full flex justify-center pt-8">
 					<AddPersonButton
 						type="dependent"
 						disabled={value === null}
