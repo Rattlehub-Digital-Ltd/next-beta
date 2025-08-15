@@ -71,7 +71,11 @@ export default function Options({ value, onValueChange }: OptionsProps) {
 					height={16}
 					width={16}
 				/>
-				<p className="text-xs text-left text-pretty leading-5">
+				<p
+					className={cn("text-xs text-left text-pretty leading-5", {
+						"line-clamp-1 mt-px": value !== null,
+					})}
+				>
 					Please choose yes or no, your information will not be shared with
 					third parties, read our{" "}
 					<a href="/" className="text-blue-600 font-medium hover:underline">
