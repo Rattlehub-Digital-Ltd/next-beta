@@ -47,12 +47,7 @@ const Content = ({ value, onValueChange, onReset }: PersonProps) => {
 							{dependents.map((item) => (
 								<li key={uid.randomUUID()}>
 									<PersonCard
-										type="dependent"
-										title={`Edit ${item.firstName} ${item.lastName}`}
-										firstName={item.firstName}
-										lastName={item.lastName}
-										relationship={item.relationship}
-										imgSrc={item.image}
+										person={item}
 										onDelete={(firstName, lastName, relationship) => {
 											const copy = [...(dependents ?? [])];
 											const index = copy.findIndex(

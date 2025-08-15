@@ -3,29 +3,18 @@
 import { Icon } from "@iconify/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import type { PersonType } from "@/types/person";
+import type { Person } from "@/types/person";
 import PersonDrawer from "./person-drawer";
 import RemovePersonDrawer from "./remove-person-drawer";
 
 type PersonCardProps = {
-	type: PersonType;
-	title: string;
-	imgSrc?: string;
-	firstName: string;
-	lastName: string;
-	relationship: string;
+	person: Person;
 	onDelete: (firstName: string, lastName: string, relationship: string) => void;
 };
 
-function PersonCard({
-	type,
-	title,
-	imgSrc,
-	firstName,
-	lastName,
-	relationship,
-	onDelete,
-}: PersonCardProps) {
+function PersonCard({ person, onDelete }: PersonCardProps) {
+	const { firstName, lastName, relationship, image: imgSrc } = person;
+
 	return (
 		<div className="flex items-center px-1.5 rounded-full h-11 w-full gap-3 bg-white border border-black/5 shadow-[0px_16px_30px_0px rgba(106, 106, 106, 0.06)]">
 			{imgSrc && imgSrc !== "" && (
@@ -52,14 +41,7 @@ function PersonCard({
 				</p>
 			</div>
 			<div className="flex items-center gap-2">
-				<PersonDrawer
-					type={type}
-					title={title}
-					firstName={firstName}
-					lastName={lastName}
-					relationship={relationship}
-					imgSrc={imgSrc}
-				>
+				<PersonDrawer person={person}>
 					<Button className="h-8 w-8 px-0 py-0 rounded-full bg-black/[0.03] active:bg-black/[0.05]">
 						<Icon icon="fluent:edit-20-regular" style={{ stroke: "#6b6b6b" }} />
 					</Button>

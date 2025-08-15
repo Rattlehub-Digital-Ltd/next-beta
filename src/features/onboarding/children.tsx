@@ -46,12 +46,7 @@ const Content = ({ value, onValueChange, onReset }: PersonProps) => {
 							{children.map((item) => (
 								<li key={uid.randomUUID()}>
 									<PersonCard
-										type="partner"
-										title={`Edit ${item.firstName} ${item.lastName}`}
-										firstName={item.firstName}
-										lastName={item.lastName}
-										relationship={item.relationship}
-										imgSrc={item.image}
+										person={item}
 										onDelete={(firstName, lastName, relationship) => {
 											const copy = [...(children ?? [])];
 											const index = copy.findIndex(

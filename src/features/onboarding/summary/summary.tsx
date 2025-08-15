@@ -42,11 +42,7 @@ export default function Summary() {
 					>
 						<div className="flex flex-col space-y-3">
 							<PersonCard
-								type="partner"
-								title={`Edit ${partnerData.firstName} ${partnerData.lastName}`}
-								firstName={partnerData.firstName}
-								lastName={partnerData.lastName}
-								relationship={partnerData.relationship}
+								person={partnerData}
 								onDelete={() => console.log("Delete partner")}
 							/>
 						</div>
@@ -65,14 +61,10 @@ export default function Summary() {
 						description="Your legally recognized biological or adopted children under your care."
 					>
 						<div className="flex flex-col space-y-3">
-							{children.map(({ firstName, lastName, relationship }) => (
+							{children.map((item) => (
 								<PersonCard
 									key={uid.randomUUID()}
-									type="child"
-									title={`Edit ${firstName} ${lastName}`}
-									firstName={firstName}
-									lastName={lastName}
-									relationship={relationship}
+									person={item}
 									onDelete={() => console.log("Delete")}
 								/>
 							))}
@@ -93,14 +85,10 @@ export default function Summary() {
 					spouse and children."
 					>
 						<div className="flex flex-col space-y-3">
-							{dependents.map(({ firstName, lastName, relationship }) => (
+							{dependents.map((item) => (
 								<PersonCard
 									key={uid.randomUUID()}
-									type="dependent"
-									title={`Edit ${firstName} ${lastName}`}
-									firstName={firstName}
-									lastName={lastName}
-									relationship={relationship}
+									person={item}
 									onDelete={() => console.log("Delete")}
 								/>
 							))}

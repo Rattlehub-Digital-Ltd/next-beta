@@ -47,12 +47,7 @@ const Content = ({ value, onValueChange, onReset }: PersonProps) => {
 							{partner.map((item) => (
 								<li key={uid.randomUUID()}>
 									<PersonCard
-										type="partner"
-										title={`Edit ${item.firstName} ${item.lastName}`}
-										firstName={item.firstName}
-										lastName={item.lastName}
-										relationship={item.relationship}
-										imgSrc={item.image}
+										person={item}
 										onDelete={(firstName, lastName, relationship) => {
 											const copy = [...(partner ?? [])];
 											const index = copy.findIndex(
@@ -82,15 +77,13 @@ const Content = ({ value, onValueChange, onReset }: PersonProps) => {
 };
 
 const Partner = () => {
-	const { has, setHas, partner, setPartner } = usePartnerStore();
+	const { has, setHas, setPartner } = usePartnerStore();
 	const { setTitle, onOpenChange, setType } = usePersonDrawerStore();
 	const { setNextButtonDisabled } = useOnboardingStore();
 
 	useEffect(() => {
-		setNextButtonDisabled(
-			has === null || (has === "yes" && partner?.length === 0),
-		);
-	}, [has, partner?.length, setNextButtonDisabled]);
+		setNextButtonDisabled(false);
+	}, [setNextButtonDisabled]);
 
 	return (
 		<motion.div
