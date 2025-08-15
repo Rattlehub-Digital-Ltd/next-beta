@@ -6,7 +6,6 @@ import * as motion from "motion/react-client";
 import { useChildrenStore } from "store/use-children-store";
 import { useDependentStore } from "store/use-dependent-store";
 import { usePartnerStore } from "store/use-partner-store";
-import { usePersonDrawerStore } from "store/use-person-drawer-store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -55,8 +54,6 @@ function PersonForm({ type, person, buttonLabel, onClose }: PersonFormProps) {
 	const { children, setChildren } = useChildrenStore();
 	const { dependents, setDependents } = useDependentStore();
 
-	const { onOpenChange } = usePersonDrawerStore();
-
 	const form = useForm({
 		defaultValues: {
 			firstName: person?.firstName ?? "",
@@ -85,9 +82,7 @@ function PersonForm({ type, person, buttonLabel, onClose }: PersonFormProps) {
 				setDependents(items);
 			}
 
-			onOpenChange(false);
-
-			// onClose();
+			onClose();
 		},
 	});
 

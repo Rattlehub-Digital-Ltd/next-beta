@@ -25,7 +25,7 @@ export default function AddPeople({
 	const { setTitle, setType } = usePersonDrawerStore();
 
 	return (
-		<PersonDrawer type={type} title={label} person={person}>
+		<PersonDrawer person={person}>
 			<motion.div
 				whileTap={{ scale: 0.95 }}
 				className="flex flex-col rounded-[16px] h-24 w-24 gap-2 bg-white/70 backdrop-blur-3xl border border-black/5 shadow-[0px_16px_30px_0px rgba(106, 106, 106, 0.06)]"

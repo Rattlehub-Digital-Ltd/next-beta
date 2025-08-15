@@ -74,11 +74,7 @@ const Content = ({ value, onValueChange, onReset }: PersonProps) => {
 			</motion.div>
 			{value === "yes" && (
 				<div className="w-full flex justify-center pt-8">
-					<AddPersonButton
-						type="partner"
-						disabled={value === null}
-						label="Add Partner"
-					/>
+					<AddPersonButton disabled={value === null} label="Add Partner" />
 				</div>
 			)}
 		</div>

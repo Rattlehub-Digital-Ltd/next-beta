@@ -9,17 +9,14 @@ import {
 	DrawerTitle,
 	DrawerTrigger,
 } from "@/components/ui/drawer";
-import type { Person, PersonType } from "@/types/person";
+import type { Person } from "@/types/person";
 import PersonForm from "./person-form";
 import ProfilePictureCard from "./profile-picture-card";
 
 type PersonDrawerProps = {
-	type: PersonType;
-	title?: string;
 	description?: string;
 	children?: React.ReactNode;
 	person?: Person;
-	addPerson?: (data: Person) => void;
 };
 
 function PersonDrawer({ person, children, description }: PersonDrawerProps) {
@@ -38,7 +35,7 @@ function PersonDrawer({ person, children, description }: PersonDrawerProps) {
 						<header className="pl-1">
 							<h1 className="text-sm font-bold leading-6">Person details</h1>
 							<p className="text-xs leading-4 tracking-[0.01px] text-foreground-secondary">
-								Add or modify person's person details.
+								Add or modify a person's details.
 							</p>
 						</header>
 						<ProfilePictureCard />
