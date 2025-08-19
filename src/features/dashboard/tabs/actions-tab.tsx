@@ -91,7 +91,10 @@ export default function ActionsTab() {
 						disabled={!hasNextPage || isFetching}
 						onClick={() => fetchNextPage()}
 					>
-						<Icon icon="fluent:arrow-counterclockwise-dashes-24-filled" className={isFetching ? "animate-spin" : ""}/>
+						<Icon
+							icon="fluent:arrow-counterclockwise-dashes-24-filled"
+							className={isFetching ? "animate-spin" : ""}
+						/>
 						{isFetchingNextPage
 							? "Loading more..."
 							: hasNextPage

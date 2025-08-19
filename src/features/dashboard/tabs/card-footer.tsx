@@ -7,17 +7,17 @@ import { toast } from "sonner";
 import { queryKeys } from "@/api/queryClient";
 import { useAutoAdvanceAdaptiveCard } from "@/api/services/dashboard/queries";
 import { queryClient } from "@/app/providers";
-import {
-	AlertDialog,
-	AlertDialogAction,
-	AlertDialogCancel,
-	AlertDialogContent,
-	AlertDialogDescription,
-	AlertDialogFooter,
-	AlertDialogHeader,
-	AlertDialogTitle,
-	AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+// import {
+// 	AlertDialog,
+// 	AlertDialogAction,
+// 	AlertDialogCancel,
+// 	AlertDialogContent,
+// 	AlertDialogDescription,
+// 	AlertDialogFooter,
+// 	AlertDialogHeader,
+// 	AlertDialogTitle,
+// 	AlertDialogTrigger,
+// } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import AdaptiveCardButton from "@/features/shared/adaptive-card/adaptive-card-button";
 
@@ -33,12 +33,12 @@ export default function CardFooter({
 	refresh,
 }: CardFooterProps) {
 	const form = new FormData();
-	form.set(recordId ?? "", recordId ?? "");
+	form.set(recordId, "");
 	const { refetch } = useAutoAdvanceAdaptiveCard(form);
 
 	const [isBusy, setIsBusy] = useState(false);
 
-	async function handleNoResponse(id: string) {
+	async function handleNoResponse(id: string, value: boolean) {
 		if (id === "") {
 			toast.error("Invalid document ID");
 			return "";
@@ -47,6 +47,8 @@ export default function CardFooter({
 		setIsBusy(true);
 
 		try {
+			form.set(id, value.toString());
+
 			const response = await refetch();
 
 			if (!response) {
@@ -64,11 +66,18 @@ export default function CardFooter({
 	}
 
 	const noResponseMutation = useMutation({
-		mutationFn: async (id: string) => await handleNoResponse(id),
-		onSuccess: (id) => {
+		mutationFn: async ({ id, value }: { id: string; value: boolean }) => {
+			await handleNoResponse(id, value);
+			return { id, value };
+		},
+		onSuccess: ({ id, value }) => {
 			toast.success("Answer submitted successfully");
-			queryClient.invalidateQueries({ queryKey: queryKeys.documents.byId(id) });
-			queryClient.invalidateQueries({ queryKey: queryKeys.documents.all });
+			queryClient.invalidateQueries({
+				queryKey: [...queryKeys.documents.byId(id), value],
+			});
+			queryClient.invalidateQueries({
+				queryKey: [...queryKeys.documents.all, value],
+			});
 		},
 		onError: () => {
 			toast.error("An error occured, please try again");
@@ -97,7 +106,27 @@ export default function CardFooter({
 					</AdaptiveCardButton>
 				</motion.div>
 				<motion.div className="w-full" whileTap={{ scale: 0.95 }}>
-					<AlertDialog>
+					<Button
+						className="px-6 rounded-2xl w-full disabled:opacity-80"
+						variant="outline"
+						size="sm"
+						disabled={isBusy}
+						onClick={async () =>
+							await noResponseMutation.mutateAsync({
+								id: recordId,
+								value: false,
+							})
+						}
+					>
+						{isBusy ? (
+							<span className="text-[13px] text-muted-foreground">
+								Processing...
+							</span>
+						) : (
+							"No"
+						)}
+					</Button>
+					{/* <AlertDialog>
 						<AlertDialogTrigger asChild>
 							<Button
 								className="px-6 rounded-2xl w-full disabled:opacity-80"
@@ -116,7 +145,7 @@ export default function CardFooter({
 						</AlertDialogTrigger>
 						<AlertDialogContent>
 							<AlertDialogHeader>
-								<AlertDialogTitle>Are you sure?</AlertDialogTitle>
+								<AlertDialogTitle>Are you sure you don't need this item?</AlertDialogTitle>
 								<AlertDialogDescription>
 									This action cannot be undone. This will permanently delete the
 									document.
@@ -126,14 +155,14 @@ export default function CardFooter({
 								<AlertDialogCancel>Cancel</AlertDialogCancel>
 								<AlertDialogAction
 									onClick={async () =>
-										await noResponseMutation.mutateAsync(recordId ?? "")
+										await noResponseMutation.mutateAsync(recordId)
 									}
 								>
 									I am sure
 								</AlertDialogAction>
 							</AlertDialogFooter>
 						</AlertDialogContent>
-					</AlertDialog>
+					</AlertDialog> */}
 				</motion.div>
 			</div>
 		</div>

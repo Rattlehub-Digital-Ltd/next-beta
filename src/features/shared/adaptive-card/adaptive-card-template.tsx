@@ -48,7 +48,7 @@ function AdaptiveCardTemplate({
 	setProccessing,
 }: AdaptiveCardProps) {
 	const form = new FormData();
-	form.set(recordId ?? "", recordId ?? "");
+	form.set(recordId ?? "", "true");
 
 	const { refetch } = useAutoAdvanceAdaptiveCard(form);
 
