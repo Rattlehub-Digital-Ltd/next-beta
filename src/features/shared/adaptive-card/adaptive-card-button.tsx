@@ -76,7 +76,7 @@ function AdaptiveCardButton({
 
 	const { client } = useAxios();
 
-	const [isProcessing, setIsProcessing] = useState(true);
+	const [isProcessing, setIsProcessing] = useState(false);
 	const [open, setOpen] = useState(defaultOpen);
 
 	const submit = useCallback(

@@ -3,6 +3,7 @@ import MarkdownIt from "markdown-it";
 import { Geist_Mono, Mona_Sans } from "next/font/google";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useAutoAdvanceAdaptiveCard } from "@/api/services/dashboard/queries";
+import { Spinner } from "@/components/ui/spinner";
 
 const adaptiveCard = new AdaptiveCards.AdaptiveCard();
 
@@ -45,12 +46,12 @@ function AdaptiveCardTemplate({
 	recordId,
 	card,
 	submit,
-	setProccessing,
 }: AdaptiveCardProps) {
 	const form = new FormData();
 	form.set(recordId ?? "", "true");
 
-	const { refetch } = useAutoAdvanceAdaptiveCard(form);
+	const { refetch, isPending, isFetching, isRefetching } =
+		useAutoAdvanceAdaptiveCard(form);
 
 	const cardWrapperRef = useRef<HTMLDivElement>(null);
 	const formData = useRef<FormData>(new FormData());
@@ -59,43 +60,14 @@ function AdaptiveCardTemplate({
 	const initialize = useCallback(async () => {
 		if (!cardWrapperRef || !card || !cardWrapperRef.current) return;
 
-		setProccessing(true);
-
 		const adaptiveCard = new AdaptiveCards.AdaptiveCard();
-		adaptiveCard.parse(card);
-
-		cardWrapperRef.current.innerHTML = "";
-		adaptiveCard.render(cardWrapperRef.current);
 
 		if (autoYes && recordId && !initialized) {
-			// const inputs = adaptiveCard.getAllInputs();
-
-			// const form = new FormData();
-
-			// if (inputs?.length > 0) {
-			// 	let i = 0;
-			// 	for (const input of inputs) {
-			// 		const { id, value, getJsonTypeName } = input;
-			// 		const typeName = getJsonTypeName();
-
-			// 		if (i === 1 && typeName === "Input.ChoiceSet") {
-			// 			form.append(id?.toString() ?? "", value);
-			// 		} else {
-			// 			form.append(id?.toString() ?? "", "yes");
-			// 		}
-			// 		i++;
-			// 	}
-
-			// 	const header = {};
-
-			// 	(header as Record<string, string>)["x-record-identifier"] = recordId;
-
-			// 	await submit(form, false, header);
-			// }
 			const { data } = await refetch();
 
 			if (data?.itemListElement?.card) {
 				const card = data.itemListElement.card;
+				adaptiveCard.clear();
 				adaptiveCard.parse(card);
 
 				cardWrapperRef.current.innerHTML = "";
@@ -103,10 +75,12 @@ function AdaptiveCardTemplate({
 			}
 
 			setInitialized(true);
-			setProccessing(false);
-		}
+		} else {
+			adaptiveCard.parse(card);
 
-		setProccessing(false);
+			cardWrapperRef.current.innerHTML = "";
+			adaptiveCard.render(cardWrapperRef.current);
+		}
 
 		card.onExecuteAction = (action: AdaptiveCards.SubmitAction) => {
 			// Access the data from the action
@@ -163,18 +137,25 @@ function AdaptiveCardTemplate({
 				action.toJSON()?.data,
 			);
 		};
-	}, [card, submit, autoYes, recordId, initialized, refetch, setProccessing]);
+	}, [card, submit, autoYes, recordId, initialized, refetch]);
 
 	useEffect(() => {
 		initialize();
 	}, [initialize]);
 
 	return (
-		<div className="h-full md:max-w-xl">
+		<div className="h-full md:max-w-xl relative">
 			<div
 				className={`px-4 pb-4 rounded-3xl md:px-0 !${fontSans.variable} !${fontMono.variable}`}
 				ref={cardWrapperRef}
 			/>
+
+			{(isPending || isFetching || isRefetching) && (
+				<div className="absolute top-0 left-0 z-200 flex flex-col items-center justify-center w-full h-full space-y-8 text-center bg-white/90 backdrop-blur-2xl">
+					<Spinner />
+					<p className="text-[13px] text-default-700">Loading...</p>
+				</div>
+			)}
 		</div>
 	);
 }
