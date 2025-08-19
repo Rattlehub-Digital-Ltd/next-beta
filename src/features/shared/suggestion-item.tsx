@@ -95,7 +95,7 @@ export default function SuggestionItem({
 				</div>
 			</div>
 			<div>
-				<p className="text-[15px] leading-6 font-semibold">{title}</p>
+				<p className="text-[14px] leading-6 font-medium">{title}</p>
 				<p className="text-[12.6px] leading-5 text-pretty text-[#616161]">
 					{description}
 				</p>

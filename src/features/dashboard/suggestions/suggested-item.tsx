@@ -27,7 +27,7 @@ export default function SuggestedItem({ item }: SuggestedItemProps) {
 			<div>
 				<SuggesteItemDrawer item={item}>
 					<Button className="!p-0 w-full" variant="ghost">
-						<RiskBar />
+						<RiskBar data={item} />
 					</Button>
 				</SuggesteItemDrawer>
 			</div>

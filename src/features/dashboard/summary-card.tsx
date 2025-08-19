@@ -101,7 +101,7 @@ export default function SummaryCard() {
 								className="!p-0 w-full !px-0 !has-[>svg]:px-0"
 								variant="ghost"
 							>
-								<RiskBar />
+								<RiskBar data={item} />
 							</Button>
 						</SuggesteItemDrawer>
 					</div>

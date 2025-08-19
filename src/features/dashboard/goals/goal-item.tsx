@@ -1,6 +1,5 @@
 import type { Goal } from "@/api/services/dashboard/goal/types";
 import GoalProgressBar from "@/features/shared/goal-progress-bar";
-import RiskBar from "@/features/shared/risk-bar";
 import SuggestionItem from "@/features/shared/suggestion-item";
 import TabsCard from "./tabs-card";
 
@@ -21,8 +20,6 @@ function GoalItem({ item }: GoalItemProps) {
 					color="dark-teal"
 				/>
 			</div>
-
-			<RiskBar />
 
 			<div>
 				<TabsCard goalName={name} referer={name} />
