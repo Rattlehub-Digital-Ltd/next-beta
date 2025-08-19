@@ -1,6 +1,7 @@
 "use client";
 
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { queryKeys } from "@/api/queryClient";
 import useAxios from "@/hooks/use-axios";
 import type { PaginationParams, TimelineData } from "@/types";
 import type { ActionsResponse } from "@/types/action-item";
@@ -53,11 +54,11 @@ export const useGetGoalDocuments = (goalName: string) => {
 	});
 };
 
-export const useInfiniteGetDocuments = (paging: PaginationParams) => {
+export const useInfiniteGetDocuments = () => {
 	const { client } = useAxios();
 
 	return useInfiniteQuery({
-		queryKey: ["documents", "infinite", { limit: paging.limit }],
+		queryKey: [...queryKeys.documents.all],
 		queryFn: async ({ pageParam = 1 }) => {
 			const { data } = await client.get<ActionsResponse>(
 				dashboardEndpoints.getInfiniteDocuments(pageParam),
@@ -106,26 +107,32 @@ export const useGetAdaptiveCard = (referer: string, recordId?: string) => {
 	});
 };
 
-export const usePutAdaptiveCard = async (
+export const useAutoAdvanceAdaptiveCard = (
 	formData: FormData,
 	headers: object = {},
 ) => {
 	const { client } = useAxios();
 
-	// biome-ignore lint/suspicious/noExplicitAny: stuff
-	const { data } = await client.put<any>(
-		dashboardEndpoints.submitAdaptiveCard(),
-		formData,
-		{
-			baseURL: `${process.env.NEXT_PUBLIC_API_BASE_URL as string}`,
-			headers: {
-				"Content-Type": "multipart/form-data",
-				...headers,
-			},
-		},
-	);
+	return useQuery({
+		queryKey: ["advance_adaptive_card", formData, headers],
+		queryFn: async () => {
+			// biome-ignore lint/suspicious/noExplicitAny: unknown object
+			const { data } = await client.put<any>(
+				dashboardEndpoints.autoAdvanceAdaptiveCard(),
+				formData,
+				{
+					baseURL: `${process.env.NEXT_PUBLIC_API_BASE_URL as string}`,
+					headers: {
+						"Content-Type": "multipart/form-data",
+						...headers,
+					},
+				},
+			);
 
-	return data;
+			return data;
+		},
+		enabled: false, // Disable by default, can be enabled when needed
+	});
 };
 
 export const useInfiniteGetTimeline = (

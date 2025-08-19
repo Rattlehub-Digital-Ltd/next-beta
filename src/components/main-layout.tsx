@@ -12,7 +12,7 @@ export default function MainLayout({ children }: PropsWithChildren) {
 				enableSystem: false,
 			}}
 		>
-			<div className="h-full flex flex-col overflow-y-auto">
+			<div className="h-full flex flex-col">
 				<div className="p-3.5 sticky left-0 top-0 w-full z-20 shrink-0">
 					<nav className="py-3 h-14 backdrop-blur-[15px] bg-white/40 rounded-[23px]">
 						<Navbar />

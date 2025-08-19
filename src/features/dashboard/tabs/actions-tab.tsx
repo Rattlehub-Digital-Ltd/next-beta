@@ -24,10 +24,7 @@ export default function ActionsTab() {
 		hasNextPage,
 		isFetching,
 		isFetchingNextPage,
-	} = useInfiniteGetDocuments({
-		page: 1,
-		limit: 5,
-	});
+	} = useInfiniteGetDocuments();
 
 	return (
 		<div className="space-y-4">
@@ -49,7 +46,7 @@ export default function ActionsTab() {
 									key={id}
 									initial="offscreen"
 									whileInView="onscreen"
-									viewport={{ amount: 0.6 }}
+									viewport={{ amount: 0.4 }}
 								>
 									<motion.div
 										id={id}

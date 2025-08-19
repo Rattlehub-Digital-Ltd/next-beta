@@ -10,6 +10,8 @@ export const dashboardEndpoints = {
 		appConfig.previewMode ? "/api/AdaptiveCard" : "/guardian/api/AdaptiveCard",
 	submitAdaptiveCard: () =>
 		appConfig.previewMode ? "/api/AdaptiveCard" : "/guardian/api/AdaptiveCard",
+	autoAdvanceAdaptiveCard: () =>
+		appConfig.previewMode ? "/api/AdaptiveCard" : "/guardian/api/AdaptiveCard",
 	getTimeline: (paging: PaginationParams) =>
 		`/documents/activity?PageNumber=${paging.page}&PageSize=${paging.limit}`,
 	getInfiniteTimeline: (page: number) =>

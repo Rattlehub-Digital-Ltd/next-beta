@@ -76,7 +76,7 @@ function AdaptiveCardButton({
 
 	const { client } = useAxios();
 
-	const [isProcessing, setIsProcessing] = useState(false);
+	const [isProcessing, setIsProcessing] = useState(true);
 	const [open, setOpen] = useState(defaultOpen);
 
 	const submit = useCallback(
@@ -139,7 +139,7 @@ function AdaptiveCardButton({
 					)}
 					{isError && <ErrorComp />}
 					{isProcessing && (
-						<div className="absolute top-0 left-0 z-10 flex flex-col items-center justify-center w-full h-full space-y-8 text-center bg-background/90 backdrop-blur-sm">
+						<div className="absolute top-0 left-0 z-10 flex flex-col items-center justify-center w-full h-full space-y-8 text-center bg-white/90 backdrop-blur-sm">
 							<Spinner />
 							<p className="text-[13px] text-default-700">Processing...</p>
 						</div>

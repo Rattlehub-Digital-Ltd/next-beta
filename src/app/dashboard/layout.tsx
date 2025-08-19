@@ -8,7 +8,7 @@ export default function DashboardLayout({ children }: PropsWithChildren) {
 	return (
 		<>
 			<ProtectedRoute>
-				<div className="h-full flex flex-col space-y-4 pb-8">
+				<div className="flex flex-col space-y-4 pb-8">
 					<div className="shrink-0">
 						<Banner />
 					</div>

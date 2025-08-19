@@ -2,6 +2,7 @@ import * as AdaptiveCards from "adaptivecards";
 import MarkdownIt from "markdown-it";
 import { Geist_Mono, Mona_Sans } from "next/font/google";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useAutoAdvanceAdaptiveCard } from "@/api/services/dashboard/queries";
 
 const adaptiveCard = new AdaptiveCards.AdaptiveCard();
 
@@ -44,13 +45,21 @@ function AdaptiveCardTemplate({
 	recordId,
 	card,
 	submit,
+	setProccessing,
 }: AdaptiveCardProps) {
+	const form = new FormData();
+	form.set(recordId ?? "", recordId ?? "");
+
+	const { refetch } = useAutoAdvanceAdaptiveCard(form);
+
 	const cardWrapperRef = useRef<HTMLDivElement>(null);
 	const formData = useRef<FormData>(new FormData());
 	const [initialized, setInitialized] = useState(false);
 
 	const initialize = useCallback(async () => {
 		if (!cardWrapperRef || !card || !cardWrapperRef.current) return;
+
+		setProccessing(true);
 
 		const adaptiveCard = new AdaptiveCards.AdaptiveCard();
 		adaptiveCard.parse(card);
@@ -59,38 +68,45 @@ function AdaptiveCardTemplate({
 		adaptiveCard.render(cardWrapperRef.current);
 
 		if (autoYes && recordId && !initialized) {
-			const inputs = adaptiveCard.getAllInputs();
+			// const inputs = adaptiveCard.getAllInputs();
 
-			const form = new FormData();
+			// const form = new FormData();
 
-			if (inputs?.length > 0) {
-				let i = 0;
-				for (const input of inputs) {
-					const { id, value, getJsonTypeName } = input;
-					const typeName = getJsonTypeName();
+			// if (inputs?.length > 0) {
+			// 	let i = 0;
+			// 	for (const input of inputs) {
+			// 		const { id, value, getJsonTypeName } = input;
+			// 		const typeName = getJsonTypeName();
 
-					if (
-						value !== "" &&
-						value !== undefined &&
-						i === 1 &&
-						typeName === "Input.ChoiceSet"
-					) {
-						form.append(id?.toString() ?? "", value);
-					} else {
-						form.append(id?.toString() ?? "", "yes");
-					}
-					i++;
-				}
+			// 		if (i === 1 && typeName === "Input.ChoiceSet") {
+			// 			form.append(id?.toString() ?? "", value);
+			// 		} else {
+			// 			form.append(id?.toString() ?? "", "yes");
+			// 		}
+			// 		i++;
+			// 	}
 
-				const header = {};
+			// 	const header = {};
 
-				(header as Record<string, string>)["x-record-identifier"] = recordId;
+			// 	(header as Record<string, string>)["x-record-identifier"] = recordId;
 
-				await submit(form, false, header);
+			// 	await submit(form, false, header);
+			// }
+			const { data } = await refetch();
+
+			if (data?.itemListElement?.card) {
+				const card = data.itemListElement.card;
+				adaptiveCard.parse(card);
+
+				cardWrapperRef.current.innerHTML = "";
+				adaptiveCard.render(cardWrapperRef.current);
 			}
 
 			setInitialized(true);
+			setProccessing(false);
 		}
+
+		setProccessing(false);
 
 		card.onExecuteAction = (action: AdaptiveCards.SubmitAction) => {
 			// Access the data from the action
@@ -147,7 +163,7 @@ function AdaptiveCardTemplate({
 				action.toJSON()?.data,
 			);
 		};
-	}, [card, submit, autoYes, recordId, initialized]);
+	}, [card, submit, autoYes, recordId, initialized, refetch, setProccessing]);
 
 	useEffect(() => {
 		initialize();

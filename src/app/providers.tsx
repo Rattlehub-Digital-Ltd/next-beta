@@ -12,7 +12,7 @@ const AuthProvider = dynamic(() => import("@/lib/auth-provider"), {
 	ssr: false,
 });
 
-const queryClient = new QueryClient({
+export const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {
 			retry: 1, // Retry failed requests once
