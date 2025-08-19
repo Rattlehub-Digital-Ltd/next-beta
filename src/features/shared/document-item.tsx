@@ -15,7 +15,6 @@ export default function DocumentItem({
 	item,
 }: DocumentItemProps) {
 	const { displayName, affectedOwner, isApplicable } = item;
-	
 
 	return (
 		<div

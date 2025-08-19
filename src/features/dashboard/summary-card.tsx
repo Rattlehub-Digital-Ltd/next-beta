@@ -6,13 +6,13 @@ import Link from "next/link";
 import { useActivitySummaryStore } from "store/use-activity-summary-store";
 import { useGetSuggestions } from "@/api/services/dashboard/suggestion/queries";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import RiskBar from "../shared/risk-bar";
 import SuggestionItem from "../shared/suggestion-item";
 import SummaryFooter from "../shared/summary-footer";
 import SuggesteItemDrawer from "./suggestions/suggeste-item-drawer";
-import { Button } from "@/components/ui/button";
 
 export default function SummaryCard() {
 	const { activity } = useActivitySummaryStore();
