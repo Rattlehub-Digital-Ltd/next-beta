@@ -87,7 +87,7 @@ export default function SummaryCard() {
 						</Link>
 					</div>
 
-					<div className="px-4">
+					<div className="px-4 w-full">
 						<SuggestionItem
 							title="Medical Policy Document"
 							description={`A legal contract between the insurer and the policyholder, detailing coverage, terms, conditions, premiums, and the responsibilities of both parties`}
@@ -95,9 +95,12 @@ export default function SummaryCard() {
 						/>
 					</div>
 
-					<div className="px-4">
+					<div className="px-0 w-full">
 						<SuggesteItemDrawer item={item}>
-							<Button className="!p-0 w-full" variant="ghost">
+							<Button
+								className="!p-0 w-full !px-0 !has-[>svg]:px-0"
+								variant="ghost"
+							>
 								<RiskBar />
 							</Button>
 						</SuggesteItemDrawer>

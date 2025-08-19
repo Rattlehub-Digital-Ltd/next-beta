@@ -112,10 +112,7 @@ function AdaptiveCardButton({
 
 	return (
 		<Drawer open={open} onOpenChange={setOpen} onClose={refresh}>
-			<DrawerTrigger
-				asChild
-				className="flex justify-center w-full overflow-hidden"
-			>
+			<DrawerTrigger asChild className="flex justify-center w-full">
 				{children}
 			</DrawerTrigger>
 			<DrawerContent className="h-[90svh] flex flex-col items-center min-h-[80svh]  pb-4 !rounded-t-3xl">

@@ -38,7 +38,11 @@ export default function LifeFileDocuments() {
 									referer=""
 									refresh={console.log}
 								>
-									<motion.div key={item.id} whileTap={{ scale: 0.95 }}>
+									<motion.div
+										key={item.id}
+										className="w-full"
+										whileTap={{ scale: 0.95 }}
+									>
 										<DocumentItem
 											className={
 												item.isApplicable
