@@ -12,6 +12,7 @@ import RiskBar from "../shared/risk-bar";
 import SuggestionItem from "../shared/suggestion-item";
 import SummaryFooter from "../shared/summary-footer";
 import SuggesteItemDrawer from "./suggestions/suggeste-item-drawer";
+import { Button } from "@/components/ui/button";
 
 export default function SummaryCard() {
 	const { activity } = useActivitySummaryStore();
@@ -94,11 +95,11 @@ export default function SummaryCard() {
 						/>
 					</div>
 
-					<div className="px-4">
-						<SuggesteItemDrawer item={item}>
+					<SuggesteItemDrawer item={item}>
+						<Button className="px-4" variant="ghost">
 							<RiskBar />
-						</SuggesteItemDrawer>
-					</div>
+						</Button>
+					</SuggesteItemDrawer>
 				</div>
 			)}
 
