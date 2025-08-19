@@ -1,14 +1,20 @@
 import ShortUniqueId from "short-unique-id";
 import type { SuggestedFor } from "@/api/services/dashboard/suggestion/types";
+import RiskCarousel from "@/features/shared/risk-carousel";
 import UserBadge from "@/features/shared/user-badge";
+import type { RiskItemProps } from "@/types/risk-item-props";
 
 type SuggestedForProps = {
 	items: SuggestedFor[];
+	riskItems?: RiskItemProps[];
 };
 
 const uid = new ShortUniqueId({ length: 10 });
 
-export default function SuggestedForTab({ items }: SuggestedForProps) {
+export default function SuggestedForTab({
+	items,
+	riskItems,
+}: SuggestedForProps) {
 	const people: string[] = [];
 	items.forEach((item) => {
 		item.affectedOwners.forEach((owner) => {
@@ -26,6 +32,7 @@ export default function SuggestedForTab({ items }: SuggestedForProps) {
 					</p>
 				</div>
 			</div>
+			<RiskCarousel items={riskItems} />
 			<div className="pt-6 flex flex-wrap gap-2">
 				{people.map((person) => (
 					<UserBadge key={uid.randomUUID()} name={person} />

@@ -34,7 +34,7 @@ export default function DrawerTabsCard({ item }: DrawerTabsCardProps) {
 				</div>
 			</div>
 			<TabsContent value="people">
-				<SuggestedForTab items={item.suggestedFor} />
+				<SuggestedForTab items={item.suggestedFor} riskItems={item.riskItems} />
 			</TabsContent>
 			<TabsContent value="services">
 				<ServiceProvidersTab serviceProviders={item.serviceProviders} />

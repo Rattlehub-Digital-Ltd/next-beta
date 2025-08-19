@@ -1,4 +1,5 @@
 import { Icon } from "@iconify/react";
+import Image from "next/image";
 import Markdown from "react-markdown";
 import type { ServiceProvider } from "@/api/services/dashboard/suggestion/types";
 
@@ -16,6 +17,30 @@ export default function ServiceProvidersTab({
 				<p className="text-xs text-[#616161]">
 					Companies that provides services for this topic.
 				</p>
+			</div>
+			<div className="gap-2 flex items-center bg-[#006150]/3 p-2 rounded-[16px]">
+				<div className="rounded-[12px] h-[88px] w-[88px] shrink-0">
+					<Image src="/image.png" alt="" height={88} width={88} />
+				</div>
+				<div className="space-y-1.5">
+					<Image
+						src="/Old-Mutual-logo-vector-01 1.svg"
+						alt=""
+						height={24}
+						width={105}
+					/>
+					<p className="text-xs text-[#616161] line-clamp-2">
+						<span className="font-medium">Old Mutual</span> is a leading
+						financial services group that provides personal and business
+						financial solutions.
+					</p>
+					<a
+						href="https://www.oldmutual.co.za/"
+						className="text-[#006150] text-[0.75rem] font-semibold"
+					>
+						Visit Old Mutual
+					</a>
+				</div>
 			</div>
 			<ul className="space-y-3">
 				{serviceProviders.map((provider) => (
