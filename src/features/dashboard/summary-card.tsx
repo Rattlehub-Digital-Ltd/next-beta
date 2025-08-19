@@ -95,11 +95,13 @@ export default function SummaryCard() {
 						/>
 					</div>
 
-					<SuggesteItemDrawer item={item}>
-						<Button className="!p-0 w-full" variant="ghost">
-							<RiskBar />
-						</Button>
-					</SuggesteItemDrawer>
+					<div className="px-4">
+						<SuggesteItemDrawer item={item}>
+							<Button className="!p-0 w-full" variant="ghost">
+								<RiskBar />
+							</Button>
+						</SuggesteItemDrawer>
+					</div>
 				</div>
 			)}
 
