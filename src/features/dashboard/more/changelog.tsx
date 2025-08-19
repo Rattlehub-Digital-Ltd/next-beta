@@ -1,5 +1,4 @@
 import { Icon } from "@iconify/react";
-import { Badge } from "lucide-react";
 
 export default function Changelog() {
 	return (
