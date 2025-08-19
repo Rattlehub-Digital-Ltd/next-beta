@@ -24,9 +24,11 @@ export default function SuggestedItem({ item }: SuggestedItemProps) {
 					color="yellow"
 				/>
 			</div>
-			<div className="px-4">
+			<div >
 				<SuggesteItemDrawer item={item}>
-					<RiskBar />
+					<Button className="!p-0 w-full" variant="ghost">
+						<RiskBar />
+					</Button>
 				</SuggesteItemDrawer>
 			</div>
 			<div className="px-4">

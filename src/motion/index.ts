@@ -2,7 +2,7 @@ import type { Variants } from "motion";
 
 export const cardVariants: Variants = {
 	offscreen: {
-		y: 0.75,
+		y: 0.85,
 		scale: 0.9,
 		opacity: 0.6,
 	},

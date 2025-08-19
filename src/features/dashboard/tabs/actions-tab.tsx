@@ -46,7 +46,7 @@ export default function ActionsTab() {
 									key={id}
 									initial="offscreen"
 									whileInView="onscreen"
-									viewport={{ amount: 0.4 }}
+									viewport={{ amount: 0.2 }}
 								>
 									<motion.div
 										id={id}
@@ -87,11 +87,11 @@ export default function ActionsTab() {
 			{hasNextPage && (
 				<motion.div className="px-2" whileTap={{ scale: 0.95 }}>
 					<Button
-						className="w-full bg-white/45 backdrop-blur-2xl text-foreground hover:bg-white/75 hover:text-foreground rounded-[12px] text-[13px] font-medium font-mono"
+						className="w-full bg-white/75 backdrop-blur-2xl text-foreground hover:bg-white/85 hover:text-foreground rounded-[12px] text-[13px] font-medium font-mono"
 						disabled={!hasNextPage || isFetching}
 						onClick={() => fetchNextPage()}
 					>
-						<Icon icon="fluent:arrow-counterclockwise-dashes-24-filled" />
+						<Icon icon="fluent:arrow-counterclockwise-dashes-24-filled" className={isFetching ? "animate-spin" : ""}/>
 						{isFetchingNextPage
 							? "Loading more..."
 							: hasNextPage

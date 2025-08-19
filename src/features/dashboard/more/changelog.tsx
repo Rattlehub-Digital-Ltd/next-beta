@@ -1,3 +1,4 @@
+import { Icon } from "@iconify/react";
 import { Badge } from "lucide-react";
 
 export default function Changelog() {
@@ -24,8 +25,11 @@ export default function Changelog() {
 					<div className="grid gap-4">
 						<h2 className="text-sm font-semibold">Version 4.2.88</h2>
 						<div className="flex flex-wrap gap-2">
-							<Badge className="text-purple-600">Improvements</Badge>
-							<Badge className="text-red-600">Bug Fixes</Badge>
+							<Icon icon="fluent-color:warning-24" className="!h-6 !w-6" />
+							<Icon
+								icon="fluent-color:clipboard-text-edit-24"
+								className="!h-6 !w-6"
+							/>
 						</div>
 						<div className="grid gap-2">
 							<h3 className="text-sm font-semibold">Improvements</h3>
@@ -57,7 +61,10 @@ export default function Changelog() {
 					<div className="grid gap-4">
 						<h2 className="text-sm font-semibold">Version 4.2.85</h2>
 						<div className="flex flex-wrap gap-2">
-							<Badge className="text-purple-600">New Features</Badge>
+							<Icon
+								icon="fluent-color:text-bullet-list-square-sparkle-24"
+								className="!h-6 !w-6"
+							/>
 						</div>
 						<div className="grid gap-2">
 							<h3 className="text-sm font-semibold">New Features</h3>

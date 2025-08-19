@@ -21,9 +21,9 @@ function GoalItem({ item }: GoalItemProps) {
 					color="dark-teal"
 				/>
 			</div>
-			<div>
+			
 				<RiskBar />
-			</div>
+			
 			<div>
 				<TabsCard goalName={name} referer={name} />
 			</div>
