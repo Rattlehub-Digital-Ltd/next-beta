@@ -95,7 +95,7 @@ export default function SummaryCard() {
 						/>
 					</div>
 
-					<div className="px-0 w-full">
+					<div className="px-4 w-full">
 						<SuggesteItemDrawer item={item}>
 							<Button
 								className="!p-0 w-full !px-0 !has-[>svg]:px-0"
