@@ -96,7 +96,7 @@ export default function SummaryCard() {
 					</div>
 
 					<SuggesteItemDrawer item={item}>
-						<Button className="px-4" variant="ghost">
+						<Button className="!p-0 w-full" variant="ghost">
 							<RiskBar />
 						</Button>
 					</SuggesteItemDrawer>
