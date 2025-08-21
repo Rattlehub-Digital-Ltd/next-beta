@@ -28,7 +28,7 @@ export const useGetDocuments = (paging: PaginationParams) => {
 	const { client } = useAxios();
 
 	return useQuery({
-		queryKey: ["documents", paging],
+		queryKey: [...queryKeys.documents.all, paging],
 		queryFn: async () => {
 			const { data } = await client.get<ActionsResponse>(
 				dashboardEndpoints.getDocuments(paging),

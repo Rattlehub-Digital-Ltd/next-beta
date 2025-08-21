@@ -12,7 +12,7 @@ type SuggestedItemProps = {
 };
 
 export default function SuggestedItem({ item }: SuggestedItemProps) {
-	const { displayName, eduText, riskItems } = item;
+	const { displayName, eduText, riskItems, id } = item;
 
 	return (
 		<div className="w-full h-full bg-[#F8F8F8]/80 py-4 border border-[#EBEDED] rounded-3xl backdrop-blur-[60px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)] space-y-4 flex flex-col">
@@ -52,7 +52,7 @@ export default function SuggestedItem({ item }: SuggestedItemProps) {
 					</Button>
 				</SuggesteItemDrawer>
 			</div>
-			<SummaryFooter>
+			<SummaryFooter id={id}>
 				<span className="font-normal">
 					Do you have <span className="font-semibold">{displayName}</span> in
 					place?
