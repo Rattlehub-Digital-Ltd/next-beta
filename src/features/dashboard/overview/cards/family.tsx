@@ -3,6 +3,7 @@
 import * as motion from "motion/react-client";
 import ShortUniqueId from "short-unique-id";
 import { useGetFamily } from "@/api/services/dashboard/overview/queries";
+import type { FamilyType } from "@/api/services/dashboard/overview/types";
 import { Skeleton } from "@/components/ui/skeleton";
 import SuggestionItem from "@/features/shared/suggestion-item";
 import UserBadge from "@/features/shared/user-badge";
@@ -10,7 +11,16 @@ import UserBadge from "@/features/shared/user-badge";
 const uid = new ShortUniqueId();
 
 export default function Family() {
-	const { data: items, isLoading, isError } = useGetFamily();
+	const { data, isLoading, isError } = useGetFamily();
+
+	const items: FamilyType[] | undefined = data ? [] : undefined;
+	if (data) {
+		data.forEach((item) => {
+			if (!items?.find((i) => i.displayName === item.displayName)) {
+				items?.push(item);
+			}
+		});
+	}
 
 	return (
 		<div>

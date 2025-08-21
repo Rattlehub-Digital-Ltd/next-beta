@@ -77,7 +77,7 @@ function AdaptiveCardButton({
 	const { client } = useAxios();
 
 	const [isProcessing, setIsProcessing] = useState(false);
-	const [open, setOpen] = useState(defaultOpen);
+	const [open, setOpen] = useState<boolean>(defaultOpen ?? false);
 
 	const submit = useCallback(
 		async (formData: FormData, isCancelButton: boolean, headers?: object) => {
@@ -127,6 +127,7 @@ function AdaptiveCardButton({
 					{isLoading && <Loading />}
 					{!isLoading && data && (
 						<AdaptiveCardTemplate
+							open={open}
 							autoYes={autoSubmit}
 							recordId={recordId}
 							card={data?.itemListElement?.card}

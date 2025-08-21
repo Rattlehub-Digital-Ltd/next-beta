@@ -29,6 +29,7 @@ AdaptiveCards.AdaptiveCard.onProcessMarkdown = (text, result) => {
 };
 
 export interface AdaptiveCardProps {
+	open: boolean;
 	autoYes?: boolean;
 	recordId?: string;
 	// biome-ignore lint/suspicious/noExplicitAny: true
@@ -42,6 +43,7 @@ export interface AdaptiveCardProps {
 }
 
 function AdaptiveCardTemplate({
+	open,
 	autoYes,
 	recordId,
 	card,
@@ -58,7 +60,7 @@ function AdaptiveCardTemplate({
 	const [initialized, setInitialized] = useState(false);
 
 	const initialize = useCallback(async () => {
-		if (!cardWrapperRef || !card || !cardWrapperRef.current) return;
+		if (!cardWrapperRef || !card || !cardWrapperRef.current || !open) return;
 
 		const adaptiveCard = new AdaptiveCards.AdaptiveCard();
 
@@ -137,7 +139,7 @@ function AdaptiveCardTemplate({
 				action.toJSON()?.data,
 			);
 		};
-	}, [card, submit, autoYes, recordId, initialized, refetch]);
+	}, [card, submit, autoYes, recordId, initialized, refetch, open]);
 
 	useEffect(() => {
 		initialize();
