@@ -17,22 +17,42 @@ const analytics = Analytics({
 	],
 });
 
+export function getUTMParams() {
+	if (typeof window === "undefined" || !window.sessionStorage) {
+		return {
+			utm_source: undefined,
+			utm_medium: undefined,
+			utm_campaign: undefined,
+			utm_term: undefined,
+			utm_content: undefined,
+		};
+	}
+
+	return {
+		utm_source: sessionStorage.getItem("utm_source") || undefined,
+		utm_medium: sessionStorage.getItem("utm_medium") || undefined,
+		utm_campaign: sessionStorage.getItem("utm_campaign") || undefined,
+		utm_term: sessionStorage.getItem("utm_term") || undefined,
+		utm_content: sessionStorage.getItem("utm_content") || undefined,
+	};
+}
+
 export const track = (
 	eventName: string,
-	payload?: Record<string, string | object>,
+	payload: Record<string, string | object>,
 ) => {
 	if (appConfig.previewMode || process.env.NODE_ENV === "development") return;
 
-	analytics.track(eventName, payload);
+	analytics.track(eventName, { ...payload, ...getUTMParams() });
 };
 
 export const identify = (
 	userId: string,
-	traits?: Record<string, string | object>,
+	traits: Record<string, string | object>,
 ) => {
 	if (appConfig.previewMode || process.env.NODE_ENV === "development") return;
 
-	analytics.identify(userId, traits);
+	analytics.identify(userId, { ...traits, ...getUTMParams() });
 };
 
 export default analytics;
