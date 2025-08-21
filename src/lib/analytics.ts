@@ -39,7 +39,7 @@ export function getUTMParams() {
 
 export const track = (
 	eventName: string,
-	payload: Record<string, string | object>,
+	payload?: Record<string, string | object>,
 ) => {
 	if (appConfig.previewMode || process.env.NODE_ENV === "development") return;
 
@@ -48,7 +48,7 @@ export const track = (
 
 export const identify = (
 	userId: string,
-	traits: Record<string, string | object>,
+	traits?: Record<string, string | object>,
 ) => {
 	if (appConfig.previewMode || process.env.NODE_ENV === "development") return;
 
