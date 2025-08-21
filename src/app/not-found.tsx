@@ -22,12 +22,15 @@ export default function NotFound() {
 				/>
 			</div>
 			<div className="space-y-1 text-sm text-center max-w-xs">
-				<p className="font-medium">
+				<p className="font-medium text-pretty">
 					We couldn't find the page you were looking for.
 				</p>
 				<div className="inline">
 					Go back to{" "}
-					<Link href={"/dashboard"} className="underline underline-offset-1">
+					<Link
+						href={"/dashboard"}
+						className="underline font-medium underline-offset-1"
+					>
 						Homepage
 					</Link>
 				</div>
