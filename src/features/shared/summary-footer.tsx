@@ -1,6 +1,7 @@
 "use client";
 
 import * as motion from "motion/react-client";
+import { useState } from "react";
 import { useToggleSuggestion } from "@/api/services/dashboard/suggestion/queries";
 import { Button } from "@/components/ui/button";
 
@@ -12,12 +13,18 @@ type SummaryFooterProps = {
 export default function SummaryFooter({ id, children }: SummaryFooterProps) {
 	const toggleSuggestion = useToggleSuggestion();
 
+	const [isPending, setIsPending] = useState(false);
+
 	const handleSuggestionToggle = async (value: boolean) => {
+		setIsPending(true);
+
 		try {
 			await toggleSuggestion.mutateAsync({ id, value });
 		} catch (error) {
 			console.error("Error toggling suggestion:", error);
 			// Handle error appropriately, e.g., show a notification or alert
+		} finally {
+			setIsPending(false);
 		}
 	};
 
@@ -28,6 +35,7 @@ export default function SummaryFooter({ id, children }: SummaryFooterProps) {
 				<motion.div className="w-full" whileTap={{ scale: 0.95 }}>
 					<Button
 						className="w-full rounded-2xl bg-blue-600 hover:bg-blue-600 active:bg-blue-700 px-6"
+						disabled={isPending}
 						onClick={() => handleSuggestionToggle(true)}
 					>
 						Yes, I do
@@ -36,6 +44,7 @@ export default function SummaryFooter({ id, children }: SummaryFooterProps) {
 				<motion.div className="w-full" whileTap={{ scale: 0.95 }}>
 					<Button
 						className="px-6 rounded-2xl w-full"
+						disabled={isPending}
 						variant="outline"
 						onClick={() => handleSuggestionToggle(false)}
 					>
