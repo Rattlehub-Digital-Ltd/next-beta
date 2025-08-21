@@ -10,6 +10,10 @@ import Header from "@/features/shared/header";
 
 const uid = new ShortUniqueId();
 
+const title = "Goals";
+const description =
+	"Keep essential documents ready when life changes come your way.";
+
 export default function GoalsPage() {
 	const {
 		data: goals,
@@ -20,8 +24,8 @@ export default function GoalsPage() {
 	return (
 		<div className="pt-3 space-y-4 pb-8">
 			<Header
-				title="Goals"
-				description="Keep essential documents ready when life changes come your way."
+				title={title}
+				description={description}
 				content={
 					<Link
 						href="/"

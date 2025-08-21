@@ -1,7 +1,21 @@
-"use client";
-
+import type { Metadata } from "next";
+import { appConfig } from "@/config/app.config";
 import Header from "@/features/shared/header";
 import StripePricingTable from "@/features/stripe/stripe-pricing-table";
+
+const title = "Subscription";
+const description = "Get the full features of Nextdot";
+
+export const metadata: Metadata = {
+	title,
+	description,
+	openGraph: {
+		title,
+		description,
+		url: `${appConfig.baseURL}/dashboard/subscription`,
+		siteName: title,
+	},
+};
 
 export default function Page() {
 	return (
@@ -10,8 +24,8 @@ export default function Page() {
 			<div className="relative z-2 space-y-8">
 				<Header
 					className="!text-white/95 text-center"
-					title="Subscription"
-					description="Get the full features of Nextdot"
+					title={title}
+					description={description}
 				/>
 				<StripePricingTable />
 			</div>

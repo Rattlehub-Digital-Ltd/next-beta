@@ -10,6 +10,9 @@ import Header from "@/features/shared/header";
 
 const uid = new ShortUniqueId();
 
+const title = "Suggestions";
+const description = "Organize and store essential family-related documents.";
+
 export default function SuggestionsPage() {
 	const {
 		data: items,
@@ -20,8 +23,8 @@ export default function SuggestionsPage() {
 	return (
 		<div className="pt-3 space-y-4 pb-8">
 			<Header
-				title="Suggestions"
-				description="Organize and store essential family-related documents."
+				title={title}
+				description={description}
 				content={
 					<Link
 						href="/"

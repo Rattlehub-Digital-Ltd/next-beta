@@ -27,15 +27,26 @@ const item = {
 	show: { opacity: 1, y: 0, scale: 1 },
 };
 
+const title = "Updates and features";
+const description = "Keep up to date with the latest features and updates.";
+
+// export const metadata: Metadata = {
+// 	title,
+// 	description,
+// 	openGraph: {
+// 		title,
+// 		description,
+// 		url: `${appConfig.baseURL}/dashboard/more`,
+// 		siteName: title,
+// 	},
+// };
+
 export default function MorePage() {
 	const { accessToken } = useApi();
 
 	return (
 		<div className="space-y-8 pb-8">
-			<Header
-				title="Updates and features"
-				description="Keep up to date with the latest features and updates."
-			/>
+			<Header title={title} description={description} />
 			<div className="space-y-6">
 				<motion.div
 					initial={{ opacity: 0, y: 20, scale: 0.8 }}
