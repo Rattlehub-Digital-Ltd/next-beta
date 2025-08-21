@@ -17,24 +17,27 @@ const analytics = Analytics({
 	],
 });
 
+// Add this helper function above getUTMParams
+const removeEmptyValues = (obj: Record<string, string | undefined>) => {
+	return Object.fromEntries(
+		Object.entries(obj).filter(([_, value]) => value != null),
+	);
+};
+
 export function getUTMParams() {
 	if (typeof window === "undefined" || !window.sessionStorage) {
-		return {
-			utm_source: undefined,
-			utm_medium: undefined,
-			utm_campaign: undefined,
-			utm_term: undefined,
-			utm_content: undefined,
-		};
+		return {};
 	}
 
-	return {
+	const utmParams = {
 		utm_source: sessionStorage.getItem("utm_source") || undefined,
 		utm_medium: sessionStorage.getItem("utm_medium") || undefined,
 		utm_campaign: sessionStorage.getItem("utm_campaign") || undefined,
 		utm_term: sessionStorage.getItem("utm_term") || undefined,
 		utm_content: sessionStorage.getItem("utm_content") || undefined,
 	};
+
+	return removeEmptyValues(utmParams);
 }
 
 export const track = (
@@ -43,7 +46,7 @@ export const track = (
 ) => {
 	if (appConfig.previewMode || process.env.NODE_ENV === "development") return;
 
-	analytics.track(eventName, { ...payload, ...getUTMParams() });
+	analytics.track(eventName, { ...getUTMParams(), ...(payload ?? {}) });
 };
 
 export const identify = (
@@ -52,7 +55,7 @@ export const identify = (
 ) => {
 	if (appConfig.previewMode || process.env.NODE_ENV === "development") return;
 
-	analytics.identify(userId, { ...traits, ...getUTMParams() });
+	analytics.identify(userId, { ...getUTMParams(), ...(traits ?? {}) });
 };
 
 export default analytics;
