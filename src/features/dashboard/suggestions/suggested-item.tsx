@@ -24,7 +24,7 @@ export default function SuggestedItem({ item }: SuggestedItemProps) {
 					color="yellow"
 				/>
 			</div>
-			<div>
+			<div className="px-4">
 				<SuggesteItemDrawer item={item}>
 					<Button className="!p-0 w-full" variant="ghost">
 						<RiskBar data={item} />
@@ -37,7 +37,7 @@ export default function SuggestedItem({ item }: SuggestedItemProps) {
 			<div className="px-4">
 				<SuggesteItemDrawer item={item}>
 					<Button
-						className="text-blue-600 !no-underline font-semibold"
+						className="text-blue-600 !no-underline font-semibold text-[13px] px-1"
 						size="sm"
 						variant="link"
 					>
@@ -46,15 +46,15 @@ export default function SuggestedItem({ item }: SuggestedItemProps) {
 						</span>
 						<Icon
 							icon="fluent:chevron-right-24-regular"
-							height={16}
-							width={16}
+							height={14}
+							width={14}
 						/>
 					</Button>
 				</SuggesteItemDrawer>
 			</div>
 			<SummaryFooter id={id}>
 				<span className="font-normal">
-					Do you have <span className="font-semibold">{displayName}</span> in
+					Do you have a <span className="font-semibold">{displayName}</span> in
 					place?
 				</span>
 			</SummaryFooter>
