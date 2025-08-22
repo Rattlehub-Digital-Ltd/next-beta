@@ -6,6 +6,10 @@ import type { EstateChecklistItem } from "@/api/services/dashboard/onboarding/ty
 import SuggestionItem from "@/features/shared/suggestion-item";
 import CustomAccordion from "./custom-accordion";
 
+const title = "Estate Checklist";
+const description =
+	"Get started with your estate planning by completing this checklist.";
+
 export default function EstateChecklist() {
 	const { data, isLoading, isError, error } = useGetSettings();
 	const [documents, setDocuments] = useState<EstateChecklistItem[]>([]);
@@ -24,14 +28,21 @@ export default function EstateChecklist() {
 			newDocuments[index] = updatedDocument;
 			return newDocuments;
 		});
-		if (value !== null && value !== undefined) {
-			setCurrentIndex(index + 1);
-		}
 	}, []);
 
-	const handleOnNextPress = useCallback((index: number) => {
-		setCurrentIndex(index);
-	}, []);
+	const handleOnNextPress = useCallback(
+		(index: number) => {
+			setCurrentIndex((_) => {
+				const max = Math.max(0, documents.length - 1);
+				return Math.max(0, Math.min(index, max));
+			});
+		},
+		[documents.length],
+	);
+
+	// const handleOnNextPress = useCallback((index: number) => {
+	// 	setCurrentIndex(index);
+	// }, []);
 
 	if (isLoading) {
 		return <div>Loading...</div>;
@@ -44,8 +55,8 @@ export default function EstateChecklist() {
 	return (
 		<div className="w-full h-full bg-[#FFFFFF]/65 p-4 border border-[#EBEDED] rounded-3xl backdrop-blur-[60px] shadow-[0px_12px_30px_0px rgba(106, 106, 106, 0.06)] space-y-8 flex flex-col">
 			<SuggestionItem
-				title="Estate Checklist"
-				description="Confirm yes or no to each question to help us fine tune your profile"
+				title={title}
+				description={description}
 				showReminder={false}
 				color="purple"
 			/>

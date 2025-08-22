@@ -9,8 +9,8 @@ export const queryKeys = {
 		all: ["suggestions"] as const,
 		byId: (id: string) => ["suggestions", id] as const,
 	},
-	gaols: {
-		all: ["goals"] as const,
-		byId: (id: string) => ["goals", id] as const,
+	products: {
+		all: ["products"] as const,
+		byId: (id: string) => ["products", id] as const,
 	},
 };

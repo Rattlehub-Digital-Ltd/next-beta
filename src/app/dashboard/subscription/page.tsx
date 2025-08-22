@@ -1,23 +1,29 @@
-import type { Metadata } from "next";
-import { appConfig } from "@/config/app.config";
+"use client";
+
+import { useGetProducts } from "@/api/services/dashboard/subscription/queries";
+// import type { Metadata } from "next";
+// import { appConfig } from "@/config/app.config";
 import Header from "@/features/shared/header";
 import StripePricingTable from "@/features/stripe/stripe-pricing-table";
 
 const title = "Subscription";
 const description = "Get the full features of Nextdot";
 
-export const metadata: Metadata = {
-	title,
-	description,
-	openGraph: {
-		title,
-		description,
-		url: `${appConfig.baseURL}/dashboard/subscription`,
-		siteName: title,
-	},
-};
+// export const metadata: Metadata = {
+// 	title,
+// 	description,
+// 	openGraph: {
+// 		title,
+// 		description,
+// 		url: `${appConfig.baseURL}/dashboard/subscription`,
+// 		siteName: title,
+// 	},
+// };
 
 export default function Page() {
+	const { data } = useGetProducts();
+	console.log(data);
+
 	return (
 		<div className="bg-[#16243d] w-full h-full">
 			<div className="fixed h-full w-full top-0 left-0 bg-[#16243d]" />
