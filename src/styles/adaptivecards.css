@@ -111,10 +111,10 @@ a.ac-anchor:visited:active {
 	font-family: "FabricMDL2Icons";
 	font-size: 10px;
 	font-weight: 900;
-	content: "\e70d";
+	content: "e70d";
 }
 .ac-pushButton.expandable.expanded:after {
-	content: "\e70e";
+	content: "e70e";
 }
 .ac-pushButton.style-positive {
 	background-color: #0078d7;
@@ -814,7 +814,7 @@ button.swiper-pagination-bullet {
 .swiper-button-next.ac-carousel-right::after {
 	font-family: "Segoe Fluent Icons";
 	font-size: 14px;
-	content: "\edda";
+	content: "edda";
 }
 .swiper-button-next.ac-carousel-right:hover {
 	background-color: rgba(0, 0, 0, 0.5);
@@ -828,7 +828,7 @@ button.swiper-pagination-bullet {
 .swiper-button-prev.ac-carousel-left::after {
 	font-family: "Segoe Fluent Icons";
 	font-size: 14px;
-	content: "\edd9";
+	content: "edd9";
 }
 .swiper-button-prev.ac-carousel-left:hover {
 	background-color: rgba(0, 0, 0, 0.5);
@@ -842,7 +842,7 @@ button.swiper-pagination-bullet {
 .swiper-button-next.ac-carousel-down::after {
 	font-family: "Segoe Fluent Icons";
 	font-size: 14px;
-	content: "\eddc";
+	content: "eddc";
 }
 .swiper-button-next.ac-carousel-down:hover {
 	background-color: rgba(0, 0, 0, 0.5);
@@ -856,7 +856,7 @@ button.swiper-pagination-bullet {
 .swiper-button-prev.ac-carousel-up::after {
 	font-family: "Segoe Fluent Icons";
 	font-size: 14px;
-	content: "\eddb";
+	content: "eddb";
 }
 .swiper-button-prev.ac-carousel-up:hover {
 	background-color: rgba(0, 0, 0, 0.5);

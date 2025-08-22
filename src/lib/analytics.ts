@@ -1,7 +1,16 @@
 import customerIO from "@analytics/customerio";
 import googleAnalytics from "@analytics/google-analytics";
 import Analytics from "analytics";
+import { z } from "zod";
 import { appConfig } from "@/config/app.config";
+
+// Validation schema for analytics events
+const EventSchema = z.object({
+	name: z.string(),
+	properties: z.record(z.string(), z.unknown()).optional(),
+});
+
+type AnalyticsEvent = z.infer<typeof EventSchema>;
 
 const analytics = Analytics({
 	app: appConfig.name,
@@ -44,9 +53,23 @@ export const track = (
 	eventName: string,
 	payload?: Record<string, string | object>,
 ) => {
-	if (appConfig.previewMode || process.env.NODE_ENV === "development") return;
+	try {
+		const event: AnalyticsEvent = {
+			name: eventName,
+			properties: payload,
+		};
+		EventSchema.parse(event);
 
-	analytics.track(eventName, { ...getUTMParams(), ...(payload ?? {}) });
+		if (
+			!appConfig.previewMode &&
+			process.env.NODE_ENV === "production" &&
+			analytics
+		) {
+			analytics.track(eventName, { ...getUTMParams(), ...(payload ?? {}) });
+		}
+	} catch (error) {
+		console.error("Invalid analytics event:", error);
+	}
 };
 
 export const identify = (
