@@ -1,4 +1,5 @@
 /** biome-ignore-all lint/a11y/noSvgWithoutTitle: true */
+/** biome-ignore-all lint/correctness/useUniqueElementIds: why */
 import type { SVGProps } from "react";
 
 export function FluentArrowCircleRight24Filled(props: SVGProps<SVGSVGElement>) {

@@ -3,8 +3,7 @@ import { Geist_Mono, Mona_Sans } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
 import { Toaster } from "sonner";
-import ErrorBoundary from "@/components/error-boundary";
-import RefreshButton from "@/features/root-layout/refresh-button";
+import { ErrorBoundary } from "@/components/error-boundary";
 import MainLayout from "../components/main-layout";
 
 const fontSans = Mona_Sans({
@@ -28,7 +27,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html className="bg-[#E5E5E5] h-[100svh]" lang="en">
+		<html className="bg-[#E5E5E5] h-screen overflow-hidden" lang="en">
 			<head>
 				<Script
 					strategy="afterInteractive"
@@ -40,22 +39,7 @@ export default function RootLayout({
 			<body
 				className={`${fontSans.variable} ${fontMono.variable} antialiased h-full overflow-y-auto bg-[#E5E5E5]`}
 			>
-				<ErrorBoundary
-					fallback={
-						<div className="min-h-screen flex items-center justify-center p-4">
-							<div className="text-center">
-								<h1 className="text-2xl font-bold text-gray-900 mb-4">
-									Oops! Something went wrong
-								</h1>
-								<p className="text-gray-600 mb-6">
-									We apologize for the inconvenience. Please try refreshing the
-									page.
-								</p>
-								<RefreshButton />
-							</div>
-						</div>
-					}
-				>
+				<ErrorBoundary>
 					<MainLayout>{children}</MainLayout>
 					<Toaster />
 				</ErrorBoundary>
