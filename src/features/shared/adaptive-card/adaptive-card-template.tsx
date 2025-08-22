@@ -54,7 +54,7 @@ function AdaptiveCardTemplate({
 	const cardWrapperRef = useRef<HTMLDivElement>(null);
 	const formData = useRef<FormData>(new FormData());
 	const [initialized, setInitialized] = useState(false);
-	const [isPending, setIsPending] = useState(false);
+	const [isPending, setIsPending] = useState(true);
 
 	const initialize = useCallback(async () => {
 		if (!cardWrapperRef || !card || !cardWrapperRef.current || !open) return;
@@ -95,6 +95,7 @@ function AdaptiveCardTemplate({
 
 			cardWrapperRef.current.innerHTML = "";
 			adaptiveCard.render(cardWrapperRef.current);
+			setIsPending(false);
 		}
 
 		card.onExecuteAction = (action: AdaptiveCards.SubmitAction) => {
