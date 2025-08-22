@@ -8,11 +8,11 @@ import { Spinner } from "@/components/ui/spinner";
 const adaptiveCard = new AdaptiveCards.AdaptiveCard();
 
 adaptiveCard.hostConfig = new AdaptiveCards.HostConfig({
-	fontFamily: "Geist, sans-serif",
+	fontFamily: "Mona Sans, sans-serif",
 });
 
 const fontSans = Mona_Sans({
-	variable: "--font-mono-sans",
+	variable: "--font-mona-sans",
 	subsets: ["latin"],
 });
 
@@ -49,23 +49,35 @@ function AdaptiveCardTemplate({
 	card,
 	submit,
 }: AdaptiveCardProps) {
-	const form = new FormData();
-	form.set(recordId ?? "", "true");
-
-	const { refetch, isPending, isFetching, isRefetching } =
-		useAutoAdvanceAdaptiveCard(form);
+	const advanceAdaptiveCard = useAutoAdvanceAdaptiveCard();
 
 	const cardWrapperRef = useRef<HTMLDivElement>(null);
 	const formData = useRef<FormData>(new FormData());
 	const [initialized, setInitialized] = useState(false);
+	const [isPending, setIsPending] = useState(false);
 
 	const initialize = useCallback(async () => {
 		if (!cardWrapperRef || !card || !cardWrapperRef.current || !open) return;
 
+		cardWrapperRef.current.innerHTML = "";
+
 		const adaptiveCard = new AdaptiveCards.AdaptiveCard();
 
 		if (autoYes && recordId && !initialized) {
-			const { data } = await refetch();
+			setIsPending(true);
+
+			const form = new FormData();
+			form.set(recordId, "true");
+
+			const headers: Record<string, string> = {};
+			headers["x-record-identifier"] = recordId;
+
+			const resp = await advanceAdaptiveCard.mutateAsync({
+				formData: form,
+				headers: headers,
+			});
+
+			const data = resp?.card.data;
 
 			if (data?.itemListElement?.card) {
 				const card = data.itemListElement.card;
@@ -76,6 +88,7 @@ function AdaptiveCardTemplate({
 				adaptiveCard.render(cardWrapperRef.current);
 			}
 
+			setIsPending(false);
 			setInitialized(true);
 		} else {
 			adaptiveCard.parse(card);
@@ -139,7 +152,15 @@ function AdaptiveCardTemplate({
 				action.toJSON()?.data,
 			);
 		};
-	}, [card, submit, autoYes, recordId, initialized, refetch, open]);
+	}, [
+		card,
+		submit,
+		autoYes,
+		recordId,
+		initialized,
+		open,
+		advanceAdaptiveCard.mutateAsync,
+	]);
 
 	useEffect(() => {
 		initialize();
@@ -152,7 +173,7 @@ function AdaptiveCardTemplate({
 				ref={cardWrapperRef}
 			/>
 
-			{(isPending || isFetching || isRefetching) && (
+			{isPending && (
 				<div className="absolute top-0 left-0 z-200 flex flex-col items-center justify-center w-full h-full space-y-8 text-center bg-white/90 backdrop-blur-2xl">
 					<Spinner />
 					<p className="text-[13px] text-default-700">Loading...</p>

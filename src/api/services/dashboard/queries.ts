@@ -1,6 +1,6 @@
 "use client";
 
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
 import { queryKeys } from "@/api/queryClient";
 import useAxios from "@/hooks/use-axios";
 import type { PaginationParams, TimelineData } from "@/types";
@@ -107,17 +107,19 @@ export const useGetAdaptiveCard = (referer: string, recordId?: string) => {
 	});
 };
 
-export const useAutoAdvanceAdaptiveCard = (
-	formData: FormData,
-	headers: object = {},
-) => {
+export const useAutoAdvanceAdaptiveCard = () => {
 	const { client } = useAxios();
 
-	return useQuery({
-		queryKey: ["advance_adaptive_card", formData, headers],
-		queryFn: async () => {
+	return useMutation({
+		mutationFn: async ({
+			formData,
+			headers,
+		}: {
+			formData: FormData;
+			headers: object;
+		}) => {
 			// biome-ignore lint/suspicious/noExplicitAny: unknown object
-			const { data } = await client.put<any>(
+			const card = await client.put<any>(
 				dashboardEndpoints.autoAdvanceAdaptiveCard(),
 				formData,
 				{
@@ -129,9 +131,8 @@ export const useAutoAdvanceAdaptiveCard = (
 				},
 			);
 
-			return data;
+			return { formData, headers, card };
 		},
-		enabled: false, // Disable by default, can be enabled when needed
 	});
 };
 

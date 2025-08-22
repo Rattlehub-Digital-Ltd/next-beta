@@ -32,9 +32,7 @@ export default function CardFooter({
 	children,
 	refresh,
 }: CardFooterProps) {
-	const form = new FormData();
-	form.set(recordId, "");
-	const { refetch } = useAutoAdvanceAdaptiveCard(form);
+	const advanceAdaptiveCard = useAutoAdvanceAdaptiveCard();
 
 	const [isBusy, setIsBusy] = useState(false);
 
@@ -47,9 +45,16 @@ export default function CardFooter({
 		setIsBusy(true);
 
 		try {
+			const form = new FormData();
 			form.set(id, value.toString());
 
-			const response = await refetch();
+			const headers: Record<string, string> = {};
+			headers["x-record-identifier"] = id;
+
+			const response = await advanceAdaptiveCard.mutateAsync({
+				formData: form,
+				headers: headers,
+			});
 
 			if (!response) {
 				toast.error("Failed to delete document");
@@ -111,8 +116,8 @@ export default function CardFooter({
 						variant="outline"
 						size="sm"
 						disabled={isBusy}
-						onClick={async () =>
-							await noResponseMutation.mutateAsync({
+						onClick={() =>
+							noResponseMutation.mutate({
 								id: recordId,
 								value: false,
 							})

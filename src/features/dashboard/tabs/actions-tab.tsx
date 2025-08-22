@@ -69,7 +69,7 @@ export default function ActionsTab() {
 										<Separator className="bg-black/5 px-4" />
 										<CardFooter recordId={id} refresh={refetch}>
 											<span className="font-normal">
-												Do you have{" "}
+												Do you have a{" "}
 												<span className="font-semibold">
 													{item.displayName}
 												</span>{" "}
