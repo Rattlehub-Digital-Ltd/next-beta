@@ -96,7 +96,7 @@ export default function CardFooter({
 						refresh={refresh}
 					>
 						<Button
-							className="w-full rounded-2xl px-6 bg-black/10"
+							className="w-full rounded-2xl px-6 bg-black/5"
 							size="sm"
 							variant="ghost"
 							disabled={isBusy}
