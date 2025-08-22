@@ -1,19 +1,29 @@
-"use client";
-
-import { useAuth0 } from "@auth0/auth0-react";
 import * as motion from "motion/react-client";
+import type { Metadata } from "next";
 import { Merriweather } from "next/font/google";
-import { redirect } from "next/navigation";
-import { useOnboardingStore } from "store/use-onboarding-store";
 import { appConfig } from "@/config/app.config";
 import LoginButton from "@/features/login/login-button";
-import Loading from "@/features/shared/loading";
 import MainSheet from "@/features/shared/main-sheet";
 
 const serif = Merriweather({
 	variable: "--font-merriweather",
 	subsets: ["latin"],
 });
+
+const title = "Login - Nextdot";
+const description =
+	"Securely manage and share your digital legacy with Nextdot.";
+
+export const metadata: Metadata = {
+	title,
+	description,
+	openGraph: {
+		title,
+		description,
+		url: `${appConfig.baseURL}/login`,
+		siteName: title,
+	},
+};
 
 const Content = () => {
 	const { links } = appConfig;
@@ -68,14 +78,6 @@ const Content = () => {
 };
 
 export default function LoginPage() {
-	const { isAuthenticated, isLoading } = useAuth0();
-
-	const { isOnboarded } = useOnboardingStore();
-
-	if (isAuthenticated) {
-		redirect(isOnboarded ? "/dashboard" : "/dashboard/onboarding");
-	}
-
 	return (
 		<motion.div
 			className="h-full w-full flex flex-col grow"
@@ -97,7 +99,6 @@ export default function LoginPage() {
 				imgAlt="Login Image"
 				content={<Content />}
 			/>
-			{isLoading && <Loading />}
 		</motion.div>
 	);
 }

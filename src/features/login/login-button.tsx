@@ -11,6 +11,7 @@ import { useAppStore } from "store/use-app-store";
 import { useOnboardingStore } from "store/use-onboarding-store";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
+import Loading from "@/features/shared/loading";
 import useApi from "@/hooks/use-api";
 import { FluentArrowCircleRight24Filled, SparkleIcon } from "@/styles/icons";
 
@@ -141,6 +142,10 @@ const LoginButton = () => {
 	useEffect(() => {
 		autoSignIn();
 	}, [autoSignIn]);
+
+	if (isLoading || processing) return <Loading />;
+
+	if (isAuthenticated) redirect(redirectUrl);
 
 	return (
 		<motion.div
