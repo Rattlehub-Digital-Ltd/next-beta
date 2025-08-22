@@ -1,18 +1,35 @@
 import { Icon } from "@iconify/react";
 
 import * as motion from "motion/react-client";
+import type { Metadata } from "next";
 import Link from "next/link";
+import { appConfig } from "@/config/app.config";
 import SummaryCard from "@/features/dashboard/summary-card";
 import TabsCard from "@/features/dashboard/tabs-card";
 import Header from "@/features/shared/header";
 import { cardVariants } from "@/motion";
 
+const title = "Welcome back!";
+const description =
+	"These will affect your estate, please read them carefully and take the necessary action.";
+
+export const metadata: Metadata = {
+	title,
+	description,
+	openGraph: {
+		title,
+		description,
+		url: `${appConfig.baseURL}/dashboard`,
+		siteName: title,
+	},
+};
+
 function DashboardPage() {
 	return (
 		<div className="pt-3 space-y-4 pb-16">
 			<Header
-				title="Welcome back!"
-				description="These will affect your estate, please read them carefully and take the necessary action."
+				title={title}
+				description={description}
 				content={
 					<Link
 						href="/"
