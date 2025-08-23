@@ -40,7 +40,13 @@ export default function RiskCarousel({ items }: RiskCarouselProps) {
 
 	return (
 		<div className="space-y-3 flex flex-col">
-			<Carousel setApi={setApi}>
+			<Carousel
+				setApi={setApi}
+				opts={{
+					align: "start",
+					loop: true,
+				}}
+			>
 				<CarouselContent>
 					{items.map(({ category, goalName, eduText }) => (
 						<CarouselItem key={uid.randomUUID()}>
