@@ -9,13 +9,12 @@ interface ProductProps {
 	currency?: string;
 }
 
-// A simple checkmark icon component for the features list
 const CheckIcon = () => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		viewBox="0 0 24 24"
 		fill="currentColor"
-		className="w-4 h-4 text-[#c9a957]" // Using the same gold color
+		className="w-4 h-4 text-[#c9a957]"
 	>
 		<title>Checkmark Icon</title>
 		<path

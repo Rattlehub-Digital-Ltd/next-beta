@@ -1,3 +1,6 @@
+"use client";
+
+import { useGetProducts } from "@/api/services/dashboard/subscription/queries";
 import { Button } from "@/components/ui/button";
 import {
 	Drawer,
@@ -8,22 +11,32 @@ import {
 	DrawerTitle,
 	DrawerTrigger,
 } from "@/components/ui/drawer";
-import StripePricingTable from "./stripe-pricing-table";
+import Product from "../dashboard/subscription/product";
 
 type StripeDrawerProps = {
 	children: React.ReactNode;
 };
 
 export default function StripeDrawer({ children }: StripeDrawerProps) {
+	const { data } = useGetProducts();
+
 	return (
 		<Drawer>
 			<DrawerTrigger asChild>{children}</DrawerTrigger>
-			<DrawerContent className="bg-[#16243d] border-[#16243d] text-white">
+			<DrawerContent className="bg-[#16243d] border-[#16243d] text-white overflow-y-auto">
 				<DrawerHeader>
 					<DrawerTitle className="text-white">Subscription</DrawerTitle>
 				</DrawerHeader>
 				<div className="p-4">
-					<StripePricingTable />
+					{data && (
+						<ul className="space-y-4">
+							{data.map((item) => (
+								<li key={item.id}>
+									<Product plan={item} isRecommended={true} currency="CA$" />
+								</li>
+							))}
+						</ul>
+					)}
 				</div>
 				<DrawerFooter>
 					<DrawerClose asChild>

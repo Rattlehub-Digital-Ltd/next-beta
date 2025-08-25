@@ -1,4 +1,5 @@
 import { Icon } from "@iconify/react";
+import { appConfig } from "@/config/app.config";
 
 export default function Changelog() {
 	return (
@@ -10,7 +11,7 @@ export default function Changelog() {
 				<div className="relative z-10 mx-auto max-w-4xl space-y-4">
 					<h1 className="text-lg font-bold">What&apos;s new?</h1>
 					<p className="text-sm text-balance opacity-90">
-						A rundown of the latest Phosphorus feature releases, product
+						A rundown of the latest {appConfig.name} feature releases, product
 						enhancements, design updates and important bug fixes.
 					</p>
 				</div>
