@@ -1,10 +1,10 @@
 "use client";
 
 import { useGetProducts } from "@/api/services/dashboard/subscription/queries";
+import Product from "@/features/dashboard/subscription/product";
 // import type { Metadata } from "next";
 // import { appConfig } from "@/config/app.config";
 import Header from "@/features/shared/header";
-import StripePricingTable from "@/features/stripe/stripe-pricing-table";
 
 const title = "Subscription";
 const description = "Get the full features of Nextdot";
@@ -22,10 +22,9 @@ const description = "Get the full features of Nextdot";
 
 export default function Page() {
 	const { data } = useGetProducts();
-	console.log(data);
 
 	return (
-		<div className="bg-[#16243d] w-full h-full">
+		<div className="bg-[#16243d] w-full h-full pb-12">
 			<div className="fixed h-full w-full top-0 left-0 bg-[#16243d]" />
 			<div className="relative z-2 space-y-8">
 				<Header
@@ -33,7 +32,16 @@ export default function Page() {
 					title={title}
 					description={description}
 				/>
-				<StripePricingTable />
+				{/* <StripePricingTable /> */}
+				{data && (
+					<ul className="space-y-4">
+						{data.map((item) => (
+							<li key={item.id}>
+								<Product plan={item} isRecommended={true} currency="CA$" />
+							</li>
+						))}
+					</ul>
+				)}
 			</div>
 		</div>
 	);

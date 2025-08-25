@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "@/api/queryClient";
 import useAxios from "@/hooks/use-axios";
 import { subscriptionEndpoints } from "./endpoints";
-import type { Product } from "./types";
+import type { ProductPlan } from "./types";
 
 export const useGetProducts = () => {
 	const { client } = useAxios();
@@ -10,7 +10,7 @@ export const useGetProducts = () => {
 	return useQuery({
 		queryKey: [...queryKeys.products.all],
 		queryFn: async () => {
-			const { data } = await client.get<Product[]>(
+			const { data } = await client.get<ProductPlan[]>(
 				subscriptionEndpoints.getProducts(),
 			);
 
