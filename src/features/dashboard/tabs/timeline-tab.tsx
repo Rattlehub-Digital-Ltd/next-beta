@@ -23,7 +23,7 @@ export default function TimelineTab({ referer }: { referer: string }) {
 	});
 
 	return (
-		<div className="flex flex-col pt-8">
+		<div className="flex flex-col pt-8 pb-4">
 			{isLoading &&
 				Array.from({ length: 5 }).map(() => (
 					<LoadingSkeleton key={uid.randomUUID()} />

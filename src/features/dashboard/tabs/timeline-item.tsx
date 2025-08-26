@@ -29,11 +29,13 @@ function TimelineItem({ item, lastItem = false }: TimelineItemProps) {
 						width={32}
 					/>
 				</div>
-				<div
-					className={cn("bg-[#13A10E] w-0.5 h-full absolute top-6 left-4", {
-						"bg-[#d1d1d1] h-[70%]": lastItem,
-					})}
-				/>
+				{!lastItem && (
+					<div
+						className={cn("bg-[#13A10E] w-0.5 h-full absolute top-6 left-4", {
+							"bg-[#d1d1d1] h-[70%]": lastItem,
+						})}
+					/>
+				)}
 			</div>
 
 			<div className="px-4 grow flex flex-col space-y-2 pb-6 ">
