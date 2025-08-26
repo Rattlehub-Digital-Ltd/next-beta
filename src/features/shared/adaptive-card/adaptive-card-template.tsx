@@ -60,15 +60,13 @@ function AdaptiveCardTemplate({
 		// if (!cardWrapperRef || !card || !cardWrapperRef.current || !open) return;
 		if (!cardWrapperRef.current || !open) return;
 
-		cardWrapperRef.current.innerHTML = "";
-
 		const adaptiveCard = new AdaptiveCards.AdaptiveCard();
 
 		if (autoYes && recordId && !initialized) {
 			setIsPending(true);
 
 			const form = new FormData();
-			form.set(recordId, "true");
+			form.set(recordId, "yes");
 
 			const headers: Record<string, string> = {};
 			headers["x-record-identifier"] = recordId;
@@ -84,8 +82,13 @@ function AdaptiveCardTemplate({
 				const card = data.itemListElement.card;
 				adaptiveCard.parse(card);
 
-				cardWrapperRef.current.innerHTML = "";
-				adaptiveCard.render(cardWrapperRef.current);
+				// cardWrapperRef.current.innerHTML = "";
+				// adaptiveCard.render(cardWrapperRef.current);
+				const renderedCard = adaptiveCard.render();
+				cardWrapperRef.current.innerHTML = ""; // Clear previous content
+				if (renderedCard) {
+					cardWrapperRef.current.appendChild(renderedCard);
+				}
 			}
 
 			setIsPending(false);
@@ -93,8 +96,11 @@ function AdaptiveCardTemplate({
 		} else if (card) {
 			adaptiveCard.parse(card);
 
-			cardWrapperRef.current.innerHTML = "";
-			adaptiveCard.render(cardWrapperRef.current);
+			const renderedCard = adaptiveCard.render();
+			cardWrapperRef.current.innerHTML = ""; // Clear previous content
+			if (renderedCard) {
+				cardWrapperRef.current.appendChild(renderedCard);
+			}
 			setIsPending(false);
 		}
 
