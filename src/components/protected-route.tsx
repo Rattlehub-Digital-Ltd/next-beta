@@ -3,7 +3,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { redirect } from "next/navigation";
 import { type PropsWithChildren, useEffect } from "react";
-import { useOnboardingStore } from "store/use-onboarding-store";
 import { appConfig } from "@/config/app.config";
 import { useAnalytics } from "@/hooks/use-analytics";
 
@@ -11,7 +10,6 @@ const key = "https://app.nextdot.ai/userid";
 
 export default function ProtectedRoute({ children }: PropsWithChildren) {
 	const { isAuthenticated, user } = useAuth0();
-	const { isOnboarded } = useOnboardingStore();
 	const { identify } = useAnalytics();
 
 	useEffect(() => {
@@ -31,10 +29,7 @@ export default function ProtectedRoute({ children }: PropsWithChildren) {
 			identify(userId);
 			sessionStorage.setItem(key, userId);
 		}
-
-		// If the user is not onboarded, redirect to onboarding
-		if (!isOnboarded) redirect("/dashboard/onboarding");
-	}, [user, identify, isOnboarded]);
+	}, [user, identify]);
 
 	if (!isAuthenticated) redirect("/login");
 

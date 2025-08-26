@@ -3,7 +3,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useActivitySummaryStore } from "store/use-activity-summary-store";
 import { useAppStore } from "store/use-app-store";
 import { useOnboardingStore } from "store/use-onboarding-store";
@@ -25,18 +25,25 @@ export default function SplashScreen() {
 	const { data: onboardingStatus, isError: isOnboardingError } =
 		useGetOnboarding();
 
-	useEffect(() => {
+	const initialize = useCallback(async () => {
 		if (activity) {
 			setActivity(activity);
 		}
 		if (onboardingStatus) setIsOnboarded(onboardingStatus.isOnboarded);
-		console.log(onboardingStatus);
 
 		if (activity && onboardingStatus) {
 			setInitialized(true);
 			setIsInitializing(false);
+
+			redirect(
+				onboardingStatus.isOnboarded ? "/dashboard" : "/dashboard/onboarding",
+			);
 		}
 	}, [activity, onboardingStatus, setActivity, setIsOnboarded, setInitialized]);
+
+	useEffect(() => {
+		initialize();
+	}, [initialize]);
 
 	if (!isAuthenticated) redirect("/login");
 
