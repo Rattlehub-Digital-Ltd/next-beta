@@ -22,9 +22,10 @@ function TimelineItem({ item, lastItem = false }: TimelineItemProps) {
 	return (
 		<div className=" flex relative -mt-0.5 overflow-hidden">
 			<div className="h-full w-8 flex flex-col items-center  z-2">
-				<div className="h-8 w-8 text-[#13A10E] bg-white rounded-full relative z-2">
+				<div className="h-8 w-8 text-[#13A10E]  rounded-full relative z-2">
 					<Icon
 						icon="fluent:checkmark-circle-32-filled"
+						className=" shrink-0"
 						height={32}
 						width={32}
 					/>
@@ -32,7 +33,7 @@ function TimelineItem({ item, lastItem = false }: TimelineItemProps) {
 				{!lastItem && (
 					<div
 						className={cn("bg-[#13A10E] w-0.5 h-full absolute top-6 left-4", {
-							"bg-[#d1d1d1] h-[70%]": lastItem,
+							"bg-[#813636] h-[70%]": lastItem,
 						})}
 					/>
 				)}

@@ -49,7 +49,10 @@ export default function TimelineTab({ referer }: { referer: string }) {
 				data &&
 				data.pages.length > 0 &&
 				data.pages[0].items.length > 0 && (
-					<motion.div className="py-0 rounded-2xl" whileTap={{ scale: 0.95 }}>
+					<motion.div
+						className="py-0 rounded-2xl pl-12 pr-5"
+						whileTap={{ scale: 0.95 }}
+					>
 						<Button
 							className="w-full bg-white/45 backdrop-blur-2xl text-foreground hover:bg-white/75 hover:text-foreground rounded-[12px] text-[13px] font-medium font-mono"
 							disabled={!hasNextPage || isFetching}
