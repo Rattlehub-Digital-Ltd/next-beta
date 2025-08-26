@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 
 export default function MorePage() {
 	return (
-		<div className="space-y-8 pb-16">
+		<div className="space-y-8 pb-20">
 			<Header title={title} description={description} />
 			<div className="space-y-6">
 				<ProfileHeader />
