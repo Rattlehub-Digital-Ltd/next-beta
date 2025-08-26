@@ -19,12 +19,11 @@ export default function EstateChecklistItem({
 			{item.isApplicable !== null && (
 				<div className="font-normal text-xs flex items-center gap-2 text-neutral-600 capitalize">
 					{item.isApplicable === "no" && (
-						<Icon icon="fluent-color:dismiss-circle-20" className="h-6 w-6" />
+						<Icon icon="fluent-color:dismiss-circle-20" className="h-5 w-5" />
 					)}
 					{item.isApplicable === "yes" && (
-						<Icon icon="fluent-color:checkmark-circle-20" className="h-6 w-6" />
+						<Icon icon="fluent-color:checkmark-circle-20" className="h-5 w-5" />
 					)}
-					{item.isApplicable}
 				</div>
 			)}
 		</div>
