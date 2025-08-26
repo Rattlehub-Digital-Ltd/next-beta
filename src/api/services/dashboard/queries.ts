@@ -104,7 +104,7 @@ export const useGetAdaptiveCard = (referer: string, recordId?: string) => {
 
 			return data;
 		},
-		enabled: false,
+		enabled: true,
 	});
 };
 
