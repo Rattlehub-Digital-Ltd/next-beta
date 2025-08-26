@@ -131,6 +131,7 @@ function AdaptiveCardTemplate({
 			}
 
 			action.validateInputs();
+
 			console.debug(
 				action.title,
 				action.toJSON(),
@@ -138,6 +139,7 @@ function AdaptiveCardTemplate({
 				action.getAriaRole(),
 				action.getSchema(),
 			);
+
 			submit(
 				form,
 				action.toJSON()?.data?.["x-action-context"]?.toLowerCase() === "cancel",
