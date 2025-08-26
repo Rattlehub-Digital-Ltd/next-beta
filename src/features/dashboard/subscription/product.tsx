@@ -1,4 +1,5 @@
 import ShortUniqueId from "short-unique-id";
+import { toast } from "sonner";
 import { useSubscribeToProduct } from "@/api/services/dashboard/subscription/queries";
 import type { ProductPlan } from "@/api/services/dashboard/subscription/types";
 import { Button } from "@/components/ui/button";
@@ -81,10 +82,20 @@ const Product: React.FC<ProductProps> = ({
 				size="default"
 				className="mt-6 w-full h-11 rounded-full py-3 bg-[#ceaa40] font-bold text-gray-900 transition-colors hover:bg-[#b89849]"
 				onClick={async () => {
-					await subscribeToPlan.mutateAsync({ id: plan.id });
+					try {
+						await subscribeToPlan.mutateAsync({ id: plan.id });
+						toast.success(
+							plan.subscribed
+								? "Redirecting to manage your subscription..."
+								: "Trial started! You can manage your subscription in your dashboard.",
+						);
+					} catch (error) {
+						console.error("Subscription error:", error);
+						toast.error("Failed to subscribe to the plan. Please try again.");
+					}
 				}}
 			>
-				{plan.subscribed ? "Manage Subscription" : "Start Trial"}
+				{plan.subscribed ? "Manage Subscription" : "Subscribe to Plan"}
 			</Button>
 		</div>
 	);
