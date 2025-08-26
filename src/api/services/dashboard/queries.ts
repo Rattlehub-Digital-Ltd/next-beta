@@ -89,7 +89,7 @@ export const useGetAdaptiveCard = (referer: string, recordId?: string) => {
 	}
 
 	return useQuery({
-		queryKey: ["adaptive_card", referer, recordId],
+		queryKey: [referer, recordId],
 		queryFn: async () => {
 			// biome-ignore lint/suspicious/noExplicitAny: unknown object
 			const { data } = await client.get<any>(
@@ -104,7 +104,7 @@ export const useGetAdaptiveCard = (referer: string, recordId?: string) => {
 
 			return data;
 		},
-		enabled: true,
+		enabled: false, // Disabled by default, manual refetch only
 	});
 };
 

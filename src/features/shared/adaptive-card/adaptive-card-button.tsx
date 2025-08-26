@@ -137,7 +137,7 @@ function AdaptiveCardButton({
 				</VisuallyHidden>
 				<div className="relative flex-grow w-full overflow-y-auto max-w-xl p-0 pb-0">
 					{isLoading && <Loading />}
-					{!isLoading && data && (
+					{!isLoading && (
 						<AdaptiveCardTemplate
 							open={open}
 							autoYes={autoSubmit}
