@@ -60,6 +60,7 @@ export const useGetGoalDocuments = (goalName: string) => {
 };
 
 export const useInfiniteGetDocuments = () => {
+	// const queryClient = useQueryClient();
 	const { client } = useAxios();
 
 	return useInfiniteQuery({
@@ -77,6 +78,11 @@ export const useInfiniteGetDocuments = () => {
 			if (lastBatch < lastPage.pageSize) return undefined;
 			return allPages.length + 1;
 		},
+		// onSuccess: () => {
+		// 	queryClient.invalidateQueries({
+		// 		queryKey: [...queryKeys.documents.all],
+		// 	});
+		// },
 	});
 };
 
