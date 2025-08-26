@@ -1,6 +1,11 @@
 "use client";
 
-import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
+import {
+	useInfiniteQuery,
+	useMutation,
+	useQuery,
+	useQueryClient,
+} from "@tanstack/react-query";
 import { queryKeys } from "@/api/queryClient";
 import useAxios from "@/hooks/use-axios";
 import type { PaginationParams, TimelineData } from "@/types";
@@ -76,6 +81,7 @@ export const useInfiniteGetDocuments = () => {
 };
 
 export const useGetAdaptiveCard = (referer: string, recordId?: string) => {
+	const queryClient = useQueryClient();
 	const { client } = useAxios();
 
 	const headers: Record<string, string> = {};
@@ -88,8 +94,12 @@ export const useGetAdaptiveCard = (referer: string, recordId?: string) => {
 		headers["x-referer-context"] = referer;
 	}
 
+	queryClient.invalidateQueries({
+		queryKey: ["adaptive_card", referer, recordId],
+	});
+
 	return useQuery({
-		queryKey: [referer, recordId],
+		queryKey: ["adaptive_card", referer, recordId],
 		queryFn: async () => {
 			// biome-ignore lint/suspicious/noExplicitAny: unknown object
 			const { data } = await client.get<any>(

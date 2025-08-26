@@ -68,7 +68,7 @@ function AdaptiveCardTemplate({
 			setIsPending(true);
 
 			const form = new FormData();
-			form.set(recordId, "True");
+			form.set(recordId, "true");
 
 			const headers: Record<string, string> = {};
 			headers["x-record-identifier"] = recordId;
@@ -81,8 +81,7 @@ function AdaptiveCardTemplate({
 			const data = resp?.card.data;
 
 			if (data?.itemListElement?.card) {
-				card = data.itemListElement.card;
-
+				const card = data.itemListElement.card;
 				adaptiveCard.parse(card);
 
 				cardWrapperRef.current.innerHTML = "";

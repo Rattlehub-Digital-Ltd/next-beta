@@ -82,7 +82,7 @@ function AdaptiveCardButton({
 	const [open, setOpen] = useState<boolean>(defaultOpen ?? false);
 
 	const fetchData = useCallback(async () => {
-		if (autoSubmit === false) {
+		if (!autoSubmit) {
 			await refetch();
 		}
 	}, [autoSubmit, refetch]);
