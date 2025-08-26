@@ -33,7 +33,7 @@ export interface AdaptiveCardProps {
 	autoYes?: boolean;
 	recordId?: string;
 	// biome-ignore lint/suspicious/noExplicitAny: true
-	card: any;
+	card: any | null;
 	setProccessing: (isProcessing: boolean) => void;
 	submit: (
 		formData: FormData,
@@ -57,7 +57,8 @@ function AdaptiveCardTemplate({
 	const [isPending, setIsPending] = useState(true);
 
 	const initialize = useCallback(async () => {
-		if (!cardWrapperRef || !card || !cardWrapperRef.current || !open) return;
+		// if (!cardWrapperRef || !card || !cardWrapperRef.current || !open) return;
+		if (!cardWrapperRef.current || !open) return;
 
 		cardWrapperRef.current.innerHTML = "";
 
@@ -67,7 +68,7 @@ function AdaptiveCardTemplate({
 			setIsPending(true);
 
 			const form = new FormData();
-			form.set(recordId, "true");
+			form.set(recordId, "True");
 
 			const headers: Record<string, string> = {};
 			headers["x-record-identifier"] = recordId;
@@ -80,8 +81,8 @@ function AdaptiveCardTemplate({
 			const data = resp?.card.data;
 
 			if (data?.itemListElement?.card) {
-				const card = data.itemListElement.card;
-				adaptiveCard.clear();
+				card = data.itemListElement.card;
+
 				adaptiveCard.parse(card);
 
 				cardWrapperRef.current.innerHTML = "";
@@ -90,28 +91,13 @@ function AdaptiveCardTemplate({
 
 			setIsPending(false);
 			setInitialized(true);
-		} else {
+		} else if (card) {
 			adaptiveCard.parse(card);
 
 			cardWrapperRef.current.innerHTML = "";
 			adaptiveCard.render(cardWrapperRef.current);
 			setIsPending(false);
 		}
-
-		card.onExecuteAction = (action: AdaptiveCards.SubmitAction) => {
-			// Access the data from the action
-			const actionData = action.data;
-
-			// Test that the onExecute parameter has the data JSON
-			if (actionData) {
-				console.debug("Received data:", actionData);
-				// Do something with the data
-			} else {
-				console.debug(
-					"You are all caught up for now received from the card action.",
-				);
-			}
-		};
 
 		adaptiveCard.onInputValueChanged = (input: AdaptiveCards.Input) => {
 			if (input.validateValue()) {

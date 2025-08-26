@@ -25,14 +25,17 @@ export const useSubscribeToProduct = () => {
 
 	return useMutation({
 		mutationFn: async ({ id }: { id: string }) => {
-			await client.post(subscriptionEndpoints.subscribeToProduct(id), {
-				headers: { "Content-Type": "application/json-patch+json" },
-				cancelPath: "/dashboard/subscription?cancel=true",
-				//"/\\I%vYYjyRo7f~p@pk {zMJ%O>hoV5CeB%3c0z_g*(b<a\"J>EAH/ZLsp_nn2hYk'W$eo\"g1@'@Bx(gUg6?%QBn#bmYLZ!*sa)-",
-			});
-			return id;
+			const resp = await client.post(
+				subscriptionEndpoints.subscribeToProduct(id),
+				{
+					headers: { "Content-Type": "application/json-patch+json" },
+					cancelPath: "/dashboard/subscription?cancel=true",
+					//"/\\I%vYYjyRo7f~p@pk {zMJ%O>hoV5CeB%3c0z_g*(b<a\"J>EAH/ZLsp_nn2hYk'W$eo\"g1@'@Bx(gUg6?%QBn#bmYLZ!*sa)-",
+				},
+			);
+			return { id, resp };
 		},
-		onSuccess: (id) => {
+		onSuccess: ({ id }) => {
 			queryClient.invalidateQueries({
 				queryKey: queryKeys.products.byId(id),
 			});

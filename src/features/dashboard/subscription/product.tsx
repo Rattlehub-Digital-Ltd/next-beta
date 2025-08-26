@@ -83,7 +83,8 @@ const Product: React.FC<ProductProps> = ({
 				className="mt-6 w-full h-11 rounded-full py-3 bg-[#ceaa40] font-bold text-gray-900 transition-colors hover:bg-[#b89849]"
 				onClick={async () => {
 					try {
-						await subscribeToPlan.mutateAsync({ id: plan.id });
+						const resp = await subscribeToPlan.mutateAsync({ id: plan.id });
+						console.log("Subscription response:", resp);
 						toast.success(
 							plan.subscribed
 								? "Redirecting to manage your subscription..."

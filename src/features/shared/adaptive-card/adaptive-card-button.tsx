@@ -1,7 +1,9 @@
 /** biome-ignore-all lint/suspicious/noExplicitAny: true */
+"use client";
+
 import { VisuallyHidden } from "@react-aria/visually-hidden";
 import Image from "next/image";
-import { type ReactNode, useCallback, useState } from "react";
+import { type ReactNode, useCallback, useEffect, useState } from "react";
 import ShortUniqueId from "short-unique-id";
 import { dashboardEndpoints } from "@/api/services/dashboard/endpoints";
 import { useGetAdaptiveCard } from "@/api/services/dashboard/queries";
@@ -79,6 +81,16 @@ function AdaptiveCardButton({
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [open, setOpen] = useState<boolean>(defaultOpen ?? false);
 
+	const fetchData = useCallback(async () => {
+		if (!autoSubmit) {
+			await refetch();
+		}
+	}, [autoSubmit, refetch]);
+
+	useEffect(() => {
+		fetchData();
+	}, [fetchData]);
+
 	const submit = useCallback(
 		async (formData: FormData, isCancelButton: boolean, headers?: object) => {
 			setIsProcessing(true);
@@ -130,7 +142,7 @@ function AdaptiveCardButton({
 							open={open}
 							autoYes={autoSubmit}
 							recordId={recordId}
-							card={data?.itemListElement?.card}
+							card={autoSubmit ? null : data?.itemListElement?.card}
 							setProccessing={setIsProcessing}
 							submit={submit}
 						/>

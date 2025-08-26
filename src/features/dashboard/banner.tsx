@@ -16,7 +16,7 @@ export default function Banner() {
 			<SparkleIcon className="h-4 w-4 shrink-0" />
 			<p className="font-medium grow truncate text-[12px] tracking-wide">
 				Your trial ends in{" "}
-				<span className="text-yellow-300 font-bold">10 days</span>
+				<span className="text-yellow-300 font-bold">14 days</span>
 			</p>
 			<StripeDrawer>
 				<motion.div whileTap={{ scale: 0.9 }}>
