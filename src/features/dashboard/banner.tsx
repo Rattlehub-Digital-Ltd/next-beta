@@ -1,11 +1,12 @@
 "use client";
 
 import * as motion from "motion/react-client";
-import { redirect, usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { SparkleIcon } from "@/styles/icons";
 
 export default function Banner() {
+	const router = useRouter();
 	const pathname = usePathname();
 
 	if (pathname.toLowerCase() === "/dashboard/onboarding") return;
@@ -23,7 +24,7 @@ export default function Banner() {
 					className="text-[11px] uppercase tracking-wide gap-1 font-bold bg-white/95 backdrop-blur-md rounded-[10px] text-[#6155F5] h-6"
 					size="sm"
 					variant="default"
-					onClick={() => redirect("/dashboard/subscription")}
+					onClick={() => router.push("/dashboard/subscription")}
 				>
 					Subscribe
 				</Button>
