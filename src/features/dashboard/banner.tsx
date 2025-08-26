@@ -1,10 +1,9 @@
 "use client";
 
 import * as motion from "motion/react-client";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { SparkleIcon } from "@/styles/icons";
-import StripeDrawer from "../stripe/stripe-drawer";
 
 export default function Banner() {
 	const pathname = usePathname();
@@ -18,17 +17,17 @@ export default function Banner() {
 				Your trial ends in{" "}
 				<span className="text-yellow-300 font-bold">14 days</span>
 			</p>
-			<StripeDrawer>
-				<motion.div whileTap={{ scale: 0.9 }}>
-					<Button
-						className="text-[11px] uppercase tracking-wide gap-1 font-bold bg-white/95 backdrop-blur-md rounded-[10px] text-[#6155F5] h-6"
-						size="sm"
-						variant="default"
-					>
-						Subscribe
-					</Button>
-				</motion.div>
-			</StripeDrawer>
+
+			<motion.div whileTap={{ scale: 0.9 }}>
+				<Button
+					className="text-[11px] uppercase tracking-wide gap-1 font-bold bg-white/95 backdrop-blur-md rounded-[10px] text-[#6155F5] h-6"
+					size="sm"
+					variant="default"
+					onClick={() => redirect("/dashboard/subscription")}
+				>
+					Subscribe
+				</Button>
+			</motion.div>
 		</div>
 	);
 }

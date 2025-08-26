@@ -32,7 +32,6 @@ export default function Page() {
 					title={title}
 					description={description}
 				/>
-				{/* <StripePricingTable /> */}
 				{data && (
 					<ul className="space-y-4">
 						{data.map((item) => (
