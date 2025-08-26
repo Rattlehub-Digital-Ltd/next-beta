@@ -23,11 +23,11 @@ export default function StripeDrawer({ children }: StripeDrawerProps) {
 	return (
 		<Drawer>
 			<DrawerTrigger asChild>{children}</DrawerTrigger>
-			<DrawerContent className="bg-[#16243d] border-[#16243d] text-white overflow-y-auto">
+			<DrawerContent className="max-h-[80svh] bg-[#16243d] flex flex-col border-[#16243d] text-white h-full">
 				<DrawerHeader>
 					<DrawerTitle className="text-white">Subscription</DrawerTitle>
 				</DrawerHeader>
-				<div className="p-4">
+				<div className="p-4 grow overflow-y-auto">
 					{data && (
 						<ul className="space-y-4">
 							{data.map((item) => (
