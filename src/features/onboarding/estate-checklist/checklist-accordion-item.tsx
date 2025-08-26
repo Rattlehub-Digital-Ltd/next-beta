@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/correctness/useUniqueElementIds: no applicable */
 import { Icon } from "@iconify/react";
 import { memo } from "react";
 import type { EstateChecklistItem } from "@/api/services/dashboard/onboarding/types";
@@ -89,16 +90,27 @@ const ChecklistAccordionItemComponent = ({
 							orientation="horizontal"
 							disabled={readOnly}
 							value={item.isApplicable ?? undefined}
-							onValueChange={(value) => onChange(value, itemIndex)}
+							onValueChange={(value) => {
+								onChange(value, itemIndex);
+								onNextPress(currentIndex + 1);
+							}}
 						>
 							<div className="flex items-center gap-3 pr-2">
-								<RadioGroupItem value="yes" id="yes" />
+								<RadioGroupItem
+									value="yes"
+									id="yes"
+									className="data-[state=checked]:bg-[#34C759] data-[state=checked]:text-white"
+								/>
 								<Label className="text-xs" htmlFor="yes">
 									Yes
 								</Label>
 							</div>
 							<div className="flex items-center gap-3 pr-2">
-								<RadioGroupItem value="no" id="no" />
+								<RadioGroupItem
+									value="no"
+									id="no"
+									className="data-[state=checked]:bg-[#D64700] data-[state=checked]:text-white"
+								/>
 								<Label className="text-xs" htmlFor="no">
 									No
 								</Label>

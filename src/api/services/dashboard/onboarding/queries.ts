@@ -1,9 +1,13 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import useAxios from "@/hooks/use-axios";
 import { onboardingEndpoints } from "./endpoints";
-import type { EstateChecklistItem, IsOnboardedStatus } from "./types";
+import type {
+	EstateChecklistItem,
+	IsOnboardedStatus,
+	OnboardingDataPayload,
+} from "./types";
 
 export const useGetOnboarding = () => {
 	const { client } = useAxios();
@@ -31,6 +35,17 @@ export const useGetSettings = () => {
 			);
 
 			return data;
+		},
+	});
+};
+
+export const useSubmitOnboardingData = () => {
+	const { client } = useAxios();
+
+	return useMutation({
+		mutationFn: async ({ payload }: { payload: OnboardingDataPayload }) => {
+			const resp = await client.post(onboardingEndpoints.submitData(), payload);
+			return resp;
 		},
 	});
 };

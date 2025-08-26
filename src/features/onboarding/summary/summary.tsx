@@ -4,8 +4,10 @@ import { Icon } from "@iconify/react";
 import ShortUniqueId from "short-unique-id";
 import { useChildrenStore } from "store/use-children-store";
 import { useDependentStore } from "store/use-dependent-store";
+import { useDocumentStore } from "store/use-document-store";
 import { usePartnerStore } from "store/use-partner-store";
 import PersonCard from "@/features/shared/person-card";
+import EstateChecklistItem from "../estate-checklist/estate-checklist-item";
 import CardContainer from "./card-container";
 
 const uid = new ShortUniqueId();
@@ -14,18 +16,12 @@ export default function Summary() {
 	const { partner } = usePartnerStore();
 	const { children } = useChildrenStore();
 	const { dependents } = useDependentStore();
+	const { documents } = useDocumentStore();
 
 	const partnerData = partner?.[0];
 
 	return (
 		<div className="h-full w-full flex flex-col space-y-6 py-4">
-			<header className="space-y-1 px-4">
-				<h1 className="text-lg font-bold">Summary</h1>
-				<p className="text-sm leading-5 text-[#616161] text-pretty">
-					A summary of all the details you have provided. Please carefully
-					review for any mistakes or inconsistencies.
-				</p>
-			</header>
 			<div className="grow flex flex-col space-y-6 overflow-hidden w-full">
 				{partnerData && (
 					<CardContainer
@@ -91,6 +87,26 @@ export default function Summary() {
 									person={item}
 									onDelete={() => console.log("Delete")}
 								/>
+							))}
+						</div>
+					</CardContainer>
+				)}
+				{documents && documents.length > 0 && (
+					<CardContainer
+						title="Partner"
+						icon={
+							<Icon
+								icon="fluent:person-heart-24-filled"
+								height={20}
+								width={20}
+							/>
+						}
+						description="The person who you are married to or with whom you enjoy a long-term
+					relationship"
+					>
+						<div className="flex flex-col space-y-3">
+							{documents.map((item) => (
+								<EstateChecklistItem key={uid.randomUUID()} item={item} />
 							))}
 						</div>
 					</CardContainer>

@@ -32,6 +32,7 @@ export default function ProtectedRoute({ children }: PropsWithChildren) {
 			sessionStorage.setItem(key, userId);
 		}
 
+		// If the user is not onboarded, redirect to onboarding
 		if (!isOnboarded) redirect("/dashboard/onboarding");
 	}, [user, identify, isOnboarded]);
 

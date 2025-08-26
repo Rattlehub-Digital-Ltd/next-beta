@@ -14,3 +14,24 @@ export type EstateChecklistItem = {
 	isApplicable: string | null;
 	riskItems?: RiskItemProps[];
 };
+
+export type OnboardingDataPayload = {
+	partner: {
+		name: string;
+		surname: string;
+	} | null;
+	children: {
+		relationship: string;
+		name: string;
+		surname: string;
+	}[];
+	dependents: {
+		relationship: string;
+		name: string;
+		surname: string;
+	}[];
+	settings: {
+		id: string;
+		isApplicable: boolean | null;
+	}[];
+};

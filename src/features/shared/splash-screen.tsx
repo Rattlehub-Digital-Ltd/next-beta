@@ -30,6 +30,7 @@ export default function SplashScreen() {
 			setActivity(activity);
 		}
 		if (onboardingStatus) setIsOnboarded(onboardingStatus.isOnboarded);
+		console.log(onboardingStatus);
 
 		if (activity && onboardingStatus) {
 			setInitialized(true);

@@ -28,9 +28,9 @@ export const metadata: Metadata = {
 const Content = () => {
 	const { links } = appConfig;
 	return (
-		<div className="h-full flex flex-col w-full">
+		<div className="flex flex-col w-full space-y-12">
 			<motion.div
-				className="space-y-4 text-center px-6 grow"
+				className="space-y-4 text-center px-6"
 				initial={{ opacity: 0, translateY: 20 }}
 				animate={{ opacity: 1, translateY: 0 }}
 				transition={{ duration: 0.35 }}
@@ -80,7 +80,7 @@ const Content = () => {
 export default function LoginPage() {
 	return (
 		<motion.div
-			className="h-full w-full flex flex-col grow"
+			className="grow items-center justify-center w-full flex flex-col pb-12"
 			initial={{ opacity: 0, scale: 0.7, translateY: 20 }}
 			animate={{ opacity: 1, scale: 1, translateY: 0 }}
 			transition={{

@@ -1,8 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { useDocumentStore } from "store/use-document-store";
 import { useGetSettings } from "@/api/services/dashboard/onboarding/queries";
-import type { EstateChecklistItem } from "@/api/services/dashboard/onboarding/types";
 import SuggestionItem from "@/features/shared/suggestion-item";
 import CustomAccordion from "./custom-accordion";
 
@@ -12,23 +12,27 @@ const description =
 
 export default function EstateChecklist() {
 	const { data, isLoading, isError, error } = useGetSettings();
-	const [documents, setDocuments] = useState<EstateChecklistItem[]>([]);
+
+	const { documents, setDocuments } = useDocumentStore();
+
 	const [currentIndex, setCurrentIndex] = useState(0);
 
 	useEffect(() => {
-		if (data) {
+		if (data && documents.length === 0) {
 			setDocuments(data);
 		}
-	}, [data]);
+	}, [data, documents, setDocuments]);
 
-	const handleOnChange = useCallback((value: string, index: number) => {
-		setDocuments((prevDocuments) => {
-			const newDocuments = [...prevDocuments];
+	const handleOnChange = useCallback(
+		(value: string, index: number) => {
+			const newDocuments = [...documents];
 			const updatedDocument = { ...newDocuments[index], isApplicable: value };
 			newDocuments[index] = updatedDocument;
-			return newDocuments;
-		});
-	}, []);
+
+			setDocuments(newDocuments);
+		},
+		[documents, setDocuments],
+	);
 
 	const handleOnNextPress = useCallback(
 		(index: number) => {
@@ -39,10 +43,6 @@ export default function EstateChecklist() {
 		},
 		[documents.length],
 	);
-
-	// const handleOnNextPress = useCallback((index: number) => {
-	// 	setCurrentIndex(index);
-	// }, []);
 
 	if (isLoading) {
 		return <div>Loading...</div>;
