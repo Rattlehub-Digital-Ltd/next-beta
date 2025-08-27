@@ -12,7 +12,7 @@ export default function DashboardLayout({ children }: PropsWithChildren) {
 					<div className="shrink-0">
 						<Banner />
 					</div>
-					<main className="grow overflow-hidden">{children}</main>
+					<main className="grow">{children}</main>
 					<nav className="fixed bottom-0 left-0 w-full z-30">
 						<BottomTabBar />
 					</nav>

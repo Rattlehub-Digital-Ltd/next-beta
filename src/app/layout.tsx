@@ -27,7 +27,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html className="bg-[#E5E5E5] h-screen overflow-hidden" lang="en">
+		<html className="bg-[#E5E5E5] h-screen" lang="en">
 			<head>
 				<Script
 					strategy="afterInteractive"
