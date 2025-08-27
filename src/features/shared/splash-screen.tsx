@@ -16,7 +16,7 @@ export default function SplashScreen() {
 
 	const { setIsOnboarded } = useOnboardingStore();
 	const { setActivity } = useActivitySummaryStore();
-	const { setInitialized } = useAppStore();
+	const { setInitialized, setIsAdmin } = useAppStore();
 
 	const [isInitializing, setIsInitializing] = useState(true);
 
@@ -27,7 +27,14 @@ export default function SplashScreen() {
 
 	const initialize = useCallback(async () => {
 		const idTokenClaims = await getIdTokenClaims();
-		console.log({ idTokenClaims });
+		if (idTokenClaims) {
+			const role = idTokenClaims?.[
+				"https://app.nextdot.ai/roles"
+			]?.[0] as string;
+			if (role && role.toLowerCase() === "rattlehub-staff") {
+				setIsAdmin(true);
+			}
+		}
 
 		if (activity) {
 			setActivity(activity);
@@ -49,6 +56,7 @@ export default function SplashScreen() {
 		setIsOnboarded,
 		setInitialized,
 		getIdTokenClaims,
+		setIsAdmin,
 	]);
 
 	useEffect(() => {
