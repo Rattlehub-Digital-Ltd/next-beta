@@ -22,6 +22,8 @@ type UserMenuProps = {
 const UserMenu = ({ children }: UserMenuProps) => {
 	const { user, logout } = useAuth0();
 
+	console.debug({ user });
+
 	const { setIsOnboarded } = useOnboardingStore();
 
 	const [open, setOpen] = useState(false);

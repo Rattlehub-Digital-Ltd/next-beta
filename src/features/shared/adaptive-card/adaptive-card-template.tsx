@@ -93,7 +93,7 @@ function AdaptiveCardTemplate({
 
 			setIsPending(false);
 			setInitialized(true);
-		} else if (card) {
+		} else if (card && !autoYes && initialized) {
 			adaptiveCard.parse(card);
 
 			const renderedCard = adaptiveCard.render();
