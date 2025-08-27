@@ -1,12 +1,16 @@
 "use client";
 
 import { Icon } from "@iconify/react";
+import { useAppStore } from "store/use-app-store";
 import { Button } from "@/components/ui/button";
 import { appConfig } from "@/config/app.config";
 import useAxios from "@/hooks/use-axios";
 
 function ResetButton() {
 	const { client } = useAxios();
+	const { isAdmin } = useAppStore();
+
+	if (!isAdmin) return;
 
 	return (
 		<Button
