@@ -1,10 +1,13 @@
 "use client";
 
+import { Icon } from "@iconify/react";
 import ShortUniqueId from "short-unique-id";
 import { useGetDocumentLocations } from "@/api/services/dashboard/overview/queries";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import SuggestionItem from "@/features/shared/suggestion-item";
 import DocumentLocationBadge from "../document-location-badge";
+import DocumentLocationSuggestions from "./document-location-suggestions";
 
 const uid = new ShortUniqueId();
 
@@ -35,6 +38,24 @@ export default function DocumentLocations() {
 							<DocumentLocationBadge label="Office Safe" count={3} />
 						</div>
 					)}
+
+					<DocumentLocationSuggestions>
+						<Button
+							className="text-indigo-600 !no-underline text-left font-semibold text-xs gap-2 px-1"
+							size="sm"
+							variant="link"
+						>
+							<Icon
+								icon="fluent-color:text-bullet-list-square-sparkle-24"
+								height={20}
+								width={20}
+								className="!h-5 !w-5"
+							/>
+							<span className="grow truncate">
+								Where can I store my documents?
+							</span>
+						</Button>
+					</DocumentLocationSuggestions>
 
 					{/* Loading complete and data has no value */}
 					{items?.length === 0 && (
