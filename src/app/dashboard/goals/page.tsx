@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function GoalsPage() {
 	return (
-		<div className="pt-3 space-y-4 pb-8">
+		<div className="pt-3 space-y-4 pb-12">
 			<Header
 				title={title}
 				description={description}

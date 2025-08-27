@@ -18,7 +18,7 @@ export default function MainLayout({ children }: PropsWithChildren) {
 						<Navbar />
 					</nav>
 				</div>
-				<main className="container relative grow mx-auto pb-4 px-4 z-10">
+				<main className="container grow mx-auto pb-4 px-4 z-10">
 					{children}
 				</main>
 			</div>
