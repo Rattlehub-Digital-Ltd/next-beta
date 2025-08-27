@@ -44,8 +44,8 @@ function OnboardingPage() {
 
 	return (
 		<div className="space-y-3 flex flex-col overflow-hidden">
-			<Carousel setApi={setApi}>
-				<CarouselContent>
+			<Carousel setApi={setApi} className="flex">
+				<CarouselContent className="flex">
 					<CarouselItem>
 						<Partner />
 					</CarouselItem>

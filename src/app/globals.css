@@ -197,3 +197,9 @@ body {
   text-decoration: none !important;
   font-weight: 600 !important;
 }
+
+.embla__container {
+  transition: height 0.2s;
+  display: flex;
+  align-items: flex-start; /* Add this */
+}

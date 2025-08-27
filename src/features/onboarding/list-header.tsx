@@ -11,8 +11,10 @@ export default function ListHeader({
 	onReset,
 }: ListHeaderProps) {
 	return (
-		<div className="flex items-center space-x-2 w-full pl-3 py-2">
-			<p className="text-sm font-semibold grow text-left">{title}</p>
+		<div className="flex items-center space-x-2 w-full pl-3 py-0">
+			<p className="text-xs text-neutral-600 font-medium grow text-left">
+				{title}
+			</p>
 			<Button
 				className="!no-underline text-red-500"
 				type="button"

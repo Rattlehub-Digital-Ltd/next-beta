@@ -39,7 +39,7 @@ const Content = ({ value, onValueChange, onReset }: PersonProps) => {
 					onValueChange={onValueChange}
 				/>
 				{children && children?.length > 0 && (
-					<div className="py-6 flex flex-col w-full items-center">
+					<div className="pb-6 flex flex-col w-full items-center space-y-1.5">
 						<ListHeader title="Children" onReset={onReset} />
 
 						<ul className="w-full flex flex-col space-y-3">
