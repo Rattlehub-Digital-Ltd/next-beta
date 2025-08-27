@@ -2,7 +2,6 @@ import * as AdaptiveCards from "adaptivecards";
 import MarkdownIt from "markdown-it";
 import { Geist_Mono, Mona_Sans } from "next/font/google";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useAutoAdvanceAdaptiveCard } from "@/api/services/dashboard/queries";
 import { Spinner } from "@/components/ui/spinner";
 
 const adaptiveCard = new AdaptiveCards.AdaptiveCard();
@@ -30,10 +29,8 @@ AdaptiveCards.AdaptiveCard.onProcessMarkdown = (text, result) => {
 
 export interface AdaptiveCardProps {
 	open: boolean;
-	autoYes?: boolean;
-	recordId?: string;
 	// biome-ignore lint/suspicious/noExplicitAny: true
-	card: any | null;
+	card: any;
 	setProccessing: (isProcessing: boolean) => void;
 	submit: (
 		formData: FormData,
@@ -44,65 +41,30 @@ export interface AdaptiveCardProps {
 
 function AdaptiveCardTemplate({
 	open,
-	autoYes,
-	recordId,
+
 	card,
 	submit,
 }: AdaptiveCardProps) {
-	const advanceAdaptiveCard = useAutoAdvanceAdaptiveCard();
-
 	const cardWrapperRef = useRef<HTMLDivElement>(null);
 	const formData = useRef<FormData>(new FormData());
-	const [initialized, setInitialized] = useState(false);
 	const [isPending, setIsPending] = useState(true);
 
 	const initialize = useCallback(async () => {
-		// if (!cardWrapperRef || !card || !cardWrapperRef.current || !open) return;
 		if (!cardWrapperRef.current || !open) return;
 
+		setIsPending(true);
+
 		const adaptiveCard = new AdaptiveCards.AdaptiveCard();
+		adaptiveCard.parse(card);
 
-		if (autoYes && recordId && !initialized) {
-			setIsPending(true);
-
-			const form = new FormData();
-			form.set(recordId, "yes");
-
-			const headers: Record<string, string> = {};
-			headers["x-record-identifier"] = recordId;
-
-			const resp = await advanceAdaptiveCard.mutateAsync({
-				formData: form,
-				headers: headers,
-			});
-
-			const data = resp?.card.data;
-
-			if (data?.itemListElement?.card) {
-				const card = data.itemListElement.card;
-				adaptiveCard.parse(card);
-
-				// cardWrapperRef.current.innerHTML = "";
-				// adaptiveCard.render(cardWrapperRef.current);
-				const renderedCard = adaptiveCard.render();
-				cardWrapperRef.current.innerHTML = ""; // Clear previous content
-				if (renderedCard) {
-					cardWrapperRef.current.appendChild(renderedCard);
-				}
-			}
-
-			setIsPending(false);
-			setInitialized(true);
-		} else if (card && !autoYes && initialized) {
-			adaptiveCard.parse(card);
-
-			const renderedCard = adaptiveCard.render();
-			cardWrapperRef.current.innerHTML = ""; // Clear previous content
-			if (renderedCard) {
-				cardWrapperRef.current.appendChild(renderedCard);
-			}
-			setIsPending(false);
+		const renderedCard = adaptiveCard.render();
+		cardWrapperRef.current.innerHTML = "";
+		if (renderedCard) {
+			// Clear previous content
+			cardWrapperRef.current.appendChild(renderedCard);
 		}
+
+		setIsPending(false);
 
 		adaptiveCard.onInputValueChanged = (input: AdaptiveCards.Input) => {
 			if (input.validateValue()) {
@@ -146,15 +108,7 @@ function AdaptiveCardTemplate({
 				action.toJSON()?.data,
 			);
 		};
-	}, [
-		card,
-		submit,
-		autoYes,
-		recordId,
-		initialized,
-		open,
-		advanceAdaptiveCard.mutateAsync,
-	]);
+	}, [card, submit, open]);
 
 	useEffect(() => {
 		initialize();

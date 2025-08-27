@@ -3,10 +3,19 @@
 
 import { VisuallyHidden } from "@react-aria/visually-hidden";
 import Image from "next/image";
-import { type ReactNode, useCallback, useEffect, useState } from "react";
+import {
+	type ReactNode,
+	useCallback,
+	useEffect,
+	useRef,
+	useState,
+} from "react";
 import ShortUniqueId from "short-unique-id";
 import { dashboardEndpoints } from "@/api/services/dashboard/endpoints";
-import { useGetAdaptiveCard } from "@/api/services/dashboard/queries";
+import {
+	useAutoAdvanceAdaptiveCard,
+	useGetAdaptiveCard,
+} from "@/api/services/dashboard/queries";
 import {
 	Drawer,
 	DrawerContent,
@@ -71,6 +80,7 @@ function AdaptiveCardButton({
 	defaultOpen,
 	refresh,
 }: Props) {
+	const advanceAdaptiveCard = useAutoAdvanceAdaptiveCard();
 	const { data, isLoading, isError, refetch } = useGetAdaptiveCard(
 		referer,
 		recordId,
@@ -80,12 +90,40 @@ function AdaptiveCardButton({
 
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [open, setOpen] = useState<boolean>(defaultOpen ?? false);
+	const autoAdvanced = useRef(false);
+
+	const autoAdvance = useCallback(
+		async (recordId: string | undefined) => {
+			if (!recordId) return;
+
+			try {
+				const form = new FormData();
+				form.set(recordId, "true");
+
+				const headers: Record<string, string> = {};
+				headers["x-record-identifier"] = recordId;
+
+				const resp = await advanceAdaptiveCard.mutateAsync({
+					formData: form,
+					headers: headers,
+				});
+
+				const data = resp?.card.data;
+				autoAdvanced.current = true;
+
+				return data;
+			} catch (error) {
+				console.log(error);
+			}
+		},
+		[advanceAdaptiveCard.mutateAsync],
+	);
 
 	const fetchData = useCallback(async () => {
-		if (!autoSubmit) {
-			await refetch();
-		}
-	}, [autoSubmit, refetch]);
+		if (autoSubmit && !autoAdvanced.current) await autoAdvance(recordId);
+
+		await refetch();
+	}, [autoSubmit, refetch, autoAdvance, recordId]);
 
 	useEffect(() => {
 		fetchData();
@@ -140,9 +178,7 @@ function AdaptiveCardButton({
 					{!isLoading && (
 						<AdaptiveCardTemplate
 							open={open}
-							autoYes={autoSubmit}
-							recordId={recordId}
-							card={autoSubmit ? null : data?.itemListElement?.card}
+							card={data?.itemListElement?.card}
 							setProccessing={setIsProcessing}
 							submit={submit}
 						/>

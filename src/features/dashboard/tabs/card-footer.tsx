@@ -46,7 +46,7 @@ export default function CardFooter({
 
 		try {
 			const form = new FormData();
-			form.set(id, value === true ? "yes" : "no");
+			form.set(id, value.toString());
 
 			const headers: Record<string, string> = {};
 			headers["x-record-identifier"] = id;
