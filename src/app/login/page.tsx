@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 const Content = () => {
 	const { links } = appConfig;
 	return (
-		<div className="flex flex-col w-full space-y-12">
+		<div className="flex flex-col w-full space-y-12 pb-12">
 			<motion.div
 				className="space-y-4 text-center px-6"
 				initial={{ opacity: 0, translateY: 20 }}

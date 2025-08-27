@@ -11,7 +11,7 @@ export default function TabsCard() {
 	return (
 		<div>
 			<Tabs defaultValue="actions" className="space-y-3">
-				<div className="pt-3.5 sticky left-0 top-16 w-full z-15">
+				<div className="pt-3.5 sticky left-0 top-96 w-full z-15">
 					<div className="p-2 backdrop-blur-[15px] bg-white/40 rounded-[16px] border border-[#EBEDED] flex justify-between items-center shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)]">
 						<TabsList>
 							<TabsTrigger className="px-2" value="actions">
