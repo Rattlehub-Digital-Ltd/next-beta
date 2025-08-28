@@ -108,14 +108,14 @@ function AdaptiveCardTemplate({ card, submit }: AdaptiveCardProps) {
 	}, [initialize]);
 
 	return (
-		<div className="h-full md:max-w-xl relative">
+		<div className="!h-full md:max-w-xl flex flex-col overflow-hidden">
 			<div
-				className={`px-4 pb-4 rounded-3xl md:px-0 !${fontSans.variable} !${fontMono.variable}`}
+				className={`px-4 !pb-8 mb-8 rounded-3xl md:px-0 overflow-y-auto !${fontSans.variable} !${fontMono.variable}`}
 				ref={cardWrapperRef}
 			/>
 
 			{isPending && (
-				<div className="absolute top-0 left-0 z-200 flex flex-col items-center justify-center w-full h-full space-y-8 text-center bg-white/90 backdrop-blur-2xl">
+				<div className="absolute  top-0 left-0 z-200 flex flex-col items-center justify-center w-full h-full space-y-8 text-center bg-white/90 backdrop-blur-2xl">
 					<Spinner />
 					<p className="text-[13px] text-default-700">Loading...</p>
 				</div>
