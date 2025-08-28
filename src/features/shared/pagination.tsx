@@ -53,8 +53,8 @@ function Pagination({
 				transition={{ duration: 0.35 }}
 			>
 				<Button
-					className="rounded-full bg-[#EBEBEB] text-[#424242] h-8 w-8 !px-0 !py-0"
-					variant="ghost"
+					className="rounded-full bg-black/3 text-[#424242] h-8 w-8 !px-0 !py-0"
+					variant="outline"
 					onClick={onPrevious}
 				>
 					<Icon icon="fluent:arrow-left-24-regular" className="!w-4 !h-4" />
@@ -84,9 +84,9 @@ function Pagination({
 				transition={{ duration: 0.35 }}
 			>
 				<Button
-					className="rounded-full bg-blue-600 text-white disabled:bg-[#EBEBEB] disabled:text-[#424242] h-8 w-8 !px-0 !py-0"
+					className="rounded-full bg-black/3 disabled:bg-[#EBEBEB] disabled:text-[#424242] h-8 w-8 !px-0 !py-0"
 					disabled={nextButtonDisabled}
-					variant="ghost"
+					variant="outline"
 					onClick={onNext}
 				>
 					<Icon icon="fluent:arrow-right-24-regular" className="!w-4 !h-4" />

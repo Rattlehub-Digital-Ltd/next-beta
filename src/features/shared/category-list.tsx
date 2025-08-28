@@ -15,8 +15,8 @@ const containerVariants = {
 };
 
 const itemVariants = {
-	hidden: { x: 2 },
-	visible: { x: 0 },
+	hidden: { opacity: 0.5, scale: 0.9 },
+	visible: { opacity: 1, scale: 1 },
 };
 
 type CategoryListProps = {
