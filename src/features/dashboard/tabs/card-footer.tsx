@@ -54,6 +54,8 @@ export default function CardFooter({
 			const response = await advanceAdaptiveCard.mutateAsync({
 				formData: form,
 				headers: headers,
+				referer: "actions",
+				recordId: id,
 			});
 
 			if (!response) {
