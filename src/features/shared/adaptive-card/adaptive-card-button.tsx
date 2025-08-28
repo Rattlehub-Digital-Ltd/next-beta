@@ -120,10 +120,12 @@ function AdaptiveCardButton({
 	);
 
 	const fetchData = useCallback(async () => {
+		if (!open) return;
+
 		if (autoSubmit && !autoAdvanced.current) await autoAdvance(recordId);
 
 		await refetch();
-	}, [autoSubmit, refetch, autoAdvance, recordId]);
+	}, [autoSubmit, refetch, autoAdvance, recordId, open]);
 
 	useEffect(() => {
 		fetchData();
