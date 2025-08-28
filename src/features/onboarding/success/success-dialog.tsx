@@ -43,8 +43,8 @@ export default function SuccessDialog({ open, onClose }: SuccessDialogProps) {
 						</div>
 						<div className="mx-auto space-y-1 text-center">
 							<h4 className="text-xl font-semibold text-pretty">Great job!</h4>
-							<p className="text-sm leading-5 max-w-[300px] tracking-wide text-default-600 text-pretty">
-								Trust us—one day, your family’s going to look back and smile big
+							<p className="text-sm leading-5 max-w-[300px] tracking-wide text-neutral-600 text-pretty">
+								Trust us—one day, your family's going to look back and smile big
 								time!
 							</p>
 						</div>
