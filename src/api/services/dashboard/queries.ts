@@ -126,14 +126,19 @@ export const useGetAdaptiveCard = (referer: string, recordId?: string) => {
 
 export const useAutoAdvanceAdaptiveCard = () => {
 	const { client } = useAxios();
+	const queryClient = useQueryClient();
 
 	return useMutation({
 		mutationFn: async ({
 			formData,
 			headers,
+			referer,
+			recordId,
 		}: {
 			formData: FormData;
 			headers: object;
+			referer: string;
+			recordId?: string;
 		}) => {
 			// biome-ignore lint/suspicious/noExplicitAny: unknown object
 			const card = await client.put<any>(
@@ -147,6 +152,46 @@ export const useAutoAdvanceAdaptiveCard = () => {
 					},
 				},
 			);
+
+			const queryKey = ["adaptive_card", referer, recordId];
+			queryClient.setQueryData(queryKey, card);
+
+			return { formData, headers, card };
+		},
+	});
+};
+
+export const useSubmitAdaptiveCardData = () => {
+	const { client } = useAxios();
+	const queryClient = useQueryClient();
+
+	return useMutation({
+		mutationFn: async ({
+			formData,
+			headers,
+			referer,
+			recordId,
+		}: {
+			formData: FormData;
+			headers: object;
+			referer: string;
+			recordId?: string;
+		}) => {
+			// biome-ignore lint/suspicious/noExplicitAny: unknown object
+			const card = await client.put<any>(
+				dashboardEndpoints.submitAdaptiveCard(),
+				formData,
+				{
+					baseURL: `${process.env.NEXT_PUBLIC_API_BASE_URL as string}`,
+					headers: {
+						"Content-Type": "multipart/form-data",
+						...headers,
+					},
+				},
+			);
+
+			const queryKey = ["adaptive_card", referer, recordId];
+			queryClient.setQueryData(queryKey, card);
 
 			return { formData, headers, card };
 		},

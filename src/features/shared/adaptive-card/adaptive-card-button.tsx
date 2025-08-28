@@ -11,10 +11,10 @@ import {
 	useState,
 } from "react";
 import ShortUniqueId from "short-unique-id";
-import { dashboardEndpoints } from "@/api/services/dashboard/endpoints";
 import {
 	useAutoAdvanceAdaptiveCard,
 	useGetAdaptiveCard,
+	useSubmitAdaptiveCardData,
 } from "@/api/services/dashboard/queries";
 import {
 	Drawer,
@@ -25,7 +25,6 @@ import {
 } from "@/components/ui/drawer";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
-import useAxios from "@/hooks/use-axios";
 import type { Document } from "@/types/document";
 import AdaptiveCardTemplate from "./adaptive-card-template";
 
@@ -81,12 +80,12 @@ function AdaptiveCardButton({
 	refresh,
 }: Props) {
 	const advanceAdaptiveCard = useAutoAdvanceAdaptiveCard();
+	const submitAdaptiveCardData = useSubmitAdaptiveCardData();
+
 	const { data, isLoading, isError, refetch } = useGetAdaptiveCard(
 		referer,
 		recordId,
 	);
-
-	const { client } = useAxios();
 
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [open, setOpen] = useState<boolean>(defaultOpen ?? false);
@@ -106,6 +105,8 @@ function AdaptiveCardButton({
 				const resp = await advanceAdaptiveCard.mutateAsync({
 					formData: form,
 					headers: headers,
+					referer,
+					recordId,
 				});
 
 				const data = resp?.card.data;
@@ -116,7 +117,7 @@ function AdaptiveCardButton({
 				console.log(error);
 			}
 		},
-		[advanceAdaptiveCard.mutateAsync],
+		[advanceAdaptiveCard.mutateAsync, referer],
 	);
 
 	const fetchData = useCallback(async () => {
@@ -136,30 +137,31 @@ function AdaptiveCardButton({
 			setIsProcessing(true);
 
 			try {
-				await client.put<any>(
-					dashboardEndpoints.submitAdaptiveCard(),
-					formData,
-					{
-						baseURL: `${process.env.NEXT_PUBLIC_API_BASE_URL as string}`,
-						headers: {
-							"Content-Type": "multipart/form-data",
-							...headers,
-						},
-					},
-				);
+				const header = headers ? (headers as object) : {};
+				if (recordId) {
+					(header as Record<string, string>)["x-record-identifier"] = recordId;
+				}
+
+				await submitAdaptiveCardData.mutateAsync({
+					formData: formData,
+					headers: header,
+					referer,
+					recordId,
+				});
 			} catch (error) {
 				console.log(error);
 			} finally {
-				setIsProcessing(false);
-
 				if (isCancelButton) {
 					setOpen(false);
 					refresh();
-					refetch();
+				} else {
+					await refetch();
 				}
+
+				setIsProcessing(false);
 			}
 		},
-		[refresh, client, refetch],
+		[refresh, refetch, recordId, referer, submitAdaptiveCardData.mutateAsync],
 	);
 
 	return (
@@ -185,7 +187,7 @@ function AdaptiveCardButton({
 					)}
 					{isError && <ErrorComp />}
 					{isProcessing && (
-						<div className="absolute top-0 left-0 z-10 flex flex-col items-center justify-center w-full h-full space-y-8 text-center bg-white/90 backdrop-blur-sm">
+						<div className="absolute top-0 left-0 z-10 flex flex-col items-center justify-center w-full h-full space-y-8 text-center bg-white/80 backdrop-blur-sm">
 							<Spinner />
 							<p className="text-[13px] text-neutral-600">Processing...</p>
 						</div>
