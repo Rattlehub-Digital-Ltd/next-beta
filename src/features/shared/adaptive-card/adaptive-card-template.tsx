@@ -104,7 +104,11 @@ function AdaptiveCardTemplate({ card, submit }: AdaptiveCardProps) {
 	}, [card, submit]);
 
 	useEffect(() => {
-		initialize();
+		try {
+			initialize();
+		} catch (error) {
+			console.log(error);
+		}
 	}, [initialize]);
 
 	return (
