@@ -177,9 +177,7 @@ function AdaptiveCardButton({
 					{isLoading && <Loading />}
 					{!isLoading && (
 						<AdaptiveCardTemplate
-							open={open}
 							card={data?.itemListElement?.card}
-							setProccessing={setIsProcessing}
 							submit={submit}
 						/>
 					)}

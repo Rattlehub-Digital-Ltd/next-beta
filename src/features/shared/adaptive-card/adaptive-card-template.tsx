@@ -28,10 +28,8 @@ AdaptiveCards.AdaptiveCard.onProcessMarkdown = (text, result) => {
 };
 
 export interface AdaptiveCardProps {
-	open: boolean;
 	// biome-ignore lint/suspicious/noExplicitAny: true
 	card: any;
-	setProccessing: (isProcessing: boolean) => void;
 	submit: (
 		formData: FormData,
 		isCancelButton: boolean,
@@ -39,18 +37,13 @@ export interface AdaptiveCardProps {
 	) => Promise<void>;
 }
 
-function AdaptiveCardTemplate({
-	open,
-
-	card,
-	submit,
-}: AdaptiveCardProps) {
+function AdaptiveCardTemplate({ card, submit }: AdaptiveCardProps) {
 	const cardWrapperRef = useRef<HTMLDivElement>(null);
 	const formData = useRef<FormData>(new FormData());
 	const [isPending, setIsPending] = useState(true);
 
 	const initialize = useCallback(async () => {
-		if (!cardWrapperRef.current || !open) return;
+		if (!cardWrapperRef.current) return;
 
 		setIsPending(true);
 
@@ -108,7 +101,7 @@ function AdaptiveCardTemplate({
 				action.toJSON()?.data,
 			);
 		};
-	}, [card, submit, open]);
+	}, [card, submit]);
 
 	useEffect(() => {
 		initialize();
