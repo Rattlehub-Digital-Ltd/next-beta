@@ -29,32 +29,45 @@ export default function LifeFileDocuments() {
 					{/* Loading complete and data has value */}
 					{items && (
 						<div className="grid grid-cols-2 gap-2">
-							{items.map((item) => (
-								<AdaptiveCardButton
-									autoSubmit={true}
-									currentDocument={item}
-									key={item.id}
-									recordId={item.id}
-									referer=""
-									refresh={console.log}
-								>
-									<motion.div
+							{items.map((item) =>
+								!item.isApplicable ? (
+									<AdaptiveCardButton
+										autoSubmit={true}
+										currentDocument={item}
 										key={item.id}
-										className="w-full"
-										whileTap={{ scale: 0.95 }}
+										recordId={item.id}
+										referer=""
+										refresh={console.log}
 									>
-										<DocumentItem
-											className={
-												item.isApplicable
-													? "bg-[#007AFF]/5 ring-[#007AFF]/80"
-													: ""
-											}
-											color={item.isApplicable ? "#007AFF" : ""}
-											item={item}
-										/>
-									</motion.div>
-								</AdaptiveCardButton>
-							))}
+										<motion.div
+											key={item.id}
+											className="w-full"
+											whileTap={{ scale: 0.95 }}
+										>
+											<DocumentItem
+												className={
+													item.isApplicable
+														? "bg-[#007AFF]/5 ring-[#007AFF]/80"
+														: ""
+												}
+												color={item.isApplicable ? "#007AFF" : ""}
+												item={item}
+											/>
+										</motion.div>
+									</AdaptiveCardButton>
+								) : (
+									<DocumentItem
+										key={item.id}
+										className={
+											item.isApplicable
+												? "bg-[#007AFF]/5 ring-[#007AFF]/80"
+												: ""
+										}
+										color={item.isApplicable ? "#007AFF" : ""}
+										item={item}
+									/>
+								),
+							)}
 						</div>
 					)}
 

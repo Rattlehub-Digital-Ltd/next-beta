@@ -5,7 +5,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 export default function EstatePlanAdvert() {
 	return (
 		<div className="h-full w-full overflow-hidden">
-			<div className="gap-2 flex flex-col bg-[#ff3a30]/3 border border-[#ff3a30]/20 p-4 rounded-[16px]">
+			<div className="gap-2 flex flex-col bg-[#ff3a30]/3 p-5 rounded-[16px]">
 				<Image src="/momentum.svg" alt="" height={32} width={128} />
 
 				<AspectRatio ratio={16 / 9}>
@@ -66,12 +66,14 @@ export default function EstatePlanAdvert() {
 							</p>
 						</div>
 					</div>
-					<a
-						href="https://www.momentum.co.za/momentum/personal/will-trust-estate/call-me-back#/lead?name=estate-planning"
-						className="text-white text-[0.75rem] font-semibold py-1.5 shrink-0 px-8 rounded-full bg-[#ff3a30] ml-6"
-					>
-						Get advice
-					</a>
+					<div className="pt-6 flex justify-center">
+						<a
+							href="https://www.momentum.co.za/momentum/personal/will-trust-estate/call-me-back#/lead?name=estate-planning"
+							className="text-white text-[0.75rem] font-semibold py-1.5 shrink-0 px-16 rounded-full bg-[#ff3a30]"
+						>
+							Get advice
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>

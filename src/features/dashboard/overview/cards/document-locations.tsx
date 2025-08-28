@@ -41,7 +41,7 @@ export default function DocumentLocations() {
 
 					<DocumentLocationSuggestions>
 						<Button
-							className="text-blue-600 border-blue-600 ring-2 ring-blue-600/30 text-left font-semibold text-xs gap-2 px-1"
+							className="text-blue-600 bg-blue-600/3 border-blue-600 ring-2 ring-blue-600/30 text-left font-semibold text-xs gap-2 px-1"
 							size="sm"
 							variant="outline"
 						>
