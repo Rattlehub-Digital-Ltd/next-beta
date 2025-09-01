@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import ShortUniqueId from "short-unique-id";
 import { toast } from "sonner";
 import { useSubscribeToProduct } from "@/api/services/dashboard/subscription/queries";
@@ -80,7 +81,8 @@ const Product: React.FC<ProductProps> = ({
 			{/* Action Button */}
 			<Button
 				size="default"
-				className="mt-6 w-full h-11 rounded-full py-3 bg-[#ceaa40] font-bold text-gray-900 transition-colors hover:bg-[#b89849]"
+				disabled={subscribeToPlan.isPending}
+				className="mt-6 w-full h-11 rounded-full disabled:opacity-80 py-3 bg-[#ceaa40] font-bold text-gray-900 transition-colors hover:bg-[#b89849]"
 				onClick={async () => {
 					try {
 						const resp = await subscribeToPlan.mutateAsync({ id: plan.id });
@@ -91,12 +93,25 @@ const Product: React.FC<ProductProps> = ({
 								: "Trial started! You can manage your subscription in your dashboard.",
 						);
 					} catch (error) {
-						console.error("Subscription error:", error);
-						toast.error("Failed to subscribe to the plan. Please try again.");
+						if (error instanceof AxiosError) {
+							const errorMessage =
+								error.response?.data?.message || "An error occurred";
+
+							toast.error(errorMessage);
+
+							console.log("Response", error);
+						} else {
+							console.error("Subscription error:", error);
+							toast.error("Failed to subscribe to the plan. Please try again.");
+						}
 					}
 				}}
 			>
-				{plan.subscribed ? "Manage Subscription" : "Subscribe to Plan"}
+				{subscribeToPlan.isPending
+					? "Subscribing..."
+					: plan.subscribed
+						? "Manage Subscription"
+						: "Subscribe to Plan"}
 			</Button>
 		</div>
 	);

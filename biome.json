@@ -1,48 +1,48 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.2.2/schema.json",
-  "vcs": {
-    "enabled": false,
-    "clientKind": "git",
-    "useIgnoreFile": true
-  },
-  "files": {
-    "includes": ["src/**/*.{ts,tsx,js,jsx,json,css,html}"],
-    "ignoreUnknown": true,
-    "experimentalScannerIgnores": [
-      "node_modules",
-      "dist",
-      "build",
-      "coverage",
-      ".git",
-      ".vscode",
-      ".idea",
-      ".cache"
-    ]
-  },
-  "formatter": {
-    "enabled": true,
-    "indentStyle": "tab"
-  },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true,
-      "nursery": {
-        "noImportCycles": "off"
-      }
-    }
-  },
-  "javascript": {
-    "formatter": {
-      "quoteStyle": "double"
-    }
-  },
-  "assist": {
-    "enabled": true,
-    "actions": {
-      "source": {
-        "organizeImports": "on"
-      }
-    }
-  }
+	"$schema": "https://biomejs.dev/schemas/2.2.2/schema.json",
+	"vcs": {
+		"enabled": false,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"files": {
+		"includes": ["src/**/*.{ts,tsx,js,jsx,json,css,html}"],
+		"ignoreUnknown": true,
+		"experimentalScannerIgnores": [
+			"node_modules",
+			"dist",
+			"build",
+			"coverage",
+			".git",
+			".vscode",
+			".idea",
+			".cache"
+		]
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab"
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"nursery": {
+				"noImportCycles": "off"
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double"
+		}
+	},
+	"assist": {
+		"enabled": true,
+		"actions": {
+			"source": {
+				"organizeImports": "on"
+			}
+		}
+	}
 }
