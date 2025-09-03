@@ -43,7 +43,7 @@ function AdaptiveCardTemplate({ card, submit }: AdaptiveCardProps) {
 	const [isPending, setIsPending] = useState(true);
 
 	const initialize = useCallback(async () => {
-		if (!cardWrapperRef.current || card) return;
+		if (!cardWrapperRef.current || !card) return;
 
 		setIsPending(true);
 
@@ -60,22 +60,22 @@ function AdaptiveCardTemplate({ card, submit }: AdaptiveCardProps) {
 			}
 		} catch (error) {
 			console.log(error);
+		} finally {
+			setIsPending(false);
 		}
 
-		setIsPending(false);
+		card.onExecuteAction = (action: AdaptiveCards.SubmitAction) => {
+			// Access the data from the action
+			const actionData = action.data;
 
-		// card.onExecuteAction = (action: AdaptiveCards.SubmitAction) => {
-		// 	// Access the data from the action
-		// 	const actionData = action.data;
-
-		// 	// Test that the onExecute parameter has the data JSON
-		// 	if (actionData) {
-		// 		console.debug("Received data:", actionData);
-		// 		// Do something with the data
-		// 	} else {
-		// 		console.debug("No data received from the card action.");
-		// 	}
-		// };
+			// Test that the onExecute parameter has the data JSON
+			if (actionData) {
+				console.debug("Received data:", actionData);
+				// Do something with the data
+			} else {
+				console.debug("No data received from the card action.");
+			}
+		};
 
 		adaptiveCard.onInputValueChanged = (input: AdaptiveCards.Input) => {
 			if (input.validateValue()) {

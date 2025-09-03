@@ -6,6 +6,7 @@ import {
 	useQuery,
 	useQueryClient,
 } from "@tanstack/react-query";
+import type { AdaptiveCard } from "adaptivecards";
 import { queryKeys } from "@/api/queryClient";
 import useAxios from "@/hooks/use-axios";
 import type { PaginationParams, TimelineData } from "@/types";
@@ -158,22 +159,18 @@ export const useAutoAdvanceAdaptiveCard = () => {
 
 export const useSubmitAdaptiveCardData = () => {
 	const { client } = useAxios();
-	const queryClient = useQueryClient();
 
 	return useMutation({
 		mutationFn: async ({
 			formData,
 			headers,
-			referer,
-			recordId,
 		}: {
 			formData: FormData;
 			headers: object;
 			referer: string;
 			recordId?: string;
 		}) => {
-			// biome-ignore lint/suspicious/noExplicitAny: unknown object
-			const card = await client.put<any>(
+			const { data } = await client.put<AdaptiveCard[]>(
 				dashboardEndpoints.submitAdaptiveCard(),
 				formData,
 				{
@@ -185,10 +182,10 @@ export const useSubmitAdaptiveCardData = () => {
 				},
 			);
 
-			const queryKey = ["adaptive_card", referer, recordId];
-			queryClient.setQueryData(queryKey, card);
+			// const queryKey = ["adaptive_card", referer, recordId];
+			// queryClient.setQueryData(queryKey, card);
 
-			return { formData, headers, card };
+			return { formData, headers, data };
 		},
 	});
 };

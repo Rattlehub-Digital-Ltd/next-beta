@@ -67,7 +67,7 @@ export default function ActionsTab() {
 										</div>
 
 										<Separator className="bg-black/5 px-4" />
-										<CardFooter recordId={id} refresh={refetch}>
+										<CardFooter item={item} recordId={id} refresh={refetch}>
 											<span className="font-normal">
 												Do you have a{" "}
 												<span className="font-semibold">

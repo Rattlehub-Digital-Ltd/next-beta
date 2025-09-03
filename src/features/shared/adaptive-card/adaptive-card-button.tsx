@@ -3,16 +3,9 @@
 
 import { VisuallyHidden } from "@react-aria/visually-hidden";
 import Image from "next/image";
-import {
-	type ReactNode,
-	useCallback,
-	useEffect,
-	useRef,
-	useState,
-} from "react";
+import { type ReactNode, useCallback, useEffect, useState } from "react";
 import ShortUniqueId from "short-unique-id";
 import {
-	useAutoAdvanceAdaptiveCard,
 	useGetAdaptiveCard,
 	useSubmitAdaptiveCardData,
 } from "@/api/services/dashboard/queries";
@@ -29,6 +22,8 @@ import type { Document } from "@/types/document";
 import AdaptiveCardTemplate from "./adaptive-card-template";
 
 type Props = {
+	isBusy?: boolean;
+	cards?: any;
 	autoSubmit?: boolean;
 	currentDocument?: Document;
 	recordId?: string;
@@ -72,14 +67,15 @@ const ErrorComp = () => (
 );
 
 function AdaptiveCardButton({
-	autoSubmit,
+	isBusy,
+	cards,
 	recordId,
 	referer,
 	children,
 	defaultOpen,
 	refresh,
 }: Props) {
-	const advanceAdaptiveCard = useAutoAdvanceAdaptiveCard();
+	// const advanceAdaptiveCard = useAutoAdvanceAdaptiveCard();
 	const submitAdaptiveCardData = useSubmitAdaptiveCardData();
 
 	const { data, isLoading, isError, refetch } = useGetAdaptiveCard(
@@ -89,46 +85,56 @@ function AdaptiveCardButton({
 
 	const [isProcessing, setIsProcessing] = useState(false);
 	const [open, setOpen] = useState<boolean>(defaultOpen ?? false);
-	const autoAdvanced = useRef(false);
+	// const autoAdvanced = useRef(false);
 
-	const autoAdvance = useCallback(
-		async (recordId: string | undefined) => {
-			if (!recordId) return;
+	// const autoAdvance = useCallback(
+	// 	async (recordId: string | undefined) => {
+	// 		if (!recordId) return;
 
-			try {
-				const form = new FormData();
-				form.set(recordId, "true");
+	// 		try {
+	// 			const form = new FormData();
+	// 			form.set(recordId, "true");
 
-				const headers: Record<string, string> = {};
-				headers["x-record-identifier"] = recordId;
+	// 			const headers: Record<string, string> = {};
+	// 			headers["x-record-identifier"] = recordId;
 
-				const resp = await advanceAdaptiveCard.mutateAsync({
-					formData: form,
-					headers: headers,
-					referer,
-					recordId,
-				});
+	// 			const resp = await advanceAdaptiveCard.mutateAsync({
+	// 				formData: form,
+	// 				headers: headers,
+	// 				referer,
+	// 				recordId,
+	// 			});
 
-				const data = resp?.card.data;
-				autoAdvanced.current = true;
+	// 			const data = resp?.card.data;
+	// 			autoAdvanced.current = true;
 
-				console.log(data);
+	// 			console.log(data);
 
-				return data;
-			} catch (error) {
-				console.log(error);
-			}
-		},
-		[advanceAdaptiveCard.mutateAsync, referer],
-	);
+	// 			return data;
+	// 		} catch (error) {
+	// 			console.log(error);
+	// 		}
+	// 	},
+	// 	[advanceAdaptiveCard.mutateAsync, referer],
+	// );
+
+	// const fetchDataz = useCallback(async () => {
+	// 	if (!open) return;
+
+	// 	if (autoSubmit && !autoAdvanced.current) await autoAdvance(recordId);
+
+	// 	await refetch();
+	// }, [autoSubmit, refetch, autoAdvance, recordId, open]);
 
 	const fetchData = useCallback(async () => {
-		if (!open) return;
+		if (!open || cards || isBusy) return;
 
-		if (autoSubmit && !autoAdvanced.current) await autoAdvance(recordId);
+		setIsProcessing(true);
 
 		await refetch();
-	}, [autoSubmit, refetch, autoAdvance, recordId, open]);
+
+		setIsProcessing(false);
+	}, [refetch, open, cards, isBusy]);
 
 	useEffect(() => {
 		fetchData();
@@ -180,10 +186,10 @@ function AdaptiveCardButton({
 					</DrawerHeader>
 				</VisuallyHidden>
 				<div className="relative flex-grow w-full overflow-y-auto max-w-xl p-0 pb-0">
-					{isLoading && <Loading />}
-					{!isLoading && (
+					{(isLoading || isBusy) && <Loading />}
+					{!isLoading && !isBusy && (
 						<AdaptiveCardTemplate
-							card={data?.itemListElement?.card}
+							card={cards?.itemListElement?.card ?? data?.itemListElement?.card}
 							submit={submit}
 						/>
 					)}
