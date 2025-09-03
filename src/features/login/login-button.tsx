@@ -145,7 +145,10 @@ const LoginButton = () => {
 
 	if (isLoading || processing) return <Loading />;
 
-	if (isAuthenticated) redirect(redirectUrl);
+	if (isAuthenticated) {
+		router.replace(redirectUrl);
+		return null;
+	}
 
 	return (
 		<motion.div className="w-full" whileTap={{ scale: 0.95 }}>
