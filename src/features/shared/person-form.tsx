@@ -190,13 +190,18 @@ function PersonForm({ type, person, buttonLabel, onClose }: PersonFormProps) {
 									onValueChange={field.handleChange}
 									value={field.state.value}
 									name={field.name}
+									disabled={type === "partner"}
 								>
 									<SelectTrigger className={cn("py-[18px]", inputClass)}>
 										<SelectValue placeholder="Select relationship" />
 									</SelectTrigger>
 									<SelectContent>
 										{options.map((item) => (
-											<SelectItem key={item} value={item}>
+											<SelectItem
+												key={item}
+												value={item}
+												defaultValue={type === "partner" ? "Wife" : undefined}
+											>
 												{item}
 											</SelectItem>
 										))}
