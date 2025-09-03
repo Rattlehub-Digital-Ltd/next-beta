@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
+import Loading from "../shared/loading";
 import RiskBar from "../shared/risk-bar";
 import SuggestionItem from "../shared/suggestion-item";
 import SummaryFooter from "../shared/summary-footer";
@@ -24,6 +25,8 @@ export default function SummaryCard() {
 	} = useGetSuggestions({ page: 1, limit: 1 });
 
 	const item = items?.[0];
+
+	if (isLoading) return <Loading />;
 
 	return (
 		<div className="w-full h-full bg-[#F8F8F8]/95 py-4 border border-[#EBEDED] rounded-3xl backdrop-blur-[60px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)] space-y-4 flex flex-col">

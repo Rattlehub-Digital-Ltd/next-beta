@@ -148,13 +148,7 @@ const LoginButton = () => {
 	if (isAuthenticated) redirect(redirectUrl);
 
 	return (
-		<motion.div
-			className="w-full"
-			whileTap={{ scale: 0.95 }}
-			initial={{ opacity: 0, translateY: -60 }}
-			animate={{ opacity: 1, translateY: 0 }}
-			transition={{ duration: 0.35 }}
-		>
+		<motion.div className="w-full" whileTap={{ scale: 0.95 }}>
 			<Button
 				className="font-semibold rounded-2xl h-11 w-full !pr-3 shadow-md shadow-blue-500/40 disabled:opacity-85 bg-blue-600 disabled:bg-blue-500"
 				variant="default"
