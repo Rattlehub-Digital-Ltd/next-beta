@@ -86,6 +86,22 @@ function PersonForm({ type, person, buttonLabel, onClose }: PersonFormProps) {
 		},
 	});
 
+	let options: string[] = [];
+
+	switch (type) {
+		case "child":
+			options = ["Adopted", "Biological", "Step Child"];
+			break;
+		case "dependent":
+			options = ["Extended family", "Friend", "Other"];
+			break;
+		case "partner":
+			options = ["Wife"];
+			break;
+		default:
+			break;
+	}
+
 	return (
 		<div>
 			<form
@@ -179,7 +195,7 @@ function PersonForm({ type, person, buttonLabel, onClose }: PersonFormProps) {
 										<SelectValue placeholder="Select relationship" />
 									</SelectTrigger>
 									<SelectContent>
-										{["Biological", "Adopted", "Other", "Wife"].map((item) => (
+										{options.map((item) => (
 											<SelectItem key={item} value={item}>
 												{item}
 											</SelectItem>
