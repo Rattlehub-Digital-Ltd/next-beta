@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 // src/middleware.ts
 // biome-ignore lint/correctness/noUnusedFunctionParameters: true
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest, resp: NextResponse) {
 	const response = NextResponse.next();
 	response.headers.set("X-DNS-Prefetch-Control", "off");
 	response.headers.set("X-XSS-Protection", "1; mode=block");

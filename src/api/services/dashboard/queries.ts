@@ -78,11 +78,6 @@ export const useInfiniteGetDocuments = () => {
 			if (lastBatch < lastPage.pageSize) return undefined;
 			return allPages.length + 1;
 		},
-		// onSuccess: () => {
-		// 	queryClient.invalidateQueries({
-		// 		queryKey: [...queryKeys.documents.all],
-		// 	});
-		// },
 	});
 };
 

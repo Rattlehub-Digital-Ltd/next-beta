@@ -82,6 +82,9 @@ export default function useAxios() {
 					console.log("Forbidden");
 					toast("Forbidden");
 				}
+				if (status === 302) {
+					console.log("redirect");
+				}
 				if (status === 404) {
 					console.log("Not Found");
 					toast("Not Found");

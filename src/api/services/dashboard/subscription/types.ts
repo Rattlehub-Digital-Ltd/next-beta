@@ -29,3 +29,9 @@ export interface ProductPlan {
 	subscribed: boolean;
 	subscriptionId: string | null;
 }
+
+export type SubscribeResponse = {
+	sessionId: string;
+	planName: string;
+	redirectUrl: string;
+};

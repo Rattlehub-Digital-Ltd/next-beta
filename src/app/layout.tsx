@@ -31,8 +31,8 @@ export default function RootLayout({
 			<head>
 				<Script
 					strategy="afterInteractive"
-					src="https://unpkg.com/adaptivecards@3.0.0/dist/adaptivecards.min.js"
-					integrity="sha384-JcibXe4w3Ha9x1e9G+nM3mQp3AgjWsS0MpWUftukzLqUJbEurvYZHPfE284wljCZ"
+					src="https://unpkg.com/adaptivecards@3.0.4/dist/adaptivecards.min.js"
+					// integrity="sha384-JcibXe4w3Ha9x1e9G+nM3mQp3AgjWsS0MpWUftukzLqUJbEurvYZHPfE284wljCZ"
 					crossOrigin="anonymous"
 				/>
 			</head>

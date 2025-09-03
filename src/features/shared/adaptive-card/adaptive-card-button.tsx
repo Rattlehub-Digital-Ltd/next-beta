@@ -112,6 +112,8 @@ function AdaptiveCardButton({
 				const data = resp?.card.data;
 				autoAdvanced.current = true;
 
+				console.log(data);
+
 				return data;
 			} catch (error) {
 				console.log(error);

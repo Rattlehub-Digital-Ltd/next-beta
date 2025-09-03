@@ -86,12 +86,11 @@ const Product: React.FC<ProductProps> = ({
 				onClick={async () => {
 					try {
 						const resp = await subscribeToPlan.mutateAsync({ id: plan.id });
-						console.log("Subscription response:", resp);
-						toast.success(
-							plan.subscribed
-								? "Redirecting to manage your subscription..."
-								: "Trial started! You can manage your subscription in your dashboard.",
-						);
+						const { data } = resp;
+
+						if (data.redirectUrl) {
+							window.location.href = data.redirectUrl;
+						}
 					} catch (error) {
 						if (error instanceof AxiosError) {
 							const errorMessage =

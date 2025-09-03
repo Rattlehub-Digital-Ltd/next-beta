@@ -1,8 +1,8 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { queryKeys } from "@/api/queryClient";
 import useAxios from "@/hooks/use-axios";
 import { subscriptionEndpoints } from "./endpoints";
-import type { ProductPlan } from "./types";
+import type { ProductPlan, SubscribeResponse } from "./types";
 
 export const useGetProducts = () => {
 	const { client } = useAxios();
@@ -20,26 +20,23 @@ export const useGetProducts = () => {
 };
 
 export const useSubscribeToProduct = () => {
-	const queryClient = useQueryClient();
 	const { client } = useAxios();
 
 	return useMutation({
 		mutationFn: async ({ id }: { id: string }) => {
-			const resp = await client.post(
+			const { data } = await client.post<SubscribeResponse>(
 				subscriptionEndpoints.subscribeToProduct(id),
 				{
-					headers: { "Content-Type": "application/json-patch+json" },
-					cancelPath: "/dashboard/subscription?cancel=true",
-					//"/\\I%vYYjyRo7f~p@pk {zMJ%O>hoV5CeB%3c0z_g*(b<a\"J>EAH/ZLsp_nn2hYk'W$eo\"g1@'@Bx(gUg6?%QBn#bmYLZ!*sa)-",
+					headers: {
+						Accept: "application/json",
+						"Content-Type": "application/json-patch+json",
+						cancelPath: "/dashboard/subscription?cancel=true",
+					},
+					maxRedirects: 0,
 				},
 			);
-			return { id, resp };
-		},
-		onSuccess: ({ id }) => {
-			queryClient.invalidateQueries({
-				queryKey: queryKeys.products.byId(id),
-			});
-			queryClient.invalidateQueries({ queryKey: queryKeys.products.all });
+
+			return { id, data };
 		},
 	});
 };
