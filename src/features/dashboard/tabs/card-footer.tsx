@@ -175,8 +175,7 @@ export default function CardFooter({
 						refresh={refresh}
 					>
 						<Button
-							className="w-full rounded-2xl border px-6 disabled:opacity-80 bg-white shadow-[0px_16px_30px_0px rgba(106, 106, 106, 0.06)]"
-							size="sm"
+							className="w-full rounded-2xl border px-6 disabled:opacity-80 bg-blue-600 text-white shadow-[0px_16px_30px_0px rgba(106, 106, 106, 0.06)]"
 							variant="ghost"
 							disabled={isBusy}
 						>
