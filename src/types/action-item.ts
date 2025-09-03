@@ -11,6 +11,19 @@ export type ActionItem = {
 	eduText: string;
 	isComplete: boolean;
 	riskItems: RiskItemProps[];
+	nextAction: {
+		type: string;
+		path: string;
+		inputs: {
+			identifier: string;
+			type: string;
+			values: {
+				name: string;
+				value: string;
+			}[];
+		}[];
+		method: string;
+	};
 };
 
 export type ActionsResponse = {
