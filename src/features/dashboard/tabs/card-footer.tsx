@@ -119,6 +119,7 @@ export default function CardFooter({
 													recordId={recordId}
 													referer="actions"
 													refresh={refresh}
+													clearCards={() => setCards(undefined)}
 												>
 													<Button
 														className={cn(

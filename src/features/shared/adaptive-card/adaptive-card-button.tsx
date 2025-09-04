@@ -24,6 +24,7 @@ import AdaptiveCardTemplate from "./adaptive-card-template";
 type Props = {
 	isBusy?: boolean;
 	cards?: any;
+	clearCards?: () => void;
 	autoSubmit?: boolean;
 	currentDocument?: Document;
 	recordId?: string;
@@ -67,6 +68,7 @@ const ErrorComp = () => (
 );
 
 function AdaptiveCardButton({
+	clearCards,
 	isBusy,
 	cards,
 	recordId,
@@ -167,9 +169,17 @@ function AdaptiveCardButton({
 				}
 
 				setIsProcessing(false);
+				clearCards?.();
 			}
 		},
-		[refresh, refetch, recordId, referer, submitAdaptiveCardData.mutateAsync],
+		[
+			refresh,
+			refetch,
+			recordId,
+			referer,
+			submitAdaptiveCardData.mutateAsync,
+			clearCards,
+		],
 	);
 
 	return (
