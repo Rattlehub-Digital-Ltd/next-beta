@@ -1,4 +1,5 @@
 import { Icon } from "@iconify/react";
+import * as motion from "motion/react-client";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { cn } from "@/lib/utils";
@@ -29,39 +30,40 @@ export default function Options({ value, onValueChange }: OptionsProps) {
 				onValueChange={onValueChange}
 			>
 				{option.map((plan) => (
-					<Label
-						className={cn(
-							"has-[[data-state=checked]]:ring-2 flex items-start gap-2 rounded-[8px] border border-black/15 py-2 pl-3 pr-2",
-							{
-								"has-[[data-state=checked]]:bg-[#34C759]/5 has-[[data-state=checked]]:border-[#34C759] ring-[#34C759]/40":
-									plan.name === "Yes",
-							},
-							{
-								"has-[[data-state=checked]]:bg-[#D64700]/5 has-[[data-state=checked]]:border-[#D64700] ring-[#D64700]/40":
-									plan.name === "No",
-							},
-						)}
-						key={plan.id}
-					>
-						<div className="flex items-center gap-2 w-full">
-							<div className="font-medium text-[13px] grow truncate text-left leading-4">
-								{plan.name}
+					<motion.div key={plan.id} whileTap={{ scale: 0.95 }}>
+						<Label
+							className={cn(
+								"has-[[data-state=checked]]:ring-2 flex items-start gap-2 rounded-[8px] border border-black/15 py-2 pl-3 pr-2",
+								{
+									"has-[[data-state=checked]]:bg-[#34C759]/5 has-[[data-state=checked]]:border-[#34C759] ring-[#34C759]/40":
+										plan.name === "Yes",
+								},
+								{
+									"has-[[data-state=checked]]:bg-[#D64700]/5 has-[[data-state=checked]]:border-[#D64700] ring-[#D64700]/40":
+										plan.name === "No",
+								},
+							)}
+						>
+							<div className="flex items-center gap-2 w-full">
+								<div className="font-medium text-[13px] grow truncate text-left leading-4">
+									{plan.name}
+								</div>
+								<RadioGroupItem
+									value={plan.id}
+									id={plan.name}
+									className={cn(
+										"data-[state=checked]:text-white",
+										{
+											" data-[state=checked]:bg-[#34C759]": plan.name === "Yes",
+										},
+										{
+											"data-[state=checked]:bg-[#D64700]": plan.name === "No",
+										},
+									)}
+								/>
 							</div>
-							<RadioGroupItem
-								value={plan.id}
-								id={plan.name}
-								className={cn(
-									"data-[state=checked]:text-white",
-									{
-										" data-[state=checked]:bg-[#34C759]": plan.name === "Yes",
-									},
-									{
-										"data-[state=checked]:bg-[#D64700]": plan.name === "No",
-									},
-								)}
-							/>
-						</div>
-					</Label>
+						</Label>
+					</motion.div>
 				))}
 			</RadioGroup>
 			<div className="flex gap-2 mt-4 text-muted-foreground p-3 bg-black/3 rounded-2xl">

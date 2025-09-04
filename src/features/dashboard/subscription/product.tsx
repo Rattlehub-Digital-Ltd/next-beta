@@ -1,6 +1,10 @@
+"use client";
+
 import { AxiosError } from "axios";
+import { useRouter } from "next/router";
 import ShortUniqueId from "short-unique-id";
 import { toast } from "sonner";
+import { useAppStore } from "store/use-app-store";
 import { useSubscribeToProduct } from "@/api/services/dashboard/subscription/queries";
 import type { ProductPlan } from "@/api/services/dashboard/subscription/types";
 import { Button } from "@/components/ui/button";
@@ -34,7 +38,11 @@ const Product: React.FC<ProductProps> = ({
 	isRecommended = false,
 	currency = "CA$",
 }) => {
+	const router = useRouter();
 	const subscribeToPlan = useSubscribeToProduct();
+	const { isAdmin } = useAppStore();
+
+	if (!isAdmin) router.replace("/dashboard");
 
 	return (
 		// Main card container
