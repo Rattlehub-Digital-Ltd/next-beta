@@ -2,12 +2,14 @@
 
 import * as motion from "motion/react-client";
 import { usePathname, useRouter } from "next/navigation";
+import { useAppStore } from "store/use-app-store";
 import { Button } from "@/components/ui/button";
 import { SparkleIcon } from "@/styles/icons";
 
 export default function Banner() {
 	const router = useRouter();
 	const pathname = usePathname();
+	const { isAdmin } = useAppStore();
 
 	if (pathname.toLowerCase() === "/dashboard/onboarding") return;
 
@@ -19,16 +21,18 @@ export default function Banner() {
 				<span className="text-yellow-300 font-bold">14 days</span>
 			</p>
 
-			<motion.div whileTap={{ scale: 0.9 }}>
-				<Button
-					className="text-[11px] uppercase tracking-wide gap-1 font-bold bg-white/95 backdrop-blur-md rounded-[10px] text-[#6155F5] h-6"
-					size="sm"
-					variant="default"
-					onClick={() => router.push("/dashboard/subscription")}
-				>
-					Subscribe
-				</Button>
-			</motion.div>
+			{isAdmin && (
+				<motion.div whileTap={{ scale: 0.9 }}>
+					<Button
+						className="text-[11px] uppercase tracking-wide gap-1 font-bold bg-white/95 backdrop-blur-md rounded-[10px] text-[#6155F5] h-6"
+						size="sm"
+						variant="default"
+						onClick={() => router.push("/dashboard/subscription")}
+					>
+						Subscribe
+					</Button>
+				</motion.div>
+			)}
 		</div>
 	);
 }

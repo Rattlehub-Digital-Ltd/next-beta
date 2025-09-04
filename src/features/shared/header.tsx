@@ -1,4 +1,7 @@
+"use client";
+
 import * as motion from "motion/react-client";
+import { useAppStore } from "store/use-app-store";
 import { cn } from "@/lib/utils";
 
 type HeaderProps = {
@@ -25,6 +28,8 @@ const item = {
 };
 
 function Header({ title, description, className, content }: HeaderProps) {
+	const { isAdmin } = useAppStore();
+
 	return (
 		<motion.div
 			variants={container}
@@ -47,7 +52,7 @@ function Header({ title, description, className, content }: HeaderProps) {
 			>
 				{description}
 			</motion.p>
-			<motion.div variants={item}>{content}</motion.div>
+			{isAdmin && <motion.div variants={item}>{content}</motion.div>}
 		</motion.div>
 	);
 }

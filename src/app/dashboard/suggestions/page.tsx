@@ -36,7 +36,7 @@ export default function SuggestionsPage() {
 							height={18}
 							width={18}
 						/>
-						<p>Invite a friend and get 5% off</p>
+						<p className="font-semibold">Invite a friend and get 5% off</p>
 						<Icon icon="fluent:chevron-right-16-filled" />
 					</Link>
 				}

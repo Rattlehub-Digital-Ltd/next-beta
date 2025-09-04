@@ -2,7 +2,7 @@
 
 import { useAuth0 } from "@auth0/auth0-react";
 import * as motion from "motion/react-client";
-import { redirect, useRouter, useSearchParams } from "next/navigation";
+import { RedirectType, redirect, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
 import { toast } from "sonner";
@@ -16,7 +16,6 @@ import useApi from "@/hooks/use-api";
 import { FluentArrowCircleRight24Filled, SparkleIcon } from "@/styles/icons";
 
 const LoginButton = () => {
-	const router = useRouter();
 	const searchParams = useSearchParams();
 
 	const { getOnboardingStatus, getActivitySummary } = useApi();
@@ -122,7 +121,7 @@ const LoginButton = () => {
 					if (token && token !== "") {
 						await loadData();
 
-						router.replace(redirectUrl);
+						redirect(redirectUrl, RedirectType.replace);
 					}
 				})
 				.catch((error) => console.log("Error getting access token:", error))
@@ -135,7 +134,6 @@ const LoginButton = () => {
 		isAuthenticated,
 		isLoading,
 		redirectUrl,
-		router,
 		loadData,
 	]);
 
@@ -146,7 +144,7 @@ const LoginButton = () => {
 	if (isLoading || processing) return <Loading />;
 
 	if (isAuthenticated) {
-		router.replace(redirectUrl);
+		redirect(redirectUrl, RedirectType.replace);
 		return null;
 	}
 
