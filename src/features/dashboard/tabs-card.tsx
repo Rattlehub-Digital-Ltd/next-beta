@@ -30,7 +30,7 @@ export default function TabsCard() {
 							</TabsTrigger>
 						</TabsList>
 						<Button
-							className="rounded-lg bg-[#EBEBEB] text-[#6b6b6b] h-9 w-9 !px-0 !py-0 border border-black/5"
+							className="text-[#6b6b6b] h-9 w-9 !px-0 !py-0"
 							variant="ghost"
 						>
 							<Icon
