@@ -207,6 +207,11 @@ export const useInfiniteGetTimeline = (
 		queryFn: async ({ pageParam = 1 }) => {
 			const { data } = await client.get<TimelineData>(
 				dashboardEndpoints.getInfiniteTimeline(pageParam),
+				{
+					headers: {
+						"x-referer-context": referer,
+					},
+				},
 			);
 
 			return data;
