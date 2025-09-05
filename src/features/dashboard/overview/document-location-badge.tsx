@@ -3,7 +3,7 @@ import * as motion from "motion/react-client";
 
 type DocumentLocationBadgeProps = {
 	label: string;
-	count: number;
+	count?: number;
 };
 
 export default function DocumentLocationBadge({
@@ -13,7 +13,7 @@ export default function DocumentLocationBadge({
 	return (
 		<motion.div
 			whileTap={{ scale: 0.95 }}
-			className="text-[#374151] rounded-[8px] h-8 flex items-center space-x-1 px-1.5 bg-[#FDFDFD]/60 border border-[#EBEDED] backdrop-blur-[25px] shadow-[0px_12px_30px_0px rgba(106, 106, 106, 0.06)]"
+			className="text-[#374151] rounded-[8px] h-8 flex items-center space-x-1.5 px-1.5 bg-[#FDFDFD]/60 border border-[#EBEDED] backdrop-blur-[25px] shadow-[0px_12px_30px_0px rgba(106, 106, 106, 0.06)]"
 		>
 			<Icon
 				icon="fluent:lock-shield-24-regular"
@@ -21,12 +21,14 @@ export default function DocumentLocationBadge({
 				width={18}
 				className="shrink-0"
 			/>
-			<p className="text-xs font-medium grow truncate">{label}</p>
-			<div className="flex items-center h-4.5">
-				<div className="bg-[#F0F0F0] px-1.5 font-mono font-semibold text-[11px] py-px rounded-[6px]">
-					{count}
+			<p className="text-xs font-medium grow truncate capitalize">{label}</p>
+			{count ? (
+				<div className="flex items-center h-4.5">
+					<div className="bg-[#F0F0F0] px-1.5 font-mono font-semibold text-[11px] py-px rounded-[6px]">
+						{count}
+					</div>
 				</div>
-			</div>
+			) : undefined}
 			<Icon
 				icon="fluent:chevron-right-16-filled"
 				height={14}

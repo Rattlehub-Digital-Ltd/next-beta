@@ -30,31 +30,36 @@ export default function DocumentLocations() {
 					/>
 
 					{/* Loading complete and data has value */}
-					{items && (
-						<div className="grid grid-cols-2 gap-2">
-							<DocumentLocationBadge label="Safe" count={4} />
-							<DocumentLocationBadge label="Lawyer Safe" count={2} />
-							<DocumentLocationBadge label="Home Safety Box" count={8} />
-							<DocumentLocationBadge label="Office Safe" count={3} />
-						</div>
+					{items && items.length > 0 && (
+						<ul className="grid grid-cols-2 gap-2">
+							{items.map(({ location, documents }) => (
+								<DocumentLocationBadge
+									key={location}
+									label={location}
+									count={documents.length}
+								/>
+							))}
+						</ul>
 					)}
 
 					<DocumentLocationSuggestions>
-						<Button
-							className="text-blue-600 bg-blue-600/3 border-blue-600 ring-2 ring-blue-600/30 text-left font-semibold text-xs gap-2 px-1"
-							size="sm"
-							variant="outline"
-						>
-							<Icon
-								icon="fluent-color:text-bullet-list-square-sparkle-24"
-								height={20}
-								width={20}
-								className="!h-5 !w-5"
-							/>
-							<span className="grow truncate">
-								Where can I store my documents?
-							</span>
-						</Button>
+						<div>
+							<Button
+								className="text-blue-600 rounded-full bg-blue-600/3 border-blue-600 ring-2 ring-blue-600/30 text-left font-semibold text-xs gap-2 px-1"
+								size="sm"
+								variant="outline"
+							>
+								<Icon
+									icon="fluent-color:text-bullet-list-square-sparkle-24"
+									height={20}
+									width={20}
+									className="!h-5 !w-5"
+								/>
+								<span className="grow truncate">
+									Where can I store my documents
+								</span>
+							</Button>
+						</div>
 					</DocumentLocationSuggestions>
 
 					{/* Loading complete and data has no value */}

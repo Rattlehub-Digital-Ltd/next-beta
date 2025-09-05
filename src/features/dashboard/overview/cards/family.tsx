@@ -40,7 +40,10 @@ export default function Family() {
 						<div className="flex flex-wrap gap-2">
 							{items.map((item) => (
 								<motion.div key={uid.randomUUID()} whileTap={{ scale: 0.95 }}>
-									<UserBadge name={item.displayName} />
+									<UserBadge
+										name={item.displayName}
+										relationship={item.itemType}
+									/>
 								</motion.div>
 							))}
 						</div>
