@@ -32,11 +32,10 @@ export default function LifeFileDocuments() {
 							{items.map((item) =>
 								!item.isApplicable ? (
 									<AdaptiveCardButton
-										autoSubmit={true}
 										currentDocument={item}
 										key={item.id}
 										recordId={item.id}
-										referer=""
+										referer="life-file-documents"
 										refresh={console.log}
 									>
 										<motion.div
