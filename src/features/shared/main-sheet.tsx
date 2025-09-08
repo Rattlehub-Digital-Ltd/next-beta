@@ -35,6 +35,7 @@ function MainSheet({ title, imgSrc, imgAlt, content }: MainSheetProps) {
 						alt={imgAlt ?? "Image"}
 						height={192}
 						width={192}
+						priority
 						loading="eager"
 					/>
 				</div>
