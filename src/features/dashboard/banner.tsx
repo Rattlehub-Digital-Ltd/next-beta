@@ -11,7 +11,7 @@ export default function Banner() {
 	const pathname = usePathname();
 	const { isAdmin } = useAppStore();
 
-	if (pathname.toLowerCase() === "/dashboard/onboarding") return;
+	if (pathname.toLowerCase() === "/dashboard/onboarding" || !isAdmin) return;
 
 	return (
 		<div className="h-10 flex items-center w-full bg-gradient-to-br from-blue-600 to-purple-600 text-white pl-4 pr-2 space-x-2  rounded-[16px]">
@@ -21,18 +21,16 @@ export default function Banner() {
 				<span className="text-yellow-300 font-bold">14 days</span>
 			</p>
 
-			{isAdmin && (
-				<motion.div whileTap={{ scale: 0.9 }}>
-					<Button
-						className="text-[11px] uppercase tracking-wide gap-1 font-bold bg-white/95 backdrop-blur-md rounded-[10px] text-[#6155F5] h-6"
-						size="sm"
-						variant="default"
-						onClick={() => router.push("/dashboard/subscription")}
-					>
-						Subscribe
-					</Button>
-				</motion.div>
-			)}
+			<motion.div whileTap={{ scale: 0.9 }}>
+				<Button
+					className="text-[11px] uppercase tracking-wide gap-1 font-bold bg-white/95 backdrop-blur-md rounded-[10px] text-[#6155F5] h-6"
+					size="sm"
+					variant="default"
+					onClick={() => router.push("/dashboard/subscription")}
+				>
+					Subscribe
+				</Button>
+			</motion.div>
 		</div>
 	);
 }

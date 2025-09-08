@@ -52,12 +52,12 @@ const Navbar = () => {
 									)}
 								</AvatarFallback>
 							</Avatar>
-							<Badge
+							{/* <Badge
 								className="h-5 min-w-5 rounded-full px-1 text-[0.65rem] font-mono tabular-nums absolute top-0 right-0 -mt-1.5 -mr-1.5"
 								variant="destructive"
 							>
 								34
-							</Badge>
+							</Badge> */}
 						</div>
 					</MenuPopup>
 				</div>
