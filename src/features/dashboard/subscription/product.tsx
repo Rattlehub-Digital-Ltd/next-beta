@@ -8,6 +8,8 @@ import { useAppStore } from "store/use-app-store";
 import { useSubscribeToProduct } from "@/api/services/dashboard/subscription/queries";
 import type { ProductPlan } from "@/api/services/dashboard/subscription/types";
 import { Button } from "@/components/ui/button";
+import clsx from "clsx";
+import { Icon } from "@iconify/react";
 
 interface ProductProps {
 	plan: ProductPlan;
@@ -45,18 +47,27 @@ const Product: React.FC<ProductProps> = ({
 
 	return (
 		// Main card container
-		<div className="flex flex-col gap-4 rounded-[36px] bg-[#ffffff1a] p-8 border border-white/20 text-white shadow-lg max-w-sm">
+		<div
+			className={clsx(
+				"flex flex-col gap-4 rounded-[36px] bg-[#ffffff1a] p-8 border border-white/20 text-white shadow-lg max-w-sm",
+				{
+					"ring-4 ring-yellow-500/40 outline outline-yellow-500":
+						plan.subscribed,
+				},
+			)}
+		>
 			<div className="space-y-4">
 				{isRecommended && (
 					<div className="flex">
 						<p className="self-start rounded-full bg-[#00000033] px-1.5 py-0.5 text-xs font-semibold">
-							Recommended
+							{plan.subscribed ? "Subscribed" : "Recommended"}
 						</p>
 					</div>
 				)}
-				<h2 className="text-xl font-semibold text-pretty ml-0.5">
-					{plan.name}
-				</h2>
+				<div className="flex items-center gap-2 ml-0.5">
+					<h2 className="text-xl font-semibold text-pretty">{plan.name}</h2>
+					<Icon icon="fluent:checkmark-circle-24-filled" className="h-5 w-5" />
+				</div>
 			</div>
 
 			<p className="text-sm text-white/70">{plan.description}</p>
