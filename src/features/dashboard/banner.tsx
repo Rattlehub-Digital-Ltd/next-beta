@@ -34,7 +34,9 @@ export default function Banner() {
 					variant="default"
 					onClick={() => router.push("/dashboard/subscription")}
 				>
-					{product?.name?.toLowerCase() === "free" ? "Upgrade" : "Subscribe"}
+					{product?.name?.toLowerCase() === "free"
+						? "Upgrade Trial"
+						: "Subscribe"}
 				</Button>
 			</motion.div>
 		</div>
