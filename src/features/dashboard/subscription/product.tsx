@@ -1,6 +1,8 @@
 "use client";
 
+import { Icon } from "@iconify/react";
 import { AxiosError } from "axios";
+import clsx from "clsx";
 import { RedirectType, redirect } from "next/navigation";
 import ShortUniqueId from "short-unique-id";
 import { toast } from "sonner";
@@ -8,8 +10,6 @@ import { useAppStore } from "store/use-app-store";
 import { useSubscribeToProduct } from "@/api/services/dashboard/subscription/queries";
 import type { ProductPlan } from "@/api/services/dashboard/subscription/types";
 import { Button } from "@/components/ui/button";
-import clsx from "clsx";
-import { Icon } from "@iconify/react";
 
 interface ProductProps {
 	plan: ProductPlan;

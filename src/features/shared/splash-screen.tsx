@@ -9,6 +9,7 @@ import { useAppStore } from "store/use-app-store";
 import { useOnboardingStore } from "store/use-onboarding-store";
 import { useGetOnboarding } from "@/api/services/dashboard/onboarding/queries";
 import { useGetActivitySummary } from "@/api/services/dashboard/queries";
+import { useGetProducts } from "@/api/services/dashboard/subscription/queries";
 import { Spinner } from "@/components/ui/spinner";
 
 export default function SplashScreen() {
@@ -16,7 +17,7 @@ export default function SplashScreen() {
 
 	const { setIsOnboarded } = useOnboardingStore();
 	const { setActivity } = useActivitySummaryStore();
-	const { setInitialized, setIsAdmin } = useAppStore();
+	const { setInitialized, setIsAdmin, setProduct } = useAppStore();
 
 	const [isInitializing, setIsInitializing] = useState(true);
 
@@ -24,6 +25,8 @@ export default function SplashScreen() {
 
 	const { data: onboardingStatus, isError: isOnboardingError } =
 		useGetOnboarding();
+
+	const { data: products } = useGetProducts();
 
 	const initialize = useCallback(async () => {
 		const idTokenClaims = await getIdTokenClaims();
@@ -36,9 +39,15 @@ export default function SplashScreen() {
 			}
 		}
 
+		if (products) {
+			const plan = products.find((product) => product.subscribed);
+			setProduct(plan ?? null);
+		}
+
 		if (activity) {
 			setActivity(activity);
 		}
+
 		if (onboardingStatus) setIsOnboarded(onboardingStatus.isOnboarded);
 
 		if (activity && onboardingStatus) {
@@ -57,6 +66,8 @@ export default function SplashScreen() {
 		setInitialized,
 		getIdTokenClaims,
 		setIsAdmin,
+		products,
+		setProduct,
 	]);
 
 	useEffect(() => {

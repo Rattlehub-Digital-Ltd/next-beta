@@ -10,8 +10,14 @@ export default function Banner() {
 	const router = useRouter();
 	const pathname = usePathname();
 	const { isAdmin } = useAppStore();
+	const { product } = useAppStore();
 
-	if (pathname.toLowerCase() === "/dashboard/onboarding" || !isAdmin) return;
+	if (
+		pathname.toLowerCase() === "/dashboard/onboarding" ||
+		!isAdmin ||
+		product?.name?.toLowerCase() !== "free"
+	)
+		return;
 
 	return (
 		<div className="h-10 flex items-center w-full bg-gradient-to-br from-blue-600 to-purple-600 text-white pl-4 pr-2 space-x-2  rounded-[16px]">
@@ -28,7 +34,7 @@ export default function Banner() {
 					variant="default"
 					onClick={() => router.push("/dashboard/subscription")}
 				>
-					Subscribe
+					{product?.name?.toLowerCase() === "free" ? "Upgrade" : "Subscribe"}
 				</Button>
 			</motion.div>
 		</div>
