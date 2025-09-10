@@ -6,7 +6,7 @@ import AdaptiveCardButton from "@/features/shared/adaptive-card/adaptive-card-bu
 import DocumentItem from "@/features/shared/document-item";
 
 export default function DocumentsTab({ goalName }: { goalName: string }) {
-	const { data, isLoading, isError } = useGetGoalDocuments(goalName);
+	const { data, isLoading, isError, refetch } = useGetGoalDocuments(goalName);
 
 	return (
 		<div className="grid grid-cols-2 gap-2 p-2 rounded-[23px] border border-[#EBEDED] backdrop-blur-[25px] bg-white/25">
@@ -16,8 +16,8 @@ export default function DocumentsTab({ goalName }: { goalName: string }) {
 					<AdaptiveCardButton
 						key={item.id}
 						recordId={item.id}
-						referer=""
-						refresh={console.log}
+						referer={goalName}
+						refresh={refetch}
 					>
 						<motion.div
 							className="w-full"
