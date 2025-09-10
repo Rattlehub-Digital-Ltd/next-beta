@@ -2,7 +2,8 @@
 
 import { Icon } from "@iconify/react";
 import { cn } from "@/lib/utils";
-import ReminderButton from "./reminder/reminder-button";
+
+// import ReminderButton from "./reminder/reminder-button";
 
 type SuggestionItemProps = {
 	title: string;
@@ -22,7 +23,7 @@ type SuggestionItemProps = {
 export default function SuggestionItem({
 	title,
 	description,
-	showReminder = false,
+	//	showReminder = false,
 	color = "yellow",
 }: SuggestionItemProps) {
 	let color1 = "";
@@ -99,7 +100,7 @@ export default function SuggestionItem({
 				<p className="text-[12.6px] leading-5 text-pretty text-[#616161]">
 					{description}
 				</p>
-				{showReminder && <ReminderButton />}
+				{/* {showReminder && <ReminderButton />} */}
 			</div>
 		</div>
 	);
