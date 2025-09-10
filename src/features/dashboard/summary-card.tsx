@@ -2,7 +2,7 @@
 
 import { Icon } from "@iconify/react";
 import Image from "next/image";
-import Link from "next/link";
+// import Link from "next/link";
 import { useActivitySummaryStore } from "store/use-activity-summary-store";
 import { useGetSuggestions } from "@/api/services/dashboard/suggestion/queries";
 import { Badge } from "@/components/ui/badge";
@@ -76,7 +76,7 @@ export default function SummaryCard() {
 						<Badge className="uppercase text-[10px] px-2.5 py-1 rounded-full tracking-wider font-bold text-white bg-gradient-to-br from-[#EF060F] to-[#B60CF2]">
 							Top suggestion
 						</Badge>
-						<Link
+						{/* <Link
 							href="/dashboard/suggestions"
 							className="p-3 flex items-center space-x-1.5 text-xs font-semibold text-blue-600 no-underline"
 						>
@@ -87,7 +87,7 @@ export default function SummaryCard() {
 								height={14}
 								width={14}
 							/>
-						</Link>
+						</Link> */}
 					</div>
 
 					<div className="px-4 w-full">
