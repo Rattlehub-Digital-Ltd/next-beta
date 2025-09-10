@@ -4,10 +4,11 @@ import ShortUniqueId from "short-unique-id";
 import { useGetEstatePlan } from "@/api/services/dashboard/overview/queries";
 import { Skeleton } from "@/components/ui/skeleton";
 import DocumentItem from "@/features/shared/document-item";
-import GoalProgressBar from "@/features/shared/goal-progress-bar";
-import { cn } from "@/lib/utils";
+// import GoalProgressBar from "@/features/shared/goal-progress-bar";
+// import { cn } from "@/lib/utils";
 import Header from "../header";
-import EstatePlanAdvert from "./estate-plan-advert";
+
+// import EstatePlanAdvert from "./estate-plan-advert";
 
 const uid = new ShortUniqueId();
 
@@ -28,15 +29,15 @@ export default function EstatePlan() {
 						color="teal"
 					/>
 
-					<EstatePlanAdvert />
+					{/* <EstatePlanAdvert /> */}
 
 					{/* Loading complete and data has value */}
 					{items && items.length > 0 && (
 						<>
-							<GoalProgressBar
+							{/* <GoalProgressBar
 								title="Estate plan is 45% complete"
 								progress={cn(`w-[45%]`)}
-							/>
+							/> */}
 
 							<div className="grid grid-cols-2 gap-3">
 								{items.map((item) => (

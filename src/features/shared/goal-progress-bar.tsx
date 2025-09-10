@@ -10,6 +10,7 @@ export default function GoalProgressBar({
 	title,
 	progress,
 }: GoalProgressBarProps) {
+	console.log(progress);
 	return (
 		<div className="rounded-[12px] flex w-full space-x-2 items-center p-2 bg-[#FDFDFD]/60 border border-[#EBEDED] backdrop-blur-[25px] shadow-[0px_8px_30px_0px rgba(106, 106, 106, 0.06)]">
 			<Icon
@@ -24,8 +25,8 @@ export default function GoalProgressBar({
 					<div
 						className={cn(
 							"absolute left-0 top-0 h-full bg-[#007AFF] rounded-full",
-							progress,
 						)}
+						style={{ width: progress }}
 					/>
 				</div>
 			</div>

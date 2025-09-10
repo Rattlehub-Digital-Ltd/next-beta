@@ -2,7 +2,6 @@
 
 import { Icon } from "@iconify/react";
 
-import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ActionsTab from "./tabs/actions-tab";
 import TimelineTab from "./tabs/timeline-tab";
@@ -13,7 +12,7 @@ export default function TabsCard() {
 			<Tabs defaultValue="actions" className="space-y-3">
 				<div className="pt-3.5 sticky left-0 top-16 w-full z-15">
 					<div className="p-2 backdrop-blur-[25px] bg-white/50 rounded-[16px] border border-[#EBEDED] flex justify-between items-center shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)]">
-						<TabsList>
+						<TabsList className="w-full grid grid-cols-2">
 							<TabsTrigger className="px-2" value="actions">
 								<Icon
 									icon="fluent:cursor-click-20-filled"
@@ -29,15 +28,6 @@ export default function TabsCard() {
 								Timeline
 							</TabsTrigger>
 						</TabsList>
-						<Button
-							className="text-[#6b6b6b] h-9 w-9 !px-0 !py-0"
-							variant="ghost"
-						>
-							<Icon
-								icon="fluent:arrow-counterclockwise-24-regular"
-								className="!w-5 !h-5"
-							/>
-						</Button>
 					</div>
 				</div>
 				<TabsContent value="actions">
