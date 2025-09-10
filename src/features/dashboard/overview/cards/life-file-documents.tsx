@@ -11,7 +11,12 @@ import Header from "../header";
 const uid = new ShortUniqueId();
 
 export default function LifeFileDocuments() {
-	const { data: items, isLoading, isError } = useGetLifeFileDocuments();
+	const {
+		data: items,
+		isLoading,
+		isError,
+		refetch,
+	} = useGetLifeFileDocuments();
 
 	return (
 		<div>
@@ -36,7 +41,7 @@ export default function LifeFileDocuments() {
 										key={item.id}
 										recordId={item.id}
 										referer="life-file-documents"
-										refresh={console.log}
+										refresh={refetch}
 									>
 										<motion.div
 											key={item.id}
