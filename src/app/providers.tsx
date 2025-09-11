@@ -15,9 +15,9 @@ const AuthProvider = dynamic(() => import("@/lib/auth-provider"), {
 export const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {
-			staleTime: 60 * 1000, // Consider data fresh for 60 seconds
+			//staleTime: 30 * 1000, // Consider data fresh for 30 seconds
 			retry: 1, // Retry failed requests once
-			refetchOnWindowFocus: false, // Disable automatic refetch on window focus
+			//refetchOnWindowFocus: false, // Disable automatic refetch on window focus
 		},
 	},
 });
