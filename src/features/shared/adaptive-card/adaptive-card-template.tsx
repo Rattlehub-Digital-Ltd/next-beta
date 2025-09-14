@@ -137,8 +137,8 @@ function AdaptiveCardTemplate({ card, submit }: AdaptiveCardProps) {
 			/>
 
 			{isPending && (
-				<div className="absolute  top-0 left-0 z-200 flex flex-col items-center justify-center w-full h-full space-y-8 text-center bg-white/90 backdrop-blur-2xl">
-					<Spinner />
+				<div className="absolute top-0 left-0 z-200 flex flex-col items-center justify-center w-full h-full space-y-4 text-center bg-[#ECECEC]/90 backdrop-blur-2xl">
+					<Spinner size="lg" />
 					<p className="text-[13px] text-neutral-700">Loading...</p>
 				</div>
 			)}

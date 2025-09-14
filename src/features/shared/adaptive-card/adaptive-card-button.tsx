@@ -195,7 +195,7 @@ function AdaptiveCardButton({
 						</DrawerTitle>
 					</DrawerHeader>
 				</VisuallyHidden>
-				<div className="relative flex-grow w-full overflow-y-auto max-w-xl p-0 pb-0">
+				<div className="relative flex-grow w-full overflow-y-auto max-w-xl pt-6 px-0 pb-0">
 					{(isLoading || isBusy) && <Loading />}
 					{!isLoading && !isBusy && (
 						<AdaptiveCardTemplate
@@ -205,8 +205,8 @@ function AdaptiveCardButton({
 					)}
 					{isError && <ErrorComp />}
 					{isProcessing && (
-						<div className="absolute top-0 left-0 z-10 flex flex-col items-center justify-center w-full h-full space-y-8 text-center bg-white/80 backdrop-blur-sm">
-							<Spinner />
+						<div className="absolute top-0 left-0 z-10 flex flex-col items-center justify-center w-full h-full space-y-6 text-center bg-[#ECECEC]/80 backdrop-blur-sm">
+							<Spinner size="lg" />
 							<p className="text-[13px] text-neutral-600">Processing...</p>
 						</div>
 					)}
