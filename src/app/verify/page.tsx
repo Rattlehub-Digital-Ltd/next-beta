@@ -26,8 +26,8 @@ function EmailVerify() {
 		<div className="pt-8 space-y-8 pb-8">
 			<Header title={title} description={description} />
 
-			<div className="space-y-4 px-4 ">
-				<p className="text-[13px] text-pretty text-[#525f7f]">
+			<div className="space-y-4 px-4 bg-[#F8F8F8]/95 py-4 border border-[#EBEDED] rounded-3xl backdrop-blur-[60px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)]">
+				<p className="text-sm text-pretty text-[#525f7f]">
 					Thanks for joining {appConfig.name}. You're almost ready to get
 					started!
 					<br />
@@ -37,7 +37,7 @@ function EmailVerify() {
 				</p>
 				<Button
 					disabled={processing}
-					className="disabled:opacity-85"
+					className="disabled:opacity-85 rounded-full"
 					onClick={async () => {
 						setProccessing(true);
 						await verifyEmail();
