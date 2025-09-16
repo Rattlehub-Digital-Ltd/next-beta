@@ -4,6 +4,7 @@ export type OnboardingStatus = { data: { isOnboarded: boolean } };
 
 export type IsOnboardedStatus = {
 	isOnboarded: boolean;
+	isEmailVerified: boolean;
 };
 
 export type EstateChecklistItem = {

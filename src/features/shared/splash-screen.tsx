@@ -2,7 +2,7 @@
 
 import { useAuth0 } from "@auth0/auth0-react";
 import Image from "next/image";
-import { redirect } from "next/navigation";
+import { RedirectType, redirect } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { useActivitySummaryStore } from "store/use-activity-summary-store";
 import { useAppStore } from "store/use-app-store";
@@ -15,7 +15,7 @@ import { Spinner } from "@/components/ui/spinner";
 export default function SplashScreen() {
 	const { isAuthenticated, getIdTokenClaims } = useAuth0();
 
-	const { setIsOnboarded } = useOnboardingStore();
+	const { setIsOnboarded, setIsEmailVerified } = useOnboardingStore();
 	const { setActivity } = useActivitySummaryStore();
 	const { setInitialized, setIsAdmin, setProduct } = useAppStore();
 
@@ -48,11 +48,17 @@ export default function SplashScreen() {
 			setActivity(activity);
 		}
 
-		if (onboardingStatus) setIsOnboarded(onboardingStatus.isOnboarded);
+		if (onboardingStatus) {
+			setIsOnboarded(onboardingStatus.isOnboarded);
+			setIsEmailVerified(onboardingStatus.isEmailVerified);
+		}
 
 		if (activity && onboardingStatus) {
 			setInitialized(true);
 			setIsInitializing(false);
+
+			if (!onboardingStatus.isEmailVerified)
+				redirect("/verify", RedirectType.replace);
 
 			redirect(
 				onboardingStatus.isOnboarded ? "/dashboard" : "/dashboard/onboarding",
@@ -68,6 +74,7 @@ export default function SplashScreen() {
 		setIsAdmin,
 		products,
 		setProduct,
+		setIsEmailVerified,
 	]);
 
 	useEffect(() => {
