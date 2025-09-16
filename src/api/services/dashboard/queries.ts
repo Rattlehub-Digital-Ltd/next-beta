@@ -61,7 +61,6 @@ export const useGetGoalDocuments = (goalName: string) => {
 };
 
 export const useInfiniteGetDocuments = () => {
-	// const queryClient = useQueryClient();
 	const { client } = useAxios();
 
 	return useInfiniteQuery({
