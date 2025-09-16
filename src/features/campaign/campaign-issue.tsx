@@ -1,11 +1,10 @@
 "use client";
 
 import { useAuth0 } from "@auth0/auth0-react";
-import { Avatar } from "@heroui/avatar";
-import { Chip } from "@heroui/chip";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useGetDocuments } from "@/api/services/dashboard/queries";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { getInitials } from "@/lib/utils";
 import type { ActionItem } from "@/types/action-item";
 import RiskItem from "../shared/risk-item";
@@ -63,15 +62,12 @@ function CampaignIssue({ setCurrentIssue }: CampaignIssueProps) {
 								{issue.displayName}
 							</p>
 							<div className="flex items-center pb-2 space-x-4">
-								<Chip
-									avatar={<Avatar name={getInitials(issue.ownerDisplayName)} />}
-									className="space-x-1.5"
-									radius="sm"
-									size="sm"
-									variant="flat"
-								>
-									{issue.ownerDisplayName}
-								</Chip>
+								<Avatar>
+									<AvatarFallback>
+										{getInitials(issue.ownerDisplayName)}
+									</AvatarFallback>
+								</Avatar>
+								<p className="text-xs">{issue.ownerDisplayName}</p>
 								{/* <TagItem category="Protective" /> */}
 							</div>
 						</div>
