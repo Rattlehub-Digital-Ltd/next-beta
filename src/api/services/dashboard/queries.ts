@@ -29,7 +29,7 @@ export const useGetActivitySummary = () => {
 				return data;
 			} catch (error) {
 				console.log(error);
-				return;
+				return null;
 			}
 		},
 	});

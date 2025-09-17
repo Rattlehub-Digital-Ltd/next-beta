@@ -53,7 +53,7 @@ export default function SplashScreen() {
 			setIsEmailVerified(onboardingStatus.isEmailVerified);
 		}
 
-		if (activity && onboardingStatus) {
+		if (onboardingStatus) {
 			setInitialized(true);
 			setIsInitializing(false);
 
