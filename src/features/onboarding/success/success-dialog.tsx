@@ -57,7 +57,7 @@ export default function SuccessDialog({ open, onClose }: SuccessDialogProps) {
 				</AlertDialogHeader>
 				<AlertDialogFooter>
 					<AlertDialogAction
-						className="rounded-full h-11"
+						className="rounded-full h-10"
 						onClick={() => {
 							onClose(false);
 							redirect("/dashboard");
