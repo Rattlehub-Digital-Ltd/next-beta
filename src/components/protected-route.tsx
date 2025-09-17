@@ -29,15 +29,17 @@ export default function ProtectedRoute({ children }: PropsWithChildren) {
 		}
 	}, [user, identify]);
 
-	if (!isAuthenticated) redirect("/login");
-
 	if (appConfig.previewMode && !isAdmin)
 		return (
-			<div>
-				<h1>Access Denied</h1>
-				<p className="text-sm">You do not have access to this page.</p>
+			<div className="p-4">
+				<h1 className="text-sm font-semibold">Access Denied</h1>
+				<p className="text-xs text-muted-foreground">
+					You do not have access to this page.
+				</p>
 			</div>
 		);
+
+	if (!isAuthenticated) redirect("/login");
 
 	return <div className="h-full w-full">{children}</div>;
 }

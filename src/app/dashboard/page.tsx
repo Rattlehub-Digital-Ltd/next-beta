@@ -1,9 +1,11 @@
+"use client";
+
 import { Icon } from "@iconify/react";
 
 import * as motion from "motion/react-client";
-import type { Metadata } from "next";
 import Link from "next/link";
-import { appConfig } from "@/config/app.config";
+import { RedirectType, redirect } from "next/navigation";
+import { useOnboardingStore } from "store/use-onboarding-store";
 import SummaryCard from "@/features/dashboard/summary-card";
 import TabsCard from "@/features/dashboard/tabs-card";
 import Header from "@/features/shared/header";
@@ -13,18 +15,12 @@ const title = "Welcome back!";
 const description =
 	"These will affect your estate, please read them carefully and take the necessary action.";
 
-export const metadata: Metadata = {
-	title,
-	description,
-	openGraph: {
-		title,
-		description,
-		url: `${appConfig.baseURL}/dashboard`,
-		siteName: title,
-	},
-};
-
 function DashboardPage() {
+	const { isEmailVerified, isOnboarded } = useOnboardingStore();
+
+	if (!isEmailVerified) redirect("/dashboard/verify", RedirectType.replace);
+	if (!isOnboarded) redirect("/dashboard/onboarding", RedirectType.replace);
+
 	return (
 		<div className="pt-3 space-y-4 pb-16">
 			<Header

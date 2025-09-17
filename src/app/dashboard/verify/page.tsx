@@ -1,5 +1,6 @@
 "use client";
 
+import { useAuth0 } from "@auth0/auth0-react";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useOnboardingStore } from "store/use-onboarding-store";
@@ -10,11 +11,13 @@ import { Spinner } from "@/components/ui/spinner";
 import { appConfig } from "@/config/app.config";
 import Header from "@/features/shared/header";
 import useSignalR from "@/hooks/useSignalR";
+import { isValidEmail } from "@/lib/utils";
 
 const title = "Verify your email address";
 const description = "You have not verified your email address";
 
 function EmailVerify() {
+	const { user } = useAuth0();
 	const hubUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL as string}/messaging`;
 
 	const { refetch: verifyEmail } = useVerifyEmail();
@@ -59,16 +62,28 @@ function EmailVerify() {
 		};
 	}, [isActive, seconds]);
 
+	useEffect(() => {
+		if (messages.length > 0) {
+			const message = messages[0];
+			setIsEmailVerified(message.isEmailVerified);
+			if (message.isEmailVerified) {
+				redirect("/dashboard/onboarding");
+			}
+		}
+	}, [messages, setIsEmailVerified]);
+
 	const reset = () => {
 		setSeconds(30);
 		setIsActive(true);
 	};
 
-	if (messages.length > 0) {
-		const message = messages[0];
-		setIsEmailVerified(message.isEmailVerified);
-		if (message.isEmailVerified) {
-			redirect("/dashboard");
+	let name = "Unknown";
+
+	if (user) {
+		if (user?.name && !isValidEmail(user?.name)) {
+			name = user.name;
+		} else if (user?.nickname && !isValidEmail(user?.nickname)) {
+			name = user.nickname;
 		}
 	}
 
@@ -78,14 +93,16 @@ function EmailVerify() {
 
 			<div className="space-y-4 px-4 bg-[#F8F8F8]/95 py-4 border border-[#EBEDED] rounded-3xl backdrop-blur-[60px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)]">
 				<p className="text-sm text-pretty text-[#525f7f]">
-					Thank you for joining{" "}
-					<span className="font-bold">{appConfig.name}</span>.
-					<br /> You're almost ready to get started!
+					Hi <span className="capitalize font-medium">{name}</span>
 					<br />
 					<br />
-					Please check your email and reply{" "}
-					<span className="font-semibold">Yes</span> to the message to verify
-					your email address.
+					We're thrilled to welcome you to{" "}
+					<span className="font-bold">{appConfig.name}</span> and celebrate this
+					big step for your family’s future!
+					<br />
+					<br />
+					Click below to send a quick verification email. If it lands in spam,
+					move it to your inbox - we’re eager to start!
 				</p>
 				<Button
 					disabled={processing || isActive}
@@ -112,6 +129,10 @@ function EmailVerify() {
 					{processing && <Spinner />}
 					{processing ? "Please wait..." : "Resend verification email"}
 				</Button>
+				<p className="text-xs leading-5 text-pretty text-[#525f7f]">
+					Can’t wait for this journey together! <br />
+					<span className="font-medium">The NextDot Team</span>
+				</p>
 				{isActive && (
 					<div>
 						<p className="text-xs text-pretty text-[#525f7f]">
