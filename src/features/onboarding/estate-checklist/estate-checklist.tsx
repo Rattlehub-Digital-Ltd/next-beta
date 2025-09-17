@@ -19,7 +19,13 @@ export default function EstateChecklist() {
 
 	useEffect(() => {
 		if (data && documents.length === 0) {
-			setDocuments(data);
+			const filtered = data.filter(
+				(d) =>
+					!d.name?.toLowerCase().includes("child") &&
+					!(d.displayName ?? "").toLowerCase().includes("spouse") &&
+					!(d.displayName ?? "").toLowerCase().includes("dependent"),
+			);
+			setDocuments(filtered);
 		}
 	}, [data, documents, setDocuments]);
 
