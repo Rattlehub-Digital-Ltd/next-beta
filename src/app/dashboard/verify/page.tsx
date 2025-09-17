@@ -30,7 +30,7 @@ function EmailVerify() {
 
 	useEffect(() => {
 		if (isEmailVerified) {
-			redirect("/dashboard");
+			redirect("/dashboard/onboarding");
 		}
 
 		setProccessing(true);
