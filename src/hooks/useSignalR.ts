@@ -51,6 +51,7 @@ const useSignalR = (hubUrl: string) => {
 					connection.on("ReceiveMessage", (sender, content, sentTime) => {
 						const message: Message = { sender, content, sentTime };
 						setMessages((prevMessages) => [...prevMessages, message]);
+						console.log(message, "hey");
 					});
 				})
 				.catch((error) => console.error("SignalR connection failed: ", error));
