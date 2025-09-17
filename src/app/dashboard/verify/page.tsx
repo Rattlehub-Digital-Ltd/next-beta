@@ -28,11 +28,6 @@ function EmailVerify() {
 	const [seconds, setSeconds] = useState(30);
 	const [isActive, setIsActive] = useState(true);
 
-	if (messages.length > 0) {
-		const message = messages[0];
-		console.log(message);
-	}
-
 	useEffect(() => {
 		if (isEmailVerified) {
 			redirect("/dashboard");
@@ -72,6 +67,14 @@ function EmailVerify() {
 		setSeconds(30);
 		setIsActive(true);
 	};
+
+	if (messages.length > 0) {
+		const message = messages[0];
+		setIsEmailVerified(message.isEmailVerified);
+		if (message.isEmailVerified) {
+			redirect("/dashboard");
+		}
+	}
 
 	return (
 		<div className="pt-8 space-y-8 pb-8">

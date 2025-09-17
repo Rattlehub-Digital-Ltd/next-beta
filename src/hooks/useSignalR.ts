@@ -7,18 +7,19 @@ import {
 	LogLevel,
 } from "@microsoft/signalr";
 import { useEffect, useState } from "react";
+import type { IsOnboardedStatus } from "@/api/services/dashboard/onboarding/types";
 import useAxios from "./use-axios";
 
-interface Message {
-	sender: string;
-	content: string;
-	sentTime: Date;
-}
+// interface Message {
+// 	sender: string;
+// 	content: string;
+// 	sentTime: Date;
+// }
 
 const useSignalR = (hubUrl: string) => {
 	const { accessToken } = useAxios();
 	const [connection, setConnection] = useState<HubConnection | null>(null);
-	const [messages, setMessages] = useState<Message[]>([]);
+	const [messages, setMessages] = useState<IsOnboardedStatus[]>([]);
 
 	useEffect(() => {
 		if (!accessToken || !hubUrl) return;
@@ -49,8 +50,7 @@ const useSignalR = (hubUrl: string) => {
 					console.log("SignalR connection established.");
 
 					// Register a handler for a specific hub method, e.g., "ReceiveMessage"
-					connection.on("ReceiveMessage", (sender, content, sentTime) => {
-						const message: Message = { sender, content, sentTime };
+					connection.on("ReceiveMessage", (message) => {
 						setMessages((prevMessages) => [...prevMessages, message]);
 						console.log(message, "hey");
 					});
