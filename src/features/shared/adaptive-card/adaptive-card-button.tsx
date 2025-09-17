@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/drawer";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
+import type { ActionItem } from "@/types/action-item";
 import type { Document } from "@/types/document";
 import AdaptiveCardTemplate from "./adaptive-card-template";
 
@@ -27,6 +28,7 @@ type Props = {
 	clearCards?: () => void;
 	autoSubmit?: boolean;
 	currentDocument?: Document;
+	currentActionItem?: ActionItem;
 	recordId?: string;
 	referer: string;
 	children: ReactNode;
@@ -68,6 +70,8 @@ const ErrorComp = () => (
 );
 
 function AdaptiveCardButton({
+	currentActionItem,
+	currentDocument,
 	clearCards,
 	isBusy,
 	cards,
@@ -199,6 +203,8 @@ function AdaptiveCardButton({
 					{(isLoading || isBusy) && <Loading />}
 					{!isLoading && !isBusy && (
 						<AdaptiveCardTemplate
+							currentActionItem={currentActionItem}
+							currentDocument={currentDocument}
 							card={cards?.itemListElement?.card ?? data?.itemListElement?.card}
 							submit={submit}
 						/>

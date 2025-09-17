@@ -15,11 +15,15 @@ import RiskItem from "./risk-item";
 
 type RiskCarouselProps = {
 	items: RiskItemProps[];
+	onRiskItemChange?: (index: number) => void;
 };
 
 const uid = new ShortUniqueId();
 
-export default function RiskCarousel({ items }: RiskCarouselProps) {
+export default function RiskCarousel({
+	items,
+	onRiskItemChange,
+}: RiskCarouselProps) {
 	const { setNextButtonDisabled } = useOnboardingStore();
 
 	const [api, setApi] = useState<CarouselApi>();
@@ -35,8 +39,9 @@ export default function RiskCarousel({ items }: RiskCarouselProps) {
 		setCurrent(api.selectedScrollSnap() + 1);
 		api.on("select", () => {
 			setCurrent(api.selectedScrollSnap() + 1);
+			onRiskItemChange?.(api.selectedScrollSnap());
 		});
-	}, [api, setNextButtonDisabled]);
+	}, [api, setNextButtonDisabled, onRiskItemChange]);
 
 	return (
 		<div className="space-y-3 flex flex-col">

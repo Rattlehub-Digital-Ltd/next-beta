@@ -9,7 +9,9 @@ import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import RiskCarousel from "@/features/shared/risk-carousel";
 import SuggestionItem from "@/features/shared/suggestion-item";
+import { track } from "@/lib/analytics";
 import { cardVariants } from "@/motion";
+import type { ActionItem } from "@/types/action-item";
 import CardFooter from "./card-footer";
 
 const uid = new ShortUniqueId({ length: 10 });
@@ -25,6 +27,19 @@ export default function ActionsTab() {
 		isFetching,
 		isFetchingNextPage,
 	} = useInfiniteGetDocuments();
+
+	function handleOnRiskItemChange(index: number, item: ActionItem) {
+		const value = item.riskItems[index];
+
+		if (!value) return;
+
+		track("swiped_carousel", {
+			item: item.displayName,
+			record_identifier: item.id,
+			risk_category: value.category,
+			goal_name: value.goalName,
+		});
+	}
 
 	return (
 		<div className="space-y-4">
@@ -63,7 +78,12 @@ export default function ActionsTab() {
 										</div>
 
 										<div className="px-4">
-											<RiskCarousel items={riskItems} />
+											<RiskCarousel
+												items={riskItems}
+												onRiskItemChange={(index: number) =>
+													handleOnRiskItemChange(index, item)
+												}
+											/>
 										</div>
 
 										<Separator className="bg-black/5 px-4" />

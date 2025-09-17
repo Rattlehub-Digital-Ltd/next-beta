@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useGetDocuments } from "@/api/services/dashboard/queries";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { track } from "@/lib/analytics";
 import { getInitials } from "@/lib/utils";
 import type { ActionItem } from "@/types/action-item";
 import RiskItem from "../shared/risk-item";
@@ -39,8 +40,21 @@ function CampaignIssue({ setCurrentIssue }: CampaignIssueProps) {
 
 			localStorage.removeItem("campaign");
 			const issue = issues?.items[0];
+			const item = issues?.items[0];
+			const chip = item?.riskItems[0];
 
 			if (issue) setCurrentIssue(issue);
+
+			if (item && chip) {
+				track("viewed_campaign", {
+					name: "Campaign Issue",
+					item: item.displayName,
+					record_identifier: item.id,
+					goal_name: chip.goalName,
+					category: chip.category,
+					is_adaptive_card: "false",
+				});
+			}
 
 			setIsLoading(false);
 		};

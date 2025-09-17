@@ -5,6 +5,7 @@ import RiskBar from "@/features/shared/risk-bar";
 import RiskCarousel from "@/features/shared/risk-carousel";
 import SuggestionItem from "@/features/shared/suggestion-item";
 import SummaryFooter from "@/features/shared/summary-footer";
+import { track } from "@/lib/analytics";
 import SuggesteItemDrawer from "./suggeste-item-drawer";
 
 type SuggestedItemProps = {
@@ -13,6 +14,19 @@ type SuggestedItemProps = {
 
 export default function SuggestedItem({ item }: SuggestedItemProps) {
 	const { displayName, eduText, riskItems, id } = item;
+
+	function handleOnRiskItemChange(index: number, item: Suggested) {
+		const value = item.riskItems[index];
+
+		if (!value) return;
+
+		track("swiped_carousel", {
+			item: item.displayName,
+			record_identifier: item.id,
+			risk_category: value.category,
+			goal_name: value.goalName,
+		});
+	}
 
 	return (
 		<div className="w-full h-full bg-[#F8F8F8]/80 py-4 border border-[#EBEDED] rounded-3xl backdrop-blur-[60px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)] space-y-4 flex flex-col">
@@ -26,13 +40,27 @@ export default function SuggestedItem({ item }: SuggestedItemProps) {
 			</div>
 			<div className="px-4">
 				<SuggesteItemDrawer item={item}>
-					<Button className="!p-0 w-full" variant="ghost">
+					<Button
+						className="!p-0 w-full"
+						variant="ghost"
+						onClick={() => {
+							track("opens_affected_owners", {
+								item: displayName,
+								is_adaptive_card: false,
+							});
+						}}
+					>
 						<RiskBar data={item} />
 					</Button>
 				</SuggesteItemDrawer>
 			</div>
 			<div className="px-4">
-				<RiskCarousel items={riskItems} />
+				<RiskCarousel
+					items={riskItems}
+					onRiskItemChange={(index: number) =>
+						handleOnRiskItemChange(index, item)
+					}
+				/>
 			</div>
 			<div className="px-4">
 				<SuggesteItemDrawer item={item}>

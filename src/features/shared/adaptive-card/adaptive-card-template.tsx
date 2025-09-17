@@ -2,7 +2,10 @@ import * as AdaptiveCards from "adaptivecards";
 import MarkdownIt from "markdown-it";
 import { Geist_Mono, Mona_Sans } from "next/font/google";
 import { useCallback, useEffect, useRef, useState } from "react";
+import type { LifeFileDocument } from "@/api/services/dashboard/overview/types";
 import { Spinner } from "@/components/ui/spinner";
+import { track } from "@/lib/analytics";
+import type { ActionItem } from "@/types/action-item";
 
 const adaptiveCard = new AdaptiveCards.AdaptiveCard();
 
@@ -28,6 +31,8 @@ AdaptiveCards.AdaptiveCard.onProcessMarkdown = (text, result) => {
 };
 
 export interface AdaptiveCardProps {
+	currentDocument?: LifeFileDocument;
+	currentActionItem?: ActionItem;
 	// biome-ignore lint/suspicious/noExplicitAny: true
 	card: any;
 	submit: (
@@ -37,10 +42,16 @@ export interface AdaptiveCardProps {
 	) => Promise<void>;
 }
 
-function AdaptiveCardTemplate({ card, submit }: AdaptiveCardProps) {
+function AdaptiveCardTemplate({
+	currentDocument,
+	currentActionItem,
+	card,
+	submit,
+}: AdaptiveCardProps) {
 	const cardWrapperRef = useRef<HTMLDivElement>(null);
 	const formData = useRef<FormData>(new FormData());
 	const [isPending, setIsPending] = useState(true);
+	const trackedItem = useRef(false);
 
 	const initialize = useCallback(async () => {
 		if (!cardWrapperRef.current || !card) return;
@@ -57,6 +68,36 @@ function AdaptiveCardTemplate({ card, submit }: AdaptiveCardProps) {
 			if (renderedCard) {
 				// Clear previous content
 				cardWrapperRef.current.appendChild(renderedCard);
+
+				if (currentDocument && !trackedItem.current) {
+					const item = currentDocument;
+
+					track("viewed_document", {
+						item: item.displayName,
+						record_identifier: item.id,
+						affected_owner: item.affectedOwner,
+						is_applicable: item.isApplicable,
+						is_adaptive_card: true,
+					});
+
+					trackedItem.current = true;
+				}
+
+				if (currentActionItem && !trackedItem.current) {
+					const item = currentActionItem;
+
+					track("viewed_document", {
+						item: item.displayName,
+						record_identifier: item.id,
+						affected_owner: item.ownerDisplayName,
+						is_complete: item.isComplete,
+						ranking: item.ranking,
+						section: item.section,
+						is_adaptive_card: "true",
+					});
+
+					trackedItem.current = true;
+				}
 			}
 		} catch (error) {
 			console.log(error);
@@ -119,7 +160,7 @@ function AdaptiveCardTemplate({ card, submit }: AdaptiveCardProps) {
 				action.toJSON()?.data,
 			);
 		};
-	}, [card, submit]);
+	}, [currentDocument, currentActionItem, card, submit]);
 
 	useEffect(() => {
 		try {

@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import RiskCarousel from "@/features/shared/risk-carousel";
+import { track } from "@/lib/analytics";
 
 type ChecklistAccordionItemProps = {
 	item: EstateChecklistItem;
@@ -32,6 +33,19 @@ const ChecklistAccordionItemComponent = ({
 	const isCompleted = item.isApplicable === "yes" || item.isApplicable === "no";
 	const isDisabled = currentIndex !== itemIndex && item.isApplicable === null;
 	const isExpanded = currentIndex === itemIndex;
+
+	function handleOnRiskItemChange(index: number, item: EstateChecklistItem) {
+		const value = item.riskItems?.[index];
+
+		if (!value) return;
+
+		track("swiped_carousel", {
+			item: item.displayName as string,
+			record_identifier: item.id,
+			risk_category: value.category,
+			goal_name: value.goalName,
+		});
+	}
 
 	return (
 		<AccordionItem
@@ -82,7 +96,12 @@ const ChecklistAccordionItemComponent = ({
 				) : null}
 				<div className="w-full space-y-2 px-4">
 					{item.riskItems && item.riskItems.length > 0 && (
-						<RiskCarousel items={item.riskItems} />
+						<RiskCarousel
+							items={item.riskItems}
+							onRiskItemChange={(index: number) =>
+								handleOnRiskItemChange(index, item)
+							}
+						/>
 					)}
 					<div className="flex items-center justify-between w-full">
 						<RadioGroup
@@ -92,6 +111,14 @@ const ChecklistAccordionItemComponent = ({
 							value={item.isApplicable ?? undefined}
 							onValueChange={(value) => {
 								onChange(value, itemIndex);
+
+								track("submitted_answer", {
+									record_identifier: item.id,
+									item: item.displayName ?? item.name ?? "",
+									has_item_in_place: item.isApplicable === "yes",
+									is_adaptive_card: false,
+								});
+
 								onNextPress(currentIndex + 1);
 							}}
 						>

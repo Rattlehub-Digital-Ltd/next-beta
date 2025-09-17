@@ -33,66 +33,10 @@ export default function CardFooter({
 	refresh,
 }: CardFooterProps) {
 	const submitAdaptiveCard = useSubmitAdaptiveCardData();
-	// const advanceAdaptiveCard = useAutoAdvanceAdaptiveCard();
 
 	const [isBusy, setIsBusy] = useState(false);
 	// biome-ignore lint/suspicious/noExplicitAny: dynamic object
 	const [cards, setCards] = useState<any | undefined>();
-
-	// async function handleNoResponse(id: string, value: boolean) {
-	// 	if (id === "") {
-	// 		toast.error("Invalid document ID");
-	// 		return "";
-	// 	}
-
-	// 	setIsBusy(true);
-
-	// 	try {
-	// 		const form = new FormData();
-	// 		form.set(id, value.toString());
-
-	// 		const headers: Record<string, string> = {};
-	// 		headers["x-record-identifier"] = id;
-
-	// 		const response = await advanceAdaptiveCard.mutateAsync({
-	// 			formData: form,
-	// 			headers: headers,
-	// 			referer: "actions",
-	// 			recordId: id,
-	// 		});
-
-	// 		if (!response) {
-	// 			toast.error("Failed to delete document");
-	// 			return "";
-	// 		}
-	// 	} catch (error) {
-	// 		console.error("Error during auto-advance:", error);
-	// 		return "";
-	// 	} finally {
-	// 		setIsBusy(false);
-	// 	}
-
-	// 	return id;
-	// }
-
-	// const noResponseMutation = useMutation({
-	// 	mutationFn: async ({ id, value }: { id: string; value: boolean }) => {
-	// 		await handleNoResponse(id, value);
-	// 		return { id, value };
-	// 	},
-	// 	onSuccess: ({ id, value }) => {
-	// 		toast.success("Answer submitted successfully");
-	// 		queryClient.invalidateQueries({
-	// 			queryKey: [...queryKeys.documents.byId(id), value],
-	// 		});
-	// 		queryClient.invalidateQueries({
-	// 			queryKey: [...queryKeys.documents.all, value],
-	// 		});
-	// 	},
-	// 	onError: () => {
-	// 		toast.error("An error occured, please try again");
-	// 	},
-	// });
 
 	if (item.nextAction.type === "Applicable") {
 		if (item.nextAction.inputs?.length > 2) {
@@ -171,6 +115,7 @@ export default function CardFooter({
 				<motion.div className="w-full" whileTap={{ scale: 0.95 }}>
 					<AdaptiveCardButton
 						autoSubmit={true}
+						currentActionItem={item}
 						recordId={recordId}
 						referer="actions"
 						refresh={refresh}

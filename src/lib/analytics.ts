@@ -51,7 +51,7 @@ export function getUTMParams() {
 
 export const track = (
 	eventName: string,
-	payload?: Record<string, string | object>,
+	payload?: Record<string, string | object | number | boolean>,
 ) => {
 	try {
 		const event: AnalyticsEvent = {
