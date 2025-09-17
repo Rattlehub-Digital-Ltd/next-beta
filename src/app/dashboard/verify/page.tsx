@@ -87,8 +87,9 @@ function EmailVerify() {
 					almost ready to get started!
 					<br />
 					<br />
-					Please check your email and click the link to verify your email
-					address.
+					Please check your email and reply{" "}
+					<span className="font-semibold">Yes</span> to the message to verify
+					your email address.
 				</p>
 				<Button
 					disabled={processing || isActive}
@@ -113,7 +114,7 @@ function EmailVerify() {
 					}}
 				>
 					{processing && <Spinner />}
-					{processing ? "Please wait..." : "Resend verification link"}
+					{processing ? "Please wait..." : "Resend verification email"}
 				</Button>
 				{isActive && (
 					<div>
