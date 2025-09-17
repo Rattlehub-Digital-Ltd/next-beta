@@ -25,6 +25,8 @@ function EmailVerify() {
 	const { messages } = useSignalR(hubUrl);
 
 	const [processing, setProccessing] = useState(false);
+	const [seconds, setSeconds] = useState(30);
+	const [isActive, setIsActive] = useState(true);
 
 	if (messages.length > 0) {
 		const message = messages[0];
@@ -32,7 +34,6 @@ function EmailVerify() {
 	}
 
 	useEffect(() => {
-		console.log(isEmailVerified);
 		if (isEmailVerified) {
 			redirect("/dashboard");
 		}
@@ -41,6 +42,36 @@ function EmailVerify() {
 
 		verifyEmail().finally(() => setProccessing(false));
 	}, [isEmailVerified, verifyEmail]);
+
+	useEffect(() => {
+		let interval: NodeJS.Timeout | null = null;
+
+		if (isActive && seconds > 0) {
+			interval = setInterval(() => {
+				setSeconds((prevSeconds) => prevSeconds - 1);
+			}, 1000);
+		} else if (seconds === 0) {
+			setIsActive(false);
+			if (interval) {
+				clearInterval(interval);
+			}
+		}
+
+		return () => {
+			if (interval) {
+				clearInterval(interval);
+			}
+		};
+	}, [isActive, seconds]);
+
+	// const toggle = () => {
+	// 	setIsActive(!isActive);
+	// };
+
+	const reset = () => {
+		setSeconds(30);
+		setIsActive(true);
+	};
 
 	return (
 		<div className="pt-8 space-y-8 pb-8">
@@ -57,8 +88,8 @@ function EmailVerify() {
 					address.
 				</p>
 				<Button
-					disabled={processing}
-					className="disabled:opacity-85 rounded-full"
+					disabled={processing || isActive}
+					className="disabled:opacity-70 rounded-full"
 					onClick={async () => {
 						setProccessing(true);
 						await verifyEmail();
@@ -68,11 +99,20 @@ function EmailVerify() {
 							setIsEmailVerified(onboardingStatus.isEmailVerified);
 						}
 						setProccessing(false);
+						reset();
 					}}
 				>
 					{processing && <Spinner />}
 					{processing ? "Resending..." : "Resend verification link"}
 				</Button>
+				{isActive && (
+					<div>
+						<p className="text-xs text-pretty text-[#525f7f]">
+							Check your Inbox, can resend in{" "}
+							<span className="font-semibold">{seconds} seconds</span>
+						</p>
+					</div>
+				)}
 			</div>
 		</div>
 	);

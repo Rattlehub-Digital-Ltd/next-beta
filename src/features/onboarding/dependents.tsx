@@ -10,7 +10,7 @@ import MainSheet from "@/features/shared/main-sheet";
 import CategoryList from "../shared/category-list";
 import PersonCard from "../shared/person-card";
 import AddPersonButton from "./add-person-button";
-import ListHeader from "./list-header";
+// import ListHeader from "./list-header";
 import TabHeader from "./tab-header";
 
 type PersonProps = {
@@ -21,7 +21,7 @@ type PersonProps = {
 
 const uid = new ShortUniqueId();
 
-const Content = ({ value, onValueChange, onReset }: PersonProps) => {
+const Content = ({ value, onValueChange }: PersonProps) => {
 	const { dependents, setDependents } = useDependentStore();
 
 	return (
@@ -41,7 +41,7 @@ const Content = ({ value, onValueChange, onReset }: PersonProps) => {
 				/>
 				{dependents && dependents?.length > 0 && (
 					<div className="pb-6 flex flex-col w-full items-center space-y-1.5">
-						<ListHeader title="Dependents" onReset={onReset} />
+						{/* <ListHeader title="Dependents" onReset={onReset} /> */}
 
 						<ul className="w-full flex flex-col space-y-3">
 							{dependents.map((item) => (

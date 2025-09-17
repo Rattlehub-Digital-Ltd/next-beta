@@ -21,10 +21,17 @@ const useSignalR = (hubUrl: string) => {
 	const [messages, setMessages] = useState<Message[]>([]);
 
 	useEffect(() => {
+		if (!accessToken || !hubUrl) return;
+
 		const newConnection = new HubConnectionBuilder()
 			.withUrl(hubUrl, {
 				accessTokenFactory: () => accessToken as string,
 				transport: HttpTransportType.LongPolling,
+				withCredentials: false,
+				headers: {
+					"Access-Control-Allow-Credentials": "true",
+					Authorization: `Bearer ${accessToken}`,
+				},
 			})
 			.withAutomaticReconnect() // Optional: Automatically reconnects if the connection is lost
 			.configureLogging(LogLevel.Information) // Optional: Configure logging
