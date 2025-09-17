@@ -95,12 +95,19 @@ function EmailVerify() {
 					className="disabled:opacity-70 rounded-full"
 					onClick={async () => {
 						setProccessing(true);
-						await verifyEmail();
+
 						await refetch();
 						if (onboardingStatus) {
 							setIsOnboarded(onboardingStatus.isOnboarded);
 							setIsEmailVerified(onboardingStatus.isEmailVerified);
+
+							if (onboardingStatus.isEmailVerified) {
+								redirect("/dashboard/onboarding");
+							} else {
+								await verifyEmail();
+							}
 						}
+
 						setProccessing(false);
 						reset();
 					}}
