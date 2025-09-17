@@ -21,11 +21,16 @@ export const useGetActivitySummary = () => {
 	return useQuery({
 		queryKey: ["activity_summary"],
 		queryFn: async () => {
-			const { data } = await client.get<ActivitySummary>(
-				dashboardEndpoints.getActivitySummary(),
-			);
+			try {
+				const { data } = await client.get<ActivitySummary>(
+					dashboardEndpoints.getActivitySummary(),
+				);
 
-			return data;
+				return data;
+			} catch (error) {
+				console.log(error);
+				return;
+			}
 		},
 	});
 };
