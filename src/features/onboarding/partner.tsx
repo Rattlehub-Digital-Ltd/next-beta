@@ -3,25 +3,30 @@
 import * as motion from "motion/react-client";
 import { useEffect } from "react";
 import ShortUniqueId from "short-unique-id";
-import { useOnboardingStore } from "store/use-onboarding-store";
+// import { useOnboardingStore } from "store/use-onboarding-store";
 import { usePartnerStore } from "store/use-partner-store";
 import { usePersonDrawerStore } from "store/use-person-drawer-store";
 import MainSheet from "@/features/shared/main-sheet";
 import CategoryList from "../shared/category-list";
 import PersonCard from "../shared/person-card";
 import AddPersonButton from "./add-person-button";
-import ListHeader from "./list-header";
+// import ListHeader from "./list-header";
 import TabHeader from "./tab-header";
 
 type PersonProps = {
 	value: string | null;
 	onValueChange: (value: string | null) => void;
 	onReset: () => void;
+	setNextButtonDisabled: (value: boolean) => void;
+};
+
+type PartnerProps = {
+	setNextButtonDisabled: (value: boolean) => void;
 };
 
 const uid = new ShortUniqueId();
 
-const Content = ({ value, onValueChange, onReset }: PersonProps) => {
+const Content = ({ value, onValueChange }: PersonProps) => {
 	const { partner, setPartner } = usePartnerStore();
 
 	return (
@@ -41,7 +46,7 @@ const Content = ({ value, onValueChange, onReset }: PersonProps) => {
 				/>
 				{partner && partner?.length > 0 && (
 					<div className="pb-6 flex flex-col w-full items-center space-y-1.5">
-						<ListHeader title="Partner" onReset={onReset} />
+						{/* <ListHeader title="Partner" onReset={onReset} /> */}
 
 						<ul className="w-full flex flex-col space-y-3">
 							{partner.map((item) => (
@@ -67,7 +72,7 @@ const Content = ({ value, onValueChange, onReset }: PersonProps) => {
 					</div>
 				)}
 			</motion.div>
-			{value === "yes" && (
+			{value === "yes" && partner?.length === 0 && (
 				<div className="w-full flex justify-center pt-8">
 					<AddPersonButton disabled={value === null} label="Add Partner" />
 				</div>
@@ -76,14 +81,27 @@ const Content = ({ value, onValueChange, onReset }: PersonProps) => {
 	);
 };
 
-const Partner = () => {
-	const { has, setHas, setPartner } = usePartnerStore();
+const Partner = ({ setNextButtonDisabled }: PartnerProps) => {
+	const { has, setHas, setPartner, partner } = usePartnerStore();
 	const { setTitle, onOpenChange, setType } = usePersonDrawerStore();
-	const { setNextButtonDisabled } = useOnboardingStore();
 
 	useEffect(() => {
-		setNextButtonDisabled(false);
-	}, [setNextButtonDisabled]);
+		console.log({ partner }, { has });
+		if (
+			has &&
+			partner &&
+			partner?.length > 0 &&
+			partner[0].firstName &&
+			partner[0].lastName
+		) {
+			console.log("yes");
+			setNextButtonDisabled(false);
+		} else if (has) {
+			setNextButtonDisabled(false);
+		} else if (has === null) {
+			setNextButtonDisabled(true);
+		}
+	}, [partner, setNextButtonDisabled, has]);
 
 	return (
 		<motion.div
@@ -113,6 +131,7 @@ const Partner = () => {
 							setHas(null);
 							setPartner(null);
 						}}
+						setNextButtonDisabled={setNextButtonDisabled}
 						onValueChange={(value: string | null) => {
 							setHas(value);
 							if (value?.toLowerCase() === "yes") {

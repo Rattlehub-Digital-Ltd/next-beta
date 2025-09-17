@@ -177,42 +177,39 @@ function PersonForm({ type, person, buttonLabel, onClose }: PersonFormProps) {
 						)}
 					/>
 				</div>
-				<div>
-					<form.Field
-						name="relationship"
-						children={(field) => (
-							<>
-								<Label htmlFor={field.name} className={labelClass}>
-									Relationship <span className="text-red-500">*</span>
-								</Label>
+				{type !== "partner" && (
+					<div>
+						<form.Field
+							name="relationship"
+							children={(field) => (
+								<>
+									<Label htmlFor={field.name} className={labelClass}>
+										Relationship <span className="text-red-500">*</span>
+									</Label>
 
-								<Select
-									onValueChange={field.handleChange}
-									value={field.state.value}
-									name={field.name}
-									disabled={type === "partner"}
-								>
-									<SelectTrigger className={cn("py-[18px]", inputClass)}>
-										<SelectValue placeholder="Select relationship" />
-									</SelectTrigger>
-									<SelectContent>
-										{options.map((item) => (
-											<SelectItem
-												key={item}
-												value={item}
-												defaultValue={type === "partner" ? "Wife" : undefined}
-											>
-												{item}
-											</SelectItem>
-										))}
-									</SelectContent>
-								</Select>
+									<Select
+										onValueChange={field.handleChange}
+										value={field.state.value}
+										name={field.name}
+									>
+										<SelectTrigger className={cn("py-[18px]", inputClass)}>
+											<SelectValue placeholder="Select relationship" />
+										</SelectTrigger>
+										<SelectContent>
+											{options.map((item) => (
+												<SelectItem key={item} value={item}>
+													{item}
+												</SelectItem>
+											))}
+										</SelectContent>
+									</Select>
 
-								<FieldInfo field={field} />
-							</>
-						)}
-					/>
-				</div>
+									<FieldInfo field={field} />
+								</>
+							)}
+						/>
+					</div>
+				)}
 				<div className="flex items-center gap-2 mt-8">
 					<form.Subscribe
 						selector={(state) => [state.canSubmit, state.isSubmitting]}

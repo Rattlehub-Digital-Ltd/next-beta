@@ -24,6 +24,9 @@ function OnboardingPage() {
 	const [count, setCount] = useState(0);
 	const [summaryOpen, setSummaryOpen] = useState(false);
 
+	const [nextButtonDisabled, setNextButtonDisabled] = useState(false);
+	const [prevButtonDisabled, setPrevButtonDisabled] = useState(false);
+
 	useEffect(() => {
 		if (!api) {
 			return;
@@ -38,6 +41,7 @@ function OnboardingPage() {
 
 	useEffect(() => {
 		console.log({ current, count });
+		setPrevButtonDisabled(current === 1);
 	}, [current, count]);
 
 	if (isOnboarded) redirect("/dashboard");
@@ -47,7 +51,7 @@ function OnboardingPage() {
 			<Carousel setApi={setApi} className="flex">
 				<CarouselContent className="flex">
 					<CarouselItem>
-						<Partner />
+						<Partner setNextButtonDisabled={setNextButtonDisabled} />
 					</CarouselItem>
 					<CarouselItem>
 						<Children />
@@ -64,6 +68,8 @@ function OnboardingPage() {
 				<Pagination
 					currentPage={current}
 					totalPages={count}
+					nextButtonDisabled={nextButtonDisabled}
+					prevButtonDisabled={prevButtonDisabled}
 					onPrevious={() => api?.scrollPrev()}
 					onNext={() => {
 						if (current === count) {

@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/drawer";
 import type { Person } from "@/types/person";
 import PersonForm from "./person-form";
-import ProfilePictureCard from "./profile-picture-card";
+// import ProfilePictureCard from "./profile-picture-card";
 
 type PersonDrawerProps = {
 	description?: string;
@@ -38,7 +38,7 @@ function PersonDrawer({ person, children, description }: PersonDrawerProps) {
 								Add or modify a person's details.
 							</p>
 						</header>
-						<ProfilePictureCard />
+						{/* <ProfilePictureCard /> */}
 						<PersonForm
 							type={type}
 							person={person}

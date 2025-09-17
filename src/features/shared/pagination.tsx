@@ -2,11 +2,12 @@ import { Icon } from "@iconify/react";
 import type { Variants } from "motion";
 import * as motion from "motion/react-client";
 import ShortUniqueId from "short-unique-id";
-import { useOnboardingStore } from "store/use-onboarding-store";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface PaginationProps {
+	nextButtonDisabled?: boolean;
+	prevButtonDisabled?: boolean;
 	currentPage: number;
 	totalPages: number;
 	onPrevious: () => void;
@@ -31,13 +32,14 @@ export const itemVariant: Variants = {
 };
 
 function Pagination({
+	nextButtonDisabled,
+	prevButtonDisabled,
 	currentPage,
 	totalPages,
-
 	onPrevious,
 	onNext,
 }: PaginationProps) {
-	const { nextButtonDisabled } = useOnboardingStore();
+	// const { nextButtonDisabled } = useOnboardingStore();
 
 	return (
 		<motion.div
@@ -54,6 +56,7 @@ function Pagination({
 			>
 				<Button
 					className="rounded-full bg-black/3 text-[#424242] h-8 w-8 !px-0 !py-0"
+					disabled={prevButtonDisabled}
 					variant="outline"
 					onClick={onPrevious}
 				>
