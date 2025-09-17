@@ -59,10 +59,6 @@ function EmailVerify() {
 		};
 	}, [isActive, seconds]);
 
-	// const toggle = () => {
-	// 	setIsActive(!isActive);
-	// };
-
 	const reset = () => {
 		setSeconds(30);
 		setIsActive(true);
@@ -82,9 +78,9 @@ function EmailVerify() {
 
 			<div className="space-y-4 px-4 bg-[#F8F8F8]/95 py-4 border border-[#EBEDED] rounded-3xl backdrop-blur-[60px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)]">
 				<p className="text-sm text-pretty text-[#525f7f]">
-					Thanks for joining{" "}
-					<span className="font-semibold">{appConfig.name}</span>.<br /> You're
-					almost ready to get started!
+					Thank you for joining{" "}
+					<span className="font-bold">{appConfig.name}</span>.
+					<br /> You're almost ready to get started!
 					<br />
 					<br />
 					Please check your email and reply{" "}
