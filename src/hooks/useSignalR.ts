@@ -28,6 +28,7 @@ const useSignalR = (hubUrl: string) => {
 				accessTokenFactory: () => accessToken as string,
 				transport: HttpTransportType.LongPolling,
 				withCredentials: false,
+				skipNegotiation: false,
 				headers: {
 					"Access-Control-Allow-Credentials": "true",
 					Authorization: `Bearer ${accessToken}`,

@@ -103,7 +103,7 @@ function EmailVerify() {
 					}}
 				>
 					{processing && <Spinner />}
-					{processing ? "Resending..." : "Resend verification link"}
+					{processing ? "Please wait..." : "Resend verification link"}
 				</Button>
 				{isActive && (
 					<div>
