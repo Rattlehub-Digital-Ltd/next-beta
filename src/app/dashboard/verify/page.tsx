@@ -1,26 +1,46 @@
 "use client";
 
 import { redirect } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useOnboardingStore } from "store/use-onboarding-store";
 import { useGetOnboarding } from "@/api/services/dashboard/onboarding/queries";
-import { useVerifyEmail } from "@/api/services/verify/queries";
+import { useVerifyEmail } from "@/api/services/dashboard/verify/queries";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { appConfig } from "@/config/app.config";
 import Header from "@/features/shared/header";
+import useSignalR from "@/hooks/useSignalR";
 
 const title = "Verify your email address";
 const description = "You have not verified your email address";
 
 function EmailVerify() {
+	const hubUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL as string}/messaging`;
+
 	const { refetch: verifyEmail } = useVerifyEmail();
-	const { setIsOnboarded, setIsEmailVerified } = useOnboardingStore();
+	const { setIsOnboarded, setIsEmailVerified, isEmailVerified } =
+		useOnboardingStore();
 	const { data: onboardingStatus, refetch } = useGetOnboarding();
+
+	const { messages } = useSignalR(hubUrl);
 
 	const [processing, setProccessing] = useState(false);
 
-	if (onboardingStatus?.isEmailVerified) redirect("/dashboard");
+	if (messages.length > 0) {
+		const message = messages[0];
+		console.log(message);
+	}
+
+	useEffect(() => {
+		console.log(isEmailVerified);
+		if (isEmailVerified) {
+			redirect("/dashboard");
+		}
+
+		setProccessing(true);
+
+		verifyEmail().finally(() => setProccessing(false));
+	}, [isEmailVerified, verifyEmail]);
 
 	return (
 		<div className="pt-8 space-y-8 pb-8">

@@ -58,7 +58,7 @@ export default function SplashScreen() {
 			setIsInitializing(false);
 
 			if (!onboardingStatus.isEmailVerified)
-				redirect("/verify", RedirectType.replace);
+				redirect("/dashboard/verify", RedirectType.replace);
 
 			redirect(
 				onboardingStatus.isOnboarded ? "/dashboard" : "/dashboard/onboarding",

@@ -11,5 +11,6 @@ export const useVerifyEmail = () => {
 			const { data } = await client.post(verifyEndpoints.verifyEmail());
 			return data;
 		},
+		enabled: false,
 	});
 };
