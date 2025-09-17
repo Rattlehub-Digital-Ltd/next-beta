@@ -51,7 +51,11 @@ function BottomTabBar() {
 	const pathname = usePathname();
 	const { activity } = useActivitySummaryStore();
 
-	if (pathname === "/" || pathname.toLowerCase() === "/dashboard/onboarding")
+	if (
+		pathname === "/" ||
+		pathname.toLowerCase() === "/dashboard/onboarding" ||
+		pathname.toLowerCase() === "/dashboard/verify"
+	)
 		return;
 
 	return (
