@@ -24,6 +24,7 @@ export default function Summary() {
 				{partner && partner.length > 0 && (
 					<CardContainer
 						title="Partner"
+						color="indigo"
 						icon={
 							<Icon
 								icon="fluent:person-heart-24-filled"
@@ -44,6 +45,7 @@ export default function Summary() {
 				{children && children.length > 0 && (
 					<CardContainer
 						title="Children"
+						color="dark-teal"
 						icon={
 							<Icon
 								icon="fluent:animal-paw-print-20-filled"
@@ -67,6 +69,7 @@ export default function Summary() {
 				{dependents && dependents.length > 0 && (
 					<CardContainer
 						title="Dependents"
+						color="purple"
 						icon={
 							<Icon
 								icon="fluent:people-community-24-filled"
@@ -90,16 +93,16 @@ export default function Summary() {
 				)}
 				{documents && documents.length > 0 && (
 					<CardContainer
-						title="Partner"
+						title="Estate Checklist"
+						color="dark-green"
 						icon={
 							<Icon
-								icon="fluent:person-heart-24-filled"
+								icon="fluent:shield-checkmark-24-filled"
 								height={20}
 								width={20}
 							/>
 						}
-						description="The person who you are married to or with whom you enjoy a long-term
-					relationship"
+						description="Get started with your estate planning by completing this checklist."
 					>
 						<div className="flex flex-col space-y-3">
 							{documents.map((item) => (

@@ -2,7 +2,7 @@ const isPreviewMode = true;
 const API_BASE_PATH = isPreviewMode ? "api" : "nextdot-snapshot/api";
 
 export const appConfig = {
-	name: "NEXT BETA",
+	name: "NEXTDOT",
 	description: "The beta chapter",
 	version: "0.0.2",
 	previewMode: isPreviewMode,

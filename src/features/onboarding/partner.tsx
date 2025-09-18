@@ -26,6 +26,8 @@ const uid = new ShortUniqueId();
 const Content = ({ value, onValueChange }: PersonProps) => {
 	const { partner, setPartner } = usePartnerStore();
 
+	console.log(partner && partner?.length === 0);
+
 	return (
 		<div className="h-full flex flex-col w-full">
 			<motion.div
@@ -69,7 +71,7 @@ const Content = ({ value, onValueChange }: PersonProps) => {
 					</div>
 				)}
 			</motion.div>
-			{value === "yes" && partner?.length === 0 && (
+			{value === "yes" && (!partner || partner?.length === 0) && (
 				<div className="w-full flex justify-center pt-8">
 					<AddPersonButton disabled={value === null} label="Add Partner" />
 				</div>
