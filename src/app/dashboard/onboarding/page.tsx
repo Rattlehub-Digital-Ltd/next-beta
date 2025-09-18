@@ -137,8 +137,14 @@ function OnboardingPage() {
 
 	return (
 		<div className="space-y-3 flex flex-col overflow-hidden">
-			<Carousel setApi={setApi} className="flex">
-				<CarouselContent className="flex">
+			<Carousel
+				setApi={setApi}
+				className="w-full h-full"
+				opts={{
+					align: "start",
+				}}
+			>
+				<CarouselContent>
 					<CarouselItem>
 						<Partner />
 					</CarouselItem>
