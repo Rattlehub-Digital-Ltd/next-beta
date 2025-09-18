@@ -11,6 +11,6 @@ interface PartnerStoreProps {
 export const usePartnerStore = create<PartnerStoreProps>((set) => ({
 	has: null,
 	setHas: (has) => set({ has }),
-	partner: [],
+	partner: null,
 	setPartner: (partner) => set({ partner }),
 }));

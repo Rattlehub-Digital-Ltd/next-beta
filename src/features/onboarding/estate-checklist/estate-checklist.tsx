@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useDocumentStore } from "store/use-document-store";
+import { useOnboardingStore } from "store/use-onboarding-store";
 import { useGetSettings } from "@/api/services/dashboard/onboarding/queries";
 import SuggestionItem from "@/features/shared/suggestion-item";
 import CustomAccordion from "./custom-accordion";
@@ -12,7 +13,7 @@ const description =
 
 export default function EstateChecklist() {
 	const { data, isLoading, isError, error } = useGetSettings();
-
+	const { setNextButtonDisabled } = useOnboardingStore();
 	const { documents, setDocuments } = useDocumentStore();
 
 	const [currentIndex, setCurrentIndex] = useState(0);
@@ -28,6 +29,17 @@ export default function EstateChecklist() {
 			setDocuments(filtered);
 		}
 	}, [data, documents, setDocuments]);
+
+	useEffect(() => {
+		if (
+			documents &&
+			documents.filter((d) => d.isApplicable === null).length === 0
+		) {
+			setNextButtonDisabled(false);
+		} else {
+			setNextButtonDisabled(true);
+		}
+	}, [documents, setNextButtonDisabled]);
 
 	const handleOnChange = useCallback(
 		(value: string, index: number) => {

@@ -1,4 +1,5 @@
 import { Icon } from "@iconify/react";
+import { useCallback } from "react";
 import type { Suggested } from "@/api/services/dashboard/suggestion/types";
 import { Button } from "@/components/ui/button";
 import RiskBar from "@/features/shared/risk-bar";
@@ -15,18 +16,21 @@ type SuggestedItemProps = {
 export default function SuggestedItem({ item }: SuggestedItemProps) {
 	const { displayName, eduText, riskItems, id } = item;
 
-	function handleOnRiskItemChange(index: number, item: Suggested) {
-		const value = item.riskItems[index];
+	const handleOnRiskItemChange = useCallback(
+		(index: number, item: Suggested) => {
+			const value = item.riskItems[index];
 
-		if (!value) return;
+			if (!value) return;
 
-		track("swiped_carousel", {
-			item: item.displayName,
-			record_identifier: item.id,
-			risk_category: value.category,
-			goal_name: value.goalName,
-		});
-	}
+			track("swiped_carousel", {
+				item: item.displayName,
+				record_identifier: item.id,
+				risk_category: value.category,
+				goal_name: value.goalName,
+			});
+		},
+		[],
+	);
 
 	return (
 		<div className="w-full h-full bg-[#F8F8F8]/80 py-4 border border-[#EBEDED] rounded-3xl backdrop-blur-[60px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)] space-y-4 flex flex-col">

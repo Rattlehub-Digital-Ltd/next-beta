@@ -3,6 +3,7 @@
 import * as motion from "motion/react-client";
 import { useEffect } from "react";
 import ShortUniqueId from "short-unique-id";
+import { useOnboardingStore } from "store/use-onboarding-store";
 // import { useOnboardingStore } from "store/use-onboarding-store";
 import { usePartnerStore } from "store/use-partner-store";
 import { usePersonDrawerStore } from "store/use-person-drawer-store";
@@ -17,10 +18,6 @@ type PersonProps = {
 	value: string | null;
 	onValueChange: (value: string | null) => void;
 	onReset: () => void;
-	setNextButtonDisabled: (value: boolean) => void;
-};
-
-type PartnerProps = {
 	setNextButtonDisabled: (value: boolean) => void;
 };
 
@@ -81,24 +78,24 @@ const Content = ({ value, onValueChange }: PersonProps) => {
 	);
 };
 
-const Partner = ({ setNextButtonDisabled }: PartnerProps) => {
+const Partner = () => {
+	const { setNextButtonDisabled } = useOnboardingStore();
 	const { has, setHas, setPartner, partner } = usePartnerStore();
 	const { setTitle, onOpenChange, setType } = usePersonDrawerStore();
 
 	useEffect(() => {
-		console.log({ partner }, { has });
 		if (
 			has &&
 			partner &&
-			partner?.length > 0 &&
-			partner[0].firstName &&
-			partner[0].lastName
+			partner.length > 0 &&
+			partner[0] &&
+			partner[0].firstName !== "" &&
+			partner[0].lastName !== ""
 		) {
-			console.log("yes");
 			setNextButtonDisabled(false);
-		} else if (has) {
+		} else if (has === "no") {
 			setNextButtonDisabled(false);
-		} else if (has === null) {
+		} else {
 			setNextButtonDisabled(true);
 		}
 	}, [partner, setNextButtonDisabled, has]);

@@ -1,6 +1,6 @@
 /** biome-ignore-all lint/correctness/useUniqueElementIds: no applicable */
 import { Icon } from "@iconify/react";
-import { memo } from "react";
+import { memo, useCallback } from "react";
 import type { EstateChecklistItem } from "@/api/services/dashboard/onboarding/types";
 import {
 	AccordionContent,
@@ -34,18 +34,21 @@ const ChecklistAccordionItemComponent = ({
 	const isDisabled = currentIndex !== itemIndex && item.isApplicable === null;
 	const isExpanded = currentIndex === itemIndex;
 
-	function handleOnRiskItemChange(index: number, item: EstateChecklistItem) {
-		const value = item.riskItems?.[index];
+	const handleOnRiskItemChange = useCallback(
+		(index: number, item: EstateChecklistItem) => {
+			const value = item.riskItems?.[index];
 
-		if (!value) return;
+			if (!value) return;
 
-		track("swiped_carousel", {
-			item: item.displayName as string,
-			record_identifier: item.id,
-			risk_category: value.category,
-			goal_name: value.goalName,
-		});
-	}
+			track("swiped_carousel", {
+				item: item.displayName as string,
+				record_identifier: item.id,
+				risk_category: value.category,
+				goal_name: value.goalName,
+			});
+		},
+		[],
+	);
 
 	return (
 		<AccordionItem

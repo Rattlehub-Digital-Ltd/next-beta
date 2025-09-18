@@ -2,7 +2,11 @@
 
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useChildrenStore } from "store/use-children-store";
+import { useDependentStore } from "store/use-dependent-store";
+import { useDocumentStore } from "store/use-document-store";
 import { useOnboardingStore } from "store/use-onboarding-store";
+import { usePartnerStore } from "store/use-partner-store";
 import {
 	Carousel,
 	type CarouselApi,
@@ -17,15 +21,23 @@ import SummaryDialog from "@/features/onboarding/summary/summary-dialog";
 import Pagination from "@/features/shared/pagination";
 
 function OnboardingPage() {
-	const { isOnboarded } = useOnboardingStore();
+	const {
+		isOnboarded,
+		nextButtonDisabled,
+		previoiusButtonDisabled,
+		setPreviousButtonDisabled,
+		setNextButtonDisabled,
+	} = useOnboardingStore();
+
+	const { has: hasChildren, children } = useChildrenStore();
+	const { has: hasPartner, partner } = usePartnerStore();
+	const { has: hasDependent, dependents } = useDependentStore();
+	const { documents } = useDocumentStore();
 
 	const [api, setApi] = useState<CarouselApi>();
 	const [current, setCurrent] = useState(0);
 	const [count, setCount] = useState(0);
 	const [summaryOpen, setSummaryOpen] = useState(false);
-
-	const [nextButtonDisabled, setNextButtonDisabled] = useState(false);
-	const [prevButtonDisabled, setPrevButtonDisabled] = useState(false);
 
 	useEffect(() => {
 		if (!api) {
@@ -40,9 +52,86 @@ function OnboardingPage() {
 	}, [api]);
 
 	useEffect(() => {
-		console.log({ current, count });
-		setPrevButtonDisabled(current === 1);
-	}, [current, count]);
+		// Partner
+		setPreviousButtonDisabled(current === 1);
+		if (current === 1) {
+			if (
+				hasPartner &&
+				partner &&
+				partner.length > 0 &&
+				partner[0] &&
+				partner[0].firstName !== "" &&
+				partner[0].lastName !== ""
+			) {
+				setNextButtonDisabled(false);
+			} else if (hasPartner === "no") {
+				setNextButtonDisabled(false);
+			} else {
+				setNextButtonDisabled(true);
+			}
+		}
+
+		// chuldren
+		if (current === 2) {
+			if (
+				hasChildren &&
+				children &&
+				children?.length > 0 &&
+				children.filter(
+					(c) =>
+						c.firstName === "" || c.lastName === "" || c.relationship === "",
+				).length === 0
+			) {
+				setNextButtonDisabled(false);
+			} else if (hasChildren === "no") {
+				setNextButtonDisabled(false);
+			} else {
+				setNextButtonDisabled(true);
+			}
+		}
+
+		// Dependents
+		if (current === 3) {
+			if (
+				hasDependent === "yes" &&
+				dependents &&
+				dependents?.length > 0 &&
+				dependents.filter(
+					(c) =>
+						c.firstName === "" || c.lastName === "" || c.relationship === "",
+				).length === 0
+			) {
+				setNextButtonDisabled(false);
+			} else if (hasDependent === "no") {
+				setNextButtonDisabled(false);
+			} else {
+				setNextButtonDisabled(true);
+			}
+		}
+
+		// Documents
+		if (current === 4) {
+			if (
+				documents &&
+				documents.filter((d) => d.isApplicable === null).length === 0
+			) {
+				setNextButtonDisabled(false);
+			} else {
+				setNextButtonDisabled(true);
+			}
+		}
+	}, [
+		current,
+		setPreviousButtonDisabled,
+		setNextButtonDisabled,
+		hasChildren,
+		children,
+		hasPartner,
+		partner,
+		hasDependent,
+		dependents,
+		documents,
+	]);
 
 	if (isOnboarded) redirect("/dashboard");
 
@@ -51,7 +140,7 @@ function OnboardingPage() {
 			<Carousel setApi={setApi} className="flex">
 				<CarouselContent className="flex">
 					<CarouselItem>
-						<Partner setNextButtonDisabled={setNextButtonDisabled} />
+						<Partner />
 					</CarouselItem>
 					<CarouselItem>
 						<Children />
@@ -69,7 +158,7 @@ function OnboardingPage() {
 					currentPage={current}
 					totalPages={count}
 					nextButtonDisabled={nextButtonDisabled}
-					prevButtonDisabled={prevButtonDisabled}
+					prevButtonDisabled={previoiusButtonDisabled}
 					onPrevious={() => api?.scrollPrev()}
 					onNext={() => {
 						if (current === count) {

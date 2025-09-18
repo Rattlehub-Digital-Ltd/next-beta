@@ -51,6 +51,9 @@ export default function SplashScreen() {
 		if (onboardingStatus) {
 			setIsOnboarded(onboardingStatus.isOnboarded);
 			setIsEmailVerified(onboardingStatus.isEmailVerified);
+
+			// remove
+			// setIsEmailVerified(true);
 		}
 
 		if (onboardingStatus) {

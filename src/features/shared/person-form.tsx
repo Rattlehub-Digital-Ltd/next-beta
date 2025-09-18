@@ -95,9 +95,6 @@ function PersonForm({ type, person, buttonLabel, onClose }: PersonFormProps) {
 		case "dependent":
 			options = ["Extended family", "Friend", "Other"];
 			break;
-		case "partner":
-			options = ["Wife"];
-			break;
 		default:
 			break;
 	}

@@ -76,13 +76,26 @@ const Content = ({ value, onValueChange }: PersonProps) => {
 };
 
 const Children = () => {
-	const { has, setHas, setChildren } = useChildrenStore();
+	const { has, setHas, setChildren, children } = useChildrenStore();
 	const { setTitle, onOpenChange, setType } = usePersonDrawerStore();
 	const { setNextButtonDisabled } = useOnboardingStore();
 
 	useEffect(() => {
-		setNextButtonDisabled(false);
-	}, [setNextButtonDisabled]);
+		if (
+			has &&
+			children &&
+			children?.length > 0 &&
+			children.filter(
+				(c) => c.firstName === "" || c.lastName === "" || c.relationship === "",
+			).length === 0
+		) {
+			setNextButtonDisabled(false);
+		} else if (has === "no") {
+			setNextButtonDisabled(false);
+		} else {
+			setNextButtonDisabled(true);
+		}
+	}, [children, setNextButtonDisabled, has]);
 
 	return (
 		<motion.div

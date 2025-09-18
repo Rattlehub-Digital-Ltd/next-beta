@@ -18,12 +18,10 @@ export default function Summary() {
 	const { dependents } = useDependentStore();
 	const { documents } = useDocumentStore();
 
-	const partnerData = partner?.[0];
-
 	return (
 		<div className="h-full w-full flex flex-col space-y-6 py-4">
 			<div className="grow flex flex-col space-y-6 overflow-hidden w-full">
-				{partnerData && (
+				{partner && partner.length > 0 && (
 					<CardContainer
 						title="Partner"
 						icon={
@@ -33,12 +31,11 @@ export default function Summary() {
 								width={20}
 							/>
 						}
-						description="The person who you are married to or with whom you enjoy a long-term
-					relationship"
+						description="The person who you are married to or with whom you enjoy a long-term relationship"
 					>
 						<div className="flex flex-col space-y-3">
 							<PersonCard
-								person={partnerData}
+								person={partner?.[0]}
 								onDelete={() => console.log("Delete partner")}
 							/>
 						</div>

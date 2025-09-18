@@ -4,8 +4,10 @@ type OnboardingStoreProps = {
 	isEmailVerified: boolean;
 	setIsEmailVerified: (isEmailVerified: boolean) => void;
 	nextButtonDisabled: boolean;
+	previoiusButtonDisabled: boolean;
 	isOnboarded: boolean | undefined;
 	setNextButtonDisabled: (nextButtonDisabled: boolean) => void;
+	setPreviousButtonDisabled: (previoiusButtonDisabled: boolean) => void;
 	setIsOnboarded: (isOnboarded: boolean | undefined) => void;
 };
 
@@ -15,5 +17,8 @@ export const useOnboardingStore = create<OnboardingStoreProps>((set) => ({
 	nextButtonDisabled: false,
 	isOnboarded: undefined,
 	setNextButtonDisabled: (nextButtonDisabled) => set({ nextButtonDisabled }),
+	previoiusButtonDisabled: false,
+	setPreviousButtonDisabled: (previoiusButtonDisabled) =>
+		set({ previoiusButtonDisabled }),
 	setIsOnboarded: (isOnboarded) => set({ isOnboarded }),
 }));

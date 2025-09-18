@@ -43,6 +43,7 @@ export default function SummaryDialog({ open, onClose }: SummaryDialogProps) {
 	const [successDialogOpen, setSuccessDialogOpen] = useState(false);
 
 	const handleSubmit = useCallback(async () => {
+		console.log("Submitting onboarding data...");
 		await submitOnboarding.mutateAsync(
 			{
 				payload: {

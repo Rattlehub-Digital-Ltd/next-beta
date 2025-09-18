@@ -160,7 +160,7 @@ function AdaptiveCardTemplate({
 				action.toJSON()?.data,
 			);
 		};
-	}, [currentDocument, currentActionItem, card, submit]);
+	}, [currentActionItem, currentDocument, card, submit]);
 
 	useEffect(() => {
 		try {
