@@ -54,6 +54,7 @@ function OnboardingPage() {
 	useEffect(() => {
 		// Partner
 		setPreviousButtonDisabled(current === 1);
+
 		if (current === 1) {
 			if (
 				hasPartner &&
@@ -67,6 +68,7 @@ function OnboardingPage() {
 			} else if (hasPartner === "no") {
 				setNextButtonDisabled(false);
 			} else {
+				console.log("yes");
 				setNextButtonDisabled(true);
 			}
 		}
@@ -139,10 +141,8 @@ function OnboardingPage() {
 		<div className="space-y-3 flex flex-col overflow-hidden">
 			<Carousel
 				setApi={setApi}
+				opts={{ align: "start" }}
 				className="w-full h-full"
-				opts={{
-					align: "start",
-				}}
 			>
 				<CarouselContent>
 					<CarouselItem>
