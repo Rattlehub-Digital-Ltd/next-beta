@@ -170,6 +170,7 @@ function OnboardingPage() {
 					totalPages={count}
 					nextButtonDisabled={nextButtonDisabled}
 					prevButtonDisabled={previoiusButtonDisabled}
+					showColor={true}
 					onPrevious={() => api?.scrollPrev()}
 					onNext={() => {
 						if (current === count) {

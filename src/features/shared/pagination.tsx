@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 interface PaginationProps {
 	nextButtonDisabled?: boolean;
 	prevButtonDisabled?: boolean;
+	showColor?: boolean;
 	currentPage: number;
 	totalPages: number;
 	onPrevious: () => void;
@@ -38,6 +39,7 @@ function Pagination({
 	totalPages,
 	onPrevious,
 	onNext,
+	showColor = false,
 }: PaginationProps) {
 	// const { nextButtonDisabled } = useOnboardingStore();
 
@@ -87,7 +89,10 @@ function Pagination({
 				transition={{ duration: 0.35 }}
 			>
 				<Button
-					className="rounded-full bg-black/3 disabled:bg-[#EBEBEB] disabled:text-[#424242] h-8 w-8 !px-0 !py-0"
+					className={cn(
+						"rounded-full bg-black/3 disabled:bg-[#EBEBEB] disabled:text-[#424242] h-8 w-8 !px-0 !py-0",
+						showColor && "bg-blue-600 text-white hover:bg-blue-700",
+					)}
 					disabled={nextButtonDisabled}
 					variant="outline"
 					onClick={onNext}
