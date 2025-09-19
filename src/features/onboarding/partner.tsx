@@ -21,6 +21,10 @@ type PersonProps = {
 	setNextButtonDisabled: (value: boolean) => void;
 };
 
+type PartnerProps = {
+	scrollNext?: () => void;
+};
+
 const uid = new ShortUniqueId();
 
 const Content = ({ value, onValueChange }: PersonProps) => {
@@ -78,7 +82,7 @@ const Content = ({ value, onValueChange }: PersonProps) => {
 	);
 };
 
-const Partner = () => {
+const Partner = ({ scrollNext }: PartnerProps) => {
 	const { setNextButtonDisabled } = useOnboardingStore();
 	const { has, setHas, setPartner, partner } = usePartnerStore();
 	const { setTitle, onOpenChange, setType } = usePersonDrawerStore();
@@ -139,6 +143,7 @@ const Partner = () => {
 								setTitle("Add person");
 								setPartner(null);
 								setType("unknown");
+								scrollNext?.();
 							}
 						}}
 					/>

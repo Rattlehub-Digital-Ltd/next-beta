@@ -19,6 +19,10 @@ type PersonProps = {
 	onReset: () => void;
 };
 
+type DependentsProps = {
+	scrollNext?: () => void;
+};
+
 const uid = new ShortUniqueId();
 
 const Content = ({ value, onValueChange }: PersonProps) => {
@@ -76,7 +80,7 @@ const Content = ({ value, onValueChange }: PersonProps) => {
 	);
 };
 
-const Dependents = () => {
+const Dependents = ({ scrollNext }: DependentsProps) => {
 	const { has, setHas, setDependents, dependents } = useDependentStore();
 	const { setTitle, onOpenChange, setType } = usePersonDrawerStore();
 	const { setNextButtonDisabled } = useOnboardingStore();
@@ -136,6 +140,7 @@ const Dependents = () => {
 								setTitle("Add person");
 								setDependents(null);
 								setType("unknown");
+								scrollNext?.();
 							}
 						}}
 					/>

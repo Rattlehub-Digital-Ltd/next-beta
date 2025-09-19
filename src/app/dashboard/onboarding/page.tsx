@@ -134,6 +134,12 @@ function OnboardingPage() {
 		documents,
 	]);
 
+	const scrollNext = () => {
+		if (api) {
+			api.scrollNext();
+		}
+	};
+
 	if (isOnboarded) redirect("/dashboard");
 
 	return (
@@ -145,13 +151,13 @@ function OnboardingPage() {
 			>
 				<CarouselContent>
 					<CarouselItem>
-						<Partner />
+						<Partner scrollNext={scrollNext} />
 					</CarouselItem>
 					<CarouselItem>
-						<Children />
+						<Children scrollNext={scrollNext} />
 					</CarouselItem>
 					<CarouselItem>
-						<Dependents />
+						<Dependents scrollNext={scrollNext} />
 					</CarouselItem>
 					<CarouselItem>
 						<EstateChecklist />

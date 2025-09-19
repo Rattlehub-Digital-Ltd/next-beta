@@ -7,22 +7,25 @@ import {
 	LogLevel,
 } from "@microsoft/signalr";
 import { useEffect, useState } from "react";
+import { useGetOnboarding } from "@/api/services/dashboard/onboarding/queries";
 import type { IsOnboardedStatus } from "@/api/services/dashboard/onboarding/types";
 import useAxios from "./use-axios";
 
-// interface Message {
-// 	sender: string;
-// 	content: string;
-// 	sentTime: Date;
-// }
-
 const useSignalR = (hubUrl: string) => {
+	const { data: onboardingStatus } = useGetOnboarding();
+
 	const { accessToken } = useAxios();
 	const [connection, setConnection] = useState<HubConnection | null>(null);
 	const [messages, setMessages] = useState<IsOnboardedStatus[]>([]);
 
 	useEffect(() => {
-		if (!accessToken || !hubUrl) return;
+		if (
+			!accessToken ||
+			!hubUrl ||
+			!onboardingStatus ||
+			onboardingStatus?.isEmailVerified
+		)
+			return;
 
 		const newConnection = new HubConnectionBuilder()
 			.withUrl(hubUrl, {
@@ -35,7 +38,7 @@ const useSignalR = (hubUrl: string) => {
 			.build();
 
 		setConnection(newConnection);
-	}, [hubUrl, accessToken]);
+	}, [hubUrl, accessToken, onboardingStatus]);
 
 	useEffect(() => {
 		if (connection) {
