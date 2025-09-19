@@ -4,6 +4,7 @@ import ShortUniqueId from "short-unique-id";
 import { useInfiniteGetTimeline } from "@/api/services/dashboard/queries";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { track } from "@/lib/analytics";
 import TimelineItem from "./timeline-item";
 
 const uid = new ShortUniqueId({ length: 10 });
@@ -56,7 +57,12 @@ export default function TimelineTab({ referer }: { referer: string }) {
 						<Button
 							className="w-full bg-white/45 backdrop-blur-2xl text-foreground hover:bg-white/75 hover:text-foreground rounded-[12px] text-[13px] font-medium font-mono"
 							disabled={!hasNextPage || isFetching}
-							onClick={() => fetchNextPage()}
+							onClick={() => {
+								fetchNextPage();
+								track("load_more_timeline", {
+									page_params: JSON.stringify(data?.pageParams || ""),
+								});
+							}}
 						>
 							<Icon icon="fluent:arrow-counterclockwise-dashes-24-filled" />
 							{isFetchingNextPage

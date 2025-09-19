@@ -9,6 +9,7 @@ import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import RiskCarousel from "@/features/shared/risk-carousel";
 import SuggestionItem from "@/features/shared/suggestion-item";
+import { track } from "@/lib/analytics";
 import { cardVariants } from "@/motion";
 import CardFooter from "./card-footer";
 
@@ -110,7 +111,12 @@ export default function ActionsTab() {
 					<Button
 						className="w-full bg-white/75 backdrop-blur-2xl text-foreground hover:bg-white/85 hover:text-foreground rounded-[12px] text-[13px] font-medium font-mono"
 						disabled={!hasNextPage || isFetching}
-						onClick={() => fetchNextPage()}
+						onClick={() => {
+							fetchNextPage();
+							track("load_more_actions", {
+								page_params: JSON.stringify(data?.pageParams || ""),
+							});
+						}}
 					>
 						<Icon
 							icon="fluent:arrow-counterclockwise-dashes-24-filled"
