@@ -68,7 +68,6 @@ function OnboardingPage() {
 			} else if (hasPartner === "no") {
 				setNextButtonDisabled(false);
 			} else {
-				console.log("yes");
 				setNextButtonDisabled(true);
 			}
 		}

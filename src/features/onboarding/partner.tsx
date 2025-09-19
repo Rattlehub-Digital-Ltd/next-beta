@@ -26,8 +26,6 @@ const uid = new ShortUniqueId();
 const Content = ({ value, onValueChange }: PersonProps) => {
 	const { partner, setPartner } = usePartnerStore();
 
-	console.log(partner && partner?.length === 0);
-
 	return (
 		<div className="h-full flex flex-col w-full">
 			<motion.div
