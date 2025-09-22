@@ -1,9 +1,7 @@
 import { Icon } from "@iconify/react";
-import { useCallback } from "react";
 import type { Suggested } from "@/api/services/dashboard/suggestion/types";
 import { Button } from "@/components/ui/button";
 import RiskBar from "@/features/shared/risk-bar";
-import RiskCarousel from "@/features/shared/risk-carousel";
 import SuggestionItem from "@/features/shared/suggestion-item";
 import SummaryFooter from "@/features/shared/summary-footer";
 import { track } from "@/lib/analytics";
@@ -14,23 +12,14 @@ type SuggestedItemProps = {
 };
 
 export default function SuggestedItem({ item }: SuggestedItemProps) {
-	const { displayName, eduText, riskItems, id } = item;
+	const { displayName, eduText, id } = item;
 
-	const handleOnRiskItemChange = useCallback(
-		(index: number, item: Suggested) => {
-			const value = item.riskItems[index];
-
-			if (!value) return;
-
-			track("swiped_carousel", {
-				item: item.displayName,
-				record_identifier: item.id,
-				risk_category: value.category,
-				goal_name: value.goalName,
-			});
-		},
-		[],
-	);
+	const people: string[] = [];
+	item.suggestedFor.forEach((item) => {
+		item.affectedOwners.forEach((owner) => {
+			if (!people.includes(owner)) people.push(owner);
+		});
+	});
 
 	return (
 		<div className="w-full h-full bg-[#F8F8F8]/80 py-4 border border-[#EBEDED] rounded-3xl backdrop-blur-[60px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)] space-y-4 flex flex-col">
@@ -58,31 +47,36 @@ export default function SuggestedItem({ item }: SuggestedItemProps) {
 					</Button>
 				</SuggesteItemDrawer>
 			</div>
-			<div className="px-4">
-				<RiskCarousel
-					items={riskItems}
-					onRiskItemChange={(index: number) =>
-						handleOnRiskItemChange(index, item)
-					}
-				/>
-			</div>
-			<div className="px-4">
-				<SuggesteItemDrawer item={item}>
-					<Button
-						className="text-blue-600 !no-underline font-semibold text-[13px] px-1"
-						size="sm"
-						variant="link"
-					>
-						<span className="grow truncate">
-							Read articles and view people at risk
-						</span>
-						<Icon
-							icon="fluent:chevron-right-24-regular"
-							height={14}
-							width={14}
-						/>
-					</Button>
-				</SuggesteItemDrawer>
+			<div className="p-4">
+				<div className="bg-white/25 rounded-2xl border border-black/5 p-6 backdrop-blur-2xl space-y-3">
+					<div className="space-y-2">
+						{/* <RiskCarousel items={riskItems} /> */}
+						<p className="text-[13px]">Changes to reduce risk for:</p>
+						<ul className="list-disc list-inside marker:text-[#616161] text-[13px] text-[#616161] pr-2 space-y-2 pl-4">
+							{people.map((person) => (
+								<li key={person} className="truncate">
+									{person}
+								</li>
+							))}
+						</ul>
+					</div>
+					<div className="px-8">
+						<SuggesteItemDrawer item={item}>
+							<Button
+								className="text-blue-600 !no-underline font-semibold gap-1 text-[13px] px-2"
+								size="sm"
+								variant="link"
+							>
+								<span className="grow truncate">Tap for more</span>
+								<Icon
+									icon="fluent:chevron-right-24-regular"
+									height={12}
+									width={12}
+								/>
+							</Button>
+						</SuggesteItemDrawer>
+					</div>
+				</div>
 			</div>
 			<SummaryFooter id={id}>
 				<span className="font-normal">

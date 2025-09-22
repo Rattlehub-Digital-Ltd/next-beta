@@ -19,18 +19,20 @@ export default function SuggestedItems() {
 
 	return (
 		<div className="flex flex-col space-y-4">
-			{items?.map((item) => (
-				<motion.div
-					key={item.id}
-					initial="offscreen"
-					whileInView="onscreen"
-					viewport={{ amount: 0.3 }}
-				>
-					<motion.div variants={cardVariants}>
-						<SuggestedItem item={item} />
+			{items &&
+				items.length > 0 &&
+				items.map((item) => (
+					<motion.div
+						key={item.id}
+						initial="offscreen"
+						whileInView="onscreen"
+						viewport={{ amount: 0.3 }}
+					>
+						<motion.div variants={cardVariants}>
+							<SuggestedItem item={item} />
+						</motion.div>
 					</motion.div>
-				</motion.div>
-			))}
+				))}
 
 			{/* Loading complete and data has no value */}
 			{items?.length === 0 && (

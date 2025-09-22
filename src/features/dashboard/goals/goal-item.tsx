@@ -1,6 +1,15 @@
+"use client";
+
 import type { Goal } from "@/api/services/dashboard/goal/types";
+import {
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
+} from "@/components/ui/accordion";
 import GoalProgressBar from "@/features/shared/goal-progress-bar";
 import SuggestionItem from "@/features/shared/suggestion-item";
+import { track } from "@/lib/analytics";
 import TabsCard from "./tabs-card";
 
 type GoalItemProps = {
@@ -22,9 +31,26 @@ function GoalItem({ item }: GoalItemProps) {
 				/>
 			</div>
 
-			<div>
-				<TabsCard goalName={name} referer={name} />
-			</div>
+			<Accordion type="single" collapsible>
+				<AccordionItem value="item-1">
+					<AccordionTrigger
+						className="text-[13px] text-blue-600 font-semibold pl-2"
+						onClick={() =>
+							track("viewed_goal", {
+								item: item.displayName,
+								percentage_completion: item.percentageCompletion,
+								goal_name: item.name,
+								goal_ranking: item.ranking,
+							})
+						}
+					>
+						See more details
+					</AccordionTrigger>
+					<AccordionContent>
+						<TabsCard goalName={name} referer={name} />
+					</AccordionContent>
+				</AccordionItem>
+			</Accordion>
 			<div>
 				<GoalProgressBar
 					title={`Goal is ${Math.round(item.percentageCompletion)}% complete`}

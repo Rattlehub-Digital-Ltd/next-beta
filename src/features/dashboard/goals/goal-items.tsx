@@ -18,7 +18,7 @@ export default function GoalItems() {
 
 	return (
 		<div className="w-full">
-			{goals && (
+			{goals && goals.length > 0 && (
 				<motion.div className="flex flex-col space-y-4">
 					{goals.map((item) => (
 						<motion.div

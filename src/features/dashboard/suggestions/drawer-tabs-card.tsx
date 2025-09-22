@@ -20,7 +20,7 @@ export default function DrawerTabsCard({ item }: DrawerTabsCardProps) {
 								icon="fluent:people-community-24-filled"
 								className="!w-5 !h-5"
 							/>
-							People
+							Risks
 						</TabsTrigger>
 						<TabsTrigger className="px-2" value="services">
 							<Icon icon="fluent:handshake-20-filled" className="!w-5 !h-5" />
@@ -34,7 +34,11 @@ export default function DrawerTabsCard({ item }: DrawerTabsCardProps) {
 				</div>
 			</div>
 			<TabsContent value="people">
-				<SuggestedForTab items={item.suggestedFor} riskItems={item.riskItems} />
+				<SuggestedForTab
+					item={item}
+					items={item.suggestedFor}
+					riskItems={item.riskItems}
+				/>
 			</TabsContent>
 			<TabsContent value="services">
 				<ServiceProvidersTab serviceProviders={item.serviceProviders} />

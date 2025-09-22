@@ -1,20 +1,45 @@
-import ShortUniqueId from "short-unique-id";
-import type { SuggestedFor } from "@/api/services/dashboard/suggestion/types";
+"use client";
+
+import { useCallback } from "react";
+// import ShortUniqueId from "short-unique-id";
+import type {
+	Suggested,
+	SuggestedFor,
+} from "@/api/services/dashboard/suggestion/types";
 import RiskCarousel from "@/features/shared/risk-carousel";
-import UserBadge from "@/features/shared/user-badge";
+import { track } from "@/lib/analytics";
+// import UserBadge from "@/features/shared/user-badge";
 import type { RiskItemProps } from "@/types/risk-item-props";
 
 type SuggestedForProps = {
+	item: Suggested;
 	items: SuggestedFor[];
 	riskItems?: RiskItemProps[];
 };
 
-const uid = new ShortUniqueId({ length: 10 });
+// const uid = new ShortUniqueId({ length: 10 });
 
 export default function SuggestedForTab({
+	item,
 	items,
 	riskItems,
 }: SuggestedForProps) {
+	const handleOnRiskItemChange = useCallback(
+		(index: number, item: Suggested) => {
+			const value = item.riskItems[index];
+
+			if (!value) return;
+
+			track("swiped_carousel", {
+				item: item.displayName,
+				record_identifier: item.id,
+				risk_category: value.category,
+				goal_name: value.goalName,
+			});
+		},
+		[],
+	);
+
 	const people: string[] = [];
 	items.forEach((item) => {
 		item.affectedOwners.forEach((owner) => {
@@ -27,17 +52,20 @@ export default function SuggestedForTab({
 			<div className="flex px-2 space-x-4">
 				<div className="grow">
 					<p className="text-[13px] font-medium">Suggested for</p>
-					<p className="text-xs text-[#616161]">
-						{people.length} people are at risk
-					</p>
+					<p className="text-xs text-[#616161]">{people.length} risk items</p>
 				</div>
 			</div>
-			<RiskCarousel items={riskItems} />
-			<div className="pt-6 flex flex-wrap gap-2">
+			<RiskCarousel
+				items={riskItems}
+				onRiskItemChange={(index: number) =>
+					handleOnRiskItemChange(index, item)
+				}
+			/>
+			{/* <div className="pt-6 flex flex-wrap gap-2">
 				{people.map((person) => (
 					<UserBadge key={uid.randomUUID()} name={person} />
 				))}
-			</div>
+			</div> */}
 		</div>
 	);
 }
