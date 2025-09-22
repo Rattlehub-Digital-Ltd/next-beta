@@ -34,7 +34,7 @@ function GoalItem({ item }: GoalItemProps) {
 			<Accordion type="single" collapsible>
 				<AccordionItem value="item-1">
 					<AccordionTrigger
-						className="text-[13px] text-blue-600 font-semibold pl-2"
+						className="text-[13.6px] text-blue-600 font-semibold pl-2"
 						onClick={() =>
 							track("viewed_goal", {
 								item: item.displayName,

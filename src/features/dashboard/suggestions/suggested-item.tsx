@@ -48,7 +48,7 @@ export default function SuggestedItem({ item }: SuggestedItemProps) {
 				</SuggesteItemDrawer>
 			</div>
 			<div className="p-4">
-				<div className="bg-white/25 rounded-2xl border border-black/5 p-6 backdrop-blur-2xl space-y-3">
+				<div className="bg-white/25 rounded-2xl border border-black/5 px-6 py-4 backdrop-blur-2xl space-y-3">
 					<div className="space-y-2">
 						{/* <RiskCarousel items={riskItems} /> */}
 						<p className="text-[13px]">Changes to reduce risk for:</p>
@@ -60,10 +60,10 @@ export default function SuggestedItem({ item }: SuggestedItemProps) {
 							))}
 						</ul>
 					</div>
-					<div className="px-8">
+					<div className="px-0">
 						<SuggesteItemDrawer item={item}>
 							<Button
-								className="text-blue-600 !no-underline font-semibold gap-1 text-[13px] px-2"
+								className="text-blue-600 !no-underline font-semibold gap-1 text-[13.6px] px-2"
 								size="sm"
 								variant="link"
 							>
