@@ -37,7 +37,7 @@ export default function RootLayout({
 				/>
 			</head>
 			<body
-				className={`${fontSans.variable} ${fontMono.variable} antialiased h-full overflow-y-auto bg-[#E5E5E5]`}
+				className={`${fontSans.variable} ${fontMono.variable} antialiased h-full overflow-y-auto bg-[#E5E5E5] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-gray-400 [&::-webkit-scrollbar-thumb]:rounded-full`}
 			>
 				<ErrorBoundary>
 					<MainLayout>{children}</MainLayout>
