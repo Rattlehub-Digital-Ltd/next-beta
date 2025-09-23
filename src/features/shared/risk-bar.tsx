@@ -21,9 +21,11 @@ export default function RiskBar({ data }: RiskBarProps) {
 				Reduces risk for{" "}
 				<span className="font-semibold text-foreground">{firstOwner}</span>
 			</p>
-			<Badge className="text-foreground bg-[#F3F4F6] font-medium">
-				{count > 9 ? "+9 more" : `+${count - 1} more`}
-			</Badge>
+			{count > 1 && (
+				<Badge className="text-foreground bg-[#F3F4F6] font-medium">
+					{count > 9 ? "+9 more" : `+${count - 1} more`}
+				</Badge>
+			)}
 		</div>
 	);
 }

@@ -68,7 +68,7 @@ export default function CardFooter({
 													<Button
 														className={cn(
 															"w-full rounded-2xl border px-6 disabled:opacity-80 bg-white shadow-[0px_16px_30px_0px rgba(106, 106, 106, 0.06)]",
-															{ "bg-black/5": name === "Yes" },
+															{ "bg-blue-600 text-white/90": name === "Yes" },
 														)}
 														size="sm"
 														variant="ghost"
@@ -132,106 +132,4 @@ export default function CardFooter({
 			</div>
 		);
 	}
-
-	// return (
-	// 	<div className="px-4 space-y-6">
-	// 		<p className="text-xs px-2">{children}</p>
-	// 		<div className="grid grid-cols-2 gap-2">
-	// 			<motion.div className="w-full" whileTap={{ scale: 0.95 }}>
-	// 				<AdaptiveCardButton
-	// 					autoSubmit={true}
-	// 					recordId={recordId}
-	// 					referer="actions"
-	// 					refresh={refresh}
-	// 				>
-	// 					<Button
-	// 						className="w-full rounded-2xl px-6 bg-black/5"
-	// 						size="sm"
-	// 						variant="ghost"
-	// 						disabled={isBusy}
-	// 						onClick={async () => {
-	// 							setIsBusy(true);
-
-	// 							const form = new FormData();
-	// 							form.set(recordId, "true");
-
-	// 							const headers: Record<string, string> = {};
-	// 							headers["x-record-identifier"] = recordId;
-
-	// 							await submitAdaptiveCard.mutateAsync({
-	// 								formData: form,
-	// 								headers: headers,
-	// 								referer: "actions",
-	// 								recordId,
-	// 							});
-
-	// 							setIsBusy(false);
-	// 						}}
-	// 					>
-	// 						Yes
-	// 					</Button>
-	// 				</AdaptiveCardButton>
-	// 			</motion.div>
-	// 			<motion.div className="w-full" whileTap={{ scale: 0.95 }}>
-	// 				<Button
-	// 					className="px-6 rounded-2xl w-full disabled:opacity-80"
-	// 					variant="outline"
-	// 					size="sm"
-	// 					disabled={isBusy}
-	// 					onClick={() =>
-	// 						noResponseMutation.mutate({
-	// 							id: recordId,
-	// 							value: false,
-	// 						})
-	// 					}
-	// 				>
-	// 					{isBusy ? (
-	// 						<span className="text-[13px] text-muted-foreground">
-	// 							Processing...
-	// 						</span>
-	// 					) : (
-	// 						"No"
-	// 					)}
-	// 				</Button>
-	// 				{/* <AlertDialog>
-	// 					<AlertDialogTrigger asChild>
-	// 						<Button
-	// 							className="px-6 rounded-2xl w-full disabled:opacity-80"
-	// 							variant="outline"
-	// 							size="sm"
-	// 							disabled={isBusy}
-	// 						>
-	// 							{isBusy ? (
-	// 								<span className="text-[13px] text-muted-foreground">
-	// 									Processing...
-	// 								</span>
-	// 							) : (
-	// 								"No"
-	// 							)}
-	// 						</Button>
-	// 					</AlertDialogTrigger>
-	// 					<AlertDialogContent>
-	// 						<AlertDialogHeader>
-	// 							<AlertDialogTitle>Are you sure you don't need this item?</AlertDialogTitle>
-	// 							<AlertDialogDescription>
-	// 								This action cannot be undone. This will permanently delete the
-	// 								document.
-	// 							</AlertDialogDescription>
-	// 						</AlertDialogHeader>
-	// 						<AlertDialogFooter>
-	// 							<AlertDialogCancel>Cancel</AlertDialogCancel>
-	// 							<AlertDialogAction
-	// 								onClick={async () =>
-	// 									await noResponseMutation.mutateAsync(recordId)
-	// 								}
-	// 							>
-	// 								I am sure
-	// 							</AlertDialogAction>
-	// 						</AlertDialogFooter>
-	// 					</AlertDialogContent>
-	// 				</AlertDialog> */}
-	// 			</motion.div>
-	// 		</div>
-	// 	</div>
-	// );
 }
