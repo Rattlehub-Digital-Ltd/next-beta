@@ -53,11 +53,15 @@ export default function SuggestedItem({ item }: SuggestedItemProps) {
 				</div>
 				<div className="px-4">
 					<div className="bg-white/25 rounded-2xl border border-black/5 p-4 backdrop-blur-2xl space-y-3">
-						<div className="space-y-4">
+						<div className="space-y-6">
 							{/* <RiskCarousel items={riskItems} /> */}
-							<p className="text-[13px] font-medium">
-								Changes to reduce risk for
-							</p>
+							<div className="flex items-center space-x-2">
+								<Icon icon="fluent-color:lock-shield-24" className="h-5 w-5" />
+
+								<p className="text-[13px] font-medium grow truncate text-left">
+									Changes to reduce risk for
+								</p>
+							</div>
 							<ul className="text-xs flex flex-wrap gap-2.5">
 								{item.suggestedFor.map((item) => (
 									<li key={uid.randomUUID()}>
@@ -65,7 +69,7 @@ export default function SuggestedItem({ item }: SuggestedItemProps) {
 											<p className="text-xs font-medium capitalize">
 												{item.displayName}
 											</p>
-											<ul className="flex flex-wrap gap-1.5d">
+											<ul className="flex flex-wrap gap-1.5">
 												{item.affectedOwners.map((owner) => (
 													<li key={uid.randomUUID()}>
 														<div>
