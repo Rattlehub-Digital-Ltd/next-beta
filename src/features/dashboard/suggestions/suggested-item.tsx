@@ -3,9 +3,11 @@ import ShortUniqueId from "short-unique-id";
 import type { Suggested } from "@/api/services/dashboard/suggestion/types";
 import { Button } from "@/components/ui/button";
 import RiskBar from "@/features/shared/risk-bar";
+import RiskCarousel from "@/features/shared/risk-carousel";
 import SuggestionItem from "@/features/shared/suggestion-item";
 import SummaryFooter from "@/features/shared/summary-footer";
 import { track } from "@/lib/analytics";
+import DrawerTabsCard from "./drawer-tabs-card";
 import SuggesteItemDrawer from "./suggeste-item-drawer";
 
 type SuggestedItemProps = {
@@ -53,19 +55,22 @@ export default function SuggestedItem({ item }: SuggestedItemProps) {
 				</div>
 				<div className="px-4">
 					<div className="bg-white/25 rounded-2xl border border-black/5 p-4 backdrop-blur-2xl space-y-3">
+						{item.isApplicable === "no" && (
+							<RiskCarousel items={item.riskItems} />
+						)}
+						{item.isApplicable === "no" && <DrawerTabsCard item={item} />}
 						<div className="space-y-6">
-							{/* <RiskCarousel items={riskItems} /> */}
 							<div className="flex items-center space-x-2">
 								<Icon icon="fluent-color:lock-shield-24" className="h-5 w-5" />
 
 								<p className="text-[13px] font-medium grow truncate text-left">
-									Changes to reduce risk for
+									Reduces risk for
 								</p>
 							</div>
-							<ul className="text-xs flex flex-wrap gap-2.5">
+							<ul className="text-xs grid grid-cols-2 gap-2.5">
 								{item.suggestedFor.map((item) => (
 									<li key={uid.randomUUID()}>
-										<div className="bg-[#f7f7f7] rounded-lg px-2.5 py-1.5 outline outline-[#E0E0E0] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)]">
+										<div className="bg-white rounded-lg px-2.5 py-1.5 outline outline-[#E0E0E0] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)]">
 											<p className="text-xs font-medium capitalize">
 												{item.displayName}
 											</p>
@@ -84,22 +89,22 @@ export default function SuggestedItem({ item }: SuggestedItemProps) {
 									</li>
 								))}
 							</ul>
-						</div>
-						<div className="px-0">
-							<SuggesteItemDrawer item={item}>
-								<Button
-									className="text-blue-600 !no-underline font-semibold gap-1 text-[13.6px] px-2"
-									size="sm"
-									variant="link"
-								>
-									<span className="grow truncate">Tap for more</span>
-									<Icon
-										icon="fluent:chevron-right-24-regular"
-										height={12}
-										width={12}
-									/>
-								</Button>
-							</SuggesteItemDrawer>
+							<div className="px-0">
+								<SuggesteItemDrawer item={item}>
+									<Button
+										className="text-blue-600 !no-underline font-semibold gap-1 text-[13.6px] px-2"
+										size="sm"
+										variant="link"
+									>
+										<span className="grow truncate">Tap for more</span>
+										<Icon
+											icon="fluent:chevron-right-24-regular"
+											height={12}
+											width={12}
+										/>
+									</Button>
+								</SuggesteItemDrawer>
+							</div>
 						</div>
 					</div>
 				</div>

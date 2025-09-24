@@ -8,7 +8,6 @@ import { useGetOnboarding } from "@/api/services/dashboard/onboarding/queries";
 import { useVerifyEmail } from "@/api/services/dashboard/verify/queries";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import { appConfig } from "@/config/app.config";
 import Header from "@/features/shared/header";
 import useSignalR from "@/hooks/useSignalR";
 import { isValidEmail } from "@/lib/utils";
@@ -96,13 +95,10 @@ function EmailVerify() {
 					Hi <span className="capitalize font-medium">{name}</span>
 					<br />
 					<br />
-					We're thrilled to welcome you to{" "}
-					<span className="font-bold">{appConfig.name}</span> and celebrate this
-					big step for your family’s future!
+					Check your inbox, we've sent you a verification email.
 					<br />
 					<br />
-					Click below to send a quick verification email. If it lands in spam,
-					move it to your inbox - we’re eager to start!
+					It might have landed in your spam/junk, check it there as well.
 				</p>
 				<Button
 					disabled={processing || isActive}
@@ -129,10 +125,6 @@ function EmailVerify() {
 					{processing && <Spinner />}
 					{processing ? "Please wait..." : "Resend verification email"}
 				</Button>
-				<p className="text-xs leading-5 text-pretty text-[#525f7f]">
-					Can’t wait for this journey together! <br />
-					<span className="font-medium">The NextDot Team</span>
-				</p>
 				{isActive && (
 					<div>
 						<p className="text-xs text-pretty text-[#525f7f]">
