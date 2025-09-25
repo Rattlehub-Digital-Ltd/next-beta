@@ -7,6 +7,7 @@ import { useDependentStore } from "store/use-dependent-store";
 import { useDocumentStore } from "store/use-document-store";
 import { useOnboardingStore } from "store/use-onboarding-store";
 import { usePartnerStore } from "store/use-partner-store";
+import { usePersonDrawerStore } from "store/use-person-drawer-store";
 import {
 	Carousel,
 	type CarouselApi,
@@ -21,6 +22,8 @@ import SummaryDialog from "@/features/onboarding/summary/summary-dialog";
 import Pagination from "@/features/shared/pagination";
 
 function OnboardingPage() {
+	const { setTitle, setType } = usePersonDrawerStore();
+
 	const {
 		isOnboarded,
 		nextButtonDisabled,
@@ -56,6 +59,9 @@ function OnboardingPage() {
 		setPreviousButtonDisabled(current === 1);
 
 		if (current === 1) {
+			setTitle("Add Partner");
+			setType("partner");
+
 			if (
 				hasPartner &&
 				partner &&
@@ -74,6 +80,9 @@ function OnboardingPage() {
 
 		// chuldren
 		if (current === 2) {
+			setTitle("Add Child");
+			setType("child");
+
 			if (
 				hasChildren &&
 				children &&
@@ -93,6 +102,9 @@ function OnboardingPage() {
 
 		// Dependents
 		if (current === 3) {
+			setTitle("Add Dependent");
+			setType("dependent");
+
 			if (
 				hasDependent === "yes" &&
 				dependents &&
@@ -132,6 +144,8 @@ function OnboardingPage() {
 		hasDependent,
 		dependents,
 		documents,
+		setTitle,
+		setType,
 	]);
 
 	const scrollNext = () => {
