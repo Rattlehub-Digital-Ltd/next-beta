@@ -7,19 +7,26 @@ import { Button } from "@/components/ui/button";
 
 type SummaryFooterProps = {
 	id: string;
+	isApplicable: boolean | null;
 	children: React.ReactNode;
 };
 
-export default function SummaryFooter({ id, children }: SummaryFooterProps) {
+export default function SummaryFooter({
+	isApplicable,
+	id,
+	children,
+}: SummaryFooterProps) {
 	const toggleSuggestion = useToggleSuggestion();
 
 	const [isPending, setIsPending] = useState(false);
+	const [value, setValue] = useState<boolean | null>(isApplicable);
 
 	const handleSuggestionToggle = async (value: boolean) => {
 		setIsPending(true);
 
 		try {
 			await toggleSuggestion.mutateAsync({ id, value });
+			setValue(value);
 		} catch (error) {
 			console.error("Error toggling suggestion:", error);
 			// Handle error appropriately, e.g., show a notification or alert
@@ -43,8 +50,8 @@ export default function SummaryFooter({ id, children }: SummaryFooterProps) {
 				</motion.div>
 				<motion.div className="w-full" whileTap={{ scale: 0.95 }}>
 					<Button
-						className="px-6 rounded-2xl w-full"
-						disabled={isPending}
+						className="px-6 rounded-2xl w-full disabled::opacity-40"
+						disabled={isPending || value === false}
 						variant="outline"
 						onClick={() => handleSuggestionToggle(false)}
 					>

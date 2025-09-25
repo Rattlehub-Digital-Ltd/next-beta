@@ -27,7 +27,7 @@ export type Suggested = {
 	name: string;
 	displayName: string;
 	eduText: string;
-	isApplicable: null;
+	isApplicable: boolean | null;
 	riskItems: RiskItemProps[];
 };
 
