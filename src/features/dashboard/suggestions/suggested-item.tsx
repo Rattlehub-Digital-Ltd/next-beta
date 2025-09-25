@@ -3,7 +3,6 @@ import ShortUniqueId from "short-unique-id";
 import type { Suggested } from "@/api/services/dashboard/suggestion/types";
 import { Button } from "@/components/ui/button";
 import RiskBar from "@/features/shared/risk-bar";
-import RiskCarousel from "@/features/shared/risk-carousel";
 import SuggestionItem from "@/features/shared/suggestion-item";
 import SummaryFooter from "@/features/shared/summary-footer";
 import { track } from "@/lib/analytics";
@@ -67,7 +66,7 @@ export default function SuggestedItem({ item }: SuggestedItemProps) {
 				{item.isApplicable === false && (
 					<div className="px-4">
 						<div className="bg-white/25 rounded-2xl border border-black/5 p-4 backdrop-blur-2xl space-y-3">
-							<RiskCarousel items={item.riskItems} />
+							{/* <RiskCarousel items={item.riskItems} /> */}
 
 							<DrawerTabsCard item={item} />
 							<div className="space-y-6">

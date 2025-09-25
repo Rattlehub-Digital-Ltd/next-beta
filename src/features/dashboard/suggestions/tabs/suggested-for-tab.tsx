@@ -51,7 +51,7 @@ export default function SuggestedForTab({
 		<div className="p-3 bg-[#FFFFFF]/65 space-y-3 border border-black/5 rounded-3xl backdrop-blur-[25px] shadow-[0px_8px_30px_0px rgba(106, 106, 106, 0.06)]">
 			<div className="flex px-2 space-x-4">
 				<div className="grow">
-					<p className="text-[13px] font-medium">Suggested for</p>
+					{/* <p className="text-[13px] font-medium">Suggested for</p> */}
 					<p className="text-xs text-[#616161]">{people.length} risk items</p>
 				</div>
 			</div>
