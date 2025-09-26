@@ -77,9 +77,8 @@ function OnboardingPage() {
 				setNextButtonDisabled(true);
 			}
 		}
-
 		// chuldren
-		if (current === 2) {
+		else if (current === 2) {
 			setTitle("Add Child");
 			setType("child");
 
@@ -99,9 +98,8 @@ function OnboardingPage() {
 				setNextButtonDisabled(true);
 			}
 		}
-
 		// Dependents
-		if (current === 3) {
+		else if (current === 3) {
 			setTitle("Add Dependent");
 			setType("dependent");
 
@@ -121,9 +119,8 @@ function OnboardingPage() {
 				setNextButtonDisabled(true);
 			}
 		}
-
 		// Documents
-		if (current === 4) {
+		else if (current === 4) {
 			if (
 				documents &&
 				documents.filter((d) => d.isApplicable === null).length === 0
@@ -132,6 +129,8 @@ function OnboardingPage() {
 			} else {
 				setNextButtonDisabled(true);
 			}
+		} else {
+			setNextButtonDisabled(false);
 		}
 	}, [
 		current,

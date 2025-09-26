@@ -1,5 +1,3 @@
-import { Icon } from "@iconify/react";
-import ShortUniqueId from "short-unique-id";
 import type { Suggested } from "@/api/services/dashboard/suggestion/types";
 import { Button } from "@/components/ui/button";
 import RiskBar from "@/features/shared/risk-bar";
@@ -13,7 +11,7 @@ type SuggestedItemProps = {
 	item: Suggested;
 };
 
-const uid = new ShortUniqueId();
+// const uid = new ShortUniqueId();
 
 export default function SuggestedItem({ item }: SuggestedItemProps) {
 	const { displayName, eduText, id, isApplicable } = item;
@@ -47,29 +45,31 @@ export default function SuggestedItem({ item }: SuggestedItemProps) {
 				</div>
 			)}
 			<div className="space-y-2">
-				<div className="px-4">
-					<SuggesteItemDrawer item={item}>
-						<Button
-							className="!p-0 w-full"
-							variant="ghost"
-							onClick={() => {
-								track("opens_affected_owners", {
-									item: displayName,
-									is_adaptive_card: false,
-								});
-							}}
-						>
-							<RiskBar data={item} />
-						</Button>
-					</SuggesteItemDrawer>
-				</div>
+				{item.isApplicable === null && (
+					<div className="px-4">
+						<SuggesteItemDrawer item={item}>
+							<Button
+								className="!p-0 w-full"
+								variant="ghost"
+								onClick={() => {
+									track("opens_affected_owners", {
+										item: displayName,
+										is_adaptive_card: false,
+									});
+								}}
+							>
+								<RiskBar data={item} />
+							</Button>
+						</SuggesteItemDrawer>
+					</div>
+				)}
 				{item.isApplicable === false && (
 					<div className="px-4">
 						<div className="bg-white/25 rounded-2xl border border-black/5 p-4 backdrop-blur-2xl space-y-3">
 							{/* <RiskCarousel items={item.riskItems} /> */}
 
 							<DrawerTabsCard item={item} />
-							<div className="space-y-6">
+							{/* <div className="space-y-6">
 								<div className="flex items-center space-x-2">
 									<Icon
 										icon="fluent-color:lock-shield-24"
@@ -118,7 +118,7 @@ export default function SuggestedItem({ item }: SuggestedItemProps) {
 										</Button>
 									</SuggesteItemDrawer>
 								</div>
-							</div>
+							</div> */}
 						</div>
 					</div>
 				)}

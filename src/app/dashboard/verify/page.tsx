@@ -31,14 +31,18 @@ function EmailVerify() {
 	const [isActive, setIsActive] = useState(true);
 
 	useEffect(() => {
-		if (isEmailVerified) {
+		if (
+			isEmailVerified ||
+			!onboardingStatus ||
+			onboardingStatus?.isEmailVerified
+		) {
 			redirect("/dashboard/onboarding");
 		}
 
 		setProccessing(true);
 
 		verifyEmail().finally(() => setProccessing(false));
-	}, [isEmailVerified, verifyEmail]);
+	}, [isEmailVerified, verifyEmail, onboardingStatus]);
 
 	useEffect(() => {
 		let interval: NodeJS.Timeout | null = null;
