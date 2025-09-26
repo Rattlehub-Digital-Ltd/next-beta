@@ -1,6 +1,6 @@
 /** biome-ignore-all lint/correctness/noChildrenProp: better */
 
-import type { AnyFieldApi } from "@tanstack/react-form";
+// import type { AnyFieldApi } from "@tanstack/react-form";
 import { useForm } from "@tanstack/react-form";
 import * as motion from "motion/react-client";
 import { useChildrenStore } from "store/use-children-store";
@@ -20,6 +20,7 @@ import { cn } from "@/lib/utils";
 import type { Person, PersonType } from "@/types/person";
 
 type PersonFormProps = {
+	isEdit: boolean;
 	type: PersonType;
 	person?: Person;
 	buttonLabel: string;
@@ -31,23 +32,23 @@ const labelClass =
 const inputClass =
 	"!text-base placeholder:text-sm bg-white rounded-[12px] w-full h-10 leading-6 flex items-center";
 
-function FieldInfo({ field }: { field: AnyFieldApi }) {
-	return (
-		<>
-			{field.state.meta.isTouched && !field.state.meta.isValid ? (
-				<p className="text-xs mt-1 truncate">
-					<span className="text-red-500">*</span>{" "}
-					{field.state.meta.errors.join(", ")}
-				</p>
-			) : null}
-			{field.state.meta.isValidating ? (
-				<p className="text-xs text-muted-foreground mt-1 truncate">
-					"Validating..."
-				</p>
-			) : null}
-		</>
-	);
-}
+// function FieldInfo({ field }: { field: AnyFieldApi }) {
+// 	return (
+// 		<>
+// 			{field.state.meta.isTouched && !field.state.meta.isValid ? (
+// 				<p className="text-xs mt-1 truncate">
+// 					<span className="text-red-500">*</span>{" "}
+// 					{field.state.meta.errors.join(", ")}
+// 				</p>
+// 			) : null}
+// 			{field.state.meta.isValidating ? (
+// 				<p className="text-xs text-muted-foreground mt-1 truncate">
+// 					"Validating..."
+// 				</p>
+// 			) : null}
+// 		</>
+// 	);
+// }
 
 function PersonForm({ type, person, buttonLabel, onClose }: PersonFormProps) {
 	const { partner, setPartner } = usePartnerStore();
@@ -55,10 +56,15 @@ function PersonForm({ type, person, buttonLabel, onClose }: PersonFormProps) {
 	const { dependents, setDependents } = useDependentStore();
 
 	const form = useForm({
+		// defaultValues: {
+		// 	firstName: person?.firstName ?? "",
+		// 	lastName: person?.lastName ?? "",
+		// 	relationship: person?.relationship ?? "",
+		// },
 		defaultValues: {
-			firstName: person?.firstName ?? "",
-			lastName: person?.lastName ?? "",
-			relationship: person?.relationship ?? "",
+			firstName: "",
+			lastName: "",
+			relationship: "",
 		},
 		onSubmit: async ({ value }) => {
 			const data: Person = {
@@ -145,7 +151,7 @@ function PersonForm({ type, person, buttonLabel, onClose }: PersonFormProps) {
 										onBlur={field.handleBlur}
 										onChange={(e) => field.handleChange(e.target.value)}
 									/>
-									<FieldInfo field={field} />
+									{/* <FieldInfo field={field} /> */}
 								</>
 							);
 						}}
@@ -169,7 +175,7 @@ function PersonForm({ type, person, buttonLabel, onClose }: PersonFormProps) {
 									onBlur={field.handleBlur}
 									onChange={(e) => field.handleChange(e.target.value)}
 								/>
-								<FieldInfo field={field} />
+								{/* <FieldInfo field={field} /> */}
 							</>
 						)}
 					/>
@@ -201,7 +207,7 @@ function PersonForm({ type, person, buttonLabel, onClose }: PersonFormProps) {
 										</SelectContent>
 									</Select>
 
-									<FieldInfo field={field} />
+									{/* <FieldInfo field={field} /> */}
 								</>
 							)}
 						/>

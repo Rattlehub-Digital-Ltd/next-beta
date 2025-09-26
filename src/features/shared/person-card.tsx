@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import type { Person } from "@/types/person";
-import PersonDrawer from "./person-drawer";
+// import PersonDrawer from "./person-drawer";
 import RemovePersonDrawer from "./remove-person-drawer";
 
 type PersonCardProps = {
@@ -41,16 +41,16 @@ function PersonCard({ person, onDelete }: PersonCardProps) {
 				</p>
 			</div>
 			<div className="flex items-center gap-2">
-				<PersonDrawer person={person}>
+				{/* <PersonDrawer person={person}>
 					<Button className="h-8 w-8 px-0 py-0 rounded-full bg-black/[0.03] active:bg-black/[0.05]">
 						<Icon icon="fluent:edit-20-regular" style={{ stroke: "#6b6b6b" }} />
 					</Button>
-				</PersonDrawer>
+				</PersonDrawer> */}
 				<RemovePersonDrawer
 					onDelete={() => onDelete(firstName, lastName, relationship)}
 				>
 					<Button
-						className="h-8 w-8 px-0 py-0 rounded-full bg-[#FEF2F2]"
+						className="h-8 w-8 px-0 py-0 rounded-full bg-[#FEF2F2] text-red-500"
 						type="button"
 					>
 						<Icon
