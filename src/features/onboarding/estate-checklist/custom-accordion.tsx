@@ -25,6 +25,7 @@ function CustomAccordion(props: Props) {
 					key={d.id}
 					item={d}
 					itemIndex={index}
+					isLastItem={index === props.data.length - 1}
 					{...props}
 				/>
 			))}

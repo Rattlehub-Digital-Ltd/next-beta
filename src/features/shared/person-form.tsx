@@ -5,6 +5,7 @@ import { useForm } from "@tanstack/react-form";
 import * as motion from "motion/react-client";
 import { useChildrenStore } from "store/use-children-store";
 import { useDependentStore } from "store/use-dependent-store";
+import { useOnboardingStore } from "store/use-onboarding-store";
 import { usePartnerStore } from "store/use-partner-store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -51,6 +52,8 @@ const inputClass =
 // }
 
 function PersonForm({ type, person, buttonLabel, onClose }: PersonFormProps) {
+	const { setNextButtonDisabled } = useOnboardingStore();
+
 	const { partner, setPartner } = usePartnerStore();
 	const { children, setChildren } = useChildrenStore();
 	const { dependents, setDependents } = useDependentStore();
@@ -88,6 +91,7 @@ function PersonForm({ type, person, buttonLabel, onClose }: PersonFormProps) {
 				setDependents(items);
 			}
 
+			setNextButtonDisabled(false);
 			onClose();
 		},
 	});

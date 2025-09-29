@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { toast } from "sonner";
 import { useChildrenStore } from "store/use-children-store";
 import { useDependentStore } from "store/use-dependent-store";
@@ -21,7 +21,6 @@ import {
 	AlertDialogHeader,
 	AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import SuccessDialog from "../success/success-dialog";
 import Summary from "./summary";
 
 type SummaryDialogProps = {
@@ -40,10 +39,7 @@ export default function SummaryDialog({ open, onClose }: SummaryDialogProps) {
 	const { dependents } = useDependentStore();
 	const { documents } = useDocumentStore();
 
-	const [successDialogOpen, setSuccessDialogOpen] = useState(false);
-
 	const handleSubmit = useCallback(async () => {
-		console.log("Submitting onboarding data...");
 		await submitOnboarding.mutateAsync(
 			{
 				payload: {
@@ -79,7 +75,6 @@ export default function SummaryDialog({ open, onClose }: SummaryDialogProps) {
 			{
 				onSuccess: () => {
 					onClose();
-					setSuccessDialogOpen(true);
 				},
 				onError: (error) => {
 					console.error("Error submitting onboarding data:", error);
@@ -108,36 +103,33 @@ export default function SummaryDialog({ open, onClose }: SummaryDialogProps) {
 	]);
 
 	return (
-		<>
-			<AlertDialog open={open} onOpenChange={onClose}>
-				<AlertDialogContent className="h-[85svh] overflow-y-auto rounded-3xl py-0">
-					<AlertDialogHeader className="sticky top-0 left-0 py-4 bg-white/50 backdrop-blur-md z-10">
-						<AlertDialogTitle className="text-lg font-bold text-left">
-							Summary
-						</AlertDialogTitle>
-						<AlertDialogDescription className="text-sm text-left leading-5 text-[#616161] text-pretty">
-							A summary of all the details you have provided. Please carefully
-							review for any mistakes or inconsistencies.
-						</AlertDialogDescription>
-					</AlertDialogHeader>
-					<div className="grow">
-						<Summary />
-					</div>
-					<AlertDialogFooter className="sticky bottom-0 left-0 bg-white/50 backdrop-blur-md py-4 z-10">
-						<AlertDialogCancel disabled={submitOnboarding.isPending}>
-							Cancel
-						</AlertDialogCancel>
-						<AlertDialogAction
-							disabled={submitOnboarding.isPending}
-							className="disabled:opacity-70"
-							onClick={handleSubmit}
-						>
-							{submitOnboarding.isPending ? "Submitting..." : "Submit"}
-						</AlertDialogAction>
-					</AlertDialogFooter>
-				</AlertDialogContent>
-			</AlertDialog>
-			<SuccessDialog open={successDialogOpen} onClose={setSuccessDialogOpen} />
-		</>
+		<AlertDialog open={open} onOpenChange={onClose}>
+			<AlertDialogContent className="h-[85svh] overflow-y-auto rounded-3xl py-0">
+				<AlertDialogHeader className="sticky top-0 left-0 py-4 bg-white/50 backdrop-blur-md z-10">
+					<AlertDialogTitle className="text-lg font-bold text-left">
+						Summary
+					</AlertDialogTitle>
+					<AlertDialogDescription className="text-sm text-left leading-5 text-[#616161] text-pretty">
+						A summary of all the details you have provided. Please carefully
+						review for any mistakes or inconsistencies.
+					</AlertDialogDescription>
+				</AlertDialogHeader>
+				<div className="grow">
+					<Summary />
+				</div>
+				<AlertDialogFooter className="sticky bottom-0 left-0 bg-white/50 backdrop-blur-md py-4 z-10">
+					<AlertDialogCancel disabled={submitOnboarding.isPending}>
+						Cancel
+					</AlertDialogCancel>
+					<AlertDialogAction
+						disabled={submitOnboarding.isPending}
+						className="disabled:opacity-70"
+						onClick={handleSubmit}
+					>
+						{submitOnboarding.isPending ? "Submitting..." : "Submit"}
+					</AlertDialogAction>
+				</AlertDialogFooter>
+			</AlertDialogContent>
+		</AlertDialog>
 	);
 }

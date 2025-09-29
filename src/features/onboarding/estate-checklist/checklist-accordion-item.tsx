@@ -14,6 +14,7 @@ import RiskCarousel from "@/features/shared/risk-carousel";
 import { track } from "@/lib/analytics";
 
 type ChecklistAccordionItemProps = {
+	isLastItem: boolean;
 	item: EstateChecklistItem;
 	currentIndex: number;
 	itemIndex: number;
@@ -23,6 +24,7 @@ type ChecklistAccordionItemProps = {
 };
 
 const ChecklistAccordionItemComponent = ({
+	isLastItem,
 	item,
 	currentIndex,
 	itemIndex,
@@ -53,7 +55,7 @@ const ChecklistAccordionItemComponent = ({
 	return (
 		<AccordionItem
 			key={item.id}
-			className="relative disabled:opacity-60 bg-white/65 backdrop-blur-2xl shadow-[rgba(149, 157, 165, 0.2) 0px 8px 24px;] rounded-2xl"
+			className="relative disabled:opacity-60 bg-white/65 backdrop-blur-2xl border-none shadow-[0px_8px_24px rgba(149, 157, 165, 0.2)] rounded-2xl"
 			value={itemIndex.toString()}
 			disabled={isDisabled}
 		>
@@ -146,17 +148,19 @@ const ChecklistAccordionItemComponent = ({
 								</Label>
 							</div>
 						</RadioGroup>
-						<Button
-							aria-disabled={!isCompleted}
-							className="pr-3 text-xs h-full"
-							color="primary"
-							disabled={!isCompleted || readOnly}
-							size="sm"
-							variant="link"
-							onClick={() => onNextPress(currentIndex + 1)}
-						>
-							Next
-						</Button>
+						{!isLastItem && (
+							<Button
+								aria-disabled={!isCompleted}
+								className="pr-3 text-xs h-full"
+								color="primary"
+								disabled={!isCompleted || readOnly}
+								size="sm"
+								variant="link"
+								onClick={() => onNextPress(currentIndex + 1)}
+							>
+								Next
+							</Button>
+						)}
 					</div>
 				</div>
 			</AccordionContent>
