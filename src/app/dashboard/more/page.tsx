@@ -2,6 +2,7 @@ import * as motion from "motion/react-client";
 import type { Metadata } from "next";
 import { appConfig } from "@/config/app.config";
 import Changelog from "@/features/dashboard/more/changelog";
+import OnboardingData from "@/features/dashboard/more/onboardingData";
 import ResetButton from "@/features/dashboard/more/reset-button";
 import AddPeople from "@/features/onboarding/summary/add-people";
 import ProfileHeader from "@/features/onboarding/summary/profile-header";
@@ -81,6 +82,9 @@ export default function MorePage() {
 						</motion.div>
 					</motion.div>
 				</div>
+			</div>
+			<div>
+				<OnboardingData />
 			</div>
 			<div>
 				<Changelog />

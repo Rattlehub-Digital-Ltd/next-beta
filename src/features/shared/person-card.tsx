@@ -8,11 +8,12 @@ import type { Person } from "@/types/person";
 import RemovePersonDrawer from "./remove-person-drawer";
 
 type PersonCardProps = {
+	canDelete?: boolean;
 	person: Person;
 	onDelete: (firstName: string, lastName: string, relationship: string) => void;
 };
 
-function PersonCard({ person, onDelete }: PersonCardProps) {
+function PersonCard({ canDelete = true, person, onDelete }: PersonCardProps) {
 	const { firstName, lastName, relationship, image: imgSrc } = person;
 
 	return (
@@ -46,20 +47,22 @@ function PersonCard({ person, onDelete }: PersonCardProps) {
 						<Icon icon="fluent:edit-20-regular" style={{ stroke: "#6b6b6b" }} />
 					</Button>
 				</PersonDrawer> */}
-				<RemovePersonDrawer
-					onDelete={() => onDelete(firstName, lastName, relationship)}
-				>
-					<Button
-						className="h-8 w-8 px-0 py-0 rounded-full bg-[#FEF2F2] text-red-500"
-						type="button"
+				{canDelete && (
+					<RemovePersonDrawer
+						onDelete={() => onDelete(firstName, lastName, relationship)}
 					>
-						<Icon
-							icon="fluent:delete-20-regular"
-							style={{ stroke: "#DC2626" }}
-							aria-label={`Delete ${firstName} ${lastName}`}
-						/>
-					</Button>
-				</RemovePersonDrawer>
+						<Button
+							className="h-8 w-8 px-0 py-0 rounded-full bg-[#FEF2F2] text-red-500"
+							type="button"
+						>
+							<Icon
+								icon="fluent:delete-20-regular"
+								style={{ stroke: "#DC2626" }}
+								aria-label={`Delete ${firstName} ${lastName}`}
+							/>
+						</Button>
+					</RemovePersonDrawer>
+				)}
 			</div>
 		</div>
 	);

@@ -36,3 +36,31 @@ export type OnboardingDataPayload = {
 		isApplicable: boolean | null;
 	}[];
 };
+
+export type OnboardingDataResponse = {
+	partner: {
+		id: string;
+		name: string;
+		surname: string;
+	} | null;
+	children:
+		| {
+				id: string;
+				relationship: string | null;
+				name: string;
+				surname: string;
+		  }[]
+		| null;
+	dependents:
+		| {
+				id: string;
+				relationship: string | null;
+				name: string;
+				surname: string;
+		  }[]
+		| null;
+	settings: {
+		id: string;
+		isApplicable: boolean | null;
+	}[];
+};

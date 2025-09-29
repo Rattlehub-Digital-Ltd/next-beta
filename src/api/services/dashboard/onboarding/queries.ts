@@ -7,6 +7,7 @@ import type {
 	EstateChecklistItem,
 	IsOnboardedStatus,
 	OnboardingDataPayload,
+	OnboardingDataResponse,
 } from "./types";
 
 export const useGetOnboarding = () => {
@@ -32,6 +33,21 @@ export const useGetSettings = () => {
 		queryFn: async () => {
 			const { data } = await client.get<EstateChecklistItem[]>(
 				onboardingEndpoints.getSettings(),
+			);
+
+			return data;
+		},
+	});
+};
+
+export const useGetOnboardingData = () => {
+	const { client } = useAxios();
+
+	return useQuery({
+		queryKey: ["onboarding_data"],
+		queryFn: async () => {
+			const { data } = await client.get<OnboardingDataResponse>(
+				onboardingEndpoints.getOnboardingData(),
 			);
 
 			return data;
