@@ -28,7 +28,7 @@ function OnboardingData() {
 				{partner && (
 					<CardContainer
 						title="Partner"
-						color="indigo"
+						color="dark-green"
 						icon={
 							<Icon
 								icon="fluent:person-heart-24-filled"
@@ -54,7 +54,7 @@ function OnboardingData() {
 				{children && children.length > 0 && (
 					<CardContainer
 						title="Children"
-						color="dark-teal"
+						color="yellow"
 						icon={
 							<Icon
 								icon="fluent:animal-paw-print-20-filled"
@@ -83,7 +83,7 @@ function OnboardingData() {
 				{dependents && dependents.length > 0 && (
 					<CardContainer
 						title="Dependents"
-						color="purple"
+						color="indigo"
 						icon={
 							<Icon
 								icon="fluent:people-community-24-filled"
@@ -113,7 +113,7 @@ function OnboardingData() {
 				{documents && documents.length > 0 && (
 					<CardContainer
 						title="Estate Checklist"
-						color="dark-green"
+						color="blue"
 						icon={
 							<Icon
 								icon="fluent:shield-checkmark-24-filled"
