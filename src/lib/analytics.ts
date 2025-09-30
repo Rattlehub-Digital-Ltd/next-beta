@@ -60,11 +60,7 @@ export const track = (
 		};
 		EventSchema.parse(event);
 
-		if (
-			!appConfig.previewMode &&
-			process.env.NODE_ENV === "production" &&
-			analytics
-		) {
+		if (process.env.NODE_ENV === "production" && analytics) {
 			analytics.track(eventName, { ...getUTMParams(), ...(payload ?? {}) });
 		}
 	} catch (error) {
@@ -76,7 +72,7 @@ export const identify = (
 	userId: string,
 	traits?: Record<string, string | object>,
 ) => {
-	if (appConfig.previewMode || process.env.NODE_ENV === "development") return;
+	if (process.env.NODE_ENV === "development") return;
 
 	analytics.identify(userId, { ...getUTMParams(), ...(traits ?? {}) });
 };
