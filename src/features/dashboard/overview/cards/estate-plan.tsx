@@ -3,6 +3,7 @@
 import ShortUniqueId from "short-unique-id";
 import { useGetEstatePlan } from "@/api/services/dashboard/overview/queries";
 import { Skeleton } from "@/components/ui/skeleton";
+import AdaptiveCardButton from "@/features/shared/adaptive-card/adaptive-card-button";
 import DocumentItem from "@/features/shared/document-item";
 // import GoalProgressBar from "@/features/shared/goal-progress-bar";
 // import { cn } from "@/lib/utils";
@@ -13,7 +14,7 @@ import Header from "../header";
 const uid = new ShortUniqueId();
 
 export default function EstatePlan() {
-	const { data: items, isLoading, isError } = useGetEstatePlan();
+	const { data: items, isLoading, isError, refetch } = useGetEstatePlan();
 
 	return (
 		<div>
@@ -41,14 +42,24 @@ export default function EstatePlan() {
 
 							<div className="grid grid-cols-2 gap-3">
 								{items.map((item) => (
-									<DocumentItem
+									<AdaptiveCardButton
+										currentDocument={item}
 										key={item.id}
-										className={
-											item.isApplicable ? "bg-[#ECFDF5] ring-[#00C7BE]/80" : ""
-										}
-										color={item.isApplicable ? "#00C7BE" : ""}
-										item={item}
-									/>
+										recordId={item.id}
+										referer="estate-plan"
+										refresh={refetch}
+									>
+										<DocumentItem
+											key={item.id}
+											className={
+												item.isApplicable
+													? "bg-[#ECFDF5] ring-[#00C7BE]/80"
+													: ""
+											}
+											color={item.isApplicable ? "#00C7BE" : ""}
+											item={item}
+										/>
+									</AdaptiveCardButton>
 								))}
 							</div>
 						</>
