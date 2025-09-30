@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react";
 import type { Suggested } from "@/api/services/dashboard/suggestion/types";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ArticlesTab from "./tabs/articles-tab";
+// import ArticlesTab from "./tabs/articles-tab";
 import RiskTab from "./tabs/risk-tab";
 import ServiceProvidersTab from "./tabs/service-providers-tab";
 import SuggestedForTab from "./tabs/suggested-for-tab";
@@ -34,10 +34,10 @@ export default function DrawerTabsCard({ item }: DrawerTabsCardProps) {
 							<Icon icon="fluent:handshake-20-filled" className="!w-5 !h-5" />
 							Providers
 						</TabsTrigger>
-						<TabsTrigger className="px-2 flex-none" value="articles">
+						{/* <TabsTrigger className="px-2 flex-none" value="articles">
 							<Icon icon="fluent:news-20-filled" className="!w-5 !h-5" />
 							Articles
-						</TabsTrigger>
+						</TabsTrigger> */}
 					</TabsList>
 				</div>
 			</div>
@@ -54,9 +54,9 @@ export default function DrawerTabsCard({ item }: DrawerTabsCardProps) {
 			<TabsContent value="services">
 				<ServiceProvidersTab serviceProviders={item.serviceProviders} />
 			</TabsContent>
-			<TabsContent value="articles">
+			{/* <TabsContent value="articles">
 				<ArticlesTab />
-			</TabsContent>
+			</TabsContent> */}
 		</Tabs>
 	);
 }
