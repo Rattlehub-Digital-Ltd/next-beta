@@ -1,11 +1,36 @@
 "use client";
 
+// import { Button } from "@/components/ui/button";
+import { useAuth0 } from "@auth0/auth0-react";
 import { Icon } from "@iconify/react";
 import * as motion from "motion/react-client";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
+import { isValidEmail } from "@/lib/utils";
 
 export default function ProfileHeader() {
+	const { user } = useAuth0();
+
+	console.log(user);
+
+	let email: string;
+	let name: string;
+
+	if (user?.email && isValidEmail(user?.email)) {
+		email = user.email;
+	} else if (user?.name && isValidEmail(user?.name)) {
+		email = user.name;
+	} else {
+		email = "Unknown";
+	}
+
+	if (user?.name && !isValidEmail(user?.name)) {
+		name = user.name;
+	} else if (user?.nickname && !isValidEmail(user?.nickname)) {
+		name = user.nickname;
+	} else {
+		name = "Unknown";
+	}
+
 	return (
 		<motion.div
 			initial={{ opacity: 0, y: 20, scale: 0.8 }}
@@ -21,21 +46,19 @@ export default function ProfileHeader() {
 					</AvatarFallback>
 				</Avatar>
 				<div className="grow text-left">
-					<p className="text-[13px] font-semibold leading-4 truncate">
-						Themba P. Mndebele
-					</p>
+					<p className="text-[13px] font-semibold leading-4 truncate">{name}</p>
 					<p className="text-xs leading-4 text-[#3C3C43]/80 tracking-[-0.08px] truncate">
-						paralistic@gmail.com
+						{email}
 					</p>
 				</div>
-				<div className="flex items-center gap-2">
+				{/* <div className="flex items-center gap-2">
 					<Button className="h-8 w-8 px-0 py-0 rounded-full bg-black/[0.03] active:bg-black/[0.05]">
 						<Icon
 							icon="fluent:settings-20-regular"
 							style={{ stroke: "#6b6b6b" }}
 						/>
 					</Button>
-				</div>
+				</div> */}
 			</div>
 		</motion.div>
 	);
