@@ -76,6 +76,7 @@ export default function ActionsTab() {
 												description={eduText}
 												showReminder={false}
 												color="teal"
+												owner={item.ownerDisplayName}
 											/>
 										</div>
 

@@ -9,6 +9,7 @@ type SuggestionItemProps = {
 	title: string;
 	description: string;
 	showReminder?: boolean;
+	owner?: string;
 	color?:
 		| "yellow"
 		| "teal"
@@ -24,6 +25,7 @@ export default function SuggestionItem({
 	title,
 	description,
 	//	showReminder = false,
+	owner,
 	color = "yellow",
 }: SuggestionItemProps) {
 	let color1 = "";
@@ -97,6 +99,14 @@ export default function SuggestionItem({
 			</div>
 			<div>
 				<p className="text-[14px] leading-6 font-medium">{title}</p>
+				{owner && (
+					<div className="bg-white flex items-center space-x-1.5 mb-1 border border-black/5 pl-1.5 pr-2.5 py-0.5 rounded-full w-fit">
+						<Icon icon="fluent-color:error-circle-24" />
+						<p className="text-[13px] leading-5 font-medium text-pretty">
+							{owner}
+						</p>
+					</div>
+				)}
 				<p className="text-[12.6px] leading-5 text-pretty text-[#616161]">
 					{description}
 				</p>
