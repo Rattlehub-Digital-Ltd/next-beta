@@ -10,8 +10,6 @@ import { isValidEmail } from "@/lib/utils";
 export default function ProfileHeader() {
 	const { user } = useAuth0();
 
-	console.log(user);
-
 	let email: string;
 	let name: string;
 

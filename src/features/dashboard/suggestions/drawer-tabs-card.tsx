@@ -16,13 +16,6 @@ export default function DrawerTabsCard({ item }: DrawerTabsCardProps) {
 			<div className="">
 				<div className="p-2 backdrop-blur-[15px] bg-white/40 relative rounded-[16px] w-full border border-[#EBEDED] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)]">
 					<TabsList className="flex justify-start flex-wrap h-auto w-full p-2 gap-2">
-						<TabsTrigger className="px-2" value="people">
-							<Icon
-								icon="fluent:people-community-24-filled"
-								className="!w-5 !h-5"
-							/>
-							Risks
-						</TabsTrigger>
 						<TabsTrigger className="px-2 flex-none" value="suggested-for">
 							<Icon
 								icon="fluent:shield-error-24-filled"
@@ -30,6 +23,14 @@ export default function DrawerTabsCard({ item }: DrawerTabsCardProps) {
 							/>
 							Suggested for
 						</TabsTrigger>
+						<TabsTrigger className="px-2" value="people">
+							<Icon
+								icon="fluent:people-community-24-filled"
+								className="!w-5 !h-5"
+							/>
+							Risks
+						</TabsTrigger>
+
 						<TabsTrigger className="px-2 flex-none" value="services">
 							<Icon icon="fluent:handshake-20-filled" className="!w-5 !h-5" />
 							Providers
