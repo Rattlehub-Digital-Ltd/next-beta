@@ -1,4 +1,5 @@
 "use client";
+import * as motion from "motion/react-client";
 
 import ShortUniqueId from "short-unique-id";
 import { useGetEstatePlan } from "@/api/services/dashboard/overview/queries";
@@ -49,16 +50,22 @@ export default function EstatePlan() {
 										referer="estate-plan"
 										refresh={refetch}
 									>
-										<DocumentItem
+										<motion.div
 											key={item.id}
-											className={
-												item.isApplicable
-													? "bg-[#ECFDF5] ring-[#00C7BE]/80"
-													: ""
-											}
-											color={item.isApplicable ? "#00C7BE" : ""}
-											item={item}
-										/>
+											className="w-full"
+											whileTap={{ scale: 0.95 }}
+										>
+											<DocumentItem
+												key={item.id}
+												className={
+													item.isApplicable
+														? "bg-[#ECFDF5] ring-[#00C7BE]/80"
+														: ""
+												}
+												color={item.isApplicable ? "#00C7BE" : ""}
+												item={item}
+											/>
+										</motion.div>
 									</AdaptiveCardButton>
 								))}
 							</div>

@@ -12,7 +12,7 @@ type DrawerTabsCardProps = {
 
 export default function DrawerTabsCard({ item }: DrawerTabsCardProps) {
 	return (
-		<Tabs defaultValue="people" className="space-y-3">
+		<Tabs defaultValue="suggested-for" className="space-y-3">
 			<div className="">
 				<div className="p-2 backdrop-blur-[15px] bg-white/40 relative rounded-[16px] w-full border border-[#EBEDED] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)]">
 					<TabsList className="flex justify-start flex-wrap h-auto w-full p-2 gap-2">
