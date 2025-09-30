@@ -89,9 +89,9 @@ export default function SummaryCard() {
 
 					<div className="px-4 w-full">
 						<SuggestionItem
-							title="Medical Policy Document"
-							description={`A legal contract between the insurer and the policyholder, detailing coverage, terms, conditions, premiums, and the responsibilities of both parties`}
-							showReminder={true}
+							title={item.displayName}
+							description={item.eduText}
+							showReminder={false}
 						/>
 					</div>
 
