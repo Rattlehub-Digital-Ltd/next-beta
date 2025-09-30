@@ -23,7 +23,7 @@ export default function DrawerTabsCard({ item }: DrawerTabsCardProps) {
 							/>
 							Suggested for
 						</TabsTrigger>
-						<TabsTrigger className="px-2" value="people">
+						<TabsTrigger className="px-2 flex-none" value="people">
 							<Icon
 								icon="fluent:people-community-24-filled"
 								className="!w-5 !h-5"
