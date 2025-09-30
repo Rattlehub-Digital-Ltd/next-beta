@@ -9,12 +9,12 @@ type RiskTabProps = {
 };
 
 function RiskTab({ item }: RiskTabProps) {
-	const people: string[] = [];
-	item.suggestedFor.forEach((item) => {
-		item.affectedOwners.forEach((owner) => {
-			if (!people.includes(owner)) people.push(owner);
-		});
-	});
+	// const people: string[] = [];
+	// item.suggestedFor.forEach((item) => {
+	// 	item.affectedOwners.forEach((owner) => {
+	// 		if (!people.includes(owner)) people.push(owner);
+	// 	});
+	// });
 
 	return (
 		<div className="p-3 bg-[#FFFFFF]/65 space-y-6 border border-black/5 rounded-3xl backdrop-blur-[25px] shadow-[0px_8px_30px_0px rgba(106, 106, 106, 0.06)]">
@@ -33,7 +33,7 @@ function RiskTab({ item }: RiskTabProps) {
 							<p className="text-xs font-medium capitalize">
 								{item.displayName}
 							</p>
-							<ul className="flex flex-wrap gap-1.5">
+							<ul className="flex flex-wrap gap-2">
 								{item.affectedOwners.map((owner) => (
 									<li key={uid.randomUUID()}>
 										<div>
