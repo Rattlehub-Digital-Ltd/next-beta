@@ -21,9 +21,10 @@ export default function SummaryCard() {
 		data: items,
 		isLoading,
 		isError,
-	} = useGetSuggestions({ page: 1, limit: 1 });
+		refetch,
+	} = useGetSuggestions({ page: 1, limit: 5 });
 
-	const item = items?.[0];
+	const item = items?.find((suggestion) => suggestion.isApplicable === null);
 
 	return (
 		<div className="w-full h-full bg-[#F8F8F8]/95 py-4 border border-[#EBEDED] rounded-3xl backdrop-blur-[60px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)] space-y-4 flex flex-col">
@@ -64,7 +65,7 @@ export default function SummaryCard() {
 				</div>
 			)}
 
-			<Separator className="bg-black/5 px-4" />
+			{(item || isLoading) && <Separator className="bg-black/5 px-4" />}
 
 			{/* Suggested item is not loading and has a value */}
 			{item && (
@@ -164,6 +165,7 @@ export default function SummaryCard() {
 						item={item}
 						id={item.id}
 						isApplicable={item.isApplicable}
+						refetch={refetch}
 					>
 						<span className="font-normal">
 							Do you have a{" "}

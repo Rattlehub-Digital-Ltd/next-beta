@@ -12,6 +12,7 @@ type SummaryFooterProps = {
 	isApplicable: boolean | null;
 	children: React.ReactNode;
 	item: Suggested;
+	refetch?: () => void;
 };
 
 export default function SummaryFooter({
@@ -19,6 +20,7 @@ export default function SummaryFooter({
 	id,
 	children,
 	item: { displayName, name },
+	refetch,
 }: SummaryFooterProps) {
 	const toggleSuggestion = useToggleSuggestion();
 
@@ -52,6 +54,7 @@ export default function SummaryFooter({
 			console.error("Error toggling suggestion:", error);
 			// Handle error appropriately, e.g., show a notification or alert
 		} finally {
+			refetch?.();
 			setIsPending(false);
 		}
 	};
