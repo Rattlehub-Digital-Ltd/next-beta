@@ -120,7 +120,7 @@ const ChecklistAccordionItemComponent = ({
 								track("submitted_answer", {
 									record_identifier: item.id,
 									item: item.displayName ?? item.name ?? "",
-									has_item_in_place: item.isApplicable === "yes",
+									has_item_in_place: value === "yes",
 									is_adaptive_card: false,
 								});
 
