@@ -41,7 +41,7 @@ export default function RiskCarousel({
 	}, [api, onRiskItemChange]);
 
 	return (
-		<div className="space-y-3 flex flex-col">
+		<div className="space-y-2 flex flex-col">
 			<Carousel
 				setApi={setApi}
 				opts={{
@@ -65,6 +65,7 @@ export default function RiskCarousel({
 				nextButtonDisabled={false}
 				prevButtonDisabled={false}
 				currentPage={current}
+				className="!bg-gray-100 !border-none !shadow-none"
 				totalPages={count}
 				onPrevious={() => api?.scrollPrev()}
 				onNext={() => api?.scrollNext()}

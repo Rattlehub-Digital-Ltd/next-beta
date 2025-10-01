@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface PaginationProps {
+	className?: string;
 	nextButtonDisabled?: boolean;
 	prevButtonDisabled?: boolean;
 	showColor?: boolean;
@@ -33,6 +34,7 @@ export const itemVariant: Variants = {
 };
 
 function Pagination({
+	className,
 	nextButtonDisabled,
 	prevButtonDisabled,
 	currentPage,
@@ -45,7 +47,10 @@ function Pagination({
 
 	return (
 		<motion.div
-			className="bg-[#FDFDFD]/50 border w-full border-[#EBEDED] rounded-full h-11 backdrop-blur-[15px] shadow-[0px_16px_30px_0px rgba(106, 106, 106, 0.06)] flex justify-between px-1.5 items-center"
+			className={cn(
+				"bg-[#FDFDFD]/50 border w-full border-[#EBEDED] rounded-full h-11 backdrop-blur-[15px] shadow-[0px_16px_30px_0px rgba(106, 106, 106, 0.06)] flex justify-between px-1.5 items-center",
+				className,
+			)}
 			initial={{ opacity: 0, translateY: 20, scaleX: 0.9 }}
 			animate={{ opacity: 1, translateY: 0, scaleX: 1 }}
 			transition={{ type: "spring", bounce: 0.25, duration: 0.35 }}
