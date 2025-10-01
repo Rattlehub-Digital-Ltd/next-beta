@@ -7,6 +7,7 @@ import { useDependentStore } from "store/use-dependent-store";
 import { useOnboardingStore } from "store/use-onboarding-store";
 import { usePersonDrawerStore } from "store/use-person-drawer-store";
 import MainSheet from "@/features/shared/main-sheet";
+import { track } from "@/lib/analytics";
 import CategoryList from "../shared/category-list";
 import PersonCard from "../shared/person-card";
 import AddPersonButton from "./add-person-button";
@@ -132,6 +133,15 @@ const Dependents = ({ scrollNext }: DependentsProps) => {
 						}}
 						onValueChange={(value: string | null) => {
 							setHas(value);
+
+							if (value !== null) {
+								track("submitted_answer", {
+									item: "Dependents",
+									has_item_in_place: value === "yes",
+									is_adaptive_card: false,
+								});
+							}
+
 							if (value?.toLowerCase() === "yes") {
 								setTitle("Add Dependent");
 								setType("dependent");

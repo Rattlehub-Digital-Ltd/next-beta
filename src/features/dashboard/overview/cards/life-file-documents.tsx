@@ -1,11 +1,14 @@
 "use client";
 
 import * as motion from "motion/react-client";
+import { useEffect } from "react";
 import ShortUniqueId from "short-unique-id";
 import { useGetLifeFileDocuments } from "@/api/services/dashboard/overview/queries";
 import { Skeleton } from "@/components/ui/skeleton";
 import AdaptiveCardButton from "@/features/shared/adaptive-card/adaptive-card-button";
 import DocumentItem from "@/features/shared/document-item";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { track } from "@/lib/analytics";
 import Header from "../header";
 
 const uid = new ShortUniqueId();
@@ -18,8 +21,22 @@ export default function LifeFileDocuments() {
 		refetch,
 	} = useGetLifeFileDocuments();
 
+	const { isIntersecting, ref } = useIntersectionObserver({
+		threshold: 0.5,
+	});
+
+	useEffect(() => {
+		if (isIntersecting && !isLoading && !isError) {
+			track("viewed_life_file_docs", {
+				item: "Life File Documents",
+				record_identifier: "life-file-documents",
+				is_adaptive_card: false,
+			});
+		}
+	}, [isIntersecting, isLoading, isError]);
+
 	return (
-		<div>
+		<div ref={ref}>
 			{/* Loading incomplete */}
 			{isLoading && <LoadingSkeleton />}
 

@@ -123,7 +123,7 @@ export default function SuggestedItem({ item }: SuggestedItemProps) {
 					</div>
 				)}
 			</div>
-			<SummaryFooter id={id} isApplicable={isApplicable}>
+			<SummaryFooter item={item} id={id} isApplicable={isApplicable}>
 				<span className="font-normal">
 					Do you have a <span className="font-semibold">{displayName}</span> in
 					place?

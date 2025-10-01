@@ -2,6 +2,7 @@
 
 import { Icon } from "@iconify/react";
 import * as motion from "motion/react-client";
+import { useCallback } from "react";
 import ShortUniqueId from "short-unique-id";
 import { useInfiniteGetDocuments } from "@/api/services/dashboard/queries";
 import { Button } from "@/components/ui/button";
@@ -11,6 +12,7 @@ import RiskCarousel from "@/features/shared/risk-carousel";
 import SuggestionItem from "@/features/shared/suggestion-item";
 import { track } from "@/lib/analytics";
 import { cardVariants } from "@/motion";
+import type { ActionItem } from "@/types/action-item";
 import CardFooter from "./card-footer";
 
 const uid = new ShortUniqueId({ length: 10 });
@@ -27,21 +29,21 @@ export default function ActionsTab() {
 		isFetchingNextPage,
 	} = useInfiniteGetDocuments();
 
-	// const handleOnRiskItemChange = useCallback(
-	// 	(index: number, item: ActionItem) => {
-	// 		const value = item.riskItems[index];
+	const handleOnRiskItemChange = useCallback(
+		(index: number, item: ActionItem) => {
+			const value = item.riskItems[index];
 
-	// 		if (!value) return;
+			if (!value) return;
 
-	// 		track("swiped_carousel", {
-	// 			item: item.displayName,
-	// 			record_identifier: item.id,
-	// 			risk_category: value.category,
-	// 			goal_name: value.goalName,
-	// 		});
-	// 	},
-	// 	[],
-	// );
+			track("swiped_carousel", {
+				item: item.displayName,
+				record_identifier: item.id,
+				risk_category: value.category,
+				goal_name: value.goalName,
+			});
+		},
+		[],
+	);
 
 	return (
 		<div className="space-y-4">
@@ -83,9 +85,9 @@ export default function ActionsTab() {
 										<div className="px-4">
 											<RiskCarousel
 												items={riskItems}
-												// onRiskItemChange={(index: number) =>
-												// 	handleOnRiskItemChange(index, item)
-												// }
+												onRiskItemChange={(index: number) =>
+													handleOnRiskItemChange(index, item)
+												}
 											/>
 										</div>
 

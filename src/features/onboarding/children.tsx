@@ -7,6 +7,7 @@ import { useChildrenStore } from "store/use-children-store";
 import { useOnboardingStore } from "store/use-onboarding-store";
 import { usePersonDrawerStore } from "store/use-person-drawer-store";
 import MainSheet from "@/features/shared/main-sheet";
+import { track } from "@/lib/analytics";
 import CategoryList from "../shared/category-list";
 import PersonCard from "../shared/person-card";
 import AddPersonButton from "./add-person-button";
@@ -133,6 +134,15 @@ const Children = ({ scrollNext }: ChildrenProps) => {
 						}}
 						onValueChange={(value: string | null) => {
 							setHas(value);
+
+							if (value !== null) {
+								track("submitted_answer", {
+									item: "Children",
+									has_item_in_place: value === "yes",
+									is_adaptive_card: false,
+								});
+							}
+
 							if (value?.toLowerCase() === "yes") {
 								setTitle("Add Child");
 								setType("child");

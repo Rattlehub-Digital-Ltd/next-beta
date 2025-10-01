@@ -8,6 +8,7 @@ import { useOnboardingStore } from "store/use-onboarding-store";
 import { usePartnerStore } from "store/use-partner-store";
 import { usePersonDrawerStore } from "store/use-person-drawer-store";
 import MainSheet from "@/features/shared/main-sheet";
+import { track } from "@/lib/analytics";
 import CategoryList from "../shared/category-list";
 import PersonCard from "../shared/person-card";
 import AddPersonButton from "./add-person-button";
@@ -135,6 +136,15 @@ const Partner = ({ scrollNext }: PartnerProps) => {
 						setNextButtonDisabled={setNextButtonDisabled}
 						onValueChange={(value: string | null) => {
 							setHas(value);
+
+							if (value !== null) {
+								track("submitted_answer", {
+									item: "Partner",
+									has_item_in_place: value === "yes",
+									is_adaptive_card: false,
+								});
+							}
+
 							if (value?.toLowerCase() === "yes") {
 								setTitle("Add Partner");
 								setType("partner");

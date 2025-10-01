@@ -3,18 +3,22 @@
 import * as motion from "motion/react-client";
 import { useState } from "react";
 import { useToggleSuggestion } from "@/api/services/dashboard/suggestion/queries";
+import type { Suggested } from "@/api/services/dashboard/suggestion/types";
 import { Button } from "@/components/ui/button";
+import { track } from "@/lib/analytics";
 
 type SummaryFooterProps = {
 	id: string;
 	isApplicable: boolean | null;
 	children: React.ReactNode;
+	item: Suggested;
 };
 
 export default function SummaryFooter({
 	isApplicable,
 	id,
 	children,
+	item: { displayName, name },
 }: SummaryFooterProps) {
 	const toggleSuggestion = useToggleSuggestion();
 
@@ -27,6 +31,23 @@ export default function SummaryFooter({
 		try {
 			await toggleSuggestion.mutateAsync({ id, value });
 			setValue(value);
+
+			if (!value) {
+				track("viewed_suggestion", {
+					id,
+					item: displayName,
+					has_item_in_place: value,
+					is_adaptive_card: false,
+				});
+			}
+
+			track("submitted_answer", {
+				id,
+				item: displayName,
+				name: name,
+				has_item_in_place: value,
+				is_adaptive_card: false,
+			});
 		} catch (error) {
 			console.error("Error toggling suggestion:", error);
 			// Handle error appropriately, e.g., show a notification or alert

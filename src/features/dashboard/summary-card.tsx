@@ -160,7 +160,11 @@ export default function SummaryCard() {
 			{item && (
 				<>
 					<Separator className="bg-black/5 px-4" />
-					<SummaryFooter id={item.id} isApplicable={item.isApplicable}>
+					<SummaryFooter
+						item={item}
+						id={item.id}
+						isApplicable={item.isApplicable}
+					>
 						<span className="font-normal">
 							Do you have a{" "}
 							<span className="font-semibold">{item.displayName}</span> in
