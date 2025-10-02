@@ -29,6 +29,21 @@ export default function ActionsTab() {
 		isFetchingNextPage,
 	} = useInfiniteGetDocuments();
 
+	const currentPage = data?.pages[data?.pages.length - 1];
+	const totalPages = currentPage?.totalPages || 0;
+	const totalItems = currentPage?.totalItems || 0;
+	const pageNumber = currentPage?.pageNumber || 0;
+
+	const currentItemsCount = data
+		? data.pages.reduce((acc, page) => acc + page.items.length, 0)
+		: 0;
+
+	// Determine if "Load More" button should be shown
+	// Show if there are more pages to load and not all items are loaded
+
+	const showLoadMore =
+		totalPages > 1 && pageNumber < totalPages && currentItemsCount < totalItems;
+
 	const handleOnRiskItemChange = useCallback(
 		(index: number, item: ActionItem) => {
 			const value = item.riskItems[index];
@@ -109,7 +124,7 @@ export default function ActionsTab() {
 				</ul>
 			)}
 
-			{hasNextPage && (
+			{showLoadMore && (
 				<motion.div className="px-2" whileTap={{ scale: 0.95 }}>
 					<Button
 						className="w-full bg-white/75 backdrop-blur-2xl text-foreground hover:bg-white/85 hover:text-foreground rounded-[12px] text-[13px] font-medium font-mono"
