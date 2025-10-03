@@ -15,7 +15,6 @@ type SuggestedItemProps = {
 
 export default function SuggestedItem({ item }: SuggestedItemProps) {
 	const { displayName, eduText, id, isApplicable } = item;
-	console.log("isApplicable", isApplicable);
 
 	const people: string[] = [];
 	item.suggestedFor.forEach((item) => {
