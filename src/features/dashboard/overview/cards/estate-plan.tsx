@@ -32,6 +32,8 @@ export default function EstatePlan() {
 		}
 	}, [isIntersecting, isLoading, isError]);
 
+	if (!isLoading && items?.length === 0) return;
+
 	return (
 		<div ref={ref}>
 			{/* Loading incomplete */}

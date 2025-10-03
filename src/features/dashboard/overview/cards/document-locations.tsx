@@ -14,6 +14,8 @@ const uid = new ShortUniqueId();
 export default function DocumentLocations() {
 	const { data: items, isLoading, isError } = useGetDocumentLocations();
 
+	if (!isLoading && items?.length === 0) return;
+
 	return (
 		<div>
 			{/* Loading incomplete */}

@@ -35,6 +35,8 @@ export default function LifeFileDocuments() {
 		}
 	}, [isIntersecting, isLoading, isError]);
 
+	if (!isLoading && items?.length === 0) return;
+
 	return (
 		<div ref={ref}>
 			{/* Loading incomplete */}

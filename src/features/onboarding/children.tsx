@@ -85,8 +85,6 @@ const Children = ({ scrollNext }: ChildrenProps) => {
 	const { setTitle, onOpenChange, setType } = usePersonDrawerStore();
 	const { setNextButtonDisabled } = useOnboardingStore();
 
-	console.log(has, children);
-
 	useEffect(() => {
 		if (
 			has &&

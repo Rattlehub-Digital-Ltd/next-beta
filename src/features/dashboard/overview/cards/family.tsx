@@ -22,6 +22,8 @@ export default function Family() {
 		});
 	}
 
+	if (!isLoading && items?.length === 0) return;
+
 	return (
 		<div>
 			{isLoading && <LoadingSkeleton />}
