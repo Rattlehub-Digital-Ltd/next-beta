@@ -50,7 +50,6 @@ const useSignalR = (hubUrl: string) => {
 					// Register a handler for a specific hub method, e.g., "ReceiveMessage"
 					connection.on("ReceiveMessage", (message) => {
 						setMessages((prevMessages) => [...prevMessages, message]);
-						console.log(message, "hey");
 					});
 				})
 				.catch((error) => console.error("SignalR connection failed: ", error));

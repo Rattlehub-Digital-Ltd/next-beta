@@ -29,16 +29,18 @@ function MainSheet({ title, imgSrc, imgAlt, content }: MainSheetProps) {
 					bounce: 0.5,
 				}}
 			>
-				<div>
-					<Image
-						src={imgSrc}
-						alt={imgAlt ?? "Image"}
-						height={192}
-						width={192}
-						priority
-						loading="eager"
-					/>
-				</div>
+				{imgSrc && imgSrc !== "" && (
+					<div>
+						<Image
+							src={imgSrc}
+							alt={imgAlt ?? "Image"}
+							height={192}
+							width={192}
+							priority
+							loading="eager"
+						/>
+					</div>
+				)}
 			</motion.div>
 			<div className="grow flex flex-col">{content}</div>
 		</div>

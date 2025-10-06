@@ -17,6 +17,7 @@ import {
 import Children from "@/features/onboarding/children";
 import Dependents from "@/features/onboarding/dependents";
 import EstateChecklist from "@/features/onboarding/estate-checklist/estate-checklist";
+import Intro from "@/features/onboarding/intro";
 import Partner from "@/features/onboarding/partner";
 import SuccessDialog from "@/features/onboarding/success/success-dialog";
 import SummaryDialog from "@/features/onboarding/summary/summary-dialog";
@@ -165,6 +166,9 @@ function OnboardingPage() {
 				className="w-full h-full"
 			>
 				<CarouselContent>
+					<CarouselItem>
+						<Intro />
+					</CarouselItem>
 					<CarouselItem>
 						<Partner scrollNext={scrollNext} />
 					</CarouselItem>
