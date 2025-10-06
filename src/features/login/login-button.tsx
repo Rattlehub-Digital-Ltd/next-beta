@@ -9,16 +9,20 @@ import { toast } from "sonner";
 import { useActivitySummaryStore } from "store/use-activity-summary-store";
 import { useAppStore } from "store/use-app-store";
 import { useOnboardingStore } from "store/use-onboarding-store";
+import { useGetOnboarding } from "@/api/services/dashboard/onboarding/queries";
+import { useGetActivitySummary } from "@/api/services/dashboard/queries";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import Loading from "@/features/shared/loading";
-import useApi from "@/hooks/use-api";
+// import useApi from "@/hooks/use-api";
 import { FluentArrowCircleRight24Filled, SparkleIcon } from "@/styles/icons";
 
 const LoginButton = () => {
 	const searchParams = useSearchParams();
 
-	const { getOnboardingStatus, getActivitySummary } = useApi();
+	// const { getOnboardingStatus, getActivitySummary } = useApi();
+	const { data: activitySummary } = useGetActivitySummary();
+	const { data: onboardingStatus } = useGetOnboarding();
 
 	const { setIsOnboarded } = useOnboardingStore();
 	const { setActivity } = useActivitySummaryStore();
@@ -45,15 +49,15 @@ const LoginButton = () => {
 
 			if (isAuthenticated) {
 				if (!initialized) {
-					const onboardingStatusResp = await getOnboardingStatus();
+					const onboardingStatusResp = onboardingStatus; //await getOnboardingStatus();
 
-					if (onboardingStatusResp?.data) {
-						const isOnboarded = onboardingStatusResp.data.isOnboarded;
+					if (onboardingStatusResp) {
+						const isOnboarded = onboardingStatusResp.isOnboarded;
 						setIsOnboarded(isOnboarded);
 
-						const activitySummaryResp = await getActivitySummary();
-						if (activitySummaryResp?.data) {
-							setActivity(activitySummaryResp.data);
+						const activitySummaryResp = activitySummary; //await getActivitySummary();
+						if (activitySummaryResp) {
+							setActivity(activitySummaryResp);
 							setInitialized(true);
 						}
 
@@ -74,8 +78,10 @@ const LoginButton = () => {
 		}
 	}, [
 		setActivity,
-		getActivitySummary,
-		getOnboardingStatus,
+		// getActivitySummary,
+		// getOnboardingStatus,
+		activitySummary,
+		onboardingStatus,
 		initialized,
 		isAuthenticated,
 		setInitialized,

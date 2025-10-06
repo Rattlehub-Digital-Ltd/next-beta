@@ -13,7 +13,7 @@ interface GlobalErrorProps {
 export default function GlobalError({ error, reset }: GlobalErrorProps) {
 	return (
 		<html lang="en">
-			<body className="bg-background text-foreground">
+			<body className="bg-background text-foreground rounded-2xl">
 				<div className="min-h-screen flex items-center justify-center p-4">
 					<Card className="w-full max-w-md">
 						<CardContent className="pt-6">
