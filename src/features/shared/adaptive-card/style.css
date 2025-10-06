@@ -1,3 +1,20 @@
+/* Carousel styling and iOS touch fixes */
+.ac-carousel {
+	overflow-x: scroll !important;
+	-webkit-overflow-scrolling: touch !important;
+	touch-action: pan-y pinch-zoom !important;
+	/* allow vertical scroll while swiping */
+}
+
+.swiper-wrapper {
+	display: flex !important;
+	-webkit-transform: translate3d(0, 0, 0) !important;
+}
+
+.swiper-slide {
+	flex-shrink: 0 !important;
+}
+
 .ac-container {
 	font-family: "Mona Sans", sans-serif !important;
 	position: relative;

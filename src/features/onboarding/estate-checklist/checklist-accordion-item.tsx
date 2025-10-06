@@ -103,6 +103,7 @@ const ChecklistAccordionItemComponent = ({
 					{item.riskItems && item.riskItems.length > 0 && (
 						<RiskCarousel
 							items={item.riskItems}
+							className="!bg-white !border-none !shadow-none"
 							onRiskItemChange={(index: number) =>
 								handleOnRiskItemChange(index, item)
 							}

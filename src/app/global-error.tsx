@@ -10,7 +10,7 @@ interface GlobalErrorProps {
 	reset: () => void;
 }
 
-export default function GlobalError({ reset }: GlobalErrorProps) {
+export default function GlobalError({ error, reset }: GlobalErrorProps) {
 	return (
 		<html lang="en">
 			<body className="bg-background text-foreground">
@@ -28,11 +28,22 @@ export default function GlobalError({ reset }: GlobalErrorProps) {
 								{/* Error Message */}
 								<div className="space-y-2">
 									<h1 className="text-2xl font-semibold">Application Error</h1>
-									<p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-										A critical error occurred that prevented the application
-										from loading. Please refresh the page or contact support if
-										the problem persists.
-									</p>
+									<div className="text-gray-600 dark:text-gray-400 leading-relaxed">
+										{error && (
+											<span className="text-red-500 font-medium">
+												{error.cause ? (
+													<span>{`Cause: ${error.cause}`}</span>
+												) : undefined}
+												{error.digest && (
+													<span>{`Digest: ${error.digest}`}</span>
+												)}
+												{error.name && <span>{`Message: ${error.name}`}</span>}
+												{error && <span>{`Stack: ${error.stack}`}</span>}
+											</span>
+										)}
+										{!error &&
+											"A critical error occurred that prevented the application from loading. Please refresh the page or contact support if the problem persists."}
+									</div>
 								</div>
 
 								{/* Action Buttons */}

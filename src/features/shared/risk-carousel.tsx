@@ -9,11 +9,13 @@ import {
 	CarouselItem,
 } from "@/components/ui/carousel";
 import Pagination from "@/features/shared/pagination";
+import { cn } from "@/lib/utils";
 import type { RiskItemProps } from "@/types/risk-item-props";
 import RiskItem from "./risk-item";
 
 type RiskCarouselProps = {
 	items: RiskItemProps[];
+	className?: string;
 	onRiskItemChange?: (index: number) => void;
 };
 
@@ -21,6 +23,7 @@ const uid = new ShortUniqueId();
 
 export default function RiskCarousel({
 	items,
+	className,
 	onRiskItemChange,
 }: RiskCarouselProps) {
 	const [api, setApi] = useState<CarouselApi>();
@@ -65,7 +68,7 @@ export default function RiskCarousel({
 				nextButtonDisabled={false}
 				prevButtonDisabled={false}
 				currentPage={current}
-				className="!bg-gray-100 !border-none !shadow-none"
+				className={cn("!bg-gray-100 !border-none !shadow-none", className)}
 				totalPages={count}
 				onPrevious={() => api?.scrollPrev()}
 				onNext={() => api?.scrollNext()}

@@ -7,10 +7,7 @@ import { useDependentStore } from "store/use-dependent-store";
 import { useDocumentStore } from "store/use-document-store";
 import { useOnboardingStore } from "store/use-onboarding-store";
 import { usePartnerStore } from "store/use-partner-store";
-import {
-	useGetOnboarding,
-	useSubmitOnboardingData,
-} from "@/api/services/dashboard/onboarding/queries";
+import { useSubmitOnboardingData } from "@/api/services/dashboard/onboarding/queries";
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -32,7 +29,6 @@ export default function SummaryDialog({ open, onClose }: SummaryDialogProps) {
 	const { setIsOnboarded } = useOnboardingStore();
 
 	const submitOnboarding = useSubmitOnboardingData();
-	const { refetch: refetchOnboardingStatus } = useGetOnboarding();
 
 	const { partner } = usePartnerStore();
 	const { children } = useChildrenStore();
@@ -74,6 +70,9 @@ export default function SummaryDialog({ open, onClose }: SummaryDialogProps) {
 			},
 			{
 				onSuccess: () => {
+					toast.success("Onboarding data submitted successfully!");
+					setIsOnboarded(true);
+					// setRedirectToDashboard(true);
 					onClose();
 				},
 				onError: (error) => {
@@ -86,20 +85,15 @@ export default function SummaryDialog({ open, onClose }: SummaryDialogProps) {
 				},
 			},
 		);
-
-		const resp = await refetchOnboardingStatus();
-		if (resp?.data?.isOnboarded) {
-			setIsOnboarded(true);
-		}
 	}, [
 		children?.map,
 		dependents?.map,
 		documents.map,
 		onClose,
 		partner,
-		refetchOnboardingStatus,
 		setIsOnboarded,
 		submitOnboarding.mutateAsync,
+		// setRedirectToDashboard,
 	]);
 
 	return (

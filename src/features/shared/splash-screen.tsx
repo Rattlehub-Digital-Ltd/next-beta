@@ -78,6 +78,7 @@ export default function SplashScreen() {
 		products,
 		setProduct,
 		setIsEmailVerified,
+		// redirectToDashboard,
 	]);
 
 	useEffect(() => {
