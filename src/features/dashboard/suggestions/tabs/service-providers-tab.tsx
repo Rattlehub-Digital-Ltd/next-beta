@@ -1,4 +1,3 @@
-import { Icon } from "@iconify/react";
 import Image from "next/image";
 import Markdown from "react-markdown";
 import type { ServiceProvider } from "@/api/services/dashboard/suggestion/types";
@@ -43,10 +42,10 @@ export default function ServiceProvidersTab({
 				</div>
 			</div>
 			<ul className="space-y-3">
-				{serviceProviders.map((provider) => (
+				{serviceProviders.map((provider, index) => (
 					<li key={`${provider.name}-${provider.summary}`}>
-						<div className="flex gap-2 border border-[#c2c2c2]/30 bg-white/90 rounded-[14px] p-3">
-							<div className="relative h-10 w-10 flex items-center justify-center rounded-[10px] shrink-0 bg-[#5856D6]/15">
+						<div className="flex gap-2 bg-indigo-50/80 border border-[#c2c2c2]/30 rounded-[16px] p-2">
+							{/* <div className="relative h-10 w-10 flex items-center justify-center rounded-[10px] shrink-0 bg-[#5856D6]/15">
 								<div className="h-[32px] w-[32px] shrink-0 rounded-[8px] flex items-center justify-center text-white/95 bg-[#5856D6]">
 									<Icon
 										icon="fluent:info-sparkle-20-filled"
@@ -54,9 +53,28 @@ export default function ServiceProvidersTab({
 										width={20}
 									/>
 								</div>
+							</div> */}
+							<div className="rounded-[12px] h-[88px] w-[88px] shrink-0 overflow-hidden">
+								<Image
+									src={
+										index === 0
+											? "/images/Intimate Family Moment with Pregnant Mother.png"
+											: "/images/Family Shopping Checkout Moment.png"
+									}
+									alt=""
+									height={88}
+									width={88}
+								/>
 							</div>
-							<div>
-								<p className="text-[0.8rem] font-semibold">{provider.name}</p>
+							<div className="space-y-2">
+								<Image
+									priority
+									src="/logo_light.svg"
+									alt="Nextdot Logo"
+									width={101}
+									height={12}
+								/>
+								{/* <p className="text-[0.8rem] font-semibold">{provider.name}</p> */}
 								<div className="text-pretty text-[#616161] text-[0.8rem] provider-summary-markdown">
 									<Markdown>{provider.summary}</Markdown>
 								</div>
