@@ -62,7 +62,7 @@ export default function EstatePlan() {
 								{items.map((item) => (
 									<AdaptiveCardButton
 										currentDocument={item}
-										key={item.id}
+										key={uid.randomUUID()}
 										recordId={item.id}
 										referer="estate-plan"
 										refresh={refetch}

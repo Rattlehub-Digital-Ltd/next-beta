@@ -57,7 +57,7 @@ export default function LifeFileDocuments() {
 								!item.isApplicable ? (
 									<AdaptiveCardButton
 										currentDocument={item}
-										key={item.id}
+										key={uid.randomUUID()}
 										recordId={item.id}
 										referer="life-file-documents"
 										refresh={refetch}
