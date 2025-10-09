@@ -1,3 +1,5 @@
+"use client";
+
 import type { PropsWithChildren } from "react";
 import ProtectedRoute from "@/components/protected-route";
 import Banner from "@/features/dashboard/banner";
@@ -5,6 +7,10 @@ import BottomTabBar from "@/features/shared/bottom-tab/bottom-tab-bar";
 import LoadingScreen from "@/features/shared/splash-screen";
 
 export default function DashboardLayout({ children }: PropsWithChildren) {
+	console.log("dashboard layout rendered", window.location.href);
+	if (!localStorage.getItem("origin_href"))
+		localStorage.setItem("origin_href", window.location.href);
+
 	return (
 		<>
 			<ProtectedRoute>

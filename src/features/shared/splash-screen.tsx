@@ -14,6 +14,7 @@ import { Spinner } from "@/components/ui/spinner";
 
 export default function SplashScreen() {
 	const { isAuthenticated, getIdTokenClaims } = useAuth0();
+	console.log("splash screen rendered", { isAuthenticated });
 
 	const { setIsOnboarded, setIsEmailVerified } = useOnboardingStore();
 	const { setActivity } = useActivitySummaryStore();
@@ -21,14 +22,23 @@ export default function SplashScreen() {
 
 	const [isInitializing, setIsInitializing] = useState(true);
 
-	const { data: activity, isError: isActivityError } = useGetActivitySummary();
+	const {
+		data: activity,
+		isError: isActivityError,
+		isLoading: isLoadingActivity,
+	} = useGetActivitySummary();
 
-	const { data: onboardingStatus, isError: isOnboardingError } =
-		useGetOnboarding();
+	const {
+		data: onboardingStatus,
+		isError: isOnboardingError,
+		isLoading: isLoadingOnboarding,
+	} = useGetOnboarding();
 
 	const { data: products } = useGetProducts();
 
 	const initialize = useCallback(async () => {
+		if (isLoadingActivity || isLoadingOnboarding) return;
+
 		const idTokenClaims = await getIdTokenClaims();
 		if (idTokenClaims) {
 			const role = idTokenClaims?.[
@@ -64,7 +74,9 @@ export default function SplashScreen() {
 				redirect("/dashboard/verify", RedirectType.replace);
 
 			redirect(
-				onboardingStatus.isOnboarded ? "/dashboard" : "/dashboard/onboarding",
+				onboardingStatus.isOnboarded
+					? (window.location.href ?? "/dashboard")
+					: "/dashboard/onboarding",
 			);
 		}
 	}, [
@@ -78,16 +90,16 @@ export default function SplashScreen() {
 		products,
 		setProduct,
 		setIsEmailVerified,
-		// redirectToDashboard,
+		isLoadingActivity,
+		isLoadingOnboarding,
 	]);
 
 	useEffect(() => {
 		initialize();
 	}, [initialize]);
 
-	if (!isAuthenticated) redirect("/login");
-
 	if (!isInitializing) return;
+	// if (!isAuthenticated) redirect("/login");
 
 	if (!isInitializing) {
 		if (isActivityError || isOnboardingError)

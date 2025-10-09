@@ -6,7 +6,6 @@ import axios, {
 	type InternalAxiosRequestConfig,
 } from "axios";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { toast } from "sonner";
 import { appConfig } from "@/config/app.config";
 
 export default function useAxios() {
@@ -72,26 +71,18 @@ export default function useAxios() {
 
 				if (status === 401) {
 					console.log("Unauthorized");
-					toast.error(
-						"Unauthorized",
-						error?.response?.message ??
-							"You are not authorized to access this page, please login or contact support.",
-					);
 				}
 				if (status === 403) {
 					console.log("Forbidden");
-					toast("Forbidden");
 				}
 				if (status === 302) {
 					console.log("redirect");
 				}
 				if (status === 404) {
 					console.log("Not Found");
-					toast("Not Found");
 				}
 				if (status === 500) {
 					console.log("Internal Server Error");
-					toast("Internal Server Error");
 				}
 				// Any status codes that falls outside the range of 2xx cause this function to trigger
 				// Do something with response error

@@ -21,8 +21,10 @@ const LoginButton = () => {
 	const searchParams = useSearchParams();
 
 	// const { getOnboardingStatus, getActivitySummary } = useApi();
-	const { data: activitySummary } = useGetActivitySummary();
-	const { data: onboardingStatus } = useGetOnboarding();
+	const { data: activitySummary, isLoading: isLoadingActivity } =
+		useGetActivitySummary();
+	const { data: onboardingStatus, isLoading: isLoadingOnboarding } =
+		useGetOnboarding();
 
 	const { setIsOnboarded } = useOnboardingStore();
 	const { setActivity } = useActivitySummaryStore();
@@ -42,6 +44,8 @@ const LoginButton = () => {
 		searchParams.get("iss") ?? searchParams.get("redirectUrl") ?? "/dashboard";
 
 	const loadData = useCallback(async () => {
+		if (isLoadingActivity || isLoadingOnboarding) return;
+
 		if (user && isAuthenticated) {
 			if (initialized) return;
 
@@ -61,9 +65,16 @@ const LoginButton = () => {
 							setInitialized(true);
 						}
 
-						if (isOnboarded)
+						if (isOnboarded) {
+							const origin = localStorage.getItem("origin_href");
+							if (origin && origin !== window.location.href) {
+								localStorage.removeItem("origin_href");
+								redirect(origin, RedirectType.replace);
+							}
 							redirect(window.location.origin !== "/" ? "/" : "/dashboard");
-						else redirect("/dashboard/onboarding");
+						} else {
+							redirect("/dashboard/onboarding");
+						}
 					} else {
 						setInitialized(false);
 					}
@@ -87,6 +98,8 @@ const LoginButton = () => {
 		setInitialized,
 		setIsOnboarded,
 		user,
+		isLoadingActivity,
+		isLoadingOnboarding,
 	]);
 
 	const authenticate = useCallback(async () => {
