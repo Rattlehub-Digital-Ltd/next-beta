@@ -83,9 +83,16 @@ export default function SplashScreen() {
 			if (!onboardingStatus.isEmailVerified)
 				redirect("/dashboard/verify", RedirectType.replace);
 
-			redirect(
-				onboardingStatus.isOnboarded ? "/dashboard" : "/dashboard/onboarding",
-			);
+			const originHref = sessionStorage.getItem("origin_href");
+
+			if (originHref) {
+				sessionStorage.removeItem("origin_href");
+				redirect(originHref, RedirectType.replace);
+			} else {
+				redirect(
+					onboardingStatus.isOnboarded ? "/dashboard" : "/dashboard/onboarding",
+				);
+			}
 		}
 	}, [
 		activity,

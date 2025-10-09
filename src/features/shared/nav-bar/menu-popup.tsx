@@ -13,9 +13,9 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { track } from "@/lib/analytics";
 import { isValidEmail } from "@/lib/utils";
 import { ComingSoonBadge } from "../coming-soon-badge";
-import { track } from "@/lib/analytics";
 
 type UserMenuProps = {
 	children: React.ReactNode;
