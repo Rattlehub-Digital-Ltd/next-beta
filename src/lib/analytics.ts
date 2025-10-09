@@ -60,8 +60,14 @@ export const track = (
 		};
 		EventSchema.parse(event);
 
+		const deviceInfo = navigator ? navigator.userAgent : {};
+
 		if (process.env.NODE_ENV === "production" && analytics) {
-			analytics.track(eventName, { ...getUTMParams(), ...(payload ?? {}) });
+			analytics.track(eventName, {
+				...getUTMParams(),
+				...(payload ?? {}),
+				...deviceInfo,
+			});
 		}
 	} catch (error) {
 		console.error("Invalid analytics event:", error);
