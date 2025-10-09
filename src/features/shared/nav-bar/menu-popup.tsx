@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { isValidEmail } from "@/lib/utils";
 import { ComingSoonBadge } from "../coming-soon-badge";
+import { track } from "@/lib/analytics";
 
 type UserMenuProps = {
 	children: React.ReactNode;
@@ -134,6 +135,8 @@ const UserMenu = ({ children }: UserMenuProps) => {
 				<DropdownMenuItem
 					className="font-medium text-red-600 w-full"
 					onClick={async () => {
+						track("user_logout", { page: window.location.href });
+
 						logout({
 							logoutParams: { returnTo: window.location.origin },
 						})

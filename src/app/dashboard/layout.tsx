@@ -8,8 +8,8 @@ import LoadingScreen from "@/features/shared/splash-screen";
 
 export default function DashboardLayout({ children }: PropsWithChildren) {
 	console.log("dashboard layout rendered", window.location.href);
-	if (!localStorage.getItem("origin_href")) {
-		localStorage.setItem("origin_href", window.location.href);
+	if (!sessionStorage.getItem("origin_href")) {
+		sessionStorage.setItem("origin_href", window.location.href);
 	}
 
 	useEffect(() => {

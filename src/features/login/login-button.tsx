@@ -66,9 +66,9 @@ const LoginButton = () => {
 						}
 
 						if (isOnboarded) {
-							const origin = localStorage.getItem("origin_href");
+							const origin = sessionStorage.getItem("origin_href");
 							if (origin) {
-								localStorage.removeItem("origin_href");
+								sessionStorage.removeItem("origin_href");
 								redirect(origin, RedirectType.replace);
 							} else
 								redirect(window.location.origin !== "/" ? "/" : "/dashboard");

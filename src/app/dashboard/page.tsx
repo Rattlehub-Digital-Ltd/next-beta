@@ -15,13 +15,13 @@ const description =
 function DashboardPage() {
 	const { isEmailVerified, isOnboarded } = useOnboardingStore();
 
-	const originHref = localStorage.getItem("origin_href");
+	const originHref = sessionStorage.getItem("origin_href");
 	console.log({ originHref });
 
 	if (!isEmailVerified) redirect("/dashboard/verify", RedirectType.replace);
 	if (!isOnboarded) redirect("/dashboard/onboarding", RedirectType.replace);
 	if (originHref) {
-		localStorage.removeItem("origin_href");
+		sessionStorage.removeItem("origin_href");
 		redirect(originHref, RedirectType.replace);
 	}
 
