@@ -20,7 +20,7 @@ function DashboardPage() {
 
 	if (!isEmailVerified) redirect("/dashboard/verify", RedirectType.replace);
 	if (!isOnboarded) redirect("/dashboard/onboarding", RedirectType.replace);
-	if (originHref && originHref !== window.location.href) {
+	if (originHref) {
 		localStorage.removeItem("origin_href");
 		redirect(originHref, RedirectType.replace);
 	}
