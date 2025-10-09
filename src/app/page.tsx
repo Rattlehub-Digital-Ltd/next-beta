@@ -1,12 +1,16 @@
 "use client";
 
+import { useAuth0 } from "@auth0/auth0-react";
 import * as motion from "motion/react-client";
 import Link from "next/link";
 import { RedirectType, redirect } from "next/navigation";
 
 export default function Home() {
-	console.log("yo whatsupp");
-	redirect(window.location.href ?? "/login", RedirectType.replace);
+	const { isAuthenticated, isLoading } = useAuth0();
+
+	if (isAuthenticated && !isLoading) {
+		redirect("/login", RedirectType.replace);
+	}
 
 	return (
 		<div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">

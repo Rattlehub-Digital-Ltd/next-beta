@@ -67,11 +67,11 @@ const LoginButton = () => {
 
 						if (isOnboarded) {
 							const origin = localStorage.getItem("origin_href");
-							if (origin && origin !== window.location.href) {
+							if (origin) {
 								localStorage.removeItem("origin_href");
 								redirect(origin, RedirectType.replace);
-							}
-							redirect(window.location.origin !== "/" ? "/" : "/dashboard");
+							} else
+								redirect(window.location.origin !== "/" ? "/" : "/dashboard");
 						} else {
 							redirect("/dashboard/onboarding");
 						}
@@ -81,7 +81,7 @@ const LoginButton = () => {
 				}
 
 				setProcessing(false);
-				redirect(window.location.origin);
+				// redirect(window.location.origin);
 			} else {
 				setInitialized(false);
 				setProcessing(false);
@@ -164,7 +164,6 @@ const LoginButton = () => {
 
 	if (isAuthenticated) {
 		redirect(redirectUrl, RedirectType.replace);
-		return null;
 	}
 
 	return (
