@@ -8,8 +8,10 @@ import { RedirectType, redirect } from "next/navigation";
 export default function Home() {
 	const { isAuthenticated, isLoading } = useAuth0();
 
-	if (isAuthenticated && !isLoading) {
+	if (!isAuthenticated && !isLoading) {
 		redirect("/login", RedirectType.replace);
+	} else {
+		redirect("/dashboard", RedirectType.replace);
 	}
 
 	return (
