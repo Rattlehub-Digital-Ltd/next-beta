@@ -13,7 +13,11 @@ import { useGetProducts } from "@/api/services/dashboard/subscription/queries";
 import { Spinner } from "@/components/ui/spinner";
 
 export default function SplashScreen() {
-	const { getIdTokenClaims, isLoading: isAuthLoading } = useAuth0();
+	const {
+		getIdTokenClaims,
+		isAuthenticated,
+		isLoading: isAuthLoading,
+	} = useAuth0();
 
 	const { setIsOnboarded, setIsEmailVerified } = useOnboardingStore();
 	const { setActivity } = useActivitySummaryStore();
@@ -43,6 +47,12 @@ export default function SplashScreen() {
 			isAuthLoading
 		)
 			return;
+
+		console.log(isAuthenticated);
+
+		if (!isAuthenticated) {
+			redirect("/login", RedirectType.replace);
+		}
 
 		const idTokenClaims = await getIdTokenClaims();
 		if (idTokenClaims) {
@@ -104,6 +114,7 @@ export default function SplashScreen() {
 		isLoadingOnboarding,
 		isLoadingProducts,
 		isAuthLoading,
+		isAuthenticated,
 	]);
 
 	useEffect(() => {

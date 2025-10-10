@@ -33,7 +33,7 @@ export default function DrawerTabsCard({ item }: DrawerTabsCardProps) {
 
 						<TabsTrigger className="px-2 flex-none" value="services">
 							<Icon icon="fluent:handshake-20-filled" className="!w-5 !h-5" />
-							Providers
+							Get help
 						</TabsTrigger>
 						{/* <TabsTrigger className="px-2 flex-none" value="articles">
 							<Icon icon="fluent:news-20-filled" className="!w-5 !h-5" />

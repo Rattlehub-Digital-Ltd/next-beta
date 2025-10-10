@@ -6,10 +6,12 @@ import { type PropsWithChildren, useEffect } from "react";
 import { useAppStore } from "store/use-app-store";
 import { appConfig } from "@/config/app.config";
 import { useAnalytics } from "@/hooks/use-analytics";
+import useUTMPersistence from "@/hooks/use-utm-persistence";
 
 const key = "https://app.nextdot.ai/userid";
 
 export default function ProtectedRoute({ children }: PropsWithChildren) {
+	useUTMPersistence(window.location.search);
 	const { isAuthenticated, user } = useAuth0();
 
 	const { isAdmin } = useAppStore();
