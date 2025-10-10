@@ -117,7 +117,9 @@ const LoginButton = () => {
 						returnTo: redirectUrl,
 					},
 				})
-					.then(console.log)
+					.then(async () => {
+						await loadData();
+					})
 					.finally(() => {
 						setProcessing(false);
 					});
@@ -127,7 +129,7 @@ const LoginButton = () => {
 				setProcessing(false);
 			}
 		}
-	}, [isAuthenticated, isLoading, loginWithRedirect, redirectUrl]);
+	}, [isAuthenticated, isLoading, loginWithRedirect, redirectUrl, loadData]);
 
 	const autoSignIn = useCallback(async () => {
 		if (isAuthenticated && !isLoading) {
@@ -146,7 +148,7 @@ const LoginButton = () => {
 					}
 				})
 				.catch((error) => console.log("Error getting access token:", error))
-				.finally(() => {
+				.finally(async () => {
 					setProcessing(false);
 				});
 		}
