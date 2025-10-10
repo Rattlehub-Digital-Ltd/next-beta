@@ -60,13 +60,13 @@ export const track = (
 		};
 		EventSchema.parse(event);
 
-		const deviceInfo = navigator ? navigator.userAgent : "unknown";
+		// const deviceInfo = navigator ? navigator.userAgent : "unknown";
 
 		if (analytics) {
 			analytics.track(eventName, {
 				...getUTMParams(),
 				...(payload ?? {}),
-				user_agent: deviceInfo,
+				// user_agent: deviceInfo,
 			});
 		}
 	} catch (error) {
