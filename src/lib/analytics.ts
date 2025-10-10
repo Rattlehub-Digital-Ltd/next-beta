@@ -33,36 +33,6 @@ const removeEmptyValues = (obj: Record<string, string | undefined>) => {
 	);
 };
 
-export const storeUTMParams = () => {
-	console.log("storeUTMParams called", window);
-	if (typeof window === "undefined" || !window.sessionStorage) {
-		return;
-	}
-
-	try {
-		const urlParams = new URLSearchParams(window.location.search);
-		console.log("urlParams", urlParams);
-		const keys = [
-			"utm_source",
-			"utm_medium",
-			"utm_campaign",
-			"utm_term",
-			"utm_content",
-		];
-		keys.forEach((key) => {
-			const value = urlParams.get(key);
-			console.log(value);
-			if (value) {
-				sessionStorage.setItem(key, value);
-			}
-		});
-
-		console.log("keys", keys);
-	} catch (error) {
-		console.log(error);
-	}
-};
-
 export function getUTMParams() {
 	if (typeof window === "undefined" || !window.sessionStorage) {
 		return {};
@@ -90,13 +60,13 @@ export const track = (
 		};
 		EventSchema.parse(event);
 
-		const deviceInfo = navigator ? navigator.userAgent : {};
+		const deviceInfo = navigator ? navigator.userAgent : "unknown";
 
 		if (analytics) {
 			analytics.track(eventName, {
 				...getUTMParams(),
 				...(payload ?? {}),
-				...deviceInfo,
+				user_agent: deviceInfo,
 			});
 		}
 	} catch (error) {

@@ -47,7 +47,11 @@ const items: BottomTabBarItemProps[] = [
 	},
 ];
 
-function BottomTabBar() {
+type BottomTabBarProps = {
+	onChange: () => void;
+};
+
+function BottomTabBar({ onChange }: BottomTabBarProps) {
 	const pathname = usePathname();
 	const { activity } = useActivitySummaryStore();
 
@@ -72,6 +76,7 @@ function BottomTabBar() {
 								"relative flex flex-col items-center justify-center py-4 w-16 h-full text-[#6B6B6B] space-y-1.5",
 								{ "text-blue-600": isActive },
 							)}
+							onClick={onChange}
 						>
 							<div className="h-6 w-6 shrink-0 relative">
 								<Icon

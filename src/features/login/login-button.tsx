@@ -72,8 +72,7 @@ const LoginButton = () => {
 							if (origin) {
 								sessionStorage.removeItem("origin_href");
 								redirect(origin, RedirectType.replace);
-							} else
-								redirect(window.location.origin !== "/" ? "/" : "/dashboard");
+							} else redirect(redirectUrl);
 						} else {
 							redirect("/dashboard/onboarding");
 						}
@@ -102,6 +101,7 @@ const LoginButton = () => {
 		user,
 		isLoadingActivity,
 		isLoadingOnboarding,
+		redirectUrl,
 	]);
 
 	const authenticate = useCallback(async () => {
