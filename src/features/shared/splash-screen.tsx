@@ -13,12 +13,7 @@ import { useGetProducts } from "@/api/services/dashboard/subscription/queries";
 import { Spinner } from "@/components/ui/spinner";
 
 export default function SplashScreen() {
-	const {
-		isAuthenticated,
-		getIdTokenClaims,
-		isLoading: isAuthLoading,
-	} = useAuth0();
-	console.log("splash screen rendered", { isAuthenticated });
+	const { getIdTokenClaims, isLoading: isAuthLoading } = useAuth0();
 
 	const { setIsOnboarded, setIsEmailVerified } = useOnboardingStore();
 	const { setActivity } = useActivitySummaryStore();

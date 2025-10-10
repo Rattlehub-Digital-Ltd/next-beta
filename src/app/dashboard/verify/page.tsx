@@ -16,7 +16,7 @@ const title = "Verify your email address";
 const description = "You have not verified your email address";
 
 function EmailVerify() {
-	const { user } = useAuth0();
+	const { user, isLoading } = useAuth0();
 	const hubUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL as string}/messaging`;
 
 	const { refetch: verifyEmail } = useVerifyEmail();
@@ -31,18 +31,23 @@ function EmailVerify() {
 	const [isActive, setIsActive] = useState(true);
 
 	useEffect(() => {
+		if (isLoading) return;
+
 		if (
 			isEmailVerified ||
 			!onboardingStatus ||
 			onboardingStatus?.isEmailVerified
 		) {
-			redirect("/dashboard/onboarding");
+			if (onboardingStatus?.isOnboarded) {
+				redirect("/dashboard");
+			} else if (!onboardingStatus?.isOnboarded)
+				redirect("/dashboard/onboarding");
 		}
 
 		setProccessing(true);
 
 		verifyEmail().finally(() => setProccessing(false));
-	}, [isEmailVerified, verifyEmail, onboardingStatus]);
+	}, [isEmailVerified, verifyEmail, onboardingStatus, isLoading]);
 
 	useEffect(() => {
 		let interval: NodeJS.Timeout | null = null;
@@ -70,7 +75,8 @@ function EmailVerify() {
 			const message = messages[0];
 			setIsEmailVerified(message.isEmailVerified);
 			if (message.isEmailVerified) {
-				redirect("/dashboard/onboarding");
+				if (message.isOnboarded) redirect("/dashboard");
+				else redirect("/dashboard/onboarding");
 			}
 		}
 	}, [messages, setIsEmailVerified]);
@@ -89,6 +95,8 @@ function EmailVerify() {
 			name = user.nickname;
 		}
 	}
+
+	if (onboardingStatus?.isEmailVerified || isLoading) return;
 
 	return (
 		<div className="pt-8 space-y-8 pb-8">
