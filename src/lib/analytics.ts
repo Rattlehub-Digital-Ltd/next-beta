@@ -62,7 +62,7 @@ export const track = (
 
 		const deviceInfo = navigator ? navigator.userAgent : {};
 
-		if (process.env.NODE_ENV === "production" && analytics) {
+		if (analytics) {
 			analytics.track(eventName, {
 				...getUTMParams(),
 				...(payload ?? {}),
@@ -78,9 +78,11 @@ export const identify = (
 	userId: string,
 	traits?: Record<string, string | object>,
 ) => {
-	if (process.env.NODE_ENV === "development") return;
-
-	analytics.identify(userId, { ...getUTMParams(), ...(traits ?? {}) });
+	try {
+		analytics.identify(userId, { ...getUTMParams(), ...(traits ?? {}) });
+	} catch (error) {
+		console.log("Analytics identify error:", error);
+	}
 };
 
 export default analytics;

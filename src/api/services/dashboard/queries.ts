@@ -16,7 +16,8 @@ import type { Document } from "@/types/document";
 import { dashboardEndpoints } from "./endpoints";
 
 export const useGetActivitySummary = () => {
-	const { client } = useAxios();
+	const { client, accessToken } = useAxios();
+	client.defaults.headers.Authorization = `Bearer ${accessToken}`;
 
 	return useQuery({
 		queryKey: ["activity_summary"],

@@ -9,12 +9,12 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { appConfig } from "@/config/app.config";
 
 export default function useAxios() {
-	const { getAccessTokenSilently, isAuthenticated } = useAuth0();
+	const { getAccessTokenSilently, isAuthenticated, isLoading } = useAuth0();
 	const [accessToken, setAccessToken] = useState<string | null>();
 
 	const initialize = useCallback(async () => {
 		try {
-			if (!isAuthenticated) return null;
+			if (!isAuthenticated || isLoading) return;
 
 			const accessToken = await getAccessTokenSilently({
 				authorizationParams: {
@@ -29,7 +29,7 @@ export default function useAxios() {
 			console.log("Error getting access token:", error);
 			return null;
 		}
-	}, [getAccessTokenSilently, isAuthenticated]);
+	}, [getAccessTokenSilently, isAuthenticated, isLoading]);
 
 	useEffect(() => {
 		initialize();
@@ -38,6 +38,7 @@ export default function useAxios() {
 	const client: AxiosInstance = useMemo(() => {
 		const config: CreateAxiosDefaults = {
 			baseURL: `${process.env.NEXT_PUBLIC_API_BASE_URL as string}/${appConfig.apiBasePath}`,
+			timeout: 25000,
 			headers: {
 				Accept: "application/json, text/plain, */*",
 				"Content-Type": "application/json",
@@ -49,7 +50,14 @@ export default function useAxios() {
 
 		instance.interceptors.request.use(
 			async (config: InternalAxiosRequestConfig) => {
-				const bearerToken = accessToken ?? (await initialize());
+				const bearerToken = await getAccessTokenSilently({
+					authorizationParams: {
+						audience: process.env.NEXT_PUBLIC_AUDIENCE as string,
+					},
+				});
+
+				setAccessToken(bearerToken);
+
 				if (bearerToken) {
 					config.headers.Authorization = `Bearer ${bearerToken}`;
 				}
@@ -91,7 +99,20 @@ export default function useAxios() {
 		);
 
 		return instance;
-	}, [initialize, accessToken]);
+	}, [getAccessTokenSilently]);
 
-	return { client, accessToken };
+	const getClient = useCallback(async () => {
+		try {
+			const accessToken = await initialize();
+
+			client.defaults.headers.Authorization = `Bearer ${accessToken}`;
+
+			return client;
+		} catch (error) {
+			console.log("Error getting access token:", error);
+			return null;
+		}
+	}, [client, initialize]);
+
+	return { getClient, client, accessToken };
 }

@@ -12,7 +12,7 @@ import type { IsOnboardedStatus } from "@/api/services/dashboard/onboarding/type
 import useAxios from "./use-axios";
 
 const useSignalR = (hubUrl: string) => {
-	const { data: onboardingStatus } = useGetOnboarding();
+	const { data: onboardingStatus, isLoading } = useGetOnboarding();
 
 	const { accessToken } = useAxios();
 	const [connection, setConnection] = useState<HubConnection | null>(null);
@@ -23,7 +23,8 @@ const useSignalR = (hubUrl: string) => {
 			!accessToken ||
 			!hubUrl ||
 			!onboardingStatus ||
-			onboardingStatus?.isEmailVerified
+			onboardingStatus?.isEmailVerified ||
+			isLoading
 		)
 			return;
 
@@ -38,7 +39,7 @@ const useSignalR = (hubUrl: string) => {
 			.build();
 
 		setConnection(newConnection);
-	}, [hubUrl, accessToken, onboardingStatus]);
+	}, [hubUrl, accessToken, onboardingStatus, isLoading]);
 
 	useEffect(() => {
 		if (connection) {
