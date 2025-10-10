@@ -118,7 +118,7 @@ export const identify = (
 	traits?: Record<string, string | object>,
 ) => {
 	try {
-		analytics.identify(userId, { ...getUTMParams(), ...(traits ?? {}) });
+		analytics.identify(userId, { ...(traits ?? {}) });
 	} catch (error) {
 		console.log("Analytics identify error:", error);
 	}

@@ -58,8 +58,6 @@ function OnboardingPage() {
 	}, [api]);
 
 	useEffect(() => {
-		if (isOnboarded && !successDialogOpen) redirect("/dashboard");
-
 		// Partner
 		setPreviousButtonDisabled(current === 1);
 
@@ -152,8 +150,6 @@ function OnboardingPage() {
 		documents,
 		setTitle,
 		setType,
-		successDialogOpen,
-		isOnboarded,
 	]);
 
 	const scrollNext = () => {
@@ -161,6 +157,8 @@ function OnboardingPage() {
 			api.scrollNext();
 		}
 	};
+
+	if (isOnboarded && !successDialogOpen) redirect("/dashboard");
 
 	return (
 		<div className="space-y-3 flex flex-col overflow-hidden">

@@ -16,7 +16,6 @@ function DashboardPage() {
 	const { isEmailVerified, isOnboarded } = useOnboardingStore();
 
 	const originHref = sessionStorage.getItem("origin_href");
-	console.log({ originHref });
 
 	if (!isEmailVerified) redirect("/dashboard/verify", RedirectType.replace);
 	if (!isOnboarded) redirect("/dashboard/onboarding", RedirectType.replace);
