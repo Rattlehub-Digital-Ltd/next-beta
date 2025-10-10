@@ -42,6 +42,8 @@ const useSignalR = (hubUrl: string) => {
 	}, [hubUrl, accessToken, onboardingStatus, isLoading]);
 
 	useEffect(() => {
+		if (onboardingStatus?.isEmailVerified) return;
+
 		if (connection) {
 			connection
 				.start()
@@ -60,7 +62,7 @@ const useSignalR = (hubUrl: string) => {
 				connection.stop();
 			};
 		}
-	}, [connection]);
+	}, [connection, onboardingStatus?.isEmailVerified]);
 
 	// Method to invoke a hub method, e.g., "SendMessage"
 	const sendMessage = (sender: string, content: string) => {
