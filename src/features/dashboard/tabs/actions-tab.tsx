@@ -132,7 +132,11 @@ export default function ActionsTab() {
 						onClick={() => {
 							fetchNextPage();
 							track("load_more_actions", {
-								page_params: JSON.stringify(data?.pageParams || ""),
+								page_params: {
+									currentPage: pageNumber,
+									totalPages,
+									totalItems,
+								},
 							});
 						}}
 					>
