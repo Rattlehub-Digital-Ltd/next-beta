@@ -74,6 +74,45 @@ export const track = (
 	}
 };
 
+// export const track = (
+// 	eventName: string,
+// 	payload?: Record<string, string | object | number | boolean>,
+// ) => {
+// 	if (
+// 		typeof window === "undefined" ||
+// 		!window.location ||
+// 		process.env.NODE_ENV === "development"
+// 	)
+// 		return;
+
+// 	try {
+// 		if (window.gtag) {
+// 			// Google Analytics
+// 			const gtag_enriched_context = {
+// 				...payload,
+// 				...getUTMParams(),
+// 			};
+
+// 			window.gtag("event", eventName, gtag_enriched_context);
+// 		}
+
+// 		if (window._cio && typeof window._cio.track === "function") {
+// 			// Customer.io
+// 			const cio_enriched_context = {
+// 				...payload,
+// 				page: window.location.href,
+// 				referrer: typeof document !== "undefined" ? document.referrer : "",
+// 				user_agent: typeof navigator !== "undefined" ? navigator.userAgent : "",
+// 				timestamp: new Date().toISOString(),
+// 				...getUTMParams(),
+// 			};
+// 			window._cio.track(eventName, cio_enriched_context);
+// 		}
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// };
+
 export const identify = (
 	userId: string,
 	traits?: Record<string, string | object>,
