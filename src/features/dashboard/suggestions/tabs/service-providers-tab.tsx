@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Markdown from "react-markdown";
 import type { ServiceProvider } from "@/api/services/dashboard/suggestion/types";
+import { ComingSoonBadge } from "@/features/shared/coming-soon-badge";
 
 type ServiceProvidersTabProps = {
 	serviceProviders: ServiceProvider[];
@@ -15,6 +16,15 @@ export default function ServiceProvidersTab({
 				<p className="text-[13px] font-medium">Service Providers</p>
 				<p className="text-xs text-[#616161]">
 					Companies that provides services for this topic.
+				</p>
+			</div>
+			<div className="flex items-center gap-2 flex-wrap py-2">
+				<ComingSoonBadge
+					variant="gradient"
+					className="text-[11px] whitespace-nowrap"
+				/>
+				<p className="text-[13.6px] font-medium">
+					Soon you'll be able to connect with service providers in our network
 				</p>
 			</div>
 			<div className="gap-2 flex items-center bg-[#006150]/3 p-2 rounded-[16px]">
@@ -35,6 +45,8 @@ export default function ServiceProvidersTab({
 					</p>
 					<a
 						href="https://www.oldmutual.co.za/"
+						target="_blank"
+						rel="noopener noreferrer"
 						className="text-[#006150] text-[0.75rem] font-semibold"
 					>
 						Visit Old Mutual
@@ -78,6 +90,14 @@ export default function ServiceProvidersTab({
 								<div className="text-pretty text-[#616161] text-[0.8rem] provider-summary-markdown">
 									<Markdown>{provider.summary}</Markdown>
 								</div>
+								<a
+									href="mailto:info@rattlehub.com"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="text-indigo-600 text-[0.75rem] font-semibold"
+								>
+									Contact NextDot
+								</a>
 							</div>
 						</div>
 					</li>
