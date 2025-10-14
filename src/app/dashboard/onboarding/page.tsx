@@ -19,7 +19,7 @@ import Dependents from "@/features/onboarding/dependents";
 import EstateChecklist from "@/features/onboarding/estate-checklist/estate-checklist";
 import Intro from "@/features/onboarding/intro";
 import Partner from "@/features/onboarding/partner";
-import SuccessDialog from "@/features/onboarding/success/success-dialog";
+// import SuccessDialog from "@/features/onboarding/success/success-dialog";
 import SummaryDialog from "@/features/onboarding/summary/summary-dialog";
 import Pagination from "@/features/shared/pagination";
 
@@ -43,7 +43,7 @@ function OnboardingPage() {
 	const [current, setCurrent] = useState(0);
 	const [count, setCount] = useState(0);
 	const [summaryOpen, setSummaryOpen] = useState(false);
-	const [successDialogOpen, setSuccessDialogOpen] = useState(false);
+	// const [successDialogOpen, setSuccessDialogOpen] = useState(false);
 
 	useEffect(() => {
 		if (!api) {
@@ -158,7 +158,7 @@ function OnboardingPage() {
 		}
 	};
 
-	if (isOnboarded && !successDialogOpen) redirect("/dashboard");
+	if (isOnboarded && !summaryOpen) redirect("/dashboard");
 
 	return (
 		<div className="space-y-3 flex flex-col overflow-hidden">
@@ -205,11 +205,11 @@ function OnboardingPage() {
 			<SummaryDialog
 				open={summaryOpen}
 				onClose={() => {
-					setSummaryOpen(false);
-					setSuccessDialogOpen(true);
+					// setSummaryOpen(false);
+					// setSuccessDialogOpen(true);
 				}}
 			/>
-			<SuccessDialog open={successDialogOpen} onClose={setSuccessDialogOpen} />
+			{/* <SuccessDialog open={successDialogOpen} onClose={setSuccessDialogOpen} /> */}
 		</div>
 	);
 }

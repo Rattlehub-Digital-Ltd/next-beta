@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { redirect } from "next/navigation";
+import { RedirectType, redirect } from "next/navigation";
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
 import {
@@ -60,8 +60,8 @@ export default function SuccessDialog({ open, onClose }: SuccessDialogProps) {
 						className="rounded-full h-10"
 						onClick={() => {
 							// setRedirectToDashboard(true);
-							onClose(false);
-							redirect("/dashboard");
+							redirect("/dashboard", RedirectType.replace);
+							//onClose(false);
 						}}
 					>
 						<SparkleIcon />

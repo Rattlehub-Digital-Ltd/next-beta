@@ -19,8 +19,9 @@ function DashboardPage() {
 	const originHref = sessionStorage.getItem("origin_href");
 
 	if (!isEmailVerified) redirect("/dashboard/verify", RedirectType.replace);
-	if (!isOnboarded) redirect("/dashboard/onboarding", RedirectType.replace);
-	if (originHref) {
+	else if (!isOnboarded)
+		redirect("/dashboard/onboarding", RedirectType.replace);
+	else if (originHref) {
 		sessionStorage.removeItem("origin_href");
 		redirect(originHref, RedirectType.replace);
 	}

@@ -9,6 +9,7 @@ import { useVerifyEmail } from "@/api/services/dashboard/verify/queries";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import Header from "@/features/shared/header";
+import Loading from "@/features/shared/loading";
 import useSignalR from "@/hooks/useSignalR";
 import { isValidEmail } from "@/lib/utils";
 
@@ -19,10 +20,14 @@ function EmailVerify() {
 	const { user, isLoading } = useAuth0();
 	const hubUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL as string}/messaging`;
 
-	const { refetch: verifyEmail } = useVerifyEmail();
+	const { refetch: verifyEmail, isLoading: isLoadingVerify } = useVerifyEmail();
 	const { setIsOnboarded, setIsEmailVerified, isEmailVerified } =
 		useOnboardingStore();
-	const { data: onboardingStatus, refetch } = useGetOnboarding();
+	const {
+		data: onboardingStatus,
+		isLoading: isOnboardingLoading,
+		refetch,
+	} = useGetOnboarding();
 
 	const { messages } = useSignalR(hubUrl);
 
@@ -31,7 +36,7 @@ function EmailVerify() {
 	const [isActive, setIsActive] = useState(true);
 
 	useEffect(() => {
-		if (isLoading) return;
+		if (isLoading || isOnboardingLoading) return;
 
 		if (
 			isEmailVerified ||
@@ -47,7 +52,13 @@ function EmailVerify() {
 		setProccessing(true);
 
 		verifyEmail().finally(() => setProccessing(false));
-	}, [isEmailVerified, verifyEmail, onboardingStatus, isLoading]);
+	}, [
+		isEmailVerified,
+		verifyEmail,
+		onboardingStatus,
+		isLoading,
+		isOnboardingLoading,
+	]);
 
 	useEffect(() => {
 		let interval: NodeJS.Timeout | null = null;
@@ -96,57 +107,70 @@ function EmailVerify() {
 		}
 	}
 
-	if (onboardingStatus?.isEmailVerified || isLoading) return;
+	// if (
+	// 	onboardingStatus?.isEmailVerified ||
+	// 	isLoading ||
+	// 	isLoadingVerify ||
+	// 	isOnboardingLoading
+	// )
+	// 	return;
+
+	const loading = isLoading || isLoadingVerify || isOnboardingLoading;
 
 	return (
-		<div className="pt-8 space-y-8 pb-8">
-			<Header title={title} description={description} />
+		<>
+			{loading && <Loading />}
+			{!loading && (
+				<div className="pt-8 space-y-8 pb-8">
+					<Header title={title} description={description} />
 
-			<div className="space-y-4 px-4 bg-[#F8F8F8]/95 py-4 border border-[#EBEDED] rounded-3xl backdrop-blur-[60px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)]">
-				<p className="text-sm text-pretty text-[#525f7f]">
-					Hi <span className="capitalize font-medium">{name}</span>
-					<br />
-					<br />
-					Check your inbox, we've sent you a verification email.
-					<br />
-					<br />
-					It might have landed in your spam/junk, check it there as well.
-				</p>
-				<Button
-					disabled={processing || isActive}
-					className="disabled:opacity-70 rounded-full"
-					onClick={async () => {
-						setProccessing(true);
-
-						await refetch();
-						if (onboardingStatus) {
-							setIsOnboarded(onboardingStatus.isOnboarded);
-							setIsEmailVerified(onboardingStatus.isEmailVerified);
-
-							if (onboardingStatus.isEmailVerified) {
-								redirect("/dashboard/onboarding");
-							} else {
-								await verifyEmail();
-							}
-						}
-
-						setProccessing(false);
-						reset();
-					}}
-				>
-					{processing && <Spinner />}
-					{processing ? "Resending..." : "Resend"}
-				</Button>
-				{isActive && (
-					<div>
-						<p className="text-xs text-pretty text-[#525f7f]">
-							Check your Inbox, can resend in{" "}
-							<span className="font-semibold">{seconds} seconds</span>
+					<div className="space-y-4 px-4 bg-[#F8F8F8]/95 py-4 border border-[#EBEDED] rounded-3xl backdrop-blur-[60px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)]">
+						<p className="text-sm text-pretty text-[#525f7f]">
+							Hi <span className="capitalize font-medium">{name}</span>
+							<br />
+							<br />
+							Check your inbox, we've sent you a verification email.
+							<br />
+							<br />
+							It might have landed in your spam/junk, check it there as well.
 						</p>
+						<Button
+							disabled={processing || isActive}
+							className="disabled:opacity-70 rounded-full"
+							onClick={async () => {
+								setProccessing(true);
+
+								await refetch();
+								if (onboardingStatus) {
+									setIsOnboarded(onboardingStatus.isOnboarded);
+									setIsEmailVerified(onboardingStatus.isEmailVerified);
+
+									if (onboardingStatus.isEmailVerified) {
+										redirect("/dashboard/onboarding");
+									} else {
+										await verifyEmail();
+									}
+								}
+
+								setProccessing(false);
+								reset();
+							}}
+						>
+							{processing && <Spinner />}
+							{processing ? "Resending..." : "Resend"}
+						</Button>
+						{isActive && (
+							<div>
+								<p className="text-xs text-pretty text-[#525f7f]">
+									Check your Inbox, can resend in{" "}
+									<span className="font-semibold">{seconds} seconds</span>
+								</p>
+							</div>
+						)}
 					</div>
-				)}
-			</div>
-		</div>
+				</div>
+			)}
+		</>
 	);
 }
 

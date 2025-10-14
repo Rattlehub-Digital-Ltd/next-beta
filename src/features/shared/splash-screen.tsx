@@ -48,8 +48,6 @@ export default function SplashScreen() {
 		)
 			return;
 
-		console.log(isAuthenticated);
-
 		if (!isAuthenticated) {
 			redirect("/login", RedirectType.replace);
 		}

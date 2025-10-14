@@ -83,8 +83,9 @@ export default function ServiceProvidersTab({
 									priority
 									src="/logo_light.svg"
 									alt="Nextdot Logo"
-									width={101}
-									height={12}
+									width={84}
+									height={10}
+									className="mt-1"
 								/>
 								{/* <p className="text-[0.8rem] font-semibold">{provider.name}</p> */}
 								<div className="text-pretty text-[#616161] text-[0.8rem] provider-summary-markdown">

@@ -21,7 +21,7 @@ export default function DrawerTabsCard({ item }: DrawerTabsCardProps) {
 								icon="fluent:shield-error-24-filled"
 								className="!w-5 !h-5"
 							/>
-							Suggested for
+							Suggested
 						</TabsTrigger>
 						<TabsTrigger className="px-2 gap-1 flex-none" value="people">
 							<Icon

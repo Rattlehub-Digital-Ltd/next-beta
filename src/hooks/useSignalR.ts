@@ -42,7 +42,8 @@ const useSignalR = (hubUrl: string) => {
 	}, [hubUrl, accessToken, onboardingStatus, isLoading]);
 
 	useEffect(() => {
-		if (onboardingStatus?.isEmailVerified) return;
+		if (!onboardingStatus || onboardingStatus?.isEmailVerified || isLoading)
+			return;
 
 		if (connection) {
 			connection
@@ -55,14 +56,14 @@ const useSignalR = (hubUrl: string) => {
 						setMessages((prevMessages) => [...prevMessages, message]);
 					});
 				})
-				.catch((error) => console.error("SignalR connection failed: ", error));
+				.catch((error) => console.log("SignalR connection failed: ", error));
 
 			// Clean up the connection when the component unmounts
-			return () => {
-				connection.stop();
-			};
+			// return () => {
+			// 	connection.stop();
+			// };
 		}
-	}, [connection, onboardingStatus?.isEmailVerified]);
+	}, [connection, onboardingStatus, isLoading]);
 
 	// Method to invoke a hub method, e.g., "SendMessage"
 	const sendMessage = (sender: string, content: string) => {
