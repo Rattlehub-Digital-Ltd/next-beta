@@ -87,6 +87,33 @@ export const useInfiniteGetDocuments = () => {
 	});
 };
 
+export const useGetCampaignDocuments = (utm_campaign: string) => {
+	const { client } = useAxios();
+
+	const headers: Record<string, string> = {};
+
+	headers["x-campaign"] = utm_campaign;
+
+	return useQuery({
+		queryKey: ["documents", utm_campaign],
+		queryFn: async () => {
+			if (!utm_campaign || utm_campaign === "") return null;
+
+			const { data } = await client.get<ActionsResponse>(
+				dashboardEndpoints.getDocuments({ page: 1, limit: 3 }),
+				{
+					headers: {
+						...headers,
+					},
+				},
+			);
+
+			return data;
+		},
+		enabled: false,
+	});
+};
+
 export const useGetAdaptiveCard = (referer: string, recordId?: string) => {
 	const queryClient = useQueryClient();
 	const { client } = useAxios();

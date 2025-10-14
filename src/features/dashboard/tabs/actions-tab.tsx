@@ -170,7 +170,7 @@ export default function ActionsTab() {
 	);
 }
 
-const LoadingSkeleton = () => {
+export const LoadingSkeleton = () => {
 	return (
 		<div className="flex flex-col space-y-3 p-4 rounded-[23px] border border-[#EBEDED] backdrop-blur-[25px] bg-white/65 shadow-[0px_16px_30px_0px rgba(106, 106, 106, 0.06)]">
 			{/* Header */}

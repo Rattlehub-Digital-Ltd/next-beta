@@ -3,6 +3,7 @@
 import * as motion from "motion/react-client";
 import { RedirectType, redirect } from "next/navigation";
 import { useOnboardingStore } from "store/use-onboarding-store";
+import CampaignResponsePopup from "@/features/dashboard/campagaign-response/campaign-response-popup";
 import SummaryCard from "@/features/dashboard/summary-card";
 import TabsCard from "@/features/dashboard/tabs-card";
 import Header from "@/features/shared/header";
@@ -55,6 +56,7 @@ function DashboardPage() {
 				</motion.div>
 			</motion.div>
 			<TabsCard />
+			<CampaignResponsePopup utm={window.location.search} />
 		</div>
 	);
 }
