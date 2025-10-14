@@ -115,6 +115,7 @@ export default function SummaryDialog({ open }: SummaryDialogProps) {
 			<AlertDialogContent
 				className={cn("overflow-y-auto rounded-3xl py-0", {
 					"h-[85svh]": !isComplete,
+					"h-auto overflow-hidden": isComplete,
 				})}
 			>
 				<AlertDialogHeader className="sticky top-0 left-0 py-4 bg-white/50 backdrop-blur-md z-10">
@@ -128,12 +129,14 @@ export default function SummaryDialog({ open }: SummaryDialogProps) {
 					</AlertDialogDescription>
 				</AlertDialogHeader>
 				<div
-					className={cn("grow", { "opacity-75": submitOnboarding.isPending })}
+					className={cn("grow w-full", {
+						"opacity-75": submitOnboarding.isPending,
+					})}
 				>
 					{!isComplete && <Summary />}
 					{isComplete && (
-						<div className="w-full">
-							<div className="flex items-center justify-center w-full pt-4 pb-4">
+						<div className="w-full h-full overflow-hidden flex flex-col">
+							<div className="flex items-center justify-center w-full pt-4 pb-4 overflow-hidden">
 								<div>
 									<Image
 										alt=""
