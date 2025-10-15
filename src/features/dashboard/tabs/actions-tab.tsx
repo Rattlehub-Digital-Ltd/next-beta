@@ -125,9 +125,9 @@ export default function ActionsTab() {
 			)}
 
 			{showLoadMore && (
-				<motion.div className="px-2" whileTap={{ scale: 0.95 }}>
+				<motion.div className="px-0" whileTap={{ scale: 0.95 }}>
 					<Button
-						className="w-full bg-white/75 backdrop-blur-2xl text-foreground hover:bg-white/85 hover:text-foreground rounded-[12px] text-[13px] font-medium font-mono"
+						className="w-full bg-white/75 backdrop-blur-2xl text-foreground hover:bg-white/85 hover:text-foreground rounded-full text-[13px] font-medium font-mono"
 						disabled={!hasNextPage || isFetching}
 						onClick={() => {
 							fetchNextPage();
