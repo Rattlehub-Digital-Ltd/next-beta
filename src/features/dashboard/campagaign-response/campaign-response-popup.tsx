@@ -99,7 +99,7 @@ function CampaignResponsePopup({ utm }: CampaignResponsePopupProps) {
 
 	return (
 		<AlertDialog open={isOpen} onOpenChange={setIsOpen}>
-			<AlertDialogContent className="h-[95vh] rounded-3xl gap-2 px-0 bg-white/85 backdrop-blur-[14px] outline-gray-100">
+			<AlertDialogContent className="h-[95vh] rounded-3xl gap-2  overflow-y-auto px-0 bg-white/85 backdrop-blur-[14px] outline-gray-100">
 				<VisuallyHidden>
 					<AlertDialogHeader className="px-6">
 						<AlertDialogTitle className="text-left flex items-center gap-2">
@@ -112,7 +112,7 @@ function CampaignResponsePopup({ utm }: CampaignResponsePopupProps) {
 						</AlertDialogDescription>
 					</AlertDialogHeader>
 				</VisuallyHidden>
-				<div className="flex flex-col grow overflow-y-auto pt-4">
+				<div className="flex flex-col grow">
 					{(isLoading || submitAdaptiveCardData.isPending) && (
 						<Loading className="rounded-3xl overflow-hidden" />
 					)}
