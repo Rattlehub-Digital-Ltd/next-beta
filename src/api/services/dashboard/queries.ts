@@ -84,6 +84,11 @@ export const useInfiniteGetDocuments = () => {
 			if (lastBatch < lastPage.pageSize) return undefined;
 			return allPages.length + 1;
 		},
+		// getNextPageParam: (lastPage, allPages) => {
+		// 	const lastBatch = lastPage.totalItems ?? 0;
+		// 	if (lastBatch < lastPage.pageSize) return undefined;
+		// 	return allPages.length + 1;
+		// },
 	});
 };
 
