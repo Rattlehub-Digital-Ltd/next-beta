@@ -1,6 +1,7 @@
 "use client";
 
 import { Icon } from "@iconify/react";
+import { VisuallyHidden } from "@react-aria/visually-hidden";
 import { useCallback, useEffect, useState } from "react";
 import {
 	useGetAdaptiveCard,
@@ -99,16 +100,18 @@ function CampaignResponsePopup({ utm }: CampaignResponsePopupProps) {
 	return (
 		<AlertDialog open={isOpen} onOpenChange={setIsOpen}>
 			<AlertDialogContent className="h-[95vh] rounded-3xl gap-2 px-0 bg-white/85 backdrop-blur-[14px] outline-gray-100">
-				<AlertDialogHeader className="px-6">
-					<AlertDialogTitle className="text-left flex items-center gap-2">
-						<Icon icon="fluent-color:shield-24" height={24} width={24} />
-						Stay Protected
-					</AlertDialogTitle>
-					<AlertDialogDescription className="text-left">
-						Good job on responding to the email, here are those 3 actions you
-						needed to complete
-					</AlertDialogDescription>
-				</AlertDialogHeader>
+				<VisuallyHidden>
+					<AlertDialogHeader className="px-6">
+						<AlertDialogTitle className="text-left flex items-center gap-2">
+							<Icon icon="fluent-color:shield-24" height={24} width={24} />
+							Stay Protected
+						</AlertDialogTitle>
+						<AlertDialogDescription className="text-left">
+							Good job on responding to the email, here are those 3 actions you
+							needed to complete
+						</AlertDialogDescription>
+					</AlertDialogHeader>
+				</VisuallyHidden>
 				<div className="flex flex-col grow overflow-y-auto pt-4">
 					{(isLoading || submitAdaptiveCardData.isPending) && (
 						<Loading className="rounded-3xl overflow-hidden" />
