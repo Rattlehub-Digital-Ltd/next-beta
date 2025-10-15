@@ -27,7 +27,7 @@ export default function ServiceProvidersTab({
 					Soon you'll be able to connect with service providers in our network
 				</p>
 			</div>
-			<div className="gap-2 flex items-center bg-[#006150]/3 p-2 rounded-[16px]">
+			{/* <div className="gap-2 flex items-center bg-[#006150]/3 p-2 rounded-[16px]">
 				<div className="rounded-[12px] h-[88px] w-[88px] shrink-0">
 					<Image src="/image.png" alt="" height={88} width={88} />
 				</div>
@@ -52,7 +52,7 @@ export default function ServiceProvidersTab({
 						Visit Old Mutual
 					</a>
 				</div>
-			</div>
+			</div> */}
 			<ul className="space-y-3">
 				{serviceProviders.map((provider, index) => (
 					<li key={`${provider.name}-${provider.summary}`}>
@@ -78,15 +78,16 @@ export default function ServiceProvidersTab({
 									width={88}
 								/>
 							</div>
-							<div className="space-y-2">
-								<Image
+							<div className="space-y-1">
+								<p className="font-semibold text-[13px]">{provider.name}</p>
+								{/* <Image
 									priority
 									src="/logo_light.svg"
 									alt="Nextdot Logo"
 									width={84}
 									height={10}
 									className="mt-1"
-								/>
+								/> */}
 								{/* <p className="text-[0.8rem] font-semibold">{provider.name}</p> */}
 								<div className="text-pretty text-[#616161] text-[0.8rem] provider-summary-markdown">
 									<Markdown>{provider.summary}</Markdown>
