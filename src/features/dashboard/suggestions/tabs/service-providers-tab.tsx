@@ -23,8 +23,9 @@ export default function ServiceProvidersTab({
 					variant="gradient"
 					className="text-[11px] whitespace-nowrap"
 				/>
-				<p className="text-[13.6px] font-medium">
+				<p className="text-[13px] text-muted-foreground text-pretty">
 					Soon you'll be able to connect with service providers in our network
+					to assist you.
 				</p>
 			</div>
 			{/* <div className="gap-2 flex items-center bg-[#006150]/3 p-2 rounded-[16px]">
@@ -56,7 +57,7 @@ export default function ServiceProvidersTab({
 			<ul className="space-y-3">
 				{serviceProviders.map((provider, index) => (
 					<li key={`${provider.name}-${provider.summary}`}>
-						<div className="flex gap-2 bg-indigo-50/80 border border-[#c2c2c2]/30 rounded-[16px] p-2">
+						<div className="flex gap-2 bg-gray-100 border border-[#c2c2c2]/30 rounded-[16px] p-2">
 							{/* <div className="relative h-10 w-10 flex items-center justify-center rounded-[10px] shrink-0 bg-[#5856D6]/15">
 								<div className="h-[32px] w-[32px] shrink-0 rounded-[8px] flex items-center justify-center text-white/95 bg-[#5856D6]">
 									<Icon
@@ -96,7 +97,7 @@ export default function ServiceProvidersTab({
 									href="mailto:info@rattlehub.com"
 									target="_blank"
 									rel="noopener noreferrer"
-									className="text-indigo-600 text-[0.75rem] font-semibold"
+									className="text-blue-600 text-[0.75rem] font-semibold"
 								>
 									Contact NextDot
 								</a>
