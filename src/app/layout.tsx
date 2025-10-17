@@ -31,7 +31,7 @@ export default function RootLayout({
 			<head>
 				<Script
 					strategy="afterInteractive"
-					src="https://unpkg.com/adaptivecards@3.0.4/dist/adaptivecards.min.js"
+					src="https://unpkg.com/adaptivecards@3.0.0/dist/adaptivecards.min.js"
 					crossOrigin="anonymous"
 				/>
 				<link

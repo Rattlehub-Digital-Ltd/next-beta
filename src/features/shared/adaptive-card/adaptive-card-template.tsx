@@ -2,11 +2,11 @@ import * as AdaptiveCards from "adaptivecards";
 import MarkdownIt from "markdown-it";
 import { Geist_Mono, Mona_Sans } from "next/font/google";
 import { useCallback, useEffect, useRef, useState } from "react";
+import Swiper from "swiper";
 import type { LifeFileDocument } from "@/api/services/dashboard/overview/types";
 import { Spinner } from "@/components/ui/spinner";
 import { track } from "@/lib/analytics";
 import type { ActionItem } from "@/types/action-item";
-import Swiper from "swiper";
 
 const adaptiveCard = new AdaptiveCards.AdaptiveCard();
 
