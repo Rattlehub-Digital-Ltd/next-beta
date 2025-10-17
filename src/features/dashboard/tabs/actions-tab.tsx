@@ -1,11 +1,9 @@
 "use client";
 
 import { Icon } from "@iconify/react";
-import { type InfiniteData, useQueryClient } from "@tanstack/react-query";
 import * as motion from "motion/react-client";
 import { useCallback } from "react";
 import ShortUniqueId from "short-unique-id";
-import { queryKeys } from "@/api/queryClient";
 import { useInfiniteGetDocuments } from "@/api/services/dashboard/queries";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -14,14 +12,14 @@ import RiskCarousel from "@/features/shared/risk-carousel";
 import SuggestionItem from "@/features/shared/suggestion-item";
 import { track } from "@/lib/analytics";
 import { cardVariants } from "@/motion";
-import type { ActionItem, ActionsResponse } from "@/types/action-item";
+import type { ActionItem } from "@/types/action-item";
 import CardFooter from "./card-footer";
 
 const uid = new ShortUniqueId({ length: 10 });
 
 export default function ActionsTab() {
-	const queryClient = useQueryClient();
-	const queryKey = [...queryKeys.documents.all];
+	// const queryClient = useQueryClient();
+	// const queryKey = [...queryKeys.documents.all];
 
 	const {
 		data,
@@ -49,23 +47,23 @@ export default function ActionsTab() {
 	const showLoadMore =
 		totalPages > 1 && pageNumber < totalPages && currentItemsCount < totalItems;
 
-	const handleRefresh = () => {
-		// 1. Manually set the cache data to only the first page.
-		queryClient.setQueryData(
-			queryKey,
-			(oldData: InfiniteData<ActionsResponse, unknown> | undefined) => {
-				if (!oldData) return oldData;
-				return {
-					...oldData,
-					pages: oldData.pages.slice(0, 1),
-					pageParams: oldData.pageParams.slice(0, 1),
-				};
-			},
-		);
+	// const handleRefresh = () => {
+	// 	// 1. Manually set the cache data to only the first page.
+	// 	queryClient.setQueryData(
+	// 		queryKey,
+	// 		(oldData: InfiniteData<ActionsResponse, unknown> | undefined) => {
+	// 			if (!oldData) return oldData;
+	// 			return {
+	// 				...oldData,
+	// 				pages: oldData.pages.slice(0, 1),
+	// 				pageParams: oldData.pageParams.slice(0, 1),
+	// 			};
+	// 		},
+	// 	);
 
-		// 2. Trigger a refetch to get the latest first page.
-		refetch();
-	};
+	// 	// 2. Trigger a refetch to get the latest first page.
+	// 	refetch();
+	// };
 
 	const handleOnRiskItemChange = useCallback(
 		(index: number, item: ActionItem) => {
@@ -130,11 +128,7 @@ export default function ActionsTab() {
 										</div>
 
 										<Separator className="bg-black/5 px-4" />
-										<CardFooter
-											item={item}
-											recordId={id}
-											refresh={handleRefresh}
-										>
+										<CardFooter item={item} recordId={id} refresh={refetch}>
 											<span className="font-normal">
 												Do you have a{" "}
 												<span className="font-semibold">
