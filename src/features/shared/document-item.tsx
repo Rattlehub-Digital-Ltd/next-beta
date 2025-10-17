@@ -35,7 +35,7 @@ export default function DocumentItem({
 					width={18}
 					className="shrink-0"
 				/> */}
-				<p className="grow truncate text-xs">{affectedOwner}</p>
+				<p className="grow truncate text-xs text-left">{affectedOwner}</p>
 				<div>
 					{!isApplicable && (
 						<Icon
@@ -58,8 +58,10 @@ export default function DocumentItem({
 					)}
 				</div>
 			</div>
-			<div className="flex flex-col w-full space-y-1.5 mt-2">
-				<p className="text-xs font-semibold truncate">{displayName}</p>
+			<div className="flex flex-col w-full space-y-1.5 mt-2 text-left">
+				<p className="text-xs font-semibold truncate text-left">
+					{displayName}
+				</p>
 				{location && <DocumentLocationBadge label={location} count={count} />}
 			</div>
 		</div>

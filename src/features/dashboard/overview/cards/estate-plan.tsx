@@ -60,30 +60,31 @@ export default function EstatePlan() {
 
 							<div className="grid grid-cols-2 gap-3">
 								{items.map((item) => (
-									<AdaptiveCardButton
-										currentDocument={item}
-										key={uid.randomUUID()}
-										recordId={item.id}
-										referer="estate-plan"
-										refresh={refetch}
+									<motion.div
+										key={item.id}
+										className="w-full"
+										whileTap={{ scale: 0.95 }}
 									>
-										<motion.div
-											key={item.id}
-											className="w-full"
-											whileTap={{ scale: 0.95 }}
+										<AdaptiveCardButton
+											currentDocument={item}
+											recordId={item.id}
+											referer="estate-plan"
+											refresh={refetch}
 										>
-											<DocumentItem
-												key={item.id}
-												className={
-													item.isApplicable
-														? "bg-[#ECFDF5] ring-[#00C7BE]/80"
-														: ""
-												}
-												color={item.isApplicable ? "#00C7BE" : ""}
-												item={item}
-											/>
-										</motion.div>
-									</AdaptiveCardButton>
+											<button type="button">
+												<DocumentItem
+													key={item.id}
+													className={
+														item.isApplicable
+															? "bg-[#ECFDF5] ring-[#00C7BE]/80"
+															: ""
+													}
+													color={item.isApplicable ? "#00C7BE" : ""}
+													item={item}
+												/>
+											</button>
+										</AdaptiveCardButton>
+									</motion.div>
 								))}
 							</div>
 						</>

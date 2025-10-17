@@ -55,29 +55,30 @@ export default function LifeFileDocuments() {
 						<div className="grid grid-cols-2 gap-2">
 							{items.map((item) =>
 								!item.isApplicable ? (
-									<AdaptiveCardButton
-										currentDocument={item}
-										key={uid.randomUUID()}
-										recordId={item.id}
-										referer="life-file-documents"
-										refresh={refetch}
+									<motion.div
+										key={item.id}
+										className="w-full"
+										whileTap={{ scale: 0.95 }}
 									>
-										<motion.div
-											key={item.id}
-											className="w-full"
-											whileTap={{ scale: 0.95 }}
+										<AdaptiveCardButton
+											currentDocument={item}
+											recordId={item.id}
+											referer="life-file-documents"
+											refresh={refetch}
 										>
-											<DocumentItem
-												className={
-													item.isApplicable
-														? "bg-[#007AFF]/5 ring-[#007AFF]/80"
-														: ""
-												}
-												color={item.isApplicable ? "#007AFF" : ""}
-												item={item}
-											/>
-										</motion.div>
-									</AdaptiveCardButton>
+											<button type="button">
+												<DocumentItem
+													className={
+														item.isApplicable
+															? "bg-[#007AFF]/5 ring-[#007AFF]/80"
+															: ""
+													}
+													color={item.isApplicable ? "#007AFF" : ""}
+													item={item}
+												/>
+											</button>
+										</AdaptiveCardButton>
+									</motion.div>
 								) : (
 									<DocumentItem
 										key={item.id}
