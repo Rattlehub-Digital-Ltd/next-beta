@@ -1,321 +1,335 @@
+/* Carousel styling and iOS touch fixes */
+.ac-carousel {
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y pinch-zoom;
+  /* allow vertical scroll while swiping */
+}
+
+.swiper-wrapper {
+  display: flex;
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+.swiper-slide {
+  flex-shrink: 0;
+}
+
 .ac-container {
-	font-family: "Mona Sans", sans-serif !important;
-	position: relative;
-	margin-bottom: 6px !important;
+  font-family: "Mona Sans", sans-serif !important;
+  position: relative;
+  margin-bottom: 6px !important;
 }
 
 .ac-container > .ac-container {
-	border-radius: 12px !important;
+  border-radius: 12px !important;
 }
 
 .ac-actionSet button[aria-label="Cancel"] {
-	background-color: transparent !important;
-	border-width: 1 !important;
-	border-color: #2563ebe6 !important;
-	color: #2563ebe6 !important;
+  background-color: transparent !important;
+  border-width: 1 !important;
+  border-color: #2563ebe6 !important;
+  color: #2563ebe6 !important;
 }
 
 .ac-container:empty {
-	display: none !important;
+  display: none !important;
 }
 
 .ac-vertical-separator {
-	width: 12px !important;
+  width: 12px !important;
 }
 
 .ac-textBlock {
-	font-family: "Mona Sans", sans-serif !important;
+  font-family: "Mona Sans", sans-serif !important;
 }
 
 .ac-textBlock h2 {
-	font-size: 15px !important;
-	font-weight: 600 !important;
-	margin-top: 2px !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  margin-top: 2px !important;
 }
 
 .ac-adaptiveCard {
-	font-family: "Mona Sans", sans-serif !important;
-	height: 100% !important;
-	flex-grow: 1 !important;
-	flex: 1 !important;
-	width: 100% !important;
-	padding: 0 8px !important;
-	background-color: transparent !important;
+  font-family: "Mona Sans", sans-serif !important;
+  height: 100% !important;
+  flex-grow: 1 !important;
+  flex: 1 !important;
+  width: 100% !important;
+  padding: 0 8px !important;
+  background-color: transparent !important;
 }
 
 .ac-container .ac-adaptiveCard {
-	padding: 0 !important;
+  padding: 0 !important;
 }
 
 .ac-container .ac-actionSet {
-	width: 100%;
-	flex-direction: column !important;
-	gap: 4px !important;
+  width: 100%;
+  flex-direction: column !important;
+  gap: 4px !important;
 }
 
 .ac-columnSet {
-	gap: 6px !important;
-	align-items: center;
-	margin-bottom: 8px !important;
+  gap: 6px !important;
+  align-items: center;
+  margin-bottom: 8px !important;
 }
 
 .ac-textInput,
 .ac-input {
-	border-width: 1px;
-	border-radius: 16px;
-	height: 40px;
-	padding: 0 16px;
-	font-size: 16px;
-	border-color: #e4e4e7;
-	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  border-width: 1px;
+  border-radius: 16px;
+  height: 40px;
+  padding: 0 16px;
+  font-size: 16px;
+  border-color: #e4e4e7;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 
 .ac-pushButton {
-	background-color: #155dfc !important;
-	font-family: "Mona Sans", sans-serif !important;
-	height: 44px;
-	color: #fff !important;
-	font-weight: 600;
-	width: 100%;
-	padding: 0 32px;
-	font-size: 14px;
-	border-radius: 16px;
-	border-radius: 24px;
-	box-shadow:
-		rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-		rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-		rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
-		rgba(0, 0, 0, 0.1) 0px 1px 2px -1px;
+  background-color: #155dfc !important;
+  font-family: "Mona Sans", sans-serif !important;
+  height: 44px;
+  color: #fff !important;
+  font-weight: 600;
+  width: 100%;
+  padding: 0 32px;
+  font-size: 14px;
+  border-radius: 16px;
+  border-radius: 24px;
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.1) 0px 1px 2px -1px;
 }
 
 .ac-pushButton-disabled {
-	background-color: #2563ebe6;
-	font-family: "Mona Sans", sans-serif !important;
-	height: 44px;
-	color: #fff;
-	font-weight: 600;
-	width: 100%;
-	padding: 0 32px;
-	font-size: 14px;
-	border-radius: 16px;
-	border-radius: 24px;
-	opacity: 0.6;
+  background-color: #2563ebe6;
+  font-family: "Mona Sans", sans-serif !important;
+  height: 44px;
+  color: #fff;
+  font-weight: 600;
+  width: 100%;
+  padding: 0 32px;
+  font-size: 14px;
+  border-radius: 16px;
+  border-radius: 24px;
+  opacity: 0.6;
 }
 
 .ac-adaptiveCard > .ac-textBlock:first-child p {
-	margin-left: 24px !important;
-	font-size: 18px !important;
+  margin-left: 24px !important;
+  font-size: 18px !important;
 }
 
 .provider-summary-markdown a {
-	color: #2563eb !important;
-	text-decoration: underline !important;
-	font-weight: 600 !important;
+  color: #2563eb !important;
+  text-decoration: underline !important;
+  font-weight: 600 !important;
 }
 
 /* Target the specific select element using its classes */
 select.ac-input.ac-multichoiceInput.ac-choiceSetInput-compact {
-	/* --- Reset Browser Defaults & Basic Setup --- */
-	appearance: none; /* Remove default browser styling (most importantly, the default arrow) */
-	-webkit-appearance: none; /* Safari/Chrome */
-	-moz-appearance: none; /* Firefox */
-	display: inline-block; /* Or block, depending on layout needs */
-	width: 100%; /* Already set inline, but good practice */
-	box-sizing: border-box; /* Include padding and border in the element's total width and height */
-	cursor: pointer;
+  /* --- Reset Browser Defaults & Basic Setup --- */
+  appearance: none; /* Remove default browser styling (most importantly, the default arrow) */
+  -webkit-appearance: none; /* Safari/Chrome */
+  -moz-appearance: none; /* Firefox */
+  display: inline-block; /* Or block, depending on layout needs */
+  width: 100%; /* Already set inline, but good practice */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  cursor: pointer;
 
-	/* --- Mimic Shadcn/UI Visuals --- */
-	/* Border & Background (Adjust colors to match your theme) */
-	border: 1px solid #e2e8f0; /* Example: Tailwind's gray-200 */
-	background-color: #ffffff; /* Example: White background */
-	border-radius: 12px !important; /* Example: 6px rounded corners (md) */
+  /* --- Mimic Shadcn/UI Visuals --- */
+  /* Border & Background (Adjust colors to match your theme) */
+  border: 1px solid #e2e8f0; /* Example: Tailwind's gray-200 */
+  background-color: #ffffff; /* Example: White background */
+  border-radius: 12px !important; /* Example: 6px rounded corners (md) */
 
-	/* Padding & Font */
-	padding: 0.5rem 2.5rem 0.5rem 0.75rem; /* Top/Bottom, Right (leave space for arrow), Left (py-2 pl-3 pr-10) */
-	font-size: 0.875rem; /* Example: 14px (text-sm) */
-	line-height: 1.25rem; /* Example: Matching line height */
-	color: #0f172a; /* Example: Tailwind's slate-900 */
-	font-family: inherit; /* Use the site's default font */
+  /* Padding & Font */
+  padding: 0.5rem 2.5rem 0.5rem 0.75rem; /* Top/Bottom, Right (leave space for arrow), Left (py-2 pl-3 pr-10) */
+  font-size: 0.875rem; /* Example: 14px (text-sm) */
+  line-height: 1.25rem; /* Example: Matching line height */
+  color: #0f172a; /* Example: Tailwind's slate-900 */
+  font-family: inherit; /* Use the site's default font */
 
-	/* --- Custom Dropdown Arrow --- */
-	/* Use an SVG background image for the arrow. You can customize the color via 'stroke'. */
-	/* Simple Chevron Down SVG - URL encoded */
-	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%2364748b' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='4 6 8 10 12 6'%3e%3c/polyline%3e%3c/svg%3e");
-	background-repeat: no-repeat;
-	background-position: right 0.75rem center; /* Position arrow: right padding, centered vertically */
-	background-size: 1rem 1rem; /* Size of the arrow */
+  /* --- Custom Dropdown Arrow --- */
+  /* Use an SVG background image for the arrow. You can customize the color via 'stroke'. */
+  /* Simple Chevron Down SVG - URL encoded */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%2364748b' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='4 6 8 10 12 6'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center; /* Position arrow: right padding, centered vertically */
+  background-size: 1rem 1rem; /* Size of the arrow */
 
-	/* --- States --- */
-	/* Hover State */
-	&:hover {
-		border-color: #cbd5e1; /* Example: Tailwind's gray-300 */
-	}
+  /* --- States --- */
+  /* Hover State */
+  &:hover {
+    border-color: #cbd5e1; /* Example: Tailwind's gray-300 */
+  }
 
-	/* Focus State (Using focus-visible for accessibility) */
-	&:focus-visible {
-		outline: 2px solid transparent; /* Remove default outline */
-		outline-offset: 2px;
-		border-color: #2563eb; /* Example: Blue focus ring color */
-		box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5); /* Example: Blue focus ring */
-	}
+  /* Focus State (Using focus-visible for accessibility) */
+  &:focus-visible {
+    outline: 2px solid transparent; /* Remove default outline */
+    outline-offset: 2px;
+    border-color: #2563eb; /* Example: Blue focus ring color */
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5); /* Example: Blue focus ring */
+  }
 
-	/* Focus State (Fallback for older browsers) */
-	&:focus {
-		outline: 2px solid transparent; /* Remove default outline */
-		outline-offset: 2px;
-		border-color: #2563eb; /* Example: Blue focus ring color */
-		box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5); /* Example: Blue focus ring */
-	}
+  /* Focus State (Fallback for older browsers) */
+  &:focus {
+    outline: 2px solid transparent; /* Remove default outline */
+    outline-offset: 2px;
+    border-color: #2563eb; /* Example: Blue focus ring color */
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5); /* Example: Blue focus ring */
+  }
 
-	/* Disabled State */
-	&:disabled {
-		cursor: not-allowed;
-		background-color: #f1f5f9; /* Example: Tailwind's gray-100 */
-		opacity: 0.7;
-		border-color: #e2e8f0;
-	}
+  /* Disabled State */
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #f1f5f9; /* Example: Tailwind's gray-100 */
+    opacity: 0.7;
+    border-color: #e2e8f0;
+  }
 
-	/* --- Placeholder (Selected Disabled Option) Styling --- */
-	/* Style the select itself when the placeholder is shown. */
-	/* This often looks slightly gray by default if the first option is selected. */
-	/* You might need JS to add a class if you need more specific styling */
-	/* based on whether the selected value IS the placeholder value. */
-	/* For pure CSS, you can style the :invalid state if you add 'required' */
-	/* Add 'required' attribute to your <select> tag in HTML */
-	&:required:invalid {
-		color: #94a3b8; /* Example: Lighter text for placeholder (slate-400) */
-	}
+  /* --- Placeholder (Selected Disabled Option) Styling --- */
+  /* Style the select itself when the placeholder is shown. */
+  /* This often looks slightly gray by default if the first option is selected. */
+  /* You might need JS to add a class if you need more specific styling */
+  /* based on whether the selected value IS the placeholder value. */
+  /* For pure CSS, you can style the :invalid state if you add 'required' */
+  /* Add 'required' attribute to your <select> tag in HTML */
+  &:required:invalid {
+    color: #94a3b8; /* Example: Lighter text for placeholder (slate-400) */
+  }
 }
 
 /* Optional: Style the options (very limited cross-browser) */
 select.ac-input.ac-multichoiceInput.ac-choiceSetInput-compact option {
-	background-color: #ffffff;
-	color: #0f172a;
-	/* Note: Styling options beyond basic color/background is unreliable */
+  background-color: #ffffff;
+  color: #0f172a;
+  /* Note: Styling options beyond basic color/background is unreliable */
 }
 
 .ac-input {
-	background-color: #ffffff !important;
+  background-color: #ffffff !important;
 }
 
 /* Adaptive Card Carousel */
 
 .ac-carousel-container {
-	display: flex !important;
-	padding-left: 0px !important;
-	padding-right: 0px !important;
-	/* padding-bottom: 40px !important; */
-	position: relative !important;
-	z-index: 1 !important;
+  display: flex !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  /* padding-bottom: 40px !important; */
+  position: relative !important;
+  z-index: 1 !important;
 
-	overflow-x: auto !important;
-	scroll-snap-type: x mandatory !important;
-	scroll-behavior: smooth !important;
-	touch-action: pan-x !important;
-	-webkit-overflow-scrolling: touch !important;
-	border-radius: 16px !important;
-	margin-bottom: 0px !important;
+  overflow-x: auto !important;
+  scroll-snap-type: x mandatory !important;
+  scroll-behavior: smooth !important;
+  touch-action: pan-x !important;
+  -webkit-overflow-scrolling: touch !important;
+  border-radius: 16px !important;
+  margin-bottom: 0px !important;
 }
 
 .ac-carousel-page-container > .ac-container {
-	background-color: rgba(248, 248, 248, 0.8) !important;
-	border-width: 1px;
-	border-color: #ebeded !important;
-	backdrop-filter: blur(60px) !important;
-	border-radius: 24px;
+  background-color: rgba(248, 248, 248, 0.8) !important;
+  border-width: 1px;
+  border-color: #ebeded !important;
+  backdrop-filter: blur(60px) !important;
+  border-radius: 24px;
 }
 
 .ac-multichoiceInput {
-	margin-top: 8px !important;
+  margin-top: 8px !important;
 }
 
 .ac-carousel-page-container ~ .ac-image {
-	margin-right: 4px !important;
+  margin-right: 4px !important;
 }
 
 .ac-carousel-navigation {
-	position: absolute !important;
-	bottom: 0 !important;
-	left: 0 !important;
-	right: 0 !important;
-	display: flex !important;
-	justify-content: space-between !important;
-	align-items: center !important;
-	height: 44px !important;
-	background-color: rgba(253, 253, 253, 0) !important;
-	border-width: 1px;
-	border-color: #ebeded !important;
-	backdrop-filter: blur(15px) !important;
-	border-radius: 24px;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  height: 44px !important;
+  background-color: rgba(253, 253, 253, 0) !important;
+  border-width: 1px;
+  border-color: #ebeded !important;
+  backdrop-filter: blur(15px) !important;
+  border-radius: 24px;
 }
 
 option {
-	pointer-events: all !important;
+  pointer-events: all !important;
 }
 
 .swiper-button-prev,
 .swiper-button-next {
-	position: relative !important;
-	margin-top: 0 !important;
-	height: 36px !important;
-	width: 36px !important;
-	flex-shrink: 0 !important;
-	border-radius: 100% !important;
-	border-width: 1px !important;
-	border-color: #e4e4e7 !important;
-	background-color: rgba(0, 0, 0, 0.08) !important;
-	cursor: pointer !important;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin: 0 !important;
-	top: 0px !important;
+  position: relative !important;
+  margin-top: 0 !important;
+  height: 36px !important;
+  width: 36px !important;
+  flex-shrink: 0 !important;
+  border-radius: 100% !important;
+  border-width: 1px !important;
+  border-color: #e4e4e7 !important;
+  background-color: rgba(0, 0, 0, 0.08) !important;
+  cursor: pointer !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 !important;
+  top: 0px !important;
 }
 
 .swiper-button-prev {
-	margin-left: 6px !important;
+  margin-left: 6px !important;
 }
 
 .swiper-button-next {
-	margin-right: 6px !important;
+  margin-right: 6px !important;
 }
 
 .ac-carousel-page-container .ac-container {
-	padding-bottom: 2px !important;
+  padding-bottom: 2px !important;
 }
 
 .ac-carousel-page-container .ac-columnSet {
-	padding: 0px !important;
-	padding-bottom: 0px !important;
+  padding: 0px !important;
+  padding-bottom: 0px !important;
 }
 
 .swiper-button-prev:active,
 .swiper-button-next:active {
-	background-color: #f1f1f1 !important;
+  background-color: #f1f1f1 !important;
 }
 
 .swiper-button-prev:hover,
 .swiper-button-next:hover {
-	background-color: rgba(0, 0, 0, 0.15) !important;
+  background-color: rgba(0, 0, 0, 0.15) !important;
 }
 
 .swiper-pagination {
-	position: relative !important;
-	/* height: stretch !important; */
-	line-height: 36px !important;
-	height: 36px !important;
+  position: relative !important;
+  /* height: stretch !important; */
+  line-height: 36px !important;
+  height: 36px !important;
 }
 
 .ac-carousel-right:after {
-	content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNnB4IiBoZWlnaHQ9IjE2cHgiIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHBhdGggZmlsbD0iIzQyNDI0MiIgZD0iTTIuNSA3LjVhLjUuNSAwIDEgMCAwIDFoOS42OTdsLTQuMDMxIDMuNjI4YS41LjUgMCAxIDAgLjY2OC43NDRsNS00LjVhLjUuNSAwIDAgMCAwLS43NDRsLTUtNC41YS41LjUgMCAwIDAtLjY2OC43NDRMMTIuMTk3IDcuNXoiLz48L3N2Zz4=") !important;
-	position: absolute;
-	width: 16px;
-	height: 16px;
+  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNnB4IiBoZWlnaHQ9IjE2cHgiIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHBhdGggZmlsbD0iIzQyNDI0MiIgZD0iTTIuNSA3LjVhLjUuNSAwIDEgMCAwIDFoOS42OTdsLTQuMDMxIDMuNjI4YS41LjUgMCAxIDAgLjY2OC43NDRsNS00LjVhLjUuNSAwIDAgMCAwLS43NDRsLTUtNC41YS41LjUgMCAwIDAtLjY2OC43NDRMMTIuMTk3IDcuNXoiLz48L3N2Zz4=") !important;
+  position: absolute;
+  width: 16px;
+  height: 16px;
 }
 
 .ac-carousel-left:after {
-	content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNnB4IiBoZWlnaHQ9IjE2cHgiIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iIzQyNDI0MiIgZD0iTTEwLjI5NSAxOS43MTVhMSAxIDAgMCAwIDEuNDA0LTEuNDI0bC01LjM3LTUuMjkyaDEzLjY3YTEgMSAwIDAgMCAwLTJINi4zMzZMMTEuNyA1LjcxNGExIDEgMCAwIDAtMS40MDQtMS40MjRMMy4zNyAxMS4xMTJhMS4yNSAxLjI1IDAgMCAwIDAgMS43OHoiLz48L3N2Zz4=") !important;
-	position: absolute;
-	width: 16px;
-	height: 16px;
+  content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNnB4IiBoZWlnaHQ9IjE2cHgiIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iIzQyNDI0MiIgZD0iTTEwLjI5NSAxOS43MTVhMSAxIDAgMCAwIDEuNDA0LTEuNDI0bC01LjM3LTUuMjkyaDEzLjY3YTEgMSAwIDAgMCAwLTJINi4zMzZMMTEuNyA1LjcxNGExIDEgMCAwIDAtMS40MDQtMS40MjRMMy4zNyAxMS4xMTJhMS4yNSAxLjI1IDAgMCAwIDAgMS43OHoiLz48L3N2Zz4=") !important;
+  position: absolute;
+  width: 16px;
+  height: 16px;
 }

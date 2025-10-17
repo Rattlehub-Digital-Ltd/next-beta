@@ -34,6 +34,11 @@ export default function RootLayout({
 					src="https://unpkg.com/adaptivecards@3.0.4/dist/adaptivecards.min.js"
 					crossOrigin="anonymous"
 				/>
+				<link
+					rel="stylesheet"
+					href="https://unpkg.com/swiper/swiper-bundle.min.css"
+				/>
+				<Script src="https://unpkg.com/swiper/swiper-bundle.min.js" />
 			</head>
 			<body
 				className={`${fontSans.variable} ${fontMono.variable} antialiased h-full overflow-y-auto bg-[#E5E5E5] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-gray-400 [&::-webkit-scrollbar-thumb]:rounded-full`}

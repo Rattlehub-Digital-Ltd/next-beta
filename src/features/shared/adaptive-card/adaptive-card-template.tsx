@@ -6,6 +6,7 @@ import type { LifeFileDocument } from "@/api/services/dashboard/overview/types";
 import { Spinner } from "@/components/ui/spinner";
 import { track } from "@/lib/analytics";
 import type { ActionItem } from "@/types/action-item";
+import Swiper from "swiper";
 
 const adaptiveCard = new AdaptiveCards.AdaptiveCard();
 
@@ -68,6 +69,21 @@ function AdaptiveCardTemplate({
 			if (renderedCard) {
 				// Clear previous content
 				cardWrapperRef.current.appendChild(renderedCard);
+
+				// Initialize Swiper manually for the carousel
+				const carouselEl = renderedCard.querySelector(
+					".ac-carousel",
+				) as HTMLElement;
+				if (carouselEl) {
+					new Swiper(carouselEl, {
+						slidesPerView: 1,
+						spaceBetween: 10,
+						loop: true,
+						pagination: { el: ".swiper-pagination", clickable: true },
+						touchStartPreventDefault: false, // allow vertical scroll while touching
+						touchMoveStopPropagation: false,
+					});
+				}
 
 				if (currentDocument && !trackedItem.current) {
 					const item = currentDocument;
