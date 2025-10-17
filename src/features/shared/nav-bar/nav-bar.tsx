@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
+// import { Badge } from "@/components/ui/badge";
 import { cn, getInitials } from "@/lib/utils";
 import MenuPopup from "./menu-popup";
 
@@ -28,13 +28,13 @@ const Navbar = () => {
 			</Link>
 			{user && (
 				<div className="flex items-center gap-6">
-					<Badge
+					{/* <Badge
 						className="bg-[#ff6c37] h-5 min-w-5 rounded-full  text-[10px] pl-1 font-mono tabular-nums"
 						variant="default"
 					>
 						<Icon icon="fluent:star-16-filled" />
 						<span>BETA</span>
-					</Badge>
+					</Badge> */}
 					<MenuPopup>
 						<div className="relative">
 							<Avatar className="h-8 w-8 rounded-[12px]">
