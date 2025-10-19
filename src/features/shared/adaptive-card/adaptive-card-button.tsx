@@ -2,7 +2,6 @@
 "use client";
 
 import { VisuallyHidden } from "@react-aria/visually-hidden";
-import Image from "next/image";
 import { type ReactNode, useCallback, useEffect, useState } from "react";
 import ShortUniqueId from "short-unique-id";
 import {
@@ -20,6 +19,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
 import type { ActionItem } from "@/types/action-item";
 import type { Document } from "@/types/document";
+import { OptimizedImage } from "../optimized-image";
 import AdaptiveCardTemplate from "./adaptive-card-template";
 
 type Props = {
@@ -60,7 +60,12 @@ const Loading = () => (
 const ErrorComp = () => (
 	<div className="flex flex-col items-center justify-center w-full h-full px-8 py-8 space-y-4 text-center">
 		<div>
-			<Image src="/empty_state_3.svg" alt="" height={192} width={192} />
+			<OptimizedImage
+				src="/empty_state_3.svg"
+				alt=""
+				height={192}
+				width={192}
+			/>
 		</div>
 		<p className="text-[13px] text-neutral-600">
 			Oops, something went wrong! Please check your network connection or try

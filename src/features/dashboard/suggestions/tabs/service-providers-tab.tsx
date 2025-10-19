@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Markdown from "react-markdown";
 import type { ServiceProvider } from "@/api/services/dashboard/suggestion/types";
 import { ComingSoonBadge } from "@/features/shared/coming-soon-badge";
+import { OptimizedImage } from "@/features/shared/optimized-image";
 
 type ServiceProvidersTabProps = {
 	serviceProviders: ServiceProvider[];
@@ -68,7 +68,7 @@ export default function ServiceProvidersTab({
 								</div>
 							</div> */}
 							<div className="rounded-[12px] h-[88px] w-[88px] shrink-0 overflow-hidden">
-								<Image
+								<OptimizedImage
 									src={
 										index === 0
 											? "/images/Intimate Family Moment with Pregnant Mother.png"

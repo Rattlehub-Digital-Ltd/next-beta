@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { RedirectType, redirect } from "next/navigation";
 import { useCallback, useState } from "react";
 import ReactConfetti from "react-confetti";
@@ -22,6 +21,7 @@ import {
 	AlertDialogHeader,
 	AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { OptimizedImage } from "@/features/shared/optimized-image";
 import { cn } from "@/lib/utils";
 import { SparkleIcon } from "@/styles/icons";
 import Summary from "./summary";
@@ -138,7 +138,7 @@ export default function SummaryDialog({ open }: SummaryDialogProps) {
 						<div className="w-full h-full overflow-hidden flex flex-col">
 							<div className="flex items-center justify-center w-full pt-4 pb-4 overflow-hidden">
 								<div>
-									<Image
+									<OptimizedImage
 										alt=""
 										height={220}
 										src="/images/families-rafiki.svg"

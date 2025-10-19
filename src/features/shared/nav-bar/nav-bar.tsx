@@ -2,12 +2,12 @@
 
 import { useAuth0 } from "@auth0/auth0-react";
 import { Icon } from "@iconify/react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 // import { Badge } from "@/components/ui/badge";
 import { cn, getInitials } from "@/lib/utils";
+import { OptimizedImage } from "../optimized-image";
 import MenuPopup from "./menu-popup";
 
 const Navbar = () => {
@@ -17,7 +17,7 @@ const Navbar = () => {
 	return (
 		<div className="flex items-center justify-between h-full pr-4 pl-6">
 			<Link className="relative z-1" href="/">
-				<Image
+				<OptimizedImage
 					priority
 					src="/logo_light.svg"
 					alt="Nextdot Logo"

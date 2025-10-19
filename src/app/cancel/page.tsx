@@ -1,10 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
+import { OptimizedImage } from "@/features/shared/optimized-image";
 
 export default function SubscriptionCancelPage() {
 	return (
 		<div className="flex flex-col items-center justify-center h-full pt-8 space-y-2 px-6">
-			<Image
+			<OptimizedImage
 				src="/images/Silk road-rafiki.svg"
 				alt=""
 				height={256}

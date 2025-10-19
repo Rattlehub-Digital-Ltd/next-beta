@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { OptimizedImage } from "@/features/shared/optimized-image";
 
 export default function NotFound() {
 	return (
@@ -14,7 +14,7 @@ export default function NotFound() {
 				</div>
 			</div>
 			<div className="shadow-xl">
-				<Image
+				<OptimizedImage
 					src="/textures-abstract-texture-brush-stain-background.png"
 					alt=""
 					height={256}

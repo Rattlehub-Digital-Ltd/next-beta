@@ -1,5 +1,5 @@
 import * as motion from "motion/react-client";
-import Image from "next/image";
+import { OptimizedImage } from "./optimized-image";
 
 type MainSheetProps = {
 	title?: string;
@@ -31,7 +31,7 @@ function MainSheet({ title, imgSrc, imgAlt, content }: MainSheetProps) {
 			>
 				{imgSrc && imgSrc !== "" && (
 					<div>
-						<Image
+						<OptimizedImage
 							src={imgSrc}
 							alt={imgAlt ?? "Image"}
 							height={192}

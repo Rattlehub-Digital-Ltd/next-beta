@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { RedirectType, redirect } from "next/navigation";
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
@@ -11,6 +10,7 @@ import {
 	AlertDialogHeader,
 	AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { OptimizedImage } from "@/features/shared/optimized-image";
 import { SparkleIcon } from "@/styles/icons";
 
 type SuccessDialogProps = {
@@ -33,7 +33,7 @@ export default function SuccessDialog({ open, onClose }: SuccessDialogProps) {
 					<div>
 						<div className="flex items-center justify-center w-full pt-4 pb-4">
 							<div>
-								<Image
+								<OptimizedImage
 									alt=""
 									height={220}
 									src="/images/families-rafiki.svg"

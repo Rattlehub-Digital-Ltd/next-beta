@@ -1,15 +1,15 @@
 import { Icon } from "@iconify/react";
-import Image from "next/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { OptimizedImage } from "@/features/shared/optimized-image";
 
 export default function EstatePlanAdvert() {
 	return (
 		<div className="h-full w-full overflow-hidden">
 			<div className="gap-2 flex flex-col bg-[#ff3a30]/3 p-5 rounded-[16px]">
-				<Image src="/momentum.svg" alt="" height={32} width={128} />
+				<OptimizedImage src="/momentum.svg" alt="" height={32} width={128} />
 
 				<AspectRatio ratio={16 / 9}>
-					<Image
+					<OptimizedImage
 						src="/images/estate-planningyoung-couple-discussing-estate-plan-hero-1-1.jpg"
 						alt="Image"
 						height="88"

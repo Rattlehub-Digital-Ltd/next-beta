@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { Spinner } from "@/components/ui/spinner";
 import { cn } from "@/lib/utils";
+import { OptimizedImage } from "./optimized-image";
 
 type LoadingProps = {
 	className?: string;
@@ -15,7 +15,7 @@ export default function Loading({ className }: LoadingProps) {
 			)}
 		>
 			<div className="relative flex items-center justify-center h-24 w-24">
-				<Image
+				<OptimizedImage
 					src="/wordmark-light.svg"
 					height={36}
 					width={36}

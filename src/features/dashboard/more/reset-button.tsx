@@ -14,8 +14,9 @@ function ResetButton() {
 
 	return (
 		<Button
-			className="rounded-full !pr-5"
+			className="rounded-full !pr-4"
 			variant="destructive"
+			size="sm"
 			onClick={async () => {
 				try {
 					const url = appConfig.previewMode
@@ -33,7 +34,7 @@ function ResetButton() {
 			}}
 		>
 			<Icon icon="fluent:arrow-reset-20-filled" />
-			<p className="flex-grow">Reset Profile</p>
+			<p className="flex-grow text-[13px]">Reset Profile</p>
 		</Button>
 	);
 }

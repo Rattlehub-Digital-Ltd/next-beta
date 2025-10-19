@@ -1,7 +1,6 @@
 "use client";
 
 import { useAuth0 } from "@auth0/auth0-react";
-import Image from "next/image";
 import { RedirectType, redirect } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { useActivitySummaryStore } from "store/use-activity-summary-store";
@@ -11,6 +10,7 @@ import { useGetOnboarding } from "@/api/services/dashboard/onboarding/queries";
 import { useGetActivitySummary } from "@/api/services/dashboard/queries";
 import { useGetProducts } from "@/api/services/dashboard/subscription/queries";
 import { Spinner } from "@/components/ui/spinner";
+import { OptimizedImage } from "./optimized-image";
 
 export default function SplashScreen() {
 	const {
@@ -130,7 +130,7 @@ export default function SplashScreen() {
 	return (
 		<div className="flex flex-col fixed z-200 top-0 left-0 right-0 bottom-0 h-full w-full items-center justify-center bg-[#111827]">
 			<div className="relative flex items-center justify-center h-24 w-24">
-				<Image
+				<OptimizedImage
 					src="/wordmark-dark.svg"
 					height={36}
 					width={36}

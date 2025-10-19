@@ -102,7 +102,7 @@ export default function SuggestionItem({
 				{owner && (
 					<div className="bg-white flex items-center space-x-1.5 mb-1 border border-black/5 pl-1.5 pr-2.5 py-0.5 rounded-full w-fit">
 						<Icon icon="fluent-color:error-circle-24" />
-						<p className="text-[13px] leading-5 font-medium text-pretty">
+						<p className="text-[13px] leading-5 font-medium text-pretty my-1">
 							{owner}
 						</p>
 					</div>
