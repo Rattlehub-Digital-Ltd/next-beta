@@ -1,7 +1,7 @@
 "use client";
 
 import * as motion from "motion/react-client";
-import { RedirectType, redirect } from "next/navigation";
+import { RedirectType, redirect, usePathname } from "next/navigation";
 import { useOnboardingStore } from "store/use-onboarding-store";
 import CampaignResponsePopup from "@/features/dashboard/campagaign-response/campaign-response-popup";
 import SummaryCard from "@/features/dashboard/summary-card";
@@ -15,13 +15,16 @@ const description =
 
 function DashboardPage() {
 	const { isEmailVerified, isOnboarded } = useOnboardingStore();
+	const pathname = usePathname();
 
 	const originHref = sessionStorage.getItem("origin_href");
+
+	console.log({ isEmailVerified, isOnboarded, originHref, pathname });
 
 	if (!isEmailVerified) redirect("/dashboard/verify", RedirectType.replace);
 	else if (!isOnboarded)
 		redirect("/dashboard/onboarding", RedirectType.replace);
-	else if (originHref) {
+	else if (originHref && pathname !== "/dashboard") {
 		sessionStorage.removeItem("origin_href");
 		redirect(originHref, RedirectType.replace);
 	}

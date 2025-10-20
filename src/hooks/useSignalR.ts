@@ -19,6 +19,7 @@ const useSignalR = (hubUrl: string) => {
 	const [messages, setMessages] = useState<IsOnboardedStatus[]>([]);
 
 	useEffect(() => {
+		console.log("fuck");
 		if (
 			!accessToken ||
 			!hubUrl ||
@@ -42,6 +43,7 @@ const useSignalR = (hubUrl: string) => {
 	}, [hubUrl, accessToken, onboardingStatus, isLoading]);
 
 	useEffect(() => {
+		console.log("fuck");
 		if (!onboardingStatus || onboardingStatus?.isEmailVerified || isLoading)
 			return;
 
@@ -59,9 +61,9 @@ const useSignalR = (hubUrl: string) => {
 				.catch((error) => console.log("SignalR connection failed: ", error));
 
 			// Clean up the connection when the component unmounts
-			// return () => {
-			// 	connection.stop();
-			// };
+			return () => {
+				connection.stop();
+			};
 		}
 	}, [connection, onboardingStatus, isLoading]);
 
