@@ -1,8 +1,8 @@
 "use client";
 
 import * as motion from "motion/react-client";
-import { RedirectType, redirect, usePathname } from "next/navigation";
-import { useOnboardingStore } from "store/use-onboarding-store";
+// import { redirect } from "next/navigation";
+// import { useOnboardingStore } from "store/use-onboarding-store";
 import CampaignResponsePopup from "@/features/dashboard/campagaign-response/campaign-response-popup";
 import SummaryCard from "@/features/dashboard/summary-card";
 import TabsCard from "@/features/dashboard/tabs-card";
@@ -14,20 +14,16 @@ const description =
 	"These will affect your estate, please read them carefully and take the necessary action.";
 
 function DashboardPage() {
-	const { isEmailVerified, isOnboarded } = useOnboardingStore();
-	const pathname = usePathname();
+	// const { isEmailVerified, isOnboarded } = useOnboardingStore();
 
-	const originHref = sessionStorage.getItem("origin_href");
+	// const originHref = sessionStorage.getItem("origin_href");
 
-	console.log({ isEmailVerified, isOnboarded, originHref, pathname });
-
-	if (!isEmailVerified) redirect("/dashboard/verify", RedirectType.replace);
-	else if (!isOnboarded)
-		redirect("/dashboard/onboarding", RedirectType.replace);
-	else if (originHref && pathname !== "/dashboard") {
-		sessionStorage.removeItem("origin_href");
-		redirect(originHref, RedirectType.replace);
-	}
+	// if (!isEmailVerified) redirect("/dashboard/verify");
+	// else if (!isOnboarded) redirect("/dashboard/onboarding");
+	// else if (originHref) {
+	// 	sessionStorage.removeItem("origin_href");
+	// 	redirect(originHref);
+	// }
 
 	return (
 		<div className="pt-3 space-y-4 pb-16">
