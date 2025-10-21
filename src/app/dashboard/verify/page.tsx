@@ -37,18 +37,18 @@ function EmailVerify() {
 	const [isActive, setIsActive] = useState(true);
 
 	useEffect(() => {
-		if (isLoading || isOnboardingLoading) return;
+		if (isLoading || isOnboardingLoading || isEmailVerified) return;
 
-		if (
-			isEmailVerified ||
-			!onboardingStatus ||
-			onboardingStatus?.isEmailVerified
-		) {
-			if (onboardingStatus?.isOnboarded) {
-				redirect("/dashboard");
-			} else if (!onboardingStatus?.isOnboarded)
-				redirect("/dashboard/onboarding");
-		}
+		// if (
+		// 	isEmailVerified ||
+		// 	!onboardingStatus ||
+		// 	onboardingStatus?.isEmailVerified
+		// ) {
+		// 	if (onboardingStatus?.isOnboarded) {
+		// 		redirect("/dashboard");
+		// 	} else if (!onboardingStatus?.isOnboarded)
+		// 		redirect("/dashboard/onboarding");
+		// }
 
 		setProccessing(true);
 
@@ -56,7 +56,7 @@ function EmailVerify() {
 	}, [
 		isEmailVerified,
 		verifyEmail,
-		onboardingStatus,
+		// onboardingStatus,
 		isLoading,
 		isOnboardingLoading,
 	]);
