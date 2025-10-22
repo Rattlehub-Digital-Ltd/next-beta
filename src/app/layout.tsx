@@ -39,6 +39,10 @@ export default function RootLayout({
 					href="https://unpkg.com/swiper/swiper-bundle.min.css"
 				/>
 				<Script src="https://unpkg.com/swiper/swiper-bundle.min.js" />
+				<meta
+					name="viewport"
+					content="width=device-width, initial-scale=1.0, maximum-scale=2.0"
+				/>
 			</head>
 			<body
 				className={`${fontSans.variable} ${fontMono.variable} antialiased h-full overflow-y-auto bg-[#E5E5E5] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-gray-400 [&::-webkit-scrollbar-thumb]:rounded-full`}
