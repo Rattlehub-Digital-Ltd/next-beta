@@ -1,6 +1,7 @@
 import type { PropsWithChildren } from "react";
 import { Providers } from "@/app/providers";
 import Navbar from "@/features/shared/nav-bar/nav-bar";
+import UTMPersistence from "@/features/shared/utm-persistence";
 
 export default function MainLayout({ children }: PropsWithChildren) {
 	return (
@@ -13,6 +14,7 @@ export default function MainLayout({ children }: PropsWithChildren) {
 			}}
 		>
 			<div className="h-full flex flex-col">
+				<UTMPersistence />
 				<div className="p-3.5 sticky left-0 top-0 w-full z-20 shrink-0 mx-auto max-w-2xl">
 					<nav className="py-3 h-14 backdrop-blur-[15px] bg-white/40 rounded-[23px]">
 						<Navbar />

@@ -11,7 +11,10 @@ import { useDependentStore } from "store/use-dependent-store";
 import { useDocumentStore } from "store/use-document-store";
 import { useOnboardingStore } from "store/use-onboarding-store";
 import { usePartnerStore } from "store/use-partner-store";
-import { useSubmitOnboardingData } from "@/api/services/dashboard/onboarding/queries";
+import {
+	useGetOnboarding,
+	useSubmitOnboardingData,
+} from "@/api/services/dashboard/onboarding/queries";
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -32,7 +35,8 @@ type SummaryDialogProps = {
 };
 
 export default function SummaryDialog({ open }: SummaryDialogProps) {
-	const { setIsOnboarded } = useOnboardingStore();
+	const { setIsOnboarded, setIsEmailVerified } = useOnboardingStore();
+	const { data, refetch } = useGetOnboarding();
 	const { width } = useWindowSize();
 
 	const submitOnboarding = useSubmitOnboardingData();
@@ -79,12 +83,19 @@ export default function SummaryDialog({ open }: SummaryDialogProps) {
 					},
 				},
 				{
-					onSuccess: () => {
+					onSuccess: async () => {
 						toast.success("Onboarding completed successfully.");
-						setIsOnboarded(true);
+						const resp = await refetch();
+						console.log(resp);
+
+						if (data) {
+							const { isOnboarded, isEmailVerified } = data;
+							setIsOnboarded(isOnboarded);
+							setIsEmailVerified(isEmailVerified);
+							if (isOnboarded) setIsComplete(true);
+						}
 						// setRedirectToDashboard(true);
 						//onClose();
-						setIsComplete(true);
 					},
 					onError: (error) => {
 						console.error("Error submitting onboarding data:", error);
@@ -103,11 +114,12 @@ export default function SummaryDialog({ open }: SummaryDialogProps) {
 		children?.map,
 		dependents?.map,
 		documents,
-		// onClose,
+		data,
+		refetch,
+		setIsEmailVerified,
 		partner,
 		setIsOnboarded,
 		submitOnboarding.mutateAsync,
-		// setRedirectToDashboard,
 	]);
 
 	return (

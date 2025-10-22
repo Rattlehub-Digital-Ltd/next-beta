@@ -5,10 +5,8 @@ import ProtectedRoute from "@/components/protected-route";
 import Banner from "@/features/dashboard/banner";
 import BottomTabBar from "@/features/shared/bottom-tab/bottom-tab-bar";
 import LoadingScreen from "@/features/shared/splash-screen";
-import useUTMPersistence from "@/hooks/use-utm-persistence";
 
 export default function DashboardLayout({ children }: PropsWithChildren) {
-	useUTMPersistence(window.location.search);
 	const noRedirect = useRef(true);
 
 	if (!sessionStorage.getItem("origin_href") && noRedirect.current === true) {

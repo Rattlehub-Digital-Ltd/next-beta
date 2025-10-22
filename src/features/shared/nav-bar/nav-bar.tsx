@@ -4,15 +4,13 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 // import { Badge } from "@/components/ui/badge";
-import { cn, getInitials } from "@/lib/utils";
+import { getInitials } from "@/lib/utils";
 import MenuPopup from "./menu-popup";
 
 const Navbar = () => {
 	const { user } = useAuth0();
-	const pathname = usePathname();
 
 	return (
 		<div className="flex items-center justify-between h-full pr-4 pl-6">
@@ -61,28 +59,6 @@ const Navbar = () => {
 						</div>
 					</MenuPopup>
 				</div>
-			)}
-			{!user && (
-				<Link
-					aria-label="Sign in"
-					className={cn(
-						"px-4 rounded-[16px] h-8 cursor-pointer text-neutral-600 flex items-center justify-center border border-[#d1d1d1]",
-						{
-							flex: pathname?.toLowerCase() === "/",
-							"!hidden": pathname?.toLowerCase() === "/login",
-						},
-						pathname?.toLowerCase() !== "/login" &&
-							pathname?.toLowerCase() !== "/" &&
-							user
-							? "hidden"
-							: "flex",
-					)}
-					href="/login"
-				>
-					<span className="text-sm font-semibold whitespace-nowrap">
-						Sign in
-					</span>
-				</Link>
 			)}
 		</div>
 	);

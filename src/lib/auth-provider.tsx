@@ -5,6 +5,8 @@ import { identify } from "./analytics";
 const domain = process.env.NEXT_PUBLIC_OIDC_DOMAIN || "";
 const clientId = process.env.NEXT_PUBLIC_OIDC_CLIENT_ID || "";
 
+const key = "https://app.nextdot.ai/userid";
+
 const configuration: Auth0ProviderOptions = {
 	domain,
 	clientId,
@@ -18,10 +20,11 @@ const configuration: Auth0ProviderOptions = {
 	},
 	onRedirectCallback: (_, user) => {
 		if (user) {
-			identify(user.sub as string, {
-				email: user.email as string,
-				name: user.name as string,
-			});
+			const userId = user[key];
+
+			if (userId) {
+				identify(userId);
+			}
 		}
 	},
 };

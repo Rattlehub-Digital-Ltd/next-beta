@@ -14,12 +14,11 @@ import { useGetActivitySummary } from "@/api/services/dashboard/queries";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import Loading from "@/features/shared/loading";
-import useUTMPersistence from "@/hooks/use-utm-persistence";
+import analytics from "@/lib/analytics";
 // import useApi from "@/hooks/use-api";
 import { FluentArrowCircleRight24Filled, SparkleIcon } from "@/styles/icons";
 
 const LoginButton = () => {
-	useUTMPersistence(window.location.search);
 	const searchParams = useSearchParams();
 
 	// const { getOnboardingStatus, getActivitySummary } = useApi();
@@ -161,6 +160,7 @@ const LoginButton = () => {
 	]);
 
 	useEffect(() => {
+		analytics.page();
 		autoSignIn();
 	}, [autoSignIn]);
 
