@@ -135,8 +135,8 @@ const UserMenu = ({ children }: UserMenuProps) => {
 				<DropdownMenuItem
 					className="font-medium text-red-600 w-full"
 					onClick={async () => {
-						sessionStorage.clear();
-						localStorage.clear();
+						// sessionStorage.clear();
+						// localStorage.clear();
 						track("user_logout", { page: window.location.href });
 
 						logout({

@@ -118,7 +118,7 @@ function EmailVerify() {
 
 	const loading = isLoading || isLoadingVerify || isOnboardingLoading;
 
-	if (onboardingStatus?.isEmailVerified) return;
+	if (onboardingStatus?.isEmailVerified || isEmailVerified) return;
 
 	return (
 		<>

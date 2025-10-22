@@ -1,7 +1,7 @@
 "use client";
 
 import { useAuth0 } from "@auth0/auth0-react";
-import { RedirectType, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { useActivitySummaryStore } from "store/use-activity-summary-store";
 import { useAppStore } from "store/use-app-store";
@@ -17,12 +17,17 @@ export default function SplashScreen() {
 		getIdTokenClaims,
 		isAuthenticated,
 		isLoading: isAuthLoading,
-		user,
 	} = useAuth0();
 
-	const { setIsOnboarded, setIsEmailVerified } = useOnboardingStore();
+	const {
+		setIsOnboarded,
+		setIsEmailVerified,
+		isEmailVerified,
+		isOnboarded,
+		isSuccessDialogOpen,
+	} = useOnboardingStore();
 	const { setActivity } = useActivitySummaryStore();
-	const { setInitialized, setIsAdmin, setProduct } = useAppStore();
+	const { setInitialized, setIsAdmin, setProduct, initialized } = useAppStore();
 
 	const [isInitializing, setIsInitializing] = useState(true);
 
@@ -49,10 +54,8 @@ export default function SplashScreen() {
 		)
 			return;
 
-		console.log("Initializing app...", isAuthenticated, user);
-
 		if (!isAuthenticated) {
-			redirect("/login", RedirectType.replace);
+			redirect("/login");
 		}
 
 		const idTokenClaims = await getIdTokenClaims();
@@ -75,34 +78,41 @@ export default function SplashScreen() {
 		}
 
 		if (onboardingStatus) {
-			setIsOnboarded(onboardingStatus.isOnboarded);
-			setIsEmailVerified(onboardingStatus.isEmailVerified);
-
-			// remove
-			// setIsEmailVerified(true);
-		}
-
-		if (onboardingStatus) {
 			setInitialized(true);
 			setIsInitializing(false);
 
-			if (!onboardingStatus.isEmailVerified)
-				redirect("/dashboard/verify", RedirectType.replace);
+			let verified = onboardingStatus.isEmailVerified;
+			if (!verified && isEmailVerified) {
+				verified = true;
+			}
+
+			let onboarded = onboardingStatus.isOnboarded;
+			if (!onboarded && isOnboarded) {
+				onboarded = true;
+			}
+
+			if (!initialized) {
+				setIsOnboarded(onboardingStatus.isOnboarded);
+				setIsEmailVerified(onboardingStatus.isEmailVerified);
+			}
 
 			const originHref = sessionStorage.getItem("origin_href");
 
+			console.log({ verified }, { onboarded });
+
+			if (!verified) redirect("/dashboard/verify");
+
 			if (originHref && originHref !== window.location.href) {
-				console.log("Redirecting to originHref:", originHref);
-				// sessionStorage.removeItem("origin_href");
-				redirect(originHref, RedirectType.replace);
-			} else {
-				redirect(
-					onboardingStatus.isOnboarded ? "/dashboard" : "/dashboard/onboarding",
-				);
+				redirect(originHref);
+			} else if (!isSuccessDialogOpen) {
+				redirect(onboarded ? "/dashboard" : "/dashboard/onboarding");
 			}
 		}
 	}, [
-		user,
+		isSuccessDialogOpen,
+		initialized,
+		isEmailVerified,
+		isOnboarded,
 		activity,
 		onboardingStatus,
 		setActivity,

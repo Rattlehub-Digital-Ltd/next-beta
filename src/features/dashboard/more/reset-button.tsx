@@ -30,7 +30,7 @@ function ResetButton() {
 					console.debug(e);
 				}
 
-				window.location.pathname = "/dashboard/onboarding";
+				window.location.pathname = "/dashboard";
 			}}
 		>
 			<Icon icon="fluent:arrow-reset-20-filled" />

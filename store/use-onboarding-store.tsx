@@ -9,6 +9,8 @@ type OnboardingStoreProps = {
 	setNextButtonDisabled: (nextButtonDisabled: boolean) => void;
 	setPreviousButtonDisabled: (previoiusButtonDisabled: boolean) => void;
 	setIsOnboarded: (isOnboarded: boolean | undefined) => void;
+	isSuccessDialogOpen: boolean;
+	setIsSuccessDialogOpen: (isSuccessDialogOpen: boolean) => void;
 	// redirectToDashboard: boolean;
 	// setRedirectToDashboard: (redirectToDashboard: boolean) => void;
 };
@@ -23,6 +25,9 @@ export const useOnboardingStore = create<OnboardingStoreProps>((set) => ({
 	setPreviousButtonDisabled: (previoiusButtonDisabled) =>
 		set({ previoiusButtonDisabled }),
 	setIsOnboarded: (isOnboarded) => set({ isOnboarded }),
+	isSuccessDialogOpen: false,
+	setIsSuccessDialogOpen: (isSuccessDialogOpen) =>
+		set({ isSuccessDialogOpen }),
 	// redirectToDashboard: true,
 	// setRedirectToDashboard: (redirectToDashboard) =>
 	// 	set({ redirectToDashboard }),

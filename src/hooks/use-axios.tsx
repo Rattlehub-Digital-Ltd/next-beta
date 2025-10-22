@@ -26,6 +26,7 @@ export default function useAxios() {
 				authorizationParams: {
 					audience: process.env.NEXT_PUBLIC_AUDIENCE as string,
 				},
+				cacheMode: "off",
 			});
 
 			setAccessToken(accessToken);
@@ -99,6 +100,7 @@ export default function useAxios() {
 								authorizationParams: {
 									audience: process.env.NEXT_PUBLIC_AUDIENCE as string,
 								},
+								cacheMode: "off",
 							});
 
 							setAccessToken(accessToken);

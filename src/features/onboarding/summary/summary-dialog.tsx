@@ -32,7 +32,8 @@ type SummaryDialogProps = {
 };
 
 export default function SummaryDialog({ open }: SummaryDialogProps) {
-	const { setIsOnboarded } = useOnboardingStore();
+	const { setIsOnboarded, setIsEmailVerified, setIsSuccessDialogOpen } =
+		useOnboardingStore();
 	const { width } = useWindowSize();
 
 	const submitOnboarding = useSubmitOnboardingData();
@@ -82,6 +83,8 @@ export default function SummaryDialog({ open }: SummaryDialogProps) {
 					onSuccess: () => {
 						toast.success("Onboarding completed successfully.");
 						setIsOnboarded(true);
+						setIsEmailVerified(true);
+						setIsSuccessDialogOpen(true);
 						// setRedirectToDashboard(true);
 						//onClose();
 						setIsComplete(true);
@@ -103,6 +106,8 @@ export default function SummaryDialog({ open }: SummaryDialogProps) {
 		children?.map,
 		dependents?.map,
 		documents,
+		setIsEmailVerified,
+		setIsSuccessDialogOpen,
 		// onClose,
 		partner,
 		setIsOnboarded,
@@ -183,6 +188,7 @@ export default function SummaryDialog({ open }: SummaryDialogProps) {
 							className="rounded-full h-10"
 							onClick={() => {
 								// setRedirectToDashboard(true);
+								setIsSuccessDialogOpen(false);
 								redirect("/dashboard", RedirectType.replace);
 								//onClose(false);
 							}}

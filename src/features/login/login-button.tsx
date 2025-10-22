@@ -135,6 +135,7 @@ const LoginButton = () => {
 	}, [isAuthenticated, isLoading, loginWithRedirect, redirectUrl, loadData]);
 
 	const autoSignIn = useCallback(async () => {
+		console.log(isAuthenticated, isLoading);
 		if (isAuthenticated && !isLoading) {
 			setProcessing(true);
 

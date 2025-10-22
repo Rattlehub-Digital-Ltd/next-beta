@@ -9,7 +9,7 @@ const configuration: Auth0ProviderOptions = {
 	domain,
 	clientId,
 	useRefreshTokens: true,
-	// cacheLocation: "localstorage",
+	cacheLocation: "localstorage",
 	useRefreshTokensFallback: true,
 	authorizationParams: {
 		audience: process.env.NEXT_PUBLIC_AUDIENCE || "",
