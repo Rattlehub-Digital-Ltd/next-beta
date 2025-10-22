@@ -118,6 +118,8 @@ function EmailVerify() {
 
 	const loading = isLoading || isLoadingVerify || isOnboardingLoading;
 
+	if (onboardingStatus?.isEmailVerified) return;
+
 	return (
 		<>
 			{loading && <Loading />}
