@@ -203,7 +203,7 @@ function OnboardingPage() {
 			<SummaryDialog
 				open={summaryOpen}
 				onClose={() => {
-					// setSummaryOpen(false);
+					setSummaryOpen(false);
 					// setSuccessDialogOpen(true);
 				}}
 			/>

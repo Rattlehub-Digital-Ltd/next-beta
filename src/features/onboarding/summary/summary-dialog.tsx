@@ -31,7 +31,7 @@ type SummaryDialogProps = {
 	onClose: () => void;
 };
 
-export default function SummaryDialog({ open }: SummaryDialogProps) {
+export default function SummaryDialog({ open, onClose }: SummaryDialogProps) {
 	const { setIsOnboarded } = useOnboardingStore();
 	const { width } = useWindowSize();
 
@@ -111,7 +111,7 @@ export default function SummaryDialog({ open }: SummaryDialogProps) {
 	]);
 
 	return (
-		<AlertDialog open={open}>
+		<AlertDialog open={open} onOpenChange={onClose}>
 			<AlertDialogContent
 				className={cn("overflow-y-auto rounded-3xl py-0", {
 					"h-[85svh]": !isComplete,
