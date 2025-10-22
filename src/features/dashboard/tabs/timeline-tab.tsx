@@ -23,6 +23,21 @@ export default function TimelineTab({ referer }: { referer: string }) {
 		limit: 15,
 	});
 
+	const currentPage = data?.pages[data?.pages.length - 1];
+	const totalPages = currentPage?.totalPages || 0;
+	const totalItems = currentPage?.totalItems || 0;
+	const pageNumber = currentPage?.pageNumber || 0;
+
+	const currentItemsCount = data
+		? data.pages.reduce((acc, page) => acc + page.items.length, 0)
+		: 0;
+
+	// Determine if "Load More" button should be shown
+	// Show if there are more pages to load and not all items are loaded
+
+	const showLoadMore =
+		totalPages > 1 && pageNumber < totalPages && currentItemsCount < totalItems;
+
 	return (
 		<div className="flex flex-col pt-8 pb-4">
 			{isLoading &&
@@ -46,7 +61,7 @@ export default function TimelineTab({ referer }: { referer: string }) {
 					});
 				})}
 
-			{hasNextPage &&
+			{showLoadMore &&
 				data &&
 				data.pages.length > 0 &&
 				data.pages[0].items.length > 0 && (
@@ -60,7 +75,11 @@ export default function TimelineTab({ referer }: { referer: string }) {
 							onClick={() => {
 								fetchNextPage();
 								track("load_more_timeline", {
-									page_params: JSON.stringify(data?.pageParams || ""),
+									page_params: {
+										currentPage: pageNumber,
+										totalPages,
+										totalItems,
+									},
 								});
 							}}
 						>
