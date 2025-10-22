@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import Loading from "@/features/shared/loading";
 import useUTMPersistence from "@/hooks/use-utm-persistence";
+import analytics from "@/lib/analytics";
 // import useApi from "@/hooks/use-api";
 import { FluentArrowCircleRight24Filled, SparkleIcon } from "@/styles/icons";
 
@@ -23,6 +24,7 @@ const LoginButton = () => {
 	const searchParams = useSearchParams();
 
 	// const { getOnboardingStatus, getActivitySummary } = useApi();
+
 	const { data: activitySummary, isLoading: isLoadingActivity } =
 		useGetActivitySummary();
 	const { data: onboardingStatus, isLoading: isLoadingOnboarding } =
@@ -46,7 +48,7 @@ const LoginButton = () => {
 		searchParams.get("iss") ?? searchParams.get("redirectUrl") ?? "/dashboard";
 
 	const loadData = useCallback(async () => {
-		if (isLoadingActivity || isLoadingOnboarding) return;
+		if (isLoadingActivity || isLoadingOnboarding || isLoading) return;
 
 		if (user && isAuthenticated) {
 			if (initialized) return;
@@ -90,6 +92,7 @@ const LoginButton = () => {
 		}
 	}, [
 		setActivity,
+		isLoading,
 		// getActivitySummary,
 		// getOnboardingStatus,
 		activitySummary,
@@ -140,12 +143,9 @@ const LoginButton = () => {
 					audience: process.env.NEXT_PUBLIC_AUDIENCE as string,
 				},
 			})
-				.then(async (token) => {
-					if (token && token !== "") {
-						await loadData();
-
-						redirect(redirectUrl, RedirectType.replace);
-					}
+				.then(async () => {
+					await loadData();
+					redirect(redirectUrl, RedirectType.replace);
 				})
 				.catch((error) => console.log("Error getting access token:", error))
 				.finally(async () => {
@@ -163,6 +163,10 @@ const LoginButton = () => {
 	useEffect(() => {
 		autoSignIn();
 	}, [autoSignIn]);
+
+	useEffect(() => {
+		analytics.page();
+	}, []);
 
 	if (isLoading || processing) return <Loading />;
 

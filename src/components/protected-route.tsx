@@ -1,7 +1,6 @@
 "use client";
 
 import { useAuth0 } from "@auth0/auth0-react";
-import { redirect } from "next/navigation";
 import { type PropsWithChildren, useEffect } from "react";
 import { useAppStore } from "store/use-app-store";
 import { appConfig } from "@/config/app.config";
@@ -12,7 +11,7 @@ const key = "https://app.nextdot.ai/userid";
 
 export default function ProtectedRoute({ children }: PropsWithChildren) {
 	useUTMPersistence(window.location.search);
-	const { isAuthenticated, user } = useAuth0();
+	const { user } = useAuth0();
 
 	const { isAdmin } = useAppStore();
 	const { identify } = useAnalytics();
@@ -41,7 +40,7 @@ export default function ProtectedRoute({ children }: PropsWithChildren) {
 			</div>
 		);
 
-	if (!isAuthenticated) redirect("/login");
+	// if (!isAuthenticated) redirect("/login");
 
 	return <div className="h-full w-full">{children}</div>;
 }

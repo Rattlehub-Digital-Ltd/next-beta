@@ -17,6 +17,7 @@ export default function SplashScreen() {
 		getIdTokenClaims,
 		isAuthenticated,
 		isLoading: isAuthLoading,
+		user,
 	} = useAuth0();
 
 	const { setIsOnboarded, setIsEmailVerified } = useOnboardingStore();
@@ -47,6 +48,8 @@ export default function SplashScreen() {
 			isAuthLoading
 		)
 			return;
+
+		console.log("Initializing app...", isAuthenticated, user);
 
 		if (!isAuthenticated) {
 			redirect("/login", RedirectType.replace);
@@ -88,8 +91,9 @@ export default function SplashScreen() {
 
 			const originHref = sessionStorage.getItem("origin_href");
 
-			if (originHref) {
-				sessionStorage.removeItem("origin_href");
+			if (originHref && originHref !== window.location.href) {
+				console.log("Redirecting to originHref:", originHref);
+				// sessionStorage.removeItem("origin_href");
 				redirect(originHref, RedirectType.replace);
 			} else {
 				redirect(
@@ -98,6 +102,7 @@ export default function SplashScreen() {
 			}
 		}
 	}, [
+		user,
 		activity,
 		onboardingStatus,
 		setActivity,

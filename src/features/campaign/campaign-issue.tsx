@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useGetDocuments } from "@/api/services/dashboard/queries";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { track } from "@/lib/analytics";
+import analytics, { track } from "@/lib/analytics";
 import { getInitials } from "@/lib/utils";
 import type { ActionItem } from "@/types/action-item";
 import RiskItem from "../shared/risk-item";
@@ -27,6 +27,7 @@ function CampaignIssue({ setCurrentIssue }: CampaignIssueProps) {
 		const getData = async () => {
 			setIsLoading(true);
 
+			analytics.page();
 			const referrer = searchParams.get("referrer") ?? "Unknown";
 			const id = searchParams.get("id") ?? "Unknown";
 

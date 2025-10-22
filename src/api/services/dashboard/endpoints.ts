@@ -2,7 +2,8 @@ import { appConfig } from "@/config/app.config";
 import type { PaginationParams } from "@/types";
 
 export const dashboardEndpoints = {
-	getActivitySummary: () => "/documents/activity-summary",
+	getActivitySummary: () =>
+		"/documents/activity-summary?PageNumber=1&PageSize=1",
 	getInfiniteDocuments: (page: number) => `/documents?PageNumber=${page}`,
 	getDocuments: (paging: PaginationParams) =>
 		`/documents?PageNumber=${paging.page}&PageSize=${paging.limit}`,

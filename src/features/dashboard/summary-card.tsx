@@ -1,8 +1,9 @@
 "use client";
 
 import { Icon } from "@iconify/react";
+import { useGetActivitySummary } from "@/api/services/dashboard/queries";
 // import Link from "next/link";
-import { useActivitySummaryStore } from "store/use-activity-summary-store";
+// import { useActivitySummaryStore } from "store/use-activity-summary-store";
 import { useGetSuggestions } from "@/api/services/dashboard/suggestion/queries";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -15,7 +16,9 @@ import SummaryFooter from "../shared/summary-footer";
 import SuggesteItemDrawer from "./suggestions/suggeste-item-drawer";
 
 export default function SummaryCard() {
-	const { activity } = useActivitySummaryStore();
+	// const { activity } = useActivitySummaryStore();
+	const { data: activity, isLoading: isLoadingActivity } =
+		useGetActivitySummary();
 
 	const {
 		data: items,
@@ -28,7 +31,7 @@ export default function SummaryCard() {
 
 	return (
 		<div className="w-full h-full bg-[#F8F8F8]/95 py-4 border border-[#EBEDED] rounded-3xl backdrop-blur-[60px] shadow-[0px_16px_30px_-3px rgba(106, 106, 106, 0.06)] space-y-4 flex flex-col">
-			{activity && (
+			{activity && !isLoadingActivity && (
 				<div className="px-2 grid grid-cols-2">
 					<div className="flex items-center space-x-2">
 						<OptimizedImage

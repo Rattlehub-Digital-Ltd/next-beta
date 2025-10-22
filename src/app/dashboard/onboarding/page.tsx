@@ -1,6 +1,5 @@
 "use client";
 
-import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useChildrenStore } from "store/use-children-store";
 import { useDependentStore } from "store/use-dependent-store";
@@ -27,7 +26,6 @@ function OnboardingPage() {
 	const { setTitle, setType } = usePersonDrawerStore();
 
 	const {
-		isOnboarded,
 		nextButtonDisabled,
 		previoiusButtonDisabled,
 		setPreviousButtonDisabled,
@@ -158,7 +156,7 @@ function OnboardingPage() {
 		}
 	};
 
-	if (isOnboarded && !summaryOpen) redirect("/dashboard");
+	// if (isOnboarded && !summaryOpen) redirect("/dashboard");
 
 	return (
 		<div className="space-y-3 flex flex-col overflow-hidden">

@@ -4,7 +4,7 @@ const API_BASE_PATH = isPreviewMode ? "api" : "nextdot-snapshot/api";
 export const appConfig = {
 	name: "NEXTDOT",
 	description: "The beta chapter",
-	version: "0.0.5",
+	version: "0.0.6",
 	previewMode: isPreviewMode,
 	avatarPlaceholder: "https://www.tapback.co/api/avatar/user95?color=3",
 	apiBasePath: API_BASE_PATH,

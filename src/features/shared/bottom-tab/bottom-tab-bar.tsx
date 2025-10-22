@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useActivitySummaryStore } from "store/use-activity-summary-store";
 import { Badge } from "@/components/ui/badge";
+import analytics from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
 type BottomTabBarItemProps = {
@@ -76,7 +77,10 @@ function BottomTabBar({ onChange }: BottomTabBarProps) {
 								"relative flex flex-col items-center justify-center py-4 w-16 h-full text-[#6B6B6B] space-y-1.5",
 								{ "text-blue-600": isActive },
 							)}
-							onClick={onChange}
+							onClick={() => {
+								analytics.page();
+								onChange();
+							}}
 						>
 							<div className="h-6 w-6 shrink-0 relative">
 								<Icon
