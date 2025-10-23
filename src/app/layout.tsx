@@ -3,6 +3,7 @@ import { Geist_Mono, Mona_Sans } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
 import { Toaster } from "sonner";
+import Analytics from "@/components/Analytics";
 import { ErrorBoundary } from "@/components/error-boundary";
 import MainLayout from "../components/main-layout";
 
@@ -28,6 +29,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html className="bg-[#E5E5E5] h-full overflow-hidden" lang="en">
+			<Analytics />
 			<head>
 				<Script
 					strategy="afterInteractive"

@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
+"use client";
+
 import { appConfig } from "@/config/app.config";
 import OnboardingData from "@/features/dashboard/more/onboardingData";
 import ResetButton from "@/features/dashboard/more/reset-button";
 import ProfileHeader from "@/features/onboarding/summary/profile-header";
 import Header from "@/features/shared/header";
-import analytics from "@/lib/analytics";
+import UsePageviewTracking from "@/hooks/use-pageview-tracking";
 
 // const container = {
 // 	hidden: { opacity: 0 },
@@ -25,19 +26,19 @@ import analytics from "@/lib/analytics";
 const title = "Updates and features";
 const description = "Keep up to date with the latest features and updates.";
 
-export const metadata: Metadata = {
-	title,
-	description,
-	openGraph: {
-		title,
-		description,
-		url: `${appConfig.baseURL}/dashboard/more`,
-		siteName: title,
-	},
-};
+// export const metadata: Metadata = {
+// 	title,
+// 	description,
+// 	openGraph: {
+// 		title,
+// 		description,
+// 		url: `${appConfig.baseURL}/dashboard/more`,
+// 		siteName: title,
+// 	},
+// };
 
 export default function MorePage() {
-	analytics.page({ title: "More Page" });
+	UsePageviewTracking();
 
 	return (
 		<div className="space-y-8 pb-20">

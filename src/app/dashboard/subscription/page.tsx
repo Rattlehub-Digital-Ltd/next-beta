@@ -1,25 +1,25 @@
-import type { Metadata } from "next";
-import { appConfig } from "@/config/app.config";
+"use client";
+
 import Products from "@/features/dashboard/subscription/products";
 import Header from "@/features/shared/header";
-import analytics from "@/lib/analytics";
+import UsePageviewTracking from "@/hooks/use-pageview-tracking";
 
 const title = "Subscription";
 const description = "Get the full features of Nextdot";
 
-export const metadata: Metadata = {
-	title,
-	description,
-	openGraph: {
-		title,
-		description,
-		url: `${appConfig.baseURL}/dashboard/subscription`,
-		siteName: title,
-	},
-};
+// export const metadata: Metadata = {
+// 	title,
+// 	description,
+// 	openGraph: {
+// 		title,
+// 		description,
+// 		url: `${appConfig.baseURL}/dashboard/subscription`,
+// 		siteName: title,
+// 	},
+// };
 
 export default function Page() {
-	analytics.page({ title: "Subscription Page" });
+	UsePageviewTracking();
 
 	return (
 		<div className="bg-[#16243d] w-full h-full pb-12">

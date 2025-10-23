@@ -5,12 +5,12 @@ import ProtectedRoute from "@/components/protected-route";
 import { Button } from "@/components/ui/button";
 import CampaignIssue from "@/features/campaign/campaign-issue";
 import AdaptiveCardButton from "@/features/shared/adaptive-card/adaptive-card-button";
-import analytics from "@/lib/analytics";
+import UsePageviewTracking from "@/hooks/use-pageview-tracking";
 import { SparkleIcon } from "@/styles/icons";
 import type { ActionItem } from "@/types/action-item";
 
 function CampaignPage() {
-	analytics.page({ title: "Campaign Page" });
+	UsePageviewTracking();
 
 	const [currentIssue, setCurrentIssue] = useState<ActionItem | undefined>();
 

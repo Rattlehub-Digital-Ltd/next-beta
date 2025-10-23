@@ -10,7 +10,8 @@ import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import RiskCarousel from "@/features/shared/risk-carousel";
 import SuggestionItem from "@/features/shared/suggestion-item";
-import analytics, { track } from "@/lib/analytics";
+import UsePageviewTracking from "@/hooks/use-pageview-tracking";
+import { track } from "@/lib/analytics";
 import { cardVariants } from "@/motion";
 import type { ActionItem } from "@/types/action-item";
 import CardFooter from "./card-footer";
@@ -18,9 +19,7 @@ import CardFooter from "./card-footer";
 const uid = new ShortUniqueId({ length: 10 });
 
 export default function ActionsTab() {
-	// const queryClient = useQueryClient();
-	// const queryKey = [...queryKeys.documents.all];
-	analytics.page();
+	UsePageviewTracking();
 
 	const {
 		data,

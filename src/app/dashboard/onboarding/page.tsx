@@ -22,10 +22,10 @@ import Partner from "@/features/onboarding/partner";
 // import SuccessDialog from "@/features/onboarding/success/success-dialog";
 import SummaryDialog from "@/features/onboarding/summary/summary-dialog";
 import Pagination from "@/features/shared/pagination";
-import analytics from "@/lib/analytics";
+import UsePageviewTracking from "@/hooks/use-pageview-tracking";
 
 function OnboardingPage() {
-	analytics.page({ title: "Onboarding Page" });
+	UsePageviewTracking();
 
 	const { setTitle, setType } = usePersonDrawerStore();
 

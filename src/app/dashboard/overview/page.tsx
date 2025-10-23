@@ -6,7 +6,7 @@ import EstatePlan from "@/features/dashboard/overview/cards/estate-plan";
 import Family from "@/features/dashboard/overview/cards/family";
 import LifeFileDocuments from "@/features/dashboard/overview/cards/life-file-documents";
 import Header from "@/features/shared/header";
-import analytics from "@/lib/analytics";
+import UsePageviewTracking from "@/hooks/use-pageview-tracking";
 import { cardVariants } from "@/motion";
 
 const title = "Overview";
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 };
 
 export default function OverviewPage() {
-	analytics.page({ title: "Overview Page" });
+	UsePageviewTracking();
 
 	return (
 		<div className="pt-3 space-y-4 pb-12">

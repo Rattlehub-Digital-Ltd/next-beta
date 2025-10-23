@@ -14,11 +14,12 @@ import { useGetActivitySummary } from "@/api/services/dashboard/queries";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import Loading from "@/features/shared/loading";
-import analytics from "@/lib/analytics";
+import UsePageviewTracking from "@/hooks/use-pageview-tracking";
 // import useApi from "@/hooks/use-api";
 import { FluentArrowCircleRight24Filled, SparkleIcon } from "@/styles/icons";
 
 const LoginButton = () => {
+	UsePageviewTracking();
 	const searchParams = useSearchParams();
 
 	// const { getOnboardingStatus, getActivitySummary } = useApi();
@@ -160,7 +161,6 @@ const LoginButton = () => {
 	]);
 
 	useEffect(() => {
-		analytics.page();
 		autoSignIn();
 	}, [autoSignIn]);
 

@@ -7,7 +7,7 @@ import CampaignResponsePopup from "@/features/dashboard/campagaign-response/camp
 import SummaryCard from "@/features/dashboard/summary-card";
 import TabsCard from "@/features/dashboard/tabs-card";
 import Header from "@/features/shared/header";
-import analytics from "@/lib/analytics";
+import UsePageviewTracking from "@/hooks/use-pageview-tracking";
 import { cardVariants } from "@/motion";
 
 const title = "Welcome back!";
@@ -15,7 +15,7 @@ const description =
 	"These will affect your estate, please read them carefully and take the necessary action.";
 
 function DashboardPage() {
-	analytics.page({ title: "Dashboard Page" });
+	UsePageviewTracking();
 
 	return (
 		<div className="pt-3 space-y-4 pb-16">

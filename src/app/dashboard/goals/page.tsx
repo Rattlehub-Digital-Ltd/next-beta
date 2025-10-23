@@ -1,26 +1,26 @@
-import type { Metadata } from "next";
-import { appConfig } from "@/config/app.config";
+"use client";
+
 import GoalItems from "@/features/dashboard/goals/goal-items";
 import Header from "@/features/shared/header";
-import analytics from "@/lib/analytics";
+import UsePageviewTracking from "@/hooks/use-pageview-tracking";
 
 const title = "Goals";
 const description =
 	"Keep essential documents ready when life changes come your way.";
 
-export const metadata: Metadata = {
-	title,
-	description,
-	openGraph: {
-		title,
-		description,
-		url: `${appConfig.baseURL}/dashboard/goals`,
-		siteName: title,
-	},
-};
+// export const metadata: Metadata = {
+// 	title,
+// 	description,
+// 	openGraph: {
+// 		title,
+// 		description,
+// 		url: `${appConfig.baseURL}/dashboard/goals`,
+// 		siteName: title,
+// 	},
+// };
 
 export default function GoalsPage() {
-	analytics.page({ title: "Goals Page" });
+	UsePageviewTracking();
 
 	return (
 		<div className="pt-3 space-y-4 pb-12">

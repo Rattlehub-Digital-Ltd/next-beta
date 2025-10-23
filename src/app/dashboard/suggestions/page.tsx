@@ -1,25 +1,25 @@
-import type { Metadata } from "next";
-import { appConfig } from "@/config/app.config";
+"use client";
+
 import SuggestedItems from "@/features/dashboard/suggestions/suggested-items";
 import Header from "@/features/shared/header";
-import analytics from "@/lib/analytics";
+import UsePageviewTracking from "@/hooks/use-pageview-tracking";
 
 const title = "Suggestions";
 const description = "Organize and store essential family-related documents.";
 
-export const metadata: Metadata = {
-	title,
-	description,
-	openGraph: {
-		title,
-		description,
-		url: `${appConfig.baseURL}/dashboard/suggestions`,
-		siteName: title,
-	},
-};
+// export const metadata: Metadata = {
+// 	title,
+// 	description,
+// 	openGraph: {
+// 		title,
+// 		description,
+// 		url: `${appConfig.baseURL}/dashboard/suggestions`,
+// 		siteName: title,
+// 	},
+// };
 
 export default function SuggestionsPage() {
-	analytics.page({ title: "Suggestions Page" });
+	UsePageviewTracking();
 
 	return (
 		<div className="pt-3 space-y-4 pb-8">
