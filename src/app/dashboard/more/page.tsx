@@ -1,29 +1,26 @@
-import * as motion from "motion/react-client";
 import type { Metadata } from "next";
 import { appConfig } from "@/config/app.config";
-import Changelog from "@/features/dashboard/more/changelog";
 import OnboardingData from "@/features/dashboard/more/onboardingData";
 import ResetButton from "@/features/dashboard/more/reset-button";
-import AddPeople from "@/features/onboarding/summary/add-people";
 import ProfileHeader from "@/features/onboarding/summary/profile-header";
 import Header from "@/features/shared/header";
 import analytics from "@/lib/analytics";
 
-const container = {
-	hidden: { opacity: 0 },
-	show: {
-		opacity: 1,
-		transition: {
-			staggerChildren: 0.3, // Adjust the delay as needed
-			delayChildren: 0.1,
-		},
-	},
-};
+// const container = {
+// 	hidden: { opacity: 0 },
+// 	show: {
+// 		opacity: 1,
+// 		transition: {
+// 			staggerChildren: 0.3, // Adjust the delay as needed
+// 			delayChildren: 0.1,
+// 		},
+// 	},
+// };
 
-const item = {
-	hidden: { opacity: 0, y: 20, scale: 0.8 },
-	show: { opacity: 1, y: 0, scale: 1 },
-};
+// const item = {
+// 	hidden: { opacity: 0, y: 20, scale: 0.8 },
+// 	show: { opacity: 1, y: 0, scale: 1 },
+// };
 
 const title = "Updates and features";
 const description = "Keep up to date with the latest features and updates.";
@@ -48,7 +45,7 @@ export default function MorePage() {
 			<div className="space-y-6">
 				<ProfileHeader />
 
-				<div className="py-2 flex flex-col gap-4">
+				{/* <div className="py-2 flex flex-col gap-4">
 					<h1 className="text-[10px] uppercase mb-3 ml-1 font-medium">
 						people
 					</h1>
@@ -84,14 +81,14 @@ export default function MorePage() {
 							/>
 						</motion.div>
 					</motion.div>
-				</div>
+				</div> */}
 			</div>
 			<div>
 				<OnboardingData />
 			</div>
-			<div>
+			{/* <div>
 				<Changelog />
-			</div>
+			</div> */}
 			<div className="px-4 space-y-4 pt-8">
 				<ResetButton />
 				<p className="text-[11px] font-medium text-neutral-500">
