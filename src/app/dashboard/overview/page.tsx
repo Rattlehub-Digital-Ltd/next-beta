@@ -1,6 +1,6 @@
+"use client";
+
 import * as motion from "motion/react-client";
-import type { Metadata } from "next";
-import { appConfig } from "@/config/app.config";
 import DocumentLocations from "@/features/dashboard/overview/cards/document-locations";
 import EstatePlan from "@/features/dashboard/overview/cards/estate-plan";
 import Family from "@/features/dashboard/overview/cards/family";
@@ -13,16 +13,16 @@ const title = "Overview";
 const description =
 	"The Overview section provides a quick view of progress, showing completed items, and highlighting risks like missing items or incomplete sections.";
 
-export const metadata: Metadata = {
-	title,
-	description,
-	openGraph: {
-		title,
-		description,
-		url: `${appConfig.baseURL}/dashboard/overview`,
-		siteName: title,
-	},
-};
+// export const metadata: Metadata = {
+// 	title,
+// 	description,
+// 	openGraph: {
+// 		title,
+// 		description,
+// 		url: `${appConfig.baseURL}/dashboard/overview`,
+// 		siteName: title,
+// 	},
+// };
 
 export default function OverviewPage() {
 	UsePageviewTracking();
