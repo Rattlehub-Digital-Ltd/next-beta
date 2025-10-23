@@ -18,7 +18,7 @@ const title = "Verify your email address";
 const description = "You have not verified your email address";
 
 function EmailVerify() {
-	analytics.page();
+	analytics.page({ title: "Email Verify Page" });
 
 	const { user, isLoading } = useAuth0();
 	const hubUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL as string}/messaging`;

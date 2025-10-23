@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 };
 
 export default function SuggestionsPage() {
-	analytics.page();
+	analytics.page({ title: "Suggestions Page" });
 
 	return (
 		<div className="pt-3 space-y-4 pb-8">

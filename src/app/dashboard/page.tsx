@@ -15,7 +15,7 @@ const description =
 	"These will affect your estate, please read them carefully and take the necessary action.";
 
 function DashboardPage() {
-	analytics.page();
+	analytics.page({ title: "Dashboard Page" });
 
 	return (
 		<div className="pt-3 space-y-4 pb-16">
