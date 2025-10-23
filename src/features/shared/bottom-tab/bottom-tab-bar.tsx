@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { useGetActivitySummary } from "@/api/services/dashboard/queries";
 // import { useActivitySummaryStore } from "store/use-activity-summary-store";
 import { Badge } from "@/components/ui/badge";
+import analytics from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
 type BottomTabBarItemProps = {
@@ -88,6 +89,7 @@ function BottomTabBar({ onChange }: BottomTabBarProps) {
 								{ "text-blue-600": isActive },
 							)}
 							onClick={() => {
+								analytics.page({ title: label });
 								onChange();
 							}}
 						>

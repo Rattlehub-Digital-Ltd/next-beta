@@ -2,16 +2,39 @@
 
 import { useAuth0 } from "@auth0/auth0-react";
 import { redirect } from "next/navigation";
-import type { PropsWithChildren } from "react";
+import { type PropsWithChildren, useEffect } from "react";
 import { useAppStore } from "store/use-app-store";
+import { useGetOnboarding } from "@/api/services/dashboard/onboarding/queries";
+// import { useOnboardingStore } from "store/use-onboarding-store";
 // import { useAppStore } from "store/use-app-store";
 // import { appConfig } from "@/config/app.config";
 import Loading from "@/features/shared/loading";
 
 export default function ProtectedRoute({ children }: PropsWithChildren) {
 	const { isAuthenticated, isLoading: isAuthLoading } = useAuth0();
+	const { data: onboardingStatus, isLoading: isLoadingOnboarding } =
+		useGetOnboarding();
 
 	const { isAdmin } = useAppStore();
+
+	useEffect(() => {
+		if (isAuthLoading || isLoadingOnboarding) return;
+
+		if (!isAuthenticated) redirect("/login");
+
+		if (!onboardingStatus?.isEmailVerified) redirect("/dashboard/verify");
+
+		if (!onboardingStatus?.isOnboarded) {
+			redirect("/dashboard/onboarding");
+		}
+
+		const originHref = sessionStorage.getItem("origin_href");
+
+		if (originHref) {
+			sessionStorage.removeItem("origin_href");
+			redirect(originHref);
+		}
+	}, [isAuthenticated, onboardingStatus, isAuthLoading, isLoadingOnboarding]);
 
 	if (!isAdmin && isAuthenticated && !isAuthLoading)
 		return (
@@ -34,9 +57,7 @@ export default function ProtectedRoute({ children }: PropsWithChildren) {
 			</div>
 		);
 
-	if (isAuthLoading) <Loading />;
-
-	if (!isAuthenticated) redirect("/login");
+	if (isAuthLoading || isLoadingOnboarding) <Loading />;
 
 	return <div className="h-full w-full">{children}</div>;
 }

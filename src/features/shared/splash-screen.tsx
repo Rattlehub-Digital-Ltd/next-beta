@@ -2,18 +2,17 @@
 
 import { useAuth0 } from "@auth0/auth0-react";
 import Image from "next/image";
-import { RedirectType, redirect } from "next/navigation";
+// import { RedirectType, redirect } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { useAppStore } from "store/use-app-store";
-import { useOnboardingStore } from "store/use-onboarding-store";
+// import { useOnboardingStore } from "store/use-onboarding-store";
 import { useGetOnboarding } from "@/api/services/dashboard/onboarding/queries";
 import { Spinner } from "@/components/ui/spinner";
 
 export default function SplashScreen() {
 	const { user } = useAuth0();
 
-	const { setIsOnboarded, setIsEmailVerified, isSuccessDialogOpen } =
-		useOnboardingStore();
+	// const { setIsOnboarded, setIsEmailVerified } = useOnboardingStore();
 	// const { setActivity } = useActivitySummaryStore();
 	const { setInitialized, setIsAdmin } = useAppStore();
 
@@ -26,7 +25,7 @@ export default function SplashScreen() {
 	// } = useGetActivitySummary();
 
 	const {
-		data: onboardingStatus,
+		// data: onboardingStatus,
 		isError: isOnboardingError,
 		isLoading: isLoadingOnboarding,
 	} = useGetOnboarding();
@@ -56,42 +55,45 @@ export default function SplashScreen() {
 		// 	setActivity(activity);
 		// }
 
-		if (onboardingStatus) {
-			setIsOnboarded(onboardingStatus.isOnboarded);
-			setIsEmailVerified(onboardingStatus.isEmailVerified);
-		}
+		// if (onboardingStatus) {
+		// 	setIsOnboarded(onboardingStatus.isOnboarded);
+		// 	setIsEmailVerified(onboardingStatus.isEmailVerified);
+		// }
 
-		if (onboardingStatus) {
-			setInitialized(true);
-			setIsInitializing(false);
+		setInitialized(true);
+		setIsInitializing(false);
 
-			if (!onboardingStatus.isEmailVerified)
-				redirect("/dashboard/verify", RedirectType.replace);
+		// if (onboardingStatus) {
+		// 	setInitialized(true);
+		// 	setIsInitializing(false);
 
-			const originHref = sessionStorage.getItem("origin_href");
+		// 	if (!onboardingStatus.isEmailVerified)
+		// 		redirect("/dashboard/verify", RedirectType.replace);
 
-			if (originHref) {
-				sessionStorage.removeItem("origin_href");
-				redirect(originHref, RedirectType.replace);
-			} else if (!isSuccessDialogOpen) {
-				redirect(
-					onboardingStatus.isOnboarded ? "/dashboard" : "/dashboard/onboarding",
-				);
-			}
-		}
+		// 	const originHref = sessionStorage.getItem("origin_href");
+
+		// 	if (originHref) {
+		// 		sessionStorage.removeItem("origin_href");
+		// 		redirect(originHref, RedirectType.replace);
+		// 	} else if (!isSuccessDialogOpen) {
+		// 		redirect(
+		// 			onboardingStatus.isOnboarded ? "/dashboard" : "/dashboard/onboarding",
+		// 		);
+		// 	}
+		// }
 	}, [
-		isSuccessDialogOpen,
+		// isSuccessDialogOpen,
 		// activity,
-		onboardingStatus,
+		// onboardingStatus,
 		setIsAdmin,
 		user,
 		// setActivity,
-		setIsOnboarded,
+		// setIsOnboarded,
 		setInitialized,
 		// getIdTokenClaims,
 		// setIsAdmin,
 		// setProduct,
-		setIsEmailVerified,
+		// setIsEmailVerified,
 		// isLoadingActivity,
 		isLoadingOnboarding,
 		// isAuthLoading,
