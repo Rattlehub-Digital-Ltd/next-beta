@@ -13,7 +13,7 @@ export default function ProtectedRoute({ children }: PropsWithChildren) {
 
 	const { isAdmin } = useAppStore();
 
-	if (!isAdmin)
+	if (!isAdmin && isAuthenticated && !isAuthLoading)
 		return (
 			<div className="p-4">
 				<h1 className="text-base font-semibold">Access Denied</h1>
