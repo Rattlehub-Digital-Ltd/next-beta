@@ -10,8 +10,9 @@ import { SparkleIcon } from "@/styles/icons";
 import type { ActionItem } from "@/types/action-item";
 
 function CampaignPage() {
+	analytics.page({ title: "Campaign Page" });
+
 	const [currentIssue, setCurrentIssue] = useState<ActionItem | undefined>();
-	analytics.page();
 
 	return (
 		<ProtectedRoute>

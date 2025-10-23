@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-	analytics.page();
+	analytics.page({ title: "Subscription Page" });
 
 	return (
 		<div className="bg-[#16243d] w-full h-full pb-12">

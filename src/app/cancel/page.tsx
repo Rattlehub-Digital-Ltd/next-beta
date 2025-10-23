@@ -3,7 +3,8 @@ import Link from "next/link";
 import analytics from "@/lib/analytics";
 
 export default function SubscriptionCancelPage() {
-	analytics.page();
+	analytics.page({ title: "Subscription Cancel Page" });
+
 	return (
 		<div className="flex flex-col items-center justify-center h-full pt-8 space-y-2 px-6">
 			<Image

@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 };
 
 export default function OverviewPage() {
-	analytics.page();
+	analytics.page({ title: "Overview Page" });
 
 	return (
 		<div className="pt-3 space-y-4 pb-12">

@@ -25,6 +25,8 @@ import Pagination from "@/features/shared/pagination";
 import analytics from "@/lib/analytics";
 
 function OnboardingPage() {
+	analytics.page({ title: "Onboarding Page" });
+
 	const { setTitle, setType } = usePersonDrawerStore();
 
 	const {
@@ -46,8 +48,6 @@ function OnboardingPage() {
 	const [count, setCount] = useState(0);
 	const [summaryOpen, setSummaryOpen] = useState(false);
 	// const [successDialogOpen, setSuccessDialogOpen] = useState(false);
-
-	analytics.page();
 
 	useEffect(() => {
 		if (!api) {

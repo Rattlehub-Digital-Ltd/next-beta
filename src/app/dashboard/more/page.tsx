@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 };
 
 export default function MorePage() {
-	analytics.page();
+	analytics.page({ title: "More Page" });
 
 	return (
 		<div className="space-y-8 pb-20">
