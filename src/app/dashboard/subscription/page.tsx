@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { appConfig } from "@/config/app.config";
 import Products from "@/features/dashboard/subscription/products";
 import Header from "@/features/shared/header";
+import analytics from "@/lib/analytics";
 
 const title = "Subscription";
 const description = "Get the full features of Nextdot";
@@ -18,6 +19,8 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
+	analytics.page();
+
 	return (
 		<div className="bg-[#16243d] w-full h-full pb-12">
 			<div className="fixed h-full w-full top-0 left-0 bg-[#16243d]" />

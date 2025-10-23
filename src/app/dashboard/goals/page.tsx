@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { appConfig } from "@/config/app.config";
 import GoalItems from "@/features/dashboard/goals/goal-items";
 import Header from "@/features/shared/header";
+import analytics from "@/lib/analytics";
 
 const title = "Goals";
 const description =
@@ -19,6 +20,8 @@ export const metadata: Metadata = {
 };
 
 export default function GoalsPage() {
+	analytics.page();
+
 	return (
 		<div className="pt-3 space-y-4 pb-12">
 			<Header

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { appConfig } from "@/config/app.config";
 import SuggestedItems from "@/features/dashboard/suggestions/suggested-items";
 import Header from "@/features/shared/header";
+import analytics from "@/lib/analytics";
 
 const title = "Suggestions";
 const description = "Organize and store essential family-related documents.";
@@ -18,6 +19,8 @@ export const metadata: Metadata = {
 };
 
 export default function SuggestionsPage() {
+	analytics.page();
+
 	return (
 		<div className="pt-3 space-y-4 pb-8">
 			<Header

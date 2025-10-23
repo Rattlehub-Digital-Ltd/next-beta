@@ -7,6 +7,7 @@ import ResetButton from "@/features/dashboard/more/reset-button";
 import AddPeople from "@/features/onboarding/summary/add-people";
 import ProfileHeader from "@/features/onboarding/summary/profile-header";
 import Header from "@/features/shared/header";
+import analytics from "@/lib/analytics";
 
 const container = {
 	hidden: { opacity: 0 },
@@ -39,6 +40,8 @@ export const metadata: Metadata = {
 };
 
 export default function MorePage() {
+	analytics.page();
+
 	return (
 		<div className="space-y-8 pb-20">
 			<Header title={title} description={description} />

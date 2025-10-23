@@ -5,12 +5,13 @@ import ProtectedRoute from "@/components/protected-route";
 import { Button } from "@/components/ui/button";
 import CampaignIssue from "@/features/campaign/campaign-issue";
 import AdaptiveCardButton from "@/features/shared/adaptive-card/adaptive-card-button";
+import analytics from "@/lib/analytics";
 import { SparkleIcon } from "@/styles/icons";
 import type { ActionItem } from "@/types/action-item";
 
 function CampaignPage() {
 	const [currentIssue, setCurrentIssue] = useState<ActionItem | undefined>();
-	console.log(currentIssue);
+	analytics.page();
 
 	return (
 		<ProtectedRoute>
@@ -23,6 +24,7 @@ function CampaignPage() {
 				<div className="fixed bottom-0 left-0 flex justify-center w-full p-6 bg-white/90 backdrop-blur-sm">
 					<div className="w-full md:max-w-xl">
 						<AdaptiveCardButton
+							currentActionItem={currentIssue}
 							defaultOpen
 							referer="campaign"
 							refresh={console.log}

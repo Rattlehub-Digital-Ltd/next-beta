@@ -11,12 +11,15 @@ import { Spinner } from "@/components/ui/spinner";
 import Header from "@/features/shared/header";
 import Loading from "@/features/shared/loading";
 import useSignalR from "@/hooks/useSignalR";
+import analytics from "@/lib/analytics";
 import { isValidEmail } from "@/lib/utils";
 
 const title = "Verify your email address";
 const description = "You have not verified your email address";
 
 function EmailVerify() {
+	analytics.page();
+
 	const { user, isLoading } = useAuth0();
 	const hubUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL as string}/messaging`;
 

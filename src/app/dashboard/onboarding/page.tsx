@@ -22,6 +22,7 @@ import Partner from "@/features/onboarding/partner";
 // import SuccessDialog from "@/features/onboarding/success/success-dialog";
 import SummaryDialog from "@/features/onboarding/summary/summary-dialog";
 import Pagination from "@/features/shared/pagination";
+import analytics from "@/lib/analytics";
 
 function OnboardingPage() {
 	const { setTitle, setType } = usePersonDrawerStore();
@@ -45,6 +46,8 @@ function OnboardingPage() {
 	const [count, setCount] = useState(0);
 	const [summaryOpen, setSummaryOpen] = useState(false);
 	// const [successDialogOpen, setSuccessDialogOpen] = useState(false);
+
+	analytics.page();
 
 	useEffect(() => {
 		if (!api) {
