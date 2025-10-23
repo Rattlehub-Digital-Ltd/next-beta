@@ -1,5 +1,6 @@
 "use client";
 
+import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useChildrenStore } from "store/use-children-store";
 import { useDependentStore } from "store/use-dependent-store";
@@ -30,6 +31,8 @@ function OnboardingPage() {
 		previoiusButtonDisabled,
 		setPreviousButtonDisabled,
 		setNextButtonDisabled,
+		isSuccessDialogOpen,
+		isOnboarded,
 	} = useOnboardingStore();
 
 	const { has: hasChildren, children } = useChildrenStore();
@@ -156,7 +159,8 @@ function OnboardingPage() {
 		}
 	};
 
-	// if (isOnboarded && !summaryOpen) redirect("/dashboard");
+	if (isOnboarded && !summaryOpen && !isSuccessDialogOpen)
+		redirect("/dashboard");
 
 	return (
 		<div className="space-y-3 flex flex-col overflow-hidden">

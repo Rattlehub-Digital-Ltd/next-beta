@@ -2,8 +2,9 @@
 
 import { Icon } from "@iconify/react";
 import Image from "next/image";
+import { useGetActivitySummary } from "@/api/services/dashboard/queries";
 // import Link from "next/link";
-import { useActivitySummaryStore } from "store/use-activity-summary-store";
+// import { useActivitySummaryStore } from "store/use-activity-summary-store";
 import { useGetSuggestions } from "@/api/services/dashboard/suggestion/queries";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -15,7 +16,12 @@ import SummaryFooter from "../shared/summary-footer";
 import SuggesteItemDrawer from "./suggestions/suggeste-item-drawer";
 
 export default function SummaryCard() {
-	const { activity } = useActivitySummaryStore();
+	// const { activity } = useActivitySummaryStore();
+	const {
+		data: activity,
+		// isError: isActivityError,
+		// isLoading: isLoadingActivity,
+	} = useGetActivitySummary();
 
 	const {
 		data: items,

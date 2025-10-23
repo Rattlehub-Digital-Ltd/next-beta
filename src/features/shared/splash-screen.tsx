@@ -4,32 +4,26 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Image from "next/image";
 import { RedirectType, redirect } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
-import { useActivitySummaryStore } from "store/use-activity-summary-store";
 import { useAppStore } from "store/use-app-store";
 import { useOnboardingStore } from "store/use-onboarding-store";
 import { useGetOnboarding } from "@/api/services/dashboard/onboarding/queries";
-import { useGetActivitySummary } from "@/api/services/dashboard/queries";
-import { useGetProducts } from "@/api/services/dashboard/subscription/queries";
 import { Spinner } from "@/components/ui/spinner";
 
 export default function SplashScreen() {
-	const {
-		getIdTokenClaims,
-		isAuthenticated,
-		isLoading: isAuthLoading,
-	} = useAuth0();
+	const { user } = useAuth0();
 
-	const { setIsOnboarded, setIsEmailVerified } = useOnboardingStore();
-	const { setActivity } = useActivitySummaryStore();
-	const { setInitialized, setIsAdmin, setProduct } = useAppStore();
+	const { setIsOnboarded, setIsEmailVerified, isSuccessDialogOpen } =
+		useOnboardingStore();
+	// const { setActivity } = useActivitySummaryStore();
+	const { setInitialized, setIsAdmin } = useAppStore();
 
 	const [isInitializing, setIsInitializing] = useState(true);
 
-	const {
-		data: activity,
-		isError: isActivityError,
-		isLoading: isLoadingActivity,
-	} = useGetActivitySummary();
+	// const {
+	// 	data: activity,
+	// 	isError: isActivityError,
+	// 	isLoading: isLoadingActivity,
+	// } = useGetActivitySummary();
 
 	const {
 		data: onboardingStatus,
@@ -37,46 +31,34 @@ export default function SplashScreen() {
 		isLoading: isLoadingOnboarding,
 	} = useGetOnboarding();
 
-	const { data: products, isLoading: isLoadingProducts } = useGetProducts();
+	// const { data: products, isLoading: isLoadingProducts } = useGetProducts();
 
 	const initialize = useCallback(async () => {
-		if (
-			isLoadingActivity ||
-			isLoadingOnboarding ||
-			isLoadingProducts ||
-			isAuthLoading
-		)
-			return;
+		if (isLoadingOnboarding) return;
 
-		if (!isAuthenticated) {
-			redirect("/login", RedirectType.replace);
-		}
+		// if (!isAuthenticated) {
+		// 	redirect("/login", RedirectType.replace);
+		// }
 
-		const idTokenClaims = await getIdTokenClaims();
-		if (idTokenClaims) {
-			const role = idTokenClaims?.[
-				"https://app.nextdot.ai/roles"
-			]?.[0] as string;
+		if (user) {
+			const role = user?.["https://app.nextdot.ai/roles"]?.[0] as string;
 			if (role && role.toLowerCase() === "rattlehub-staff") {
 				setIsAdmin(true);
 			}
 		}
 
-		if (products) {
-			const plan = products.find((product) => product.subscribed);
-			setProduct(plan ?? null);
-		}
+		// if (products) {
+		// 	const plan = products.find((product) => product.subscribed);
+		// 	setProduct(plan ?? null);
+		// }
 
-		if (activity) {
-			setActivity(activity);
-		}
+		// if (activity) {
+		// 	setActivity(activity);
+		// }
 
 		if (onboardingStatus) {
 			setIsOnboarded(onboardingStatus.isOnboarded);
 			setIsEmailVerified(onboardingStatus.isEmailVerified);
-
-			// remove
-			// setIsEmailVerified(true);
 		}
 
 		if (onboardingStatus) {
@@ -91,28 +73,29 @@ export default function SplashScreen() {
 			if (originHref) {
 				sessionStorage.removeItem("origin_href");
 				redirect(originHref, RedirectType.replace);
-			} else {
+			} else if (!isSuccessDialogOpen) {
 				redirect(
 					onboardingStatus.isOnboarded ? "/dashboard" : "/dashboard/onboarding",
 				);
 			}
 		}
 	}, [
-		activity,
+		isSuccessDialogOpen,
+		// activity,
 		onboardingStatus,
-		setActivity,
+		setIsAdmin,
+		user,
+		// setActivity,
 		setIsOnboarded,
 		setInitialized,
-		getIdTokenClaims,
-		setIsAdmin,
-		products,
-		setProduct,
+		// getIdTokenClaims,
+		// setIsAdmin,
+		// setProduct,
 		setIsEmailVerified,
-		isLoadingActivity,
+		// isLoadingActivity,
 		isLoadingOnboarding,
-		isLoadingProducts,
-		isAuthLoading,
-		isAuthenticated,
+		// isAuthLoading,
+		// isAuthenticated,
 	]);
 
 	useEffect(() => {
@@ -123,7 +106,7 @@ export default function SplashScreen() {
 	// if (!isAuthenticated) redirect("/login");
 
 	if (!isInitializing) {
-		if (isActivityError || isOnboardingError)
+		if (isOnboardingError)
 			return <div className="p-4">Error initializing app</div>;
 	}
 

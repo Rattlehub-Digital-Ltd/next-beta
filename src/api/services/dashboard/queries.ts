@@ -16,22 +16,16 @@ import type { Document } from "@/types/document";
 import { dashboardEndpoints } from "./endpoints";
 
 export const useGetActivitySummary = () => {
-	const { client, accessToken } = useAxios();
-	client.defaults.headers.Authorization = `Bearer ${accessToken}`;
+	const { client } = useAxios();
 
 	return useQuery({
 		queryKey: ["activity_summary"],
 		queryFn: async () => {
-			try {
-				const { data } = await client.get<ActivitySummary>(
-					dashboardEndpoints.getActivitySummary(),
-				);
+			const { data } = await client.get<ActivitySummary>(
+				dashboardEndpoints.getActivitySummary(),
+			);
 
-				return data;
-			} catch (error) {
-				console.log(error);
-				return null;
-			}
+			return data;
 		},
 	});
 };

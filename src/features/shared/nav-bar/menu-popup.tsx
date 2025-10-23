@@ -16,13 +16,14 @@ import {
 import { track } from "@/lib/analytics";
 import { isValidEmail } from "@/lib/utils";
 import { ComingSoonBadge } from "../coming-soon-badge";
+import Loading from "../loading";
 
 type UserMenuProps = {
 	children: React.ReactNode;
 };
 
 const UserMenu = ({ children }: UserMenuProps) => {
-	const { user, logout } = useAuth0();
+	const { user, logout, isLoading } = useAuth0();
 	const { isAdmin } = useAppStore();
 
 	const { setIsOnboarded } = useOnboardingStore();
@@ -47,6 +48,8 @@ const UserMenu = ({ children }: UserMenuProps) => {
 	} else {
 		name = "Unknown";
 	}
+
+	if (isLoading) <Loading />;
 
 	return (
 		<DropdownMenu open={open} onOpenChange={setOpen}>

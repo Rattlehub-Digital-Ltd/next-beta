@@ -35,8 +35,9 @@ type SummaryDialogProps = {
 };
 
 export default function SummaryDialog({ open }: SummaryDialogProps) {
-	const { setIsOnboarded, setIsEmailVerified } = useOnboardingStore();
-	const { data, refetch } = useGetOnboarding();
+	const { setIsOnboarded, setIsEmailVerified, setIsSuccessDialogOpen } =
+		useOnboardingStore();
+	const { refetch } = useGetOnboarding();
 	const { width } = useWindowSize();
 
 	const submitOnboarding = useSubmitOnboardingData();
@@ -85,14 +86,17 @@ export default function SummaryDialog({ open }: SummaryDialogProps) {
 				{
 					onSuccess: async () => {
 						toast.success("Onboarding completed successfully.");
-						const resp = await refetch();
-						console.log(resp);
+						const status = await refetch();
 
-						if (data) {
-							const { isOnboarded, isEmailVerified } = data;
+						if (status?.data) {
+							const { isOnboarded, isEmailVerified } = status.data;
+							console.log("Onboarding status:", isOnboarded, isEmailVerified);
 							setIsOnboarded(isOnboarded);
 							setIsEmailVerified(isEmailVerified);
-							if (isOnboarded) setIsComplete(true);
+							if (isOnboarded) {
+								setIsSuccessDialogOpen(true);
+								setIsComplete(true);
+							}
 						}
 						// setRedirectToDashboard(true);
 						//onClose();
@@ -111,10 +115,10 @@ export default function SummaryDialog({ open }: SummaryDialogProps) {
 			console.log(error);
 		}
 	}, [
+		setIsSuccessDialogOpen,
 		children?.map,
 		dependents?.map,
 		documents,
-		data,
 		refetch,
 		setIsEmailVerified,
 		partner,

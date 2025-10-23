@@ -1,9 +1,11 @@
 "use client";
 
+import { useAuth0 } from "@auth0/auth0-react";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useActivitySummaryStore } from "store/use-activity-summary-store";
+import { useGetActivitySummary } from "@/api/services/dashboard/queries";
+// import { useActivitySummaryStore } from "store/use-activity-summary-store";
 import { Badge } from "@/components/ui/badge";
 import analytics from "@/lib/analytics";
 import { cn } from "@/lib/utils";
@@ -54,12 +56,21 @@ type BottomTabBarProps = {
 
 function BottomTabBar({ onChange }: BottomTabBarProps) {
 	const pathname = usePathname();
-	const { activity } = useActivitySummaryStore();
+	const { isLoading } = useAuth0();
+	// const { activity } = useActivitySummaryStore();
+
+	const {
+		data: activity,
+		// isError: isActivityError,
+		isLoading: isLoadingActivity,
+	} = useGetActivitySummary();
 
 	if (
 		pathname === "/" ||
 		pathname.toLowerCase() === "/dashboard/onboarding" ||
-		pathname.toLowerCase() === "/dashboard/verify"
+		pathname.toLowerCase() === "/dashboard/verify" ||
+		isLoadingActivity ||
+		isLoading
 	)
 		return;
 
