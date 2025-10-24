@@ -33,8 +33,6 @@ export default function ProtectedRoute({ children }: PropsWithChildren) {
 			redirect("/dashboard/onboarding");
 		}
 
-		console.log("origin_href", sessionStorage.getItem("origin_href"));
-
 		const originHref = sessionStorage.getItem("origin_href");
 
 		if (originHref && pathname !== originHref) {
