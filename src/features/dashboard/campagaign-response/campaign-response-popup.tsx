@@ -43,30 +43,14 @@ function CampaignResponsePopup({ utm }: CampaignResponsePopupProps) {
 		if (utm === "" || !utm) return;
 
 		try {
-			console.log("campaign", campaign);
-
 			if (campaign && campaign.toLowerCase() === "stay protected") {
 				setIsOpen(true);
 				fetchData();
 			}
-
-			const keys = [
-				"utm_source",
-				"utm_medium",
-				"utm_campaign",
-				"utm_term",
-				"utm_content",
-			];
-			keys.forEach((key) => {
-				const value = urlParams.get(key);
-				if (value) {
-					sessionStorage.setItem(key, value);
-				}
-			});
 		} catch (error) {
 			console.log(error);
 		}
-	}, [campaign, fetchData, urlParams.get, utm]);
+	}, [campaign, fetchData, utm]);
 
 	const submit = useCallback(
 		async (formData: FormData, isCancelButton: boolean, headers?: object) => {
@@ -113,9 +97,7 @@ function CampaignResponsePopup({ utm }: CampaignResponsePopupProps) {
 					</AlertDialogHeader>
 				</VisuallyHidden>
 				<div className="flex flex-col grow">
-					{(isLoading || submitAdaptiveCardData.isPending) && (
-						<Loading className="rounded-3xl overflow-hidden" />
-					)}
+					{isLoading && <Loading className="rounded-3xl overflow-hidden" />}
 					{!isLoading && (
 						<AdaptiveCardTemplate
 							card={data?.itemListElement?.card}
