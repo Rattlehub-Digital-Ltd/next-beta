@@ -191,7 +191,7 @@ function AdaptiveCardButton({
 			<DrawerTrigger asChild className="flex justify-center w-full">
 				{children}
 			</DrawerTrigger>
-			<DrawerContent className="h-[90svh] flex flex-col items-center min-h-[80svh] bg-[#ECECEC] pb-4 !rounded-t-3xl">
+			<DrawerContent className="max-h-[90svh] flex flex-col items-center min-h-[40svh] bg-[#ECECEC] pb-4 !rounded-t-3xl">
 				<VisuallyHidden>
 					<DrawerHeader className="sticky top-0 z-20 w-full max-w-xl pl-5 text-left bg-background/80 backdrop-blur-sm">
 						<DrawerTitle className="flex items-center gap-2">
