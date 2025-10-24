@@ -6,7 +6,6 @@ import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { useAppStore } from "store/use-app-store";
 // import { useOnboardingStore } from "store/use-onboarding-store";
-import { useGetOnboarding } from "@/api/services/dashboard/onboarding/queries";
 import { Spinner } from "@/components/ui/spinner";
 
 export default function SplashScreen() {
@@ -24,17 +23,9 @@ export default function SplashScreen() {
 	// 	isLoading: isLoadingActivity,
 	// } = useGetActivitySummary();
 
-	const {
-		// data: onboardingStatus,
-		isError: isOnboardingError,
-		isLoading: isLoadingOnboarding,
-	} = useGetOnboarding();
-
 	// const { data: products, isLoading: isLoadingProducts } = useGetProducts();
 
 	const initialize = useCallback(async () => {
-		if (isLoadingOnboarding) return;
-
 		// if (!isAuthenticated) {
 		// 	redirect("/login", RedirectType.replace);
 		// }
@@ -95,7 +86,6 @@ export default function SplashScreen() {
 		// setProduct,
 		// setIsEmailVerified,
 		// isLoadingActivity,
-		isLoadingOnboarding,
 		// isAuthLoading,
 		// isAuthenticated,
 	]);
@@ -106,11 +96,6 @@ export default function SplashScreen() {
 
 	if (!isInitializing) return;
 	// if (!isAuthenticated) redirect("/login");
-
-	if (!isInitializing) {
-		if (isOnboardingError)
-			return <div className="p-4">Error initializing app</div>;
-	}
 
 	return (
 		<div className="flex flex-col fixed z-200 top-0 left-0 right-0 bottom-0 h-full w-full items-center justify-center bg-[#111827]">

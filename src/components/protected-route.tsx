@@ -1,7 +1,7 @@
 "use client";
 
 import { useAuth0 } from "@auth0/auth0-react";
-import { redirect } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import { type PropsWithChildren, useEffect } from "react";
 import { useAppStore } from "store/use-app-store";
 import { useGetOnboarding } from "@/api/services/dashboard/onboarding/queries";
@@ -11,6 +11,7 @@ import { useGetOnboarding } from "@/api/services/dashboard/onboarding/queries";
 import Loading from "@/features/shared/loading";
 
 export default function ProtectedRoute({ children }: PropsWithChildren) {
+	const pathname = usePathname();
 	const { isAuthenticated, isLoading: isAuthLoading } = useAuth0();
 	const { data: onboardingStatus, isLoading: isLoadingOnboarding } =
 		useGetOnboarding();
@@ -18,23 +19,35 @@ export default function ProtectedRoute({ children }: PropsWithChildren) {
 	const { isAdmin } = useAppStore();
 
 	useEffect(() => {
-		if (isAuthLoading || isLoadingOnboarding) return;
+		if (isAuthLoading || (isLoadingOnboarding && !onboardingStatus)) return;
 
 		if (!isAuthenticated) redirect("/login");
 
-		if (!onboardingStatus?.isEmailVerified) redirect("/dashboard/verify");
+		if (!onboardingStatus?.isEmailVerified && pathname !== "/dashboard/verify")
+			redirect("/dashboard/verify");
 
-		if (!onboardingStatus?.isOnboarded) {
+		if (
+			!onboardingStatus?.isOnboarded &&
+			pathname !== "/dashboard/onboarding"
+		) {
 			redirect("/dashboard/onboarding");
 		}
 
+		console.log("origin_href", sessionStorage.getItem("origin_href"));
+
 		const originHref = sessionStorage.getItem("origin_href");
 
-		if (originHref) {
+		if (originHref && pathname !== originHref) {
 			sessionStorage.removeItem("origin_href");
 			redirect(originHref);
 		}
-	}, [isAuthenticated, onboardingStatus, isAuthLoading, isLoadingOnboarding]);
+	}, [
+		isAuthenticated,
+		onboardingStatus,
+		isAuthLoading,
+		isLoadingOnboarding,
+		pathname,
+	]);
 
 	if (!isAdmin && isAuthenticated && !isAuthLoading)
 		return (
